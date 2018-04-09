@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02AE8207804CD00AD05BC /* AppDelegate.swift */; };
+		8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEC207804CD00AD05BC /* Main.storyboard */; };
+		8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEF207804CD00AD05BC /* Assets.xcassets */; };
+		8AD02AF3207804CD00AD05BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */; };
+		8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */; };
+		8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56EA2078179500B827F2 /* LogEntryController.swift */; };
+		8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */; };
+		B744A1D7B9CEF769CDE7A856 /* Pods_Komatsu_Maintlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74470B509A15745D1CAC57EF /* Pods_Komatsu_Maintlog.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5F1146305F9AA830D0326B21 /* Pods-Komatsu Maintlog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.debug.xcconfig"; sourceTree = "<group>"; };
+		74470B509A15745D1CAC57EF /* Pods_Komatsu_Maintlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Komatsu_Maintlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Komatsu Maintlog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AD02AE8207804CD00AD05BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8AD02AED207804CD00AD05BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8AD02AEF207804CD00AD05BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8AD02AF2207804CD00AD05BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8AD02AF4207804CD00AD05BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionEntryController.swift; sourceTree = "<group>"; };
+		8AEA56EA2078179500B827F2 /* LogEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntryController.swift; sourceTree = "<group>"; };
+		8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScreenController.swift; sourceTree = "<group>"; };
+		BA94ABFAF1AF579454E0B9A6 /* Pods-Komatsu Maintlog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8AD02AE2207804CD00AD05BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B744A1D7B9CEF769CDE7A856 /* Pods_Komatsu_Maintlog.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34009248A7C717B655C41CE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74470B509A15745D1CAC57EF /* Pods_Komatsu_Maintlog.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8AD02ADC207804CD00AD05BC = {
+			isa = PBXGroup;
+			children = (
+				8AD02AE7207804CD00AD05BC /* Komatsu Maintlog */,
+				8AD02AE6207804CD00AD05BC /* Products */,
+				BEE979A1456960B0BEB4E10C /* Pods */,
+				34009248A7C717B655C41CE8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8AD02AE6207804CD00AD05BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8AD02AE7207804CD00AD05BC /* Komatsu Maintlog */ = {
+			isa = PBXGroup;
+			children = (
+				8AF55ECE207809E5000DDF2D /* View */,
+				8AF55ECF207809EC000DDF2D /* Model */,
+				8AF55ED0207809F4000DDF2D /* Controller */,
+				8AD02AE8207804CD00AD05BC /* AppDelegate.swift */,
+				8AD02AEF207804CD00AD05BC /* Assets.xcassets */,
+				8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */,
+				8AD02AF4207804CD00AD05BC /* Info.plist */,
+			);
+			path = "Komatsu Maintlog";
+			sourceTree = "<group>";
+		};
+		8AF55ECE207809E5000DDF2D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8AD02AEC207804CD00AD05BC /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8AF55ECF207809EC000DDF2D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8AF55ED0207809F4000DDF2D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */,
+				8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */,
+				8AEA56EA2078179500B827F2 /* LogEntryController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BEE979A1456960B0BEB4E10C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F1146305F9AA830D0326B21 /* Pods-Komatsu Maintlog.debug.xcconfig */,
+				BA94ABFAF1AF579454E0B9A6 /* Pods-Komatsu Maintlog.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8AD02AE4207804CD00AD05BC /* Komatsu Maintlog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AD02AF7207804CD00AD05BC /* Build configuration list for PBXNativeTarget "Komatsu Maintlog" */;
+			buildPhases = (
+				6E4E4A83093F7EC27D441A20 /* [CP] Check Pods Manifest.lock */,
+				8AD02AE1207804CD00AD05BC /* Sources */,
+				8AD02AE2207804CD00AD05BC /* Frameworks */,
+				8AD02AE3207804CD00AD05BC /* Resources */,
+				70D219E78DAD566DF2C36302 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Komatsu Maintlog";
+			productName = "Komatsu Maintlog";
+			productReference = 8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8AD02ADD207804CD00AD05BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = user138461;
+				TargetAttributes = {
+					8AD02AE4207804CD00AD05BC = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8AD02AE0207804CD00AD05BC /* Build configuration list for PBXProject "Komatsu Maintlog" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8AD02ADC207804CD00AD05BC;
+			productRefGroup = 8AD02AE6207804CD00AD05BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8AD02AE4207804CD00AD05BC /* Komatsu Maintlog */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8AD02AE3207804CD00AD05BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AD02AF3207804CD00AD05BC /* LaunchScreen.storyboard in Resources */,
+				8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */,
+				8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E4E4A83093F7EC27D441A20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Komatsu Maintlog-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		70D219E78DAD566DF2C36302 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8AD02AE1207804CD00AD05BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
+				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
+				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
+				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8AD02AEC207804CD00AD05BC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AD02AED207804CD00AD05BC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AD02AF2207804CD00AD05BC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8AD02AF5207804CD00AD05BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8AD02AF6207804CD00AD05BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8AD02AF8207804CD00AD05BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F1146305F9AA830D0326B21 /* Pods-Komatsu Maintlog.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Komatsu Maintlog/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rinconmountaintech.Komatsu-Maintlog";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8AD02AF9207804CD00AD05BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA94ABFAF1AF579454E0B9A6 /* Pods-Komatsu Maintlog.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Komatsu Maintlog/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rinconmountaintech.Komatsu-Maintlog";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8AD02AE0207804CD00AD05BC /* Build configuration list for PBXProject "Komatsu Maintlog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AD02AF5207804CD00AD05BC /* Debug */,
+				8AD02AF6207804CD00AD05BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AD02AF7207804CD00AD05BC /* Build configuration list for PBXNativeTarget "Komatsu Maintlog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AD02AF8207804CD00AD05BC /* Debug */,
+				8AD02AF9207804CD00AD05BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8AD02ADD207804CD00AD05BC /* Project object */;
+}
