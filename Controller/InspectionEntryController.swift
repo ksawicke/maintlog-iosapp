@@ -10,8 +10,7 @@ import UIKit
 
 class InspectionEntryController: UIViewController {
     
-
-    @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
+    @IBAction func onCloseViewButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
