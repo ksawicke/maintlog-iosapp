@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class InspectionEntryController: UIViewController {
+    
     
 
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {

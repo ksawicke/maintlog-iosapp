@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2FEA50A1D1D23DA8B50FC72E /* Pods_Komatsu_Maintlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E1AA0027F2000E15C8FF683 /* Pods_Komatsu_Maintlog.framework */; };
+		07EE05FD10E7FAFF6DEE1700 /* Pods_Komatsu_Maintlog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B902D4120C8AB0303F7D143D /* Pods_Komatsu_Maintlog.framework */; };
 		8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02AE8207804CD00AD05BC /* AppDelegate.swift */; };
 		8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEC207804CD00AD05BC /* Main.storyboard */; };
 		8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEF207804CD00AD05BC /* Assets.xcassets */; };
@@ -18,9 +18,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		283D29736CD29FFCCFA7818C /* Pods-Komatsu Maintlog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.debug.xcconfig"; sourceTree = "<group>"; };
-		2E1AA0027F2000E15C8FF683 /* Pods_Komatsu_Maintlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Komatsu_Maintlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EE11E418D3206F08337DFCC /* Pods-Komatsu Maintlog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.release.xcconfig"; sourceTree = "<group>"; };
 		8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Komatsu Maintlog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD02AE8207804CD00AD05BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AD02AED207804CD00AD05BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,6 +27,9 @@
 		8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionEntryController.swift; sourceTree = "<group>"; };
 		8AEA56EA2078179500B827F2 /* LogEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntryController.swift; sourceTree = "<group>"; };
 		8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScreenController.swift; sourceTree = "<group>"; };
+		8EF64DB5A8295D50A0AE155D /* Pods-Komatsu Maintlog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.debug.xcconfig"; sourceTree = "<group>"; };
+		B20E9B37A2E7C3113649BE0A /* Pods-Komatsu Maintlog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.release.xcconfig"; sourceTree = "<group>"; };
+		B902D4120C8AB0303F7D143D /* Pods_Komatsu_Maintlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Komatsu_Maintlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,20 +37,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FEA50A1D1D23DA8B50FC72E /* Pods_Komatsu_Maintlog.framework in Frameworks */,
+				07EE05FD10E7FAFF6DEE1700 /* Pods_Komatsu_Maintlog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		36089D4A7B97C646F5F55BC9 /* Pods */ = {
+		8A396EBD207D4D9500B50BFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				283D29736CD29FFCCFA7818C /* Pods-Komatsu Maintlog.debug.xcconfig */,
-				5EE11E418D3206F08337DFCC /* Pods-Komatsu Maintlog.release.xcconfig */,
+				8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */,
+				8AD02AEF207804CD00AD05BC /* Assets.xcassets */,
 			);
-			name = Pods;
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8AD02ADC207804CD00AD05BC = {
@@ -58,8 +58,8 @@
 			children = (
 				8AD02AE7207804CD00AD05BC /* Komatsu Maintlog */,
 				8AD02AE6207804CD00AD05BC /* Products */,
-				36089D4A7B97C646F5F55BC9 /* Pods */,
-				CCBFD3EAC9803D75DA72454B /* Frameworks */,
+				986115F2AD9DA1AF86A6CBE9 /* Pods */,
+				FF43CC326BE037980F0A923D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,11 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				8AF55ECE207809E5000DDF2D /* View */,
-				8AF55ECF207809EC000DDF2D /* Model */,
-				8AF55ED0207809F4000DDF2D /* Controller */,
+				8AF55ECF207809EC000DDF2D /* Data Model */,
+				8AF55ED0207809F4000DDF2D /* Controllers */,
 				8AD02AE8207804CD00AD05BC /* AppDelegate.swift */,
-				8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */,
-				8AD02AEF207804CD00AD05BC /* Assets.xcassets */,
+				8A396EBD207D4D9500B50BFB /* Supporting Files */,
 				8AD02AF4207804CD00AD05BC /* Info.plist */,
 			);
 			path = "Komatsu Maintlog";
@@ -93,27 +92,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8AF55ECF207809EC000DDF2D /* Model */ = {
+		8AF55ECF207809EC000DDF2D /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Model;
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
-		8AF55ED0207809F4000DDF2D /* Controller */ = {
+		8AF55ED0207809F4000DDF2D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */,
 				8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */,
 				8AEA56EA2078179500B827F2 /* LogEntryController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		CCBFD3EAC9803D75DA72454B /* Frameworks */ = {
+		986115F2AD9DA1AF86A6CBE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2E1AA0027F2000E15C8FF683 /* Pods_Komatsu_Maintlog.framework */,
+				8EF64DB5A8295D50A0AE155D /* Pods-Komatsu Maintlog.debug.xcconfig */,
+				B20E9B37A2E7C3113649BE0A /* Pods-Komatsu Maintlog.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF43CC326BE037980F0A923D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B902D4120C8AB0303F7D143D /* Pods_Komatsu_Maintlog.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,11 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AD02AF7207804CD00AD05BC /* Build configuration list for PBXNativeTarget "Komatsu Maintlog" */;
 			buildPhases = (
-				FE05450DBE296221532CF994 /* [CP] Check Pods Manifest.lock */,
+				AFB8F4AE47C13E835B5A4780 /* [CP] Check Pods Manifest.lock */,
 				8AD02AE1207804CD00AD05BC /* Sources */,
 				8AD02AE2207804CD00AD05BC /* Frameworks */,
 				8AD02AE3207804CD00AD05BC /* Resources */,
-				008EBA866A6F0B2A052B0B5E /* [CP] Embed Pods Frameworks */,
+				69B26BA4E42F6183227A74ED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,7 +196,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		008EBA866A6F0B2A052B0B5E /* [CP] Embed Pods Frameworks */ = {
+		69B26BA4E42F6183227A74ED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -208,7 +216,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FE05450DBE296221532CF994 /* [CP] Check Pods Manifest.lock */ = {
+		AFB8F4AE47C13E835B5A4780 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -375,7 +383,7 @@
 		};
 		8AD02AF8207804CD00AD05BC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 283D29736CD29FFCCFA7818C /* Pods-Komatsu Maintlog.debug.xcconfig */;
+			baseConfigurationReference = 8EF64DB5A8295D50A0AE155D /* Pods-Komatsu Maintlog.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -391,7 +399,7 @@
 		};
 		8AD02AF9207804CD00AD05BC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EE11E418D3206F08337DFCC /* Pods-Komatsu Maintlog.release.xcconfig */;
+			baseConfigurationReference = B20E9B37A2E7C3113649BE0A /* Pods-Komatsu Maintlog.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
