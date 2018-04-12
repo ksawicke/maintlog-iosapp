@@ -89,6 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // Delete a row
+    // context.delete(itemArray[indexPath.row])
+    // itemArray.remove(at: indexPath.row
+    // saveItems()
 
 }
 
