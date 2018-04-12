@@ -119,10 +119,10 @@ class InspectionEntryController: UIViewController {
 //        let checklistItem23 = ChecklistItem(context: context)
 //        checklistItem23.id = 50
 //        checklistItem23.item = "Steering"
-        
-        // Manually add items to EquipmentType entity
-        // Done 04/11/18
-        
+//
+////         Manually add items to EquipmentType entity
+////         Done 04/11/18
+//
 //        let equipmentType = EquipmentType(context: context)
 //        equipmentType.id = 5
 //        equipmentType.equipment_type = "Loader"
@@ -213,8 +213,20 @@ class InspectionEntryController: UIViewController {
         let request : NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()
         
         do {
-            checklistitemArray = try context.fetch(request)
-            print(checklistitemArray)
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                for result in results {
+                    let id = result.id
+                    let item = result.item
+                    
+                    print(id)
+                    print(item)
+                }
+            }
+            
+//            checklistitemArray = try context.fetch(request)
+//            print(checklistitemArray)
         } catch {
             print("Error fetching data from context \(error)")
         }
