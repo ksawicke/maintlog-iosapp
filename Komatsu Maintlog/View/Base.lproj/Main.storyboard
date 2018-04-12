@@ -111,14 +111,16 @@
                                     <constraint firstAttribute="height" constant="60" id="mJm-IC-OvK"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6">
                                 <rect key="frame" x="127" y="187" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="icons8-ok"/>
+                                <connections>
+                                    <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="qJY-vj-1YH"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
-                                <rect key="frame" x="145" y="108" width="84" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
+                                <rect key="frame" x="15" y="110" width="345" height="36"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -127,12 +129,14 @@
                                 <rect key="frame" x="127" y="335" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="icons8-cancel"/>
+                                <connections>
+                                    <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="56k-nl-IDr"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="84f-hB-cVh">
                                 <rect key="frame" x="26" y="463" width="325" height="95"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -140,11 +144,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DHK-8W-B4e" firstAttribute="leading" secondItem="7af-af-63R" secondAttribute="leading" id="0zJ-bL-eh2"/>
+                            <constraint firstItem="w2j-Pe-FZU" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="bottom" constant="50" id="GTd-Cd-kba"/>
+                            <constraint firstItem="w2j-Pe-FZU" firstAttribute="leading" secondItem="7af-af-63R" secondAttribute="leading" constant="15" id="KTQ-sa-ckf"/>
+                            <constraint firstItem="w2j-Pe-FZU" firstAttribute="centerX" secondItem="UuT-3S-p8b" secondAttribute="centerX" id="WK4-Ep-W8X"/>
                             <constraint firstAttribute="trailing" secondItem="DHK-8W-B4e" secondAttribute="trailing" id="goF-tY-nsK"/>
+                            <constraint firstItem="7af-af-63R" firstAttribute="trailing" secondItem="w2j-Pe-FZU" secondAttribute="trailing" constant="15" id="vhd-N0-ZYq"/>
                             <constraint firstItem="DHK-8W-B4e" firstAttribute="top" secondItem="UuT-3S-p8b" secondAttribute="top" id="w2b-7O-gye"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7af-af-63R"/>
                     </view>
+                    <connections>
+                        <outlet property="currentInspectionItemLabel" destination="w2j-Pe-FZU" id="bsl-8N-qur"/>
+                        <outlet property="inspectionItemBadNote" destination="84f-hB-cVh" id="Xtf-Eg-JPr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-bu-Uep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

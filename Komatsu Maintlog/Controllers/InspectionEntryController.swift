@@ -13,13 +13,29 @@ import SwiftyJSON
 
 class InspectionEntryController: UIViewController {
 
-    var checklistitemArray = [ChecklistItem]()
+    var checklistitemArray = [[String: String]]() //[ChecklistItem]()
+    var questionNumber : Int = 0
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
+    @IBOutlet weak var currentInspectionItemLabel: UILabel!
+    @IBOutlet weak var inspectionItemBadNote: UITextView!
+    
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onChooseInspectionValue(_ sender: Any) {
+        if (sender as AnyObject).tag == 1 {
+            print("\(questionNumber) - Good")
+        } else if (sender as AnyObject).tag == 0 {
+            print("\(questionNumber) - Bad")
+        }
+        
+        questionNumber += 1
+        
+        nextQuestion()
     }
     
     override func viewDidLoad() {
@@ -189,6 +205,8 @@ class InspectionEntryController: UIViewController {
         
         loadItems()
         
+        
+        
         print(checklistitemArray)
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -211,6 +229,7 @@ class InspectionEntryController: UIViewController {
     
     func loadItems() {
         let request : NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()
+//        let results = []
         
         do {
             let results = try context.fetch(request)
@@ -220,16 +239,57 @@ class InspectionEntryController: UIViewController {
                     let id = result.id
                     let item = result.item
                     
-                    print(id)
-                    print(item)
+                    print(item!)
+                    
+                    let dict = ["id": "\(id)", "item": "\(String(describing: item!))"]
+                    
+                    checklistitemArray.append(dict)
                 }
             }
             
 //            checklistitemArray = try context.fetch(request)
-//            print(checklistitemArray)
+            print(checklistitemArray)
         } catch {
             print("Error fetching data from context \(error)")
         }
+    }
+    
+    func nextQuestion() {
+        if questionNumber <= 10 {
+            
+            let checklistitem: [String : String] = checklistitemArray[questionNumber]
+            
+            for(key, value) in checklistitem {
+//                print("\(key) \(value)")
+                if(key=="item") {
+                    currentInspectionItemLabel.text = value
+                }
+            }
+            
+//            inspectionItemBadNote.text = "\(nextLabelText)"
+//            currentInspectionItemLabel.text = "Test \(questionNumber)"
+            
+            updateUI()
+            
+//            questionLabel.text = allQuestions.list[questionNumber].questionText
+//            updateUI()
+            
+        } else {
+            
+            let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
+            
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action: UIAlertAction!) in
+//                self.startOver()
+            })
+            
+            alert.addAction(restartAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func updateUI() {
+        
     }
     
 }
