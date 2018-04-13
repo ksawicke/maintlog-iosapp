@@ -22,14 +22,15 @@
                                 <rect key="frame" x="124" y="35" width="127" height="25"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maintenance Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T9-Ut-Dd9">
-                                <rect key="frame" x="118" y="70" width="139" height="20.5"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                <rect key="frame" x="119" y="70" width="137" height="25"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
                                 <color key="textColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUU-IH-D1v" userLabel="Log Entry Button">
-                                <rect key="frame" x="15" y="105.5" width="345" height="30"/>
+                                <rect key="frame" x="15" y="110" width="345" height="36"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="17"/>
                                 <state key="normal" title="Log Entry">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -38,8 +39,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
-                                <rect key="frame" x="15" y="150.5" width="345" height="30"/>
+                                <rect key="frame" x="15" y="161" width="345" height="36"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="17"/>
                                 <state key="normal" title="Inspection Entry">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -82,18 +84,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebz-EK-t2A">
-                                        <rect key="frame" x="124.5" y="25" width="126" height="18"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
+                                        <rect key="frame" x="125.5" y="30" width="124.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7e-MO-wzv" userLabel="Exit Button">
-                                        <rect key="frame" x="335" y="25" width="25" height="25"/>
-                                        <state key="normal" image="icons8-exit-sign-filled"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tt-42-uVF" userLabel="Close Button">
-                                        <rect key="frame" x="300" y="25" width="25" height="25"/>
-                                        <state key="normal" image="icons8-cancel-filled"/>
+                                        <rect key="frame" x="330" y="25" width="25" height="25"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
                                         <connections>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="CfK-ry-1xH"/>
                                         </connections>
@@ -103,32 +101,30 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ebz-EK-t2A" firstAttribute="centerX" secondItem="DHK-8W-B4e" secondAttribute="centerX" id="6gh-cp-eF8"/>
-                                    <constraint firstItem="V7e-MO-wzv" firstAttribute="leading" secondItem="5Tt-42-uVF" secondAttribute="trailing" constant="10" id="Aj0-9q-y1Q"/>
-                                    <constraint firstItem="ebz-EK-t2A" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="25" id="IAu-UA-3vX"/>
-                                    <constraint firstItem="5Tt-42-uVF" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="25" id="MDy-GX-BbQ"/>
-                                    <constraint firstItem="V7e-MO-wzv" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="25" id="MGY-ML-V9B"/>
-                                    <constraint firstAttribute="trailing" secondItem="V7e-MO-wzv" secondAttribute="trailing" constant="15" id="UUm-ZY-cFG"/>
+                                    <constraint firstItem="ebz-EK-t2A" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="30" id="IAu-UA-3vX"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Tt-42-uVF" secondAttribute="trailing" constant="20" id="RhY-1r-1PU"/>
+                                    <constraint firstItem="5Tt-42-uVF" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="25" id="a44-TJ-7a9"/>
                                     <constraint firstAttribute="height" constant="60" id="mJm-IC-OvK"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6">
                                 <rect key="frame" x="127" y="187" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="icons8-ok"/>
+                                <state key="normal" image="icons8-good"/>
                                 <connections>
                                     <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="qJY-vj-1YH"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
-                                <rect key="frame" x="15" y="110" width="345" height="36"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
+                                <rect key="frame" x="15" y="110" width="345" height="38.5"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K">
                                 <rect key="frame" x="127" y="335" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="icons8-cancel"/>
+                                <state key="normal" image="icons8-bad"/>
                                 <connections>
                                     <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="56k-nl-IDr"/>
                                 </connections>
@@ -155,6 +151,7 @@
                     </view>
                     <connections>
                         <outlet property="currentInspectionItemLabel" destination="w2j-Pe-FZU" id="bsl-8N-qur"/>
+                        <outlet property="inspectionChoiceImage" destination="3CT-gE-Vr6" id="HIp-D3-u3P"/>
                         <outlet property="inspectionItemBadNote" destination="84f-hB-cVh" id="Xtf-Eg-JPr"/>
                     </connections>
                 </viewController>
@@ -174,18 +171,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-Ji-Acn">
-                                        <rect key="frame" x="150" y="25" width="75" height="18"/>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
+                                        <rect key="frame" x="150.5" y="30" width="74" height="22"/>
+                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL7-cD-igG" userLabel="Exit Button">
-                                        <rect key="frame" x="335" y="25" width="25" height="25"/>
-                                        <state key="normal" image="icons8-exit-sign-filled"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPF-Mb-beX" userLabel="Close Button">
-                                        <rect key="frame" x="300" y="25" width="25" height="25"/>
-                                        <state key="normal" image="icons8-cancel-filled"/>
+                                        <rect key="frame" x="330" y="25" width="25" height="25"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
                                         <connections>
                                             <action selector="onCloseLogEntryViewButton:" destination="kLd-ml-HGc" eventType="touchUpInside" id="8Xs-QE-igJ"/>
                                         </connections>
@@ -194,13 +187,11 @@
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.83529411760000005" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="SL7-cD-igG" firstAttribute="leading" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="10" id="6u8-B4-Omj"/>
                                     <constraint firstAttribute="height" constant="60" id="CM4-j1-9J4"/>
-                                    <constraint firstItem="SL7-cD-igG" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="25" id="Tdk-Wo-8F2"/>
-                                    <constraint firstAttribute="trailing" secondItem="SL7-cD-igG" secondAttribute="trailing" constant="15" id="ZcN-ac-hEF"/>
                                     <constraint firstItem="dM9-Ji-Acn" firstAttribute="centerX" secondItem="kxr-dZ-gNE" secondAttribute="centerX" id="nxe-ca-Ng0"/>
-                                    <constraint firstItem="wPF-Mb-beX" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="25" id="pYH-q0-TVM"/>
-                                    <constraint firstItem="dM9-Ji-Acn" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="25" id="vHY-lr-rSL"/>
+                                    <constraint firstAttribute="trailing" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="20" id="ser-Tb-vo9"/>
+                                    <constraint firstItem="dM9-Ji-Acn" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="30" id="vHY-lr-rSL"/>
+                                    <constraint firstItem="wPF-Mb-beX" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="25" id="xyK-t7-YAb"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -219,10 +210,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-cancel" width="120" height="120"/>
-        <image name="icons8-cancel-filled" width="25" height="25"/>
-        <image name="icons8-exit-sign-filled" width="25" height="25"/>
-        <image name="icons8-ok" width="120" height="120"/>
+        <image name="icons8-bad" width="120" height="120"/>
+        <image name="icons8-good" width="120" height="120"/>
+        <image name="icons8-menu-filled" width="25" height="25"/>
         <image name="komatsu-logo" width="127" height="25"/>
     </resources>
 </document>

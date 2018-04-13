@@ -16,6 +16,7 @@
 		8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */; };
 		8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56EA2078179500B827F2 /* LogEntryController.swift */; };
 		8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */; };
+		8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEAD20A2081249B009F12CC /* UIButtonExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionEntryController.swift; sourceTree = "<group>"; };
 		8AEA56EA2078179500B827F2 /* LogEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntryController.swift; sourceTree = "<group>"; };
 		8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScreenController.swift; sourceTree = "<group>"; };
+		8AEAD20A2081249B009F12CC /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8EF64DB5A8295D50A0AE155D /* Pods-Komatsu Maintlog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.debug.xcconfig"; sourceTree = "<group>"; };
 		B20E9B37A2E7C3113649BE0A /* Pods-Komatsu Maintlog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Komatsu Maintlog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Komatsu Maintlog/Pods-Komatsu Maintlog.release.xcconfig"; sourceTree = "<group>"; };
 		B902D4120C8AB0303F7D143D /* Pods_Komatsu_Maintlog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Komatsu_Maintlog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +53,7 @@
 			children = (
 				8AD02AF1207804CD00AD05BC /* LaunchScreen.storyboard */,
 				8AD02AEF207804CD00AD05BC /* Assets.xcassets */,
+				8AEAD20A2081249B009F12CC /* UIButtonExtension.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
 				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
+				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

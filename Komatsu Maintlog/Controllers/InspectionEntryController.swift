@@ -20,22 +20,25 @@ class InspectionEntryController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
+    @IBOutlet weak var inspectionChoiceImage: UIImageView!
     @IBOutlet weak var inspectionItemBadNote: UITextView!
     
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onChooseInspectionValue(_ sender: Any) {
+    @IBAction func onChooseInspectionValue(_ sender: UIButton) {
         if (sender as AnyObject).tag == 1 {
             print("\(questionNumber) - Good")
         } else if (sender as AnyObject).tag == 0 {
             print("\(questionNumber) - Bad")
         }
         
+        sender.pulsate()
+        
         questionNumber += 1
         
-        nextQuestion()
+        nextInspectionItem()
     }
     
     override func viewDidLoad() {
@@ -205,6 +208,8 @@ class InspectionEntryController: UIViewController {
         
         loadItems()
         
+        nextInspectionItem()
+        
         
         
         print(checklistitemArray)
@@ -254,8 +259,14 @@ class InspectionEntryController: UIViewController {
         }
     }
     
-    func nextQuestion() {
+    func nextInspectionItem() {
         if questionNumber <= 10 {
+            
+            // Animate and change icon
+            
+            // Pause
+            
+            // Update Label
             
             let checklistitem: [String : String] = checklistitemArray[questionNumber]
             
@@ -265,6 +276,8 @@ class InspectionEntryController: UIViewController {
                     currentInspectionItemLabel.text = value
                 }
             }
+            
+            // Change icon to grey
             
 //            inspectionItemBadNote.text = "\(nextLabelText)"
 //            currentInspectionItemLabel.text = "Test \(questionNumber)"
