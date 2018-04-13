@@ -21,24 +21,41 @@ class InspectionEntryController: UIViewController {
 
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
-    @IBOutlet weak var inspectionItemBadNote: UITextView!
+    @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
+    @IBOutlet weak var currentInspectionItemBadNote: UITextField!
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBAction func onClickNext(_ sender: Any) {
+    }
     
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func onSaveBadNote(_ sender: Any) {
+        
+    }
+    
     @IBAction func onChooseInspectionValue(_ sender: UIButton) {
         if (sender as AnyObject).tag == 1 {
             print("\(questionNumber) - Good")
+            
+            sender.pulsate()
+            
+            questionNumber += 1
+            
+            nextInspectionItem()
         } else if (sender as AnyObject).tag == 0 {
             print("\(questionNumber) - Bad")
+            
+            currentInspectionItemBadNoteLabel.isHidden = false
+            currentInspectionItemBadNote.isHidden = false
+            nextButton.isHidden = false
         }
         
-        sender.pulsate()
         
-        questionNumber += 1
         
-        nextInspectionItem()
+        
     }
     
     override func viewDidLoad() {
