@@ -11,7 +11,7 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
-class InspectionEntryController: UIViewController {
+class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
     var checklistitemArray = [[String: String]]() //[ChecklistItem]()
     var questionNumber : Int = 0
@@ -24,8 +24,20 @@ class InspectionEntryController: UIViewController {
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var badNoteBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var topConstraint: NSLayoutConstraint!
+    @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet var slidingView: UIView!
     
     @IBAction func onClickNext(_ sender: Any) {
+        hideKeyboard()
+        currentInspectionItemBadNoteLabel.isHidden = true
+        currentInspectionItemBadNote.isHidden = true
+        nextButton.isHidden = true
+        
+        questionNumber += 1
+        
+        nextInspectionItem()
     }
     
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
@@ -48,9 +60,10 @@ class InspectionEntryController: UIViewController {
         } else if (sender as AnyObject).tag == 0 {
             print("\(questionNumber) - Bad")
             
+            // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
             currentInspectionItemBadNote.isHidden = false
-            nextButton.isHidden = false
+            
         }
         
         
@@ -60,6 +73,16 @@ class InspectionEntryController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentInspectionItemBadNote.delegate = self
+        
+        currentInspectionItemBadNote.setLeftPaddingPoints(10)
+        currentInspectionItemBadNote.setRightPaddingPoints(10)
+        
+        // Listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         // Manually add items to ChecklistItem entity
         // Done 04/11/18
@@ -236,9 +259,45 @@ class InspectionEntryController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    deinit {
+        // Stop listening for keyboard hide/show events
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func hideKeyboard() {
+        currentInspectionItemBadNote.resignFirstResponder()
+    }
+    
+    @objc func keyboardWillChange(notification: Notification) {
+//        print("Keyboard will show: \(notification.name.rawValue)")
+        
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        
+        if notification.name == Notification.Name.UIKeyboardWillShow ||
+            notification.name == Notification.Name.UIKeyboardWillChangeFrame {
+            view.frame.origin.y = -keyboardRect.height // Change keyboard Y position, must be below 0
+        } else {
+            view.frame.origin.y = 0 // Move keyboard back to bottom of screen
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Return pressed")
+        
+        hideKeyboard()
+        
+        nextButton.isHidden = false
+        
+        return true
     }
     
     func saveItems() {
@@ -294,12 +353,14 @@ class InspectionEntryController: UIViewController {
                 }
             }
             
+            currentInspectionItemBadNote.text = ""
+            
             // Change icon to grey
             
 //            inspectionItemBadNote.text = "\(nextLabelText)"
 //            currentInspectionItemLabel.text = "Test \(questionNumber)"
             
-            updateUI()
+//            updateUI()
             
 //            questionLabel.text = allQuestions.list[questionNumber].questionText
 //            updateUI()
