@@ -14,6 +14,7 @@ import SwiftyJSON
 class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
     var checklistitemArray = [[String: String]]() //[ChecklistItem]()
+    var userFormData = [[String: String]]()
     var questionNumber : Int = 0
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -337,12 +338,31 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
     func nextInspectionItem() {
         if questionNumber <= 10 {
+            // Add entered stuff to array
+            var saveId = 0;
+            var saveItem = "";
+            var saveNote = "";
             
-            // Animate and change icon
+            let prevchecklistitem: [String : String] = checklistitemArray[questionNumber]
             
-            // Pause
+            for(key, value) in prevchecklistitem {
+                if(key=="id") {
+                    saveId = 0
+                }
+                if(key=="item") {
+                    saveItem = "\(value)"
+                }
+            }
             
-            // Update Label
+            saveNote = currentInspectionItemBadNote.text!
+            
+            let saveDict = ["id": "\(saveId)", "item": "\(String(describing: saveItem))", "note": "\(saveNote)"]
+            
+            userFormData.append(saveDict)
+            
+            print(userFormData)
+            
+            // Get next Checklist Item
             
             let checklistitem: [String : String] = checklistitemArray[questionNumber]
             
