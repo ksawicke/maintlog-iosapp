@@ -335,15 +335,15 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
     func appendFormData() {
         // Add entered stuff to array
-        var saveId = 0;
-        var saveItem = "";
-        var saveNote = "";
+        var saveId : String = "";
+        var saveItem : String = "";
+        var saveNote : String = "";
         
         let prevchecklistitem: [String : String] = checklistitemArray[questionNumber]
         
         for(key, value) in prevchecklistitem {
             if(key=="id") {
-                saveId = 0
+                saveId = value
             }
             if(key=="item") {
                 saveItem = "\(value)"
@@ -352,7 +352,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         
         saveNote = currentInspectionItemBadNote.text!
         
-        let saveDict = ["id": "\(saveId)", "item": "\(String(describing: saveItem))", "note": "\(saveNote)"]
+        let saveDict = ["id": "\(saveId)", "item": "\(saveItem)", "note": "\(saveNote)"]
         
         userFormData.append(saveDict)
         

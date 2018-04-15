@@ -84,8 +84,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebz-EK-t2A">
-                                        <rect key="frame" x="125.5" y="45" width="124.5" height="22"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="16"/>
+                                        <rect key="frame" x="118" y="45" width="140" height="25"/>
+                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
