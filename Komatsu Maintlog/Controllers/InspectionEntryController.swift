@@ -25,10 +25,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var badNoteBottomConstraint: NSLayoutConstraint!
-    @IBOutlet var topConstraint: NSLayoutConstraint!
-    @IBOutlet var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet var slidingView: UIView!
+    @IBOutlet weak var progressBar: UIView!
     
     @IBAction func onClickNext(_ sender: Any) {
         hideKeyboard()
@@ -41,6 +38,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         questionNumber += 1
         
         nextInspectionItem()
+        
+        updateUI()
     }
     
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
@@ -60,6 +59,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
             questionNumber += 1
             
             nextInspectionItem()
+            
+            updateUI()
         } else if (sender as AnyObject).tag == 0 {
             // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
@@ -82,11 +83,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         
         // Manually add items to ChecklistItem entity
         // Done 04/11/18
-        addChecklistItems()
+//        addChecklistItems()
 
         // Manually add items to EquipmentType entity
         // Done 04/11/18
-        addEquipmentTypes()
+//        addEquipmentTypes()
         
         loadItems()
         
@@ -360,7 +361,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     func nextInspectionItem() {
-        if questionNumber <= 10 {
+        let numChecklistItems = Int(checklistitemArray.count)
+        
+        print(numChecklistItems)
+        
+        if questionNumber < numChecklistItems {
             // Get next Checklist Item
             
             let checklistitem: [String : String] = checklistitemArray[questionNumber]
@@ -399,7 +404,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     func updateUI() {
+        // checklistitemArray
         
+        let numChecklistItems = CGFloat(checklistitemArray.count)
+        
+        progressBar.frame.size.width = (view.frame.size.width / numChecklistItems) * CGFloat(questionNumber + 1)
     }
     
 }
