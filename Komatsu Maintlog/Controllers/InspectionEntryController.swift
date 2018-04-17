@@ -25,7 +25,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var progressBar: UIView!
+    @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickNext(_ sender: Any) {
         hideKeyboard()
@@ -33,13 +33,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         currentInspectionItemBadNote.isHidden = true
         nextButton.isHidden = true
         
-        appendFormData()
+        appendFormData(rating: "0")
         
         questionNumber += 1
         
         nextInspectionItem()
-        
-        updateUI()
     }
     
     @IBAction func onCloseInspectionEntryViewButton(_ sender: UIButton) {
@@ -51,17 +49,15 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onChooseInspectionValue(_ sender: UIButton) {
-        if (sender as AnyObject).tag == 1 {
-            sender.pulsate()
+        if (sender as AnyObject).tag == 1 && currentInspectionItemBadNote.isHidden == true {
+            sender.shake()
             
-            appendFormData()
+            appendFormData(rating: "1")
             
             questionNumber += 1
             
             nextInspectionItem()
-            
-            updateUI()
-        } else if (sender as AnyObject).tag == 0 {
+        } else if (sender as AnyObject).tag == 0 && currentInspectionItemBadNote.isHidden == true {
             // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
             currentInspectionItemBadNote.isHidden = false
@@ -83,17 +79,19 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         
         // Manually add items to ChecklistItem entity
         // Done 04/11/18
-//        addChecklistItems()
+        addChecklistItems()
 
         // Manually add items to EquipmentType entity
         // Done 04/11/18
-//        addEquipmentTypes()
+        addEquipmentTypes()
         
         loadItems()
         
         nextInspectionItem()
 
-        // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print(dataFilePath)
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -140,163 +138,163 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     func addChecklistItems() {
-        //        let checklistItem = ChecklistItem(context: context)
-        //        checklistItem.id = 28
-        //        checklistItem.item = "Secured Cargo"
-        //
-        //        let checklistItem2 = ChecklistItem(context: context)
-        //        checklistItem2.id = 29
-        //        checklistItem2.item = "Mirrors"
-        //
-        //        let checklistItem3 = ChecklistItem(context: context)
-        //        checklistItem3.id = 30
-        //        checklistItem3.item = "Horn/Alarm/Lights"
-        //
-        //        let checklistItem4 = ChecklistItem(context: context)
-        //        checklistItem4.id = 31
-        //        checklistItem4.item = "Test Instruments"
-        //
-        //        let checklistItem5 = ChecklistItem(context: context)
-        //        checklistItem5.id = 32
-        //        checklistItem5.item = "Handrails"
-        //
-        //        let checklistItem6 = ChecklistItem(context: context)
-        //        checklistItem6.id = 33
-        //        checklistItem6.item = "Leak Evidence"
-        //
-        //        let checklistItem7 = ChecklistItem(context: context)
-        //        checklistItem7.id = 34
-        //        checklistItem7.item = "Operators Manual"
-        //
-        //        let checklistItem8 = ChecklistItem(context: context)
-        //        checklistItem8.id = 35
-        //        checklistItem8.item = "First Aid Kit"
-        //
-        //        let checklistItem9 = ChecklistItem(context: context)
-        //        checklistItem9.id = 36
-        //        checklistItem9.item = "Blade/Bucket/Tool"
-        //
-        //        let checklistItem10 = ChecklistItem(context: context)
-        //        checklistItem10.id = 37
-        //        checklistItem10.item = "Visibility Flag Whip"
-        //
-        //        let checklistItem11 = ChecklistItem(context: context)
-        //        checklistItem11.id = 38
-        //        checklistItem11.item = "Tires"
-        //
-        //        let checklistItem12 = ChecklistItem(context: context)
-        //        checklistItem12.id = 39
-        //        checklistItem12.item = "Windows/Wipers"
-        //
-        //        let checklistItem13 = ChecklistItem(context: context)
-        //        checklistItem13.id = 40
-        //        checklistItem13.item = "Seat Controls"
-        //
-        //        let checklistItem14 = ChecklistItem(context: context)
-        //        checklistItem14.id = 41
-        //        checklistItem14.item = "Air Conditioner"
-        //
-        //        let checklistItem15 = ChecklistItem(context: context)
-        //        checklistItem15.id = 42
-        //        checklistItem15.item = "Suspension"
-        //
-        //        let checklistItem16 = ChecklistItem(context: context)
-        //        checklistItem16.id = 43
-        //        checklistItem16.item = "Seat Belt/Suspension"
-        //
-        //        let checklistItem17 = ChecklistItem(context: context)
-        //        checklistItem17.id = 44
-        //        checklistItem17.item = "Doors & Latches"
-        //
-        //        let checklistItem18 = ChecklistItem(context: context)
-        //        checklistItem18.id = 45
-        //        checklistItem18.item = "Brakes/Retard"
-        //
-        //        let checklistItem19 = ChecklistItem(context: context)
-        //        checklistItem19.id = 46
-        //        checklistItem19.item = "Brakes"
-        //
-        //        let checklistItem20 = ChecklistItem(context: context)
-        //        checklistItem20.id = 47
-        //        checklistItem20.item = "Seat Belt"
-        //
-        //        let checklistItem21 = ChecklistItem(context: context)
-        //        checklistItem21.id = 48
-        //        checklistItem21.item = "Dash Controls"
-        //
-        //        let checklistItem22 = ChecklistItem(context: context)
-        //        checklistItem22.id = 49
-        //        checklistItem22.item = "Displays/Gauges"
-        //
-        //        let checklistItem23 = ChecklistItem(context: context)
-        //        checklistItem23.id = 50
-        //        checklistItem23.item = "Steering"
-        //
-        // saveItems()
+//                let checklistItem = ChecklistItem(context: context)
+//                checklistItem.id = 28
+//                checklistItem.item = "Secured Cargo"
+//
+//                let checklistItem2 = ChecklistItem(context: context)
+//                checklistItem2.id = 29
+//                checklistItem2.item = "Mirrors"
+//
+//                let checklistItem3 = ChecklistItem(context: context)
+//                checklistItem3.id = 30
+//                checklistItem3.item = "Horn/Alarm/Lights"
+//
+//                let checklistItem4 = ChecklistItem(context: context)
+//                checklistItem4.id = 31
+//                checklistItem4.item = "Test Instruments"
+//
+//                let checklistItem5 = ChecklistItem(context: context)
+//                checklistItem5.id = 32
+//                checklistItem5.item = "Handrails"
+//
+//                let checklistItem6 = ChecklistItem(context: context)
+//                checklistItem6.id = 33
+//                checklistItem6.item = "Leak Evidence"
+//
+//                let checklistItem7 = ChecklistItem(context: context)
+//                checklistItem7.id = 34
+//                checklistItem7.item = "Operators Manual"
+//
+//                let checklistItem8 = ChecklistItem(context: context)
+//                checklistItem8.id = 35
+//                checklistItem8.item = "First Aid Kit"
+//
+//                let checklistItem9 = ChecklistItem(context: context)
+//                checklistItem9.id = 36
+//                checklistItem9.item = "Blade/Bucket/Tool"
+//
+//                let checklistItem10 = ChecklistItem(context: context)
+//                checklistItem10.id = 37
+//                checklistItem10.item = "Visibility Flag Whip"
+//
+//                let checklistItem11 = ChecklistItem(context: context)
+//                checklistItem11.id = 38
+//                checklistItem11.item = "Tires"
+//
+//                let checklistItem12 = ChecklistItem(context: context)
+//                checklistItem12.id = 39
+//                checklistItem12.item = "Windows/Wipers"
+//
+//                let checklistItem13 = ChecklistItem(context: context)
+//                checklistItem13.id = 40
+//                checklistItem13.item = "Seat Controls"
+//
+//                let checklistItem14 = ChecklistItem(context: context)
+//                checklistItem14.id = 41
+//                checklistItem14.item = "Air Conditioner"
+//
+//                let checklistItem15 = ChecklistItem(context: context)
+//                checklistItem15.id = 42
+//                checklistItem15.item = "Suspension"
+//
+//                let checklistItem16 = ChecklistItem(context: context)
+//                checklistItem16.id = 43
+//                checklistItem16.item = "Seat Belt/Suspension"
+//
+//                let checklistItem17 = ChecklistItem(context: context)
+//                checklistItem17.id = 44
+//                checklistItem17.item = "Doors & Latches"
+//
+//                let checklistItem18 = ChecklistItem(context: context)
+//                checklistItem18.id = 45
+//                checklistItem18.item = "Brakes/Retard"
+//
+//                let checklistItem19 = ChecklistItem(context: context)
+//                checklistItem19.id = 46
+//                checklistItem19.item = "Brakes"
+//
+//                let checklistItem20 = ChecklistItem(context: context)
+//                checklistItem20.id = 47
+//                checklistItem20.item = "Seat Belt"
+//
+//                let checklistItem21 = ChecklistItem(context: context)
+//                checklistItem21.id = 48
+//                checklistItem21.item = "Dash Controls"
+//
+//                let checklistItem22 = ChecklistItem(context: context)
+//                checklistItem22.id = 49
+//                checklistItem22.item = "Displays/Gauges"
+//
+//                let checklistItem23 = ChecklistItem(context: context)
+//                checklistItem23.id = 50
+//                checklistItem23.item = "Steering"
+//
+//         saveItems()
     }
     
     func addEquipmentTypes() {
-        //        let equipmentType = EquipmentType(context: context)
-        //        equipmentType.id = 5
-        //        equipmentType.equipment_type = "Loader"
-        //
-        //        let equipmentType2 = EquipmentType(context: context)
-        //        equipmentType2.id = 6
-        //        equipmentType2.equipment_type = "Fork Lift"
-        //
-        //        let equipmentType3 = EquipmentType(context: context)
-        //        equipmentType3.id = 7
-        //        equipmentType3.equipment_type = "Other"
-        //
-        //        let equipmentType4 = EquipmentType(context: context)
-        //        equipmentType4.id = 8
-        //        equipmentType4.equipment_type = "Light Vehicle"
-        //
-        //        let equipmentType5 = EquipmentType(context: context)
-        //        equipmentType5.id = 9
-        //        equipmentType5.equipment_type = "Generators"
-        //
-        //        let equipmentType6 = EquipmentType(context: context)
-        //        equipmentType6.id = 10
-        //        equipmentType6.equipment_type = "Welders"
-        //
-        //        let equipmentType7 = EquipmentType(context: context)
-        //        equipmentType7.id = 11
-        //        equipmentType7.equipment_type = "Rental Equipment"
-        //
-        //        let equipmentType8 = EquipmentType(context: context)
-        //        equipmentType8.id = 13
-        //        equipmentType8.equipment_type = "Backhoe Loader"
-        //
-        //        let equipmentType9 = EquipmentType(context: context)
-        //        equipmentType9.id = 14
-        //        equipmentType9.equipment_type = "Manlift"
-        //
-        //        let equipmentType10 = EquipmentType(context: context)
-        //        equipmentType10.id = 16
-        //        equipmentType10.equipment_type = "Sweeper"
-        //
-        //        let equipmentType11 = EquipmentType(context: context)
-        //        equipmentType11.id = 17
-        //        equipmentType11.equipment_type = "Sweeper Mop"
-        //
-        //        let equipmentType12 = EquipmentType(context: context)
-        //        equipmentType12.id = 19
-        //        equipmentType12.equipment_type = "Haul Truck"
-        //
-        //        let equipmentType13 = EquipmentType(context: context)
-        //        equipmentType13.id = 20
-        //        equipmentType13.equipment_type = "Dozer"
-        //
-        //        let equipmentType14 = EquipmentType(context: context)
-        //        equipmentType14.id = 21
-        //        equipmentType14.equipment_type = "Motor Grader"
-        //
-        //        let b15 = EquipmentType(context: context)
-        //        b15.id = 22
-        //        b15.equipment_type = "Drill"
-        //
-        // saveItems()
+//                let equipmentType = EquipmentType(context: context)
+//                equipmentType.id = 5
+//                equipmentType.equipment_type = "Loader"
+//
+//                let equipmentType2 = EquipmentType(context: context)
+//                equipmentType2.id = 6
+//                equipmentType2.equipment_type = "Fork Lift"
+//
+//                let equipmentType3 = EquipmentType(context: context)
+//                equipmentType3.id = 7
+//                equipmentType3.equipment_type = "Other"
+//
+//                let equipmentType4 = EquipmentType(context: context)
+//                equipmentType4.id = 8
+//                equipmentType4.equipment_type = "Light Vehicle"
+//
+//                let equipmentType5 = EquipmentType(context: context)
+//                equipmentType5.id = 9
+//                equipmentType5.equipment_type = "Generators"
+//
+//                let equipmentType6 = EquipmentType(context: context)
+//                equipmentType6.id = 10
+//                equipmentType6.equipment_type = "Welders"
+//
+//                let equipmentType7 = EquipmentType(context: context)
+//                equipmentType7.id = 11
+//                equipmentType7.equipment_type = "Rental Equipment"
+//
+//                let equipmentType8 = EquipmentType(context: context)
+//                equipmentType8.id = 13
+//                equipmentType8.equipment_type = "Backhoe Loader"
+//
+//                let equipmentType9 = EquipmentType(context: context)
+//                equipmentType9.id = 14
+//                equipmentType9.equipment_type = "Manlift"
+//
+//                let equipmentType10 = EquipmentType(context: context)
+//                equipmentType10.id = 16
+//                equipmentType10.equipment_type = "Sweeper"
+//
+//                let equipmentType11 = EquipmentType(context: context)
+//                equipmentType11.id = 17
+//                equipmentType11.equipment_type = "Sweeper Mop"
+//
+//                let equipmentType12 = EquipmentType(context: context)
+//                equipmentType12.id = 19
+//                equipmentType12.equipment_type = "Haul Truck"
+//
+//                let equipmentType13 = EquipmentType(context: context)
+//                equipmentType13.id = 20
+//                equipmentType13.equipment_type = "Dozer"
+//
+//                let equipmentType14 = EquipmentType(context: context)
+//                equipmentType14.id = 21
+//                equipmentType14.equipment_type = "Motor Grader"
+//
+//                let b15 = EquipmentType(context: context)
+//                b15.id = 22
+//                b15.equipment_type = "Drill"
+//
+//         saveItems()
     }
     
     func saveItems() {
@@ -334,10 +332,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func appendFormData() {
+    func appendFormData(rating: String) {
         // Add entered stuff to array
         var saveId : String = "";
         var saveItem : String = "";
+        var saveRating : String = "";
         var saveNote : String = "";
         
         let prevchecklistitem: [String : String] = checklistitemArray[questionNumber]
@@ -352,18 +351,20 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         }
         
         saveNote = currentInspectionItemBadNote.text!
+        saveRating = rating
         
-        let saveDict = ["id": "\(saveId)", "item": "\(saveItem)", "note": "\(saveNote)"]
+        let saveDict = ["id": "\(saveId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
         userFormData.append(saveDict)
         
-        print(userFormData)
+//        print(userFormData)
     }
     
     func nextInspectionItem() {
         let numChecklistItems = Int(checklistitemArray.count)
         
-        print(numChecklistItems)
+//        print(questionNumber)
+//        print(numChecklistItems)
         
         if questionNumber < numChecklistItems {
             // Get next Checklist Item
@@ -371,30 +372,19 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
             let checklistitem: [String : String] = checklistitemArray[questionNumber]
             
             for(key, value) in checklistitem {
-//                print("\(key) \(value)")
                 if(key=="item") {
                     currentInspectionItemLabel.text = value
                 }
             }
             
-            currentInspectionItemBadNote.text = ""
-            
-            // Change icon to grey
-            
-//            inspectionItemBadNote.text = "\(nextLabelText)"
-//            currentInspectionItemLabel.text = "Test \(questionNumber)"
-            
-//            updateUI()
-            
-//            questionLabel.text = allQuestions.list[questionNumber].questionText
-//            updateUI()
+            updateUI()
             
         } else {
             
             let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
             
             let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action: UIAlertAction!) in
-//                self.startOver()
+                self.startOver()
             })
             
             alert.addAction(restartAction)
@@ -403,12 +393,28 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func startOver() {
+        loadItems()
+//        checklistitemArray = [[String: String]]()
+//        userFormData = [[String: String]]()
+        questionNumber = 0
+        nextInspectionItem()
+    }
+    
     func updateUI() {
-        // checklistitemArray
+        let windowWidth = view.frame.size.width
+        let piece = (windowWidth - 10) / CGFloat(checklistitemArray.count)
+        let totalWidth = piece * CGFloat(questionNumber)
         
-        let numChecklistItems = CGFloat(checklistitemArray.count)
+        currentInspectionItemBadNote.text = ""
         
-        progressBar.frame.size.width = (view.frame.size.width / numChecklistItems) * CGFloat(questionNumber + 1)
+//        print("Window width: \(windowWidth)")
+//        print("Minus 10: \(windowWidth - 10)")
+//        print("Piece: \(piece)")
+//        print("Total Width: \(totalWidth)")
+//        print("Total Width Plus 10: \(totalWidth + 10)")
+        
+        progressBar.frame.size.width = totalWidth + 10
     }
     
 }
