@@ -20,6 +20,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
     var checklistitem:[ChecklistItem]? = nil
     
+    //Constants
+//    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
+//    let APP_ID = "27474384dc09e3a1d2109468edeee08f"
+
+    
 //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
@@ -135,6 +140,42 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+//    func getWeatherData(url: String, parameters: [String : String]) {
+//
+//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
+//            response in
+//            if response.result.isSuccess {
+//                print("Success! Got the weather data")
+//
+//                let weatherJSON : JSON = JSON(response.result.value!)
+//                self.updateWeatherData(json: weatherJSON)
+//
+//            } else {
+//                print("ERROR getting weather data...") // response.result.error
+//                self.cityLabel.text = "Connection Issues"
+//            }
+//        }
+//
+//    }
+    
+//    func parseChecklistJson(checklist_json : JSON) {
+    
+//        if let preStartData = checklist_json["preStart"] {
+        
+//            weatherDataModel.condition = json["weather"][0]["id"].intValue
+//            weatherDataModel.city = json["name"].stringValue
+//            weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+//
+//            updateUIWithWeatherData()
+            
+//        } else {
+    
+//            cityLabel.text = "Weather Unavailable"
+            
+//        }
+    
+//    }
+    
     func addChecklists() {
         _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
     }
@@ -193,15 +234,54 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         let checklist = ChecklistCoreDataHandler.filterData(fieldName: "id", filterType: "equals", queryString: equipmentTypeSelected)
         let checklistitem = ChecklistItemCoreDataHandler.fetchObject()
         
+        
+        
         if (checklist != nil) {
             for j in checklist! {
                 let id = j.id
                 let equipmenttype_id = j.equipmenttype_id
-                let checklist_json = j.checklist_json
+//                let checklist_json = j.checklist_json
+                
+//                let checklist_json: [String: [String:Any]] = j.checklist_json
                 
                 print(id)
                 print(equipmenttype_id)
-                print(checklist_json)
+//                print(checklist_json)
+                
+                // https://www.swiftyninja.com/escaped-string-json-using-swift/
+                
+                let jsonData = j.checklist_json?.data(using: .utf8)
+                
+//                print(j.checklist_json)
+//                print("&&&")
+//
+//                print("\(jsonData)")
+//                print("##")
+                
+                var dic: [String : Any]?
+                
+                do {
+                    dic = try JSONSerialization.jsonObject(with: jsonData!, options: []) as? [String : Any]
+
+                    let preStartData = ("\(dic!["preStartData"]!)")
+                   
+                    // https://stackoverflow.com/questions/25678373/swift-split-a-string-into-an-array
+                    // https://stackoverflow.com/questions/36594179/remove-all-non-numeric-characters-from-a-string-in-swift
+                    let preStartDataArr = (preStartData as AnyObject).components(separatedBy: ",")
+//                    let postStartDataArr = (postStartData as AnyObject).components(separatedBy: ",")
+                    
+                    let unsafeChars = CharacterSet.alphanumerics.inverted  // Remove the .inverted to get the opposite result.
+                    
+                    let blah = preStartDataArr[0].components(separatedBy: unsafeChars).joined(separator: "")
+
+                    
+                    print("@\(blah)@")
+//                    print("@\(blah1)@")
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+//                parseChecklistJson(checklist_json : JSON)
             }
         }
         
