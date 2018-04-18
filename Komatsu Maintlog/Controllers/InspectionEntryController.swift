@@ -15,10 +15,12 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
     var checklistitemArray = [[String: String]]() //[ChecklistItem]()
     var userFormData = [[String: String]]()
+    var equipmentTypeSelected : String = ""
     var questionNumber : Int = 0
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var checklistitem:[ChecklistItem]? = nil
+    
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
@@ -58,6 +60,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
             
             nextInspectionItem()
         } else if (sender as AnyObject).tag == 0 && currentInspectionItemBadNote.isHidden == true {
+            sender.shake()
+            
             // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
             currentInspectionItemBadNote.isHidden = false
@@ -77,23 +81,17 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-        // Manually add items to ChecklistItem entity
-        // Done 04/11/18
-        addChecklistItems()
-
-        // Manually add items to EquipmentType entity
-        // Done 04/11/18
+        deleteItems()
+        
         addEquipmentTypes()
+        addChecklists()
+        addChecklistItems()
+        
+        equipmentTypeSelected = "2"
         
         loadItems()
         
         nextInspectionItem()
-
-        print(dataFilePath)
-        
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     deinit {
@@ -137,198 +135,87 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func addChecklists() {
+        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
+    }
+    
     func addChecklistItems() {
-//                let checklistItem = ChecklistItem(context: context)
-//                checklistItem.id = 28
-//                checklistItem.item = "Secured Cargo"
-//
-//                let checklistItem2 = ChecklistItem(context: context)
-//                checklistItem2.id = 29
-//                checklistItem2.item = "Mirrors"
-//
-//                let checklistItem3 = ChecklistItem(context: context)
-//                checklistItem3.id = 30
-//                checklistItem3.item = "Horn/Alarm/Lights"
-//
-//                let checklistItem4 = ChecklistItem(context: context)
-//                checklistItem4.id = 31
-//                checklistItem4.item = "Test Instruments"
-//
-//                let checklistItem5 = ChecklistItem(context: context)
-//                checklistItem5.id = 32
-//                checklistItem5.item = "Handrails"
-//
-//                let checklistItem6 = ChecklistItem(context: context)
-//                checklistItem6.id = 33
-//                checklistItem6.item = "Leak Evidence"
-//
-//                let checklistItem7 = ChecklistItem(context: context)
-//                checklistItem7.id = 34
-//                checklistItem7.item = "Operators Manual"
-//
-//                let checklistItem8 = ChecklistItem(context: context)
-//                checklistItem8.id = 35
-//                checklistItem8.item = "First Aid Kit"
-//
-//                let checklistItem9 = ChecklistItem(context: context)
-//                checklistItem9.id = 36
-//                checklistItem9.item = "Blade/Bucket/Tool"
-//
-//                let checklistItem10 = ChecklistItem(context: context)
-//                checklistItem10.id = 37
-//                checklistItem10.item = "Visibility Flag Whip"
-//
-//                let checklistItem11 = ChecklistItem(context: context)
-//                checklistItem11.id = 38
-//                checklistItem11.item = "Tires"
-//
-//                let checklistItem12 = ChecklistItem(context: context)
-//                checklistItem12.id = 39
-//                checklistItem12.item = "Windows/Wipers"
-//
-//                let checklistItem13 = ChecklistItem(context: context)
-//                checklistItem13.id = 40
-//                checklistItem13.item = "Seat Controls"
-//
-//                let checklistItem14 = ChecklistItem(context: context)
-//                checklistItem14.id = 41
-//                checklistItem14.item = "Air Conditioner"
-//
-//                let checklistItem15 = ChecklistItem(context: context)
-//                checklistItem15.id = 42
-//                checklistItem15.item = "Suspension"
-//
-//                let checklistItem16 = ChecklistItem(context: context)
-//                checklistItem16.id = 43
-//                checklistItem16.item = "Seat Belt/Suspension"
-//
-//                let checklistItem17 = ChecklistItem(context: context)
-//                checklistItem17.id = 44
-//                checklistItem17.item = "Doors & Latches"
-//
-//                let checklistItem18 = ChecklistItem(context: context)
-//                checklistItem18.id = 45
-//                checklistItem18.item = "Brakes/Retard"
-//
-//                let checklistItem19 = ChecklistItem(context: context)
-//                checklistItem19.id = 46
-//                checklistItem19.item = "Brakes"
-//
-//                let checklistItem20 = ChecklistItem(context: context)
-//                checklistItem20.id = 47
-//                checklistItem20.item = "Seat Belt"
-//
-//                let checklistItem21 = ChecklistItem(context: context)
-//                checklistItem21.id = 48
-//                checklistItem21.item = "Dash Controls"
-//
-//                let checklistItem22 = ChecklistItem(context: context)
-//                checklistItem22.id = 49
-//                checklistItem22.item = "Displays/Gauges"
-//
-//                let checklistItem23 = ChecklistItem(context: context)
-//                checklistItem23.id = 50
-//                checklistItem23.item = "Steering"
-//
-//         saveItems()
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 28, item: "Secured Cargo")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 29, item: "Mirrors")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 30, item: "Horn/Alarm/Lights")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 31, item: "Test Instruments")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 32, item: "Handrails")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 33, item: "Leak Evidence")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 34, item: "Operators Manual")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 35, item: "First Aid Kit")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 36, item: "Blade/Bucket/Tool")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 37, item: "Visibility Flag Whip")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 38, item: "Tires")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 39, item: "Windows/Wipers")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 40, item: "Seat Controls")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 41, item: "Air Conditioner")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 42, item: "Suspension")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 43, item: "Seat Belt/Suspension")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 44, item: "Doors & Latches")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 45, item: "Brakes/Retard")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 46, item: "Brakes")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 47, item: "Seat Belt")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 48, item: "Dash Controls")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 49, item: "Displays/Gauges")
+        _ = ChecklistItemCoreDataHandler.saveObject(id: 50, item: "Steering")
     }
     
     func addEquipmentTypes() {
-//                let equipmentType = EquipmentType(context: context)
-//                equipmentType.id = 5
-//                equipmentType.equipment_type = "Loader"
-//
-//                let equipmentType2 = EquipmentType(context: context)
-//                equipmentType2.id = 6
-//                equipmentType2.equipment_type = "Fork Lift"
-//
-//                let equipmentType3 = EquipmentType(context: context)
-//                equipmentType3.id = 7
-//                equipmentType3.equipment_type = "Other"
-//
-//                let equipmentType4 = EquipmentType(context: context)
-//                equipmentType4.id = 8
-//                equipmentType4.equipment_type = "Light Vehicle"
-//
-//                let equipmentType5 = EquipmentType(context: context)
-//                equipmentType5.id = 9
-//                equipmentType5.equipment_type = "Generators"
-//
-//                let equipmentType6 = EquipmentType(context: context)
-//                equipmentType6.id = 10
-//                equipmentType6.equipment_type = "Welders"
-//
-//                let equipmentType7 = EquipmentType(context: context)
-//                equipmentType7.id = 11
-//                equipmentType7.equipment_type = "Rental Equipment"
-//
-//                let equipmentType8 = EquipmentType(context: context)
-//                equipmentType8.id = 13
-//                equipmentType8.equipment_type = "Backhoe Loader"
-//
-//                let equipmentType9 = EquipmentType(context: context)
-//                equipmentType9.id = 14
-//                equipmentType9.equipment_type = "Manlift"
-//
-//                let equipmentType10 = EquipmentType(context: context)
-//                equipmentType10.id = 16
-//                equipmentType10.equipment_type = "Sweeper"
-//
-//                let equipmentType11 = EquipmentType(context: context)
-//                equipmentType11.id = 17
-//                equipmentType11.equipment_type = "Sweeper Mop"
-//
-//                let equipmentType12 = EquipmentType(context: context)
-//                equipmentType12.id = 19
-//                equipmentType12.equipment_type = "Haul Truck"
-//
-//                let equipmentType13 = EquipmentType(context: context)
-//                equipmentType13.id = 20
-//                equipmentType13.equipment_type = "Dozer"
-//
-//                let equipmentType14 = EquipmentType(context: context)
-//                equipmentType14.id = 21
-//                equipmentType14.equipment_type = "Motor Grader"
-//
-//                let b15 = EquipmentType(context: context)
-//                b15.id = 22
-//                b15.equipment_type = "Drill"
-//
-//         saveItems()
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipment_type: "Loader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 6, equipment_type: "Fork Lift")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 7, equipment_type: "Other")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 8, equipment_type: "Light Vehicle")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 9, equipment_type: "Generators")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 10, equipment_type: "Welders")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 11, equipment_type: "Rental Equipment")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 13, equipment_type: "Backhoe Loader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 14, equipment_type: "Manlift")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 16, equipment_type: "Sweeper")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 17, equipment_type: "Sweeper Mop")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 19, equipment_type: "Haul Truck")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 20, equipment_type: "Dozer")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 21, equipment_type: "Motor Grader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 22, equipment_type: "Drill")
     }
     
-    func saveItems() {
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context \(error)")
-        }
+    func deleteItems() {
+        _ = EquipmentTypeCoreDataHandler.cleanDelete()
+        _ = ChecklistCoreDataHandler.cleanDelete()
+        _ = ChecklistItemCoreDataHandler.cleanDelete()
     }
     
     func loadItems() {
-        let request : NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()
-//        let results = []
+        let checklist = ChecklistCoreDataHandler.filterData(fieldName: "id", filterType: "equals", queryString: equipmentTypeSelected)
+        let checklistitem = ChecklistItemCoreDataHandler.fetchObject()
         
-        do {
-            let results = try context.fetch(request)
-            
-            if results.count > 0 {
-                for result in results {
-                    let id = result.id
-                    let item = result.item
-                    
-//                    print(item!)
-                    
-                    let dict = ["id": "\(id)", "item": "\(String(describing: item!))"]
-                    
-                    checklistitemArray.append(dict)
-                }
+        if (checklist != nil) {
+            for j in checklist! {
+                let id = j.id
+                let equipmenttype_id = j.equipmenttype_id
+                let checklist_json = j.checklist_json
+                
+                print(id)
+                print(equipmenttype_id)
+                print(checklist_json)
             }
-            
-//            checklistitemArray = try context.fetch(request)
-//            print(checklistitemArray)
-        } catch {
-            print("Error fetching data from context \(error)")
+        }
+        
+        if (checklistitem != nil) {
+            for i in checklistitem! {
+                let id = i.id
+                let item = i.item!
+                
+                let dict = ["id": "\(id)", "item": "\(String(describing: item))"]
+                
+                checklistitemArray.append(dict)
+            }
+        } else {
+            print("Error fetching checklistitems")
         }
     }
     
@@ -395,9 +282,9 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
     func startOver() {
         loadItems()
-//        checklistitemArray = [[String: String]]()
-//        userFormData = [[String: String]]()
+        
         questionNumber = 0
+        
         nextInspectionItem()
     }
     
@@ -407,12 +294,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         let totalWidth = piece * CGFloat(questionNumber)
         
         currentInspectionItemBadNote.text = ""
-        
-//        print("Window width: \(windowWidth)")
-//        print("Minus 10: \(windowWidth - 10)")
-//        print("Piece: \(piece)")
-//        print("Total Width: \(totalWidth)")
-//        print("Total Width Plus 10: \(totalWidth + 10)")
         
         progressBar.frame.size.width = totalWidth + 10
     }

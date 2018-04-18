@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
+		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
+		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
+		65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */; };
 		8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02AE8207804CD00AD05BC /* AppDelegate.swift */; };
 		8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEC207804CD00AD05BC /* Main.storyboard */; };
 		8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEF207804CD00AD05BC /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
+		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
+		65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentTypeCoreDataHandler.swift; sourceTree = "<group>"; };
 		8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Komatsu Maintlog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD02AE8207804CD00AD05BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AD02AED207804CD00AD05BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				8AE7FA6B207D70F600945D73 /* DataModel.xcdatamodeld */,
+				65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */,
+				65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */,
+				65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -251,11 +260,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
+				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,
 				8AE7FA6D207D70F600945D73 /* DataModel.xcdatamodeld in Sources */,
 				65875F732083FE4800303D20 /* UITextField.swift in Sources */,
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
 				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
+				65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
+				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
