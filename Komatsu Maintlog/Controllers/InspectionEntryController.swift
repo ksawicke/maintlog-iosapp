@@ -18,7 +18,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     var userFormData = [[String: String]]()
     var equipmentTypeSelected : String = ""
     var questionNumber : Int = 0
-    
+    var currentSection : String = ""
     var checklistitem:[ChecklistItem]? = nil
     
     //Constants
@@ -28,6 +28,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
 //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
+    @IBOutlet weak var currentSectionLabel: UILabel!
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
@@ -299,22 +300,42 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     func appendFormData(rating: String) {
-        // Add entered stuff to array
+        let numChecklistItems = Int(checklistitemPrestartArray.count) + Int(checklistitemPoststartArray.count)
+        var counter = questionNumber
+        
         var saveId : String = "";
         var saveItem : String = "";
         var saveRating : String = "";
         var saveNote : String = "";
         
-        // TODO: Adjust since we now have an array for prestart and poststart items
-        let prevchecklistitem: [String : String] = checklistitemPrestartArray[questionNumber]
-        
-        for(key, value) in prevchecklistitem {
-            if(key=="id") {
-                saveId = value
+        if questionNumber <= checklistitemPrestartArray.count-1 {
+            counter = questionNumber
+            let prevchecklistitem: [String : String] = checklistitemPrestartArray[counter]
+            
+            for(key, value) in prevchecklistitem {
+                if(key=="id") {
+                    saveId = value
+                }
+                if(key=="item") {
+                    saveItem = "\(value)"
+                }
             }
-            if(key=="item") {
-                saveItem = "\(value)"
+            
+            currentSection = "preStart"
+        } else {
+            counter = numChecklistItems - questionNumber - 1
+            let prevchecklistitem: [String : String] = checklistitemPoststartArray[counter]
+            
+            for(key, value) in prevchecklistitem {
+                if(key=="id") {
+                    saveId = value
+                }
+                if(key=="item") {
+                    saveItem = "\(value)"
+                }
             }
+            
+            currentSection = "postStart"
         }
         
         saveNote = currentInspectionItemBadNote.text!
@@ -323,32 +344,43 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         let saveDict = ["id": "\(saveId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
         userFormData.append(saveDict)
-        
-//        print(userFormData)
     }
     
     func nextInspectionItem() {
         let numChecklistItems = Int(checklistitemPrestartArray.count) + Int(checklistitemPoststartArray.count)
-        
-//        print(questionNumber)
-//        print(numChecklistItems)
-        
+        var counter = questionNumber
+        var sectionLabel : String = ""
+        var itemLabel : String = ""
+
         if questionNumber < numChecklistItems {
             // Get next Checklist Item
             
-            // TODO: Adjust since we now have an array for prestart and poststart items
-            let checklistitem: [String : String] = checklistitemPrestartArray[questionNumber]
-            
-            for(key, value) in checklistitem {
-                if(key=="item") {
-                    currentInspectionItemLabel.text = value
+            if questionNumber <= checklistitemPrestartArray.count-1 {
+                counter = questionNumber
+                let checklistitem: [String : String] = checklistitemPrestartArray[counter]
+                
+                for(key, value) in checklistitem {
+                    if(key=="item") {
+                        itemLabel = value
+                    }
                 }
+                
+                sectionLabel = "Pre-Start"
+            } else {
+                counter = numChecklistItems - questionNumber - 1
+                let checklistitem: [String : String] = checklistitemPoststartArray[counter]
+                
+                for(key, value) in checklistitem {
+                    if(key=="item") {
+                        itemLabel = value
+                    }
+                }
+                
+                sectionLabel = "Post-Start"
             }
             
-            updateUI()
-            
+            updateUI(sectionLabel: sectionLabel, itemLabel: itemLabel)
         } else {
-            
             let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
             
             let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action: UIAlertAction!) in
@@ -369,12 +401,14 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         nextInspectionItem()
     }
     
-    func updateUI() {
+    func updateUI(sectionLabel: String, itemLabel: String) {
         let windowWidth = view.frame.size.width
         let numTotalItems = CGFloat(checklistitemPrestartArray.count) + CGFloat(checklistitemPoststartArray.count)
         let piece = (windowWidth - 10) / numTotalItems
         let totalWidth = piece * CGFloat(questionNumber)
         
+        currentSectionLabel.text = sectionLabel
+        currentInspectionItemLabel.text = itemLabel
         currentInspectionItemBadNote.text = ""
         
         progressBar.frame.size.width = totalWidth + 10

@@ -263,6 +263,7 @@
                         <outlet property="currentInspectionItemBadNote" destination="2ig-4B-nUA" id="0I2-pV-VOf"/>
                         <outlet property="currentInspectionItemBadNoteLabel" destination="J5V-y2-O4W" id="0uf-P6-yTr"/>
                         <outlet property="currentInspectionItemLabel" destination="w2j-Pe-FZU" id="bsl-8N-qur"/>
+                        <outlet property="currentSectionLabel" destination="DFT-q1-F0v" id="Kdl-j1-XXe"/>
                         <outlet property="inspectionChoiceImage" destination="3CT-gE-Vr6" id="HIp-D3-u3P"/>
                         <outlet property="nextButton" destination="Lbd-kj-MKI" id="a2Q-KV-nHQ"/>
                         <outlet property="progressBar" destination="5Zd-ew-bNW" id="iHp-rA-RyE"/>
