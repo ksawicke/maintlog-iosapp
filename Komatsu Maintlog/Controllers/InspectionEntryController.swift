@@ -33,8 +33,13 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
+
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var progressBar: UIView!
+    
+    @IBAction func onClickTakePicture(_ sender: Any) {
+        print("Clicked button \((sender as AnyObject).tag)")
+    }
     
     @IBAction func onClickNext(_ sender: Any) {
         hideKeyboard()
