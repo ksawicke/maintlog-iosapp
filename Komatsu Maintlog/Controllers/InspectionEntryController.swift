@@ -13,7 +13,8 @@ import SwiftyJSON
 
 class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
-    var checklistitemArray = [[String: String]]() //[ChecklistItem]()
+    var checklistitemPrestartArray = [[String: String]]()
+    var checklistitemPoststartArray = [[String: String]]()
     var userFormData = [[String: String]]()
     var equipmentTypeSelected : String = ""
     var questionNumber : Int = 0
@@ -241,25 +242,9 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
         if (checklist != nil) {
             for j in checklist! {
-                let id = j.id
-                let equipmenttype_id = j.equipmenttype_id
-//                let checklist_json = j.checklist_json
-                
-//                let checklist_json: [String: [String:Any]] = j.checklist_json
-                
-//                print(id)
-//                print(equipmenttype_id)
-//                print(checklist_json)
-                
                 // https://www.swiftyninja.com/escaped-string-json-using-swift/
                 
                 let jsonData = j.checklist_json?.data(using: .utf8)
-                
-//                print(j.checklist_json)
-//                print("&&&")
-//
-//                print("\(jsonData)")
-//                print("##")
                 
                 var dic: [String : Any]?
                 
@@ -267,40 +252,34 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
                     dic = try JSONSerialization.jsonObject(with: jsonData!, options: []) as? [String : Any]
 
                     let preStartData = ("\(dic!["preStartData"]!)")
+                    let postStartData = ("\(dic!["postStartData"]!)")
                    
                     // https://stackoverflow.com/questions/25678373/swift-split-a-string-into-an-array
                     // https://stackoverflow.com/questions/36594179/remove-all-non-numeric-characters-from-a-string-in-swift
                     let preStartDataArr = (preStartData as AnyObject).components(separatedBy: ",")
-//                    let postStartDataArr = (postStartData as AnyObject).components(separatedBy: ",")
+                    let postStartDataArr = (postStartData as AnyObject).components(separatedBy: ",")
                     
                     let unsafeChars = CharacterSet.alphanumerics.inverted  // Remove the .inverted to get the opposite result.
                     
-//                    print(preStartDataArr.count)
-//                    print(preStartDataArr[0])
-//                    print(preStartDataArr[preStartDataArr.count-1])
                     for index in 0...preStartDataArr.count-1 {
                         let checklistItemId = preStartDataArr[index].components(separatedBy: unsafeChars).joined(separator: "")
-                    
-//                        print("TEST: \(checklistItemId)")
-                        
-                        appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!)
+
+                        appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!, appendTo: "preStart")
                     }
                     
-//                    let blah = preStartDataArr[0].components(separatedBy: unsafeChars).joined(separator: "")
-
-                    
-//                    print("@\(blah)@")
-//                    print("@\(blah1)@")
+                    for index in 0...postStartDataArr.count-1 {
+                        let checklistItemId = postStartDataArr[index].components(separatedBy: unsafeChars).joined(separator: "")
+                        
+                        appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!, appendTo: "postStart")
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }
-                
-//                parseChecklistJson(checklist_json : JSON)
             }
         }
     }
     
-    func appendToChecklistItemArray(id: String, checklistitem: [ChecklistItem]) {
+    func appendToChecklistItemArray(id: String, checklistitem: [ChecklistItem], appendTo: String) {
         if (checklistitem != nil) {
             for i in checklistitem {
                 let thisChecklistitemId = i.id
@@ -309,13 +288,14 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
                 if(String(id) == String(thisChecklistitemId)) {
                     let dict = ["id": "\(thisChecklistitemId)", "item": "\(String(describing: thisChecklistitemItem))"]
                     
-                    checklistitemArray.append(dict)
+                    if appendTo=="preStart" {
+                        checklistitemPrestartArray.append(dict)
+                    } else if appendTo=="postStart" {
+                        checklistitemPoststartArray.append(dict)
+                    }
                 }
             }
         }
-//        else {
-//            print("Error fetching checklistitems")
-//        }
     }
     
     func appendFormData(rating: String) {
@@ -325,7 +305,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         var saveRating : String = "";
         var saveNote : String = "";
         
-        let prevchecklistitem: [String : String] = checklistitemArray[questionNumber]
+        // TODO: Adjust since we now have an array for prestart and poststart items
+        let prevchecklistitem: [String : String] = checklistitemPrestartArray[questionNumber]
         
         for(key, value) in prevchecklistitem {
             if(key=="id") {
@@ -347,7 +328,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     }
     
     func nextInspectionItem() {
-        let numChecklistItems = Int(checklistitemArray.count)
+        let numChecklistItems = Int(checklistitemPrestartArray.count) + Int(checklistitemPoststartArray.count)
         
 //        print(questionNumber)
 //        print(numChecklistItems)
@@ -355,7 +336,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         if questionNumber < numChecklistItems {
             // Get next Checklist Item
             
-            let checklistitem: [String : String] = checklistitemArray[questionNumber]
+            // TODO: Adjust since we now have an array for prestart and poststart items
+            let checklistitem: [String : String] = checklistitemPrestartArray[questionNumber]
             
             for(key, value) in checklistitem {
                 if(key=="item") {
@@ -389,7 +371,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     
     func updateUI() {
         let windowWidth = view.frame.size.width
-        let piece = (windowWidth - 10) / CGFloat(checklistitemArray.count)
+        let numTotalItems = CGFloat(checklistitemPrestartArray.count) + CGFloat(checklistitemPoststartArray.count)
+        let piece = (windowWidth - 10) / numTotalItems
         let totalWidth = piece * CGFloat(questionNumber)
         
         currentInspectionItemBadNote.text = ""

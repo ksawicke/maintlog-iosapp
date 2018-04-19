@@ -109,10 +109,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txh-gy-ZIi" userLabel="Inspection Choice Good Area">
-                                <rect key="frame" x="0.0" y="147" width="375" height="160"/>
+                                <rect key="frame" x="0.0" y="162" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6" userLabel="Inspection Choice Good">
-                                        <rect key="frame" x="127" y="20" width="120" height="120"/>
+                                        <rect key="frame" x="127" y="0.0" width="120" height="120"/>
                                         <state key="normal" image="icons8-good"/>
                                         <connections>
                                             <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="qJY-vj-1YH"/>
@@ -121,16 +121,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="TNf-6M-WnI"/>
+                                    <constraint firstAttribute="height" constant="120" id="TNf-6M-WnI"/>
                                     <constraint firstItem="3CT-gE-Vr6" firstAttribute="centerX" secondItem="Txh-gy-ZIi" secondAttribute="centerX" id="dJ2-Hg-mOT"/>
                                     <constraint firstItem="3CT-gE-Vr6" firstAttribute="centerY" secondItem="Txh-gy-ZIi" secondAttribute="centerY" id="mVq-Wx-s4E"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="up3-zf-Zkz" userLabel="Inspection Choice Bad Area">
-                                <rect key="frame" x="0.0" y="307" width="375" height="160"/>
+                                <rect key="frame" x="0.0" y="282" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K" userLabel="Inspection Choice Bad">
-                                        <rect key="frame" x="127" y="20" width="120" height="120"/>
+                                        <rect key="frame" x="127" y="0.0" width="120" height="120"/>
                                         <state key="normal" image="icons8-bad"/>
                                         <connections>
                                             <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="56k-nl-IDr"/>
@@ -139,16 +139,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="aLC-xz-vzA"/>
+                                    <constraint firstAttribute="height" constant="120" id="aLC-xz-vzA"/>
                                     <constraint firstItem="y6q-En-x2K" firstAttribute="centerY" secondItem="up3-zf-Zkz" secondAttribute="centerY" id="jHY-MO-E61"/>
                                     <constraint firstItem="y6q-En-x2K" firstAttribute="centerX" secondItem="up3-zf-Zkz" secondAttribute="centerX" id="pi9-Ih-GV8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3w5-KK-bYu" userLabel="Inspection Item Label Area">
-                                <rect key="frame" x="0.0" y="72" width="375" height="75"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="90"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFT-q1-F0v">
+                                        <rect key="frame" x="157" y="10" width="61.5" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
-                                        <rect key="frame" x="93.5" y="20" width="189" height="35.5"/>
+                                        <rect key="frame" x="93" y="44.5" width="189" height="35.5"/>
                                         <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -156,13 +162,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="w2j-Pe-FZU" firstAttribute="centerY" secondItem="3w5-KK-bYu" secondAttribute="centerY" id="7IP-w5-QMn"/>
-                                    <constraint firstItem="w2j-Pe-FZU" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="7o4-b6-7gK"/>
-                                    <constraint firstAttribute="height" constant="75" id="ZBA-QA-AGg"/>
+                                    <constraint firstItem="w2j-Pe-FZU" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="990-1t-zov"/>
+                                    <constraint firstItem="DFT-q1-F0v" firstAttribute="top" secondItem="3w5-KK-bYu" secondAttribute="top" constant="10" id="LDh-vo-BGs"/>
+                                    <constraint firstAttribute="height" constant="90" id="ZBA-QA-AGg"/>
+                                    <constraint firstItem="DFT-q1-F0v" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="w2I-7v-Svt"/>
+                                    <constraint firstAttribute="bottom" secondItem="w2j-Pe-FZU" secondAttribute="bottom" constant="10" id="xUk-tH-10W"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-VS-jDY" userLabel="Bad Note Area">
-                                <rect key="frame" x="0.0" y="467" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="402" width="375" height="215"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-y2-O4W">
                                         <rect key="frame" x="161.5" y="5" width="50.5" height="25"/>
