@@ -202,7 +202,7 @@
                                             <action selector="onSaveBadNote:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="uoy-Yj-arV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9X-eO-0FQ">
+                                    <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9X-eO-0FQ">
                                         <rect key="frame" x="5" y="75" width="125" height="60"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -213,10 +213,10 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Take Picture"/>
                                         <connections>
-                                            <action selector="onClickTakePicture:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="xQU-9y-JDg"/>
+                                            <action selector="onClickTakePicture:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="Gbc-oE-Gmt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giH-Bd-ppV">
+                                    <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giH-Bd-ppV">
                                         <rect key="frame" x="284" y="75" width="125" height="60"/>
                                         <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -226,9 +226,6 @@
                                         <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Take Picture"/>
-                                        <connections>
-                                            <action selector="onClickTakePicture:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="6Zp-Uq-9WH"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,7 +295,10 @@
                         <outlet property="currentSectionLabel" destination="DFT-q1-F0v" id="Kdl-j1-XXe"/>
                         <outlet property="inspectionChoiceImage" destination="3CT-gE-Vr6" id="HIp-D3-u3P"/>
                         <outlet property="nextButton" destination="Lbd-kj-MKI" id="a2Q-KV-nHQ"/>
+                        <outlet property="onClickTakePicture" destination="J9X-eO-0FQ" id="S6V-R9-Uia"/>
                         <outlet property="progressBar" destination="5Zd-ew-bNW" id="iHp-rA-RyE"/>
+                        <outlet property="takePicture1Button" destination="J9X-eO-0FQ" id="X3a-BF-ZhO"/>
+                        <outlet property="takePicture2Button" destination="giH-Bd-ppV" id="7a6-63-wpi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-bu-Uep" userLabel="First Responder" sceneMemberID="firstResponder"/>

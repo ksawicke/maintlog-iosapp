@@ -34,17 +34,22 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
 
+    @IBOutlet weak var takePicture1Button: UIButton!
+    @IBOutlet weak var takePicture2Button: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickTakePicture(_ sender: Any) {
-        print("Clicked button \((sender as AnyObject).tag)")
+        print((sender as AnyObject).tag)
     }
     
+    @IBOutlet weak var onClickTakePicture: UIButton!
     @IBAction func onClickNext(_ sender: Any) {
         hideKeyboard()
         currentInspectionItemBadNoteLabel.isHidden = true
         currentInspectionItemBadNote.isHidden = true
+        takePicture1Button.isHidden = true
+        takePicture2Button.isHidden = true
         nextButton.isHidden = true
         
         appendFormData(rating: "0")
@@ -77,6 +82,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
             // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
             currentInspectionItemBadNote.isHidden = false
+            takePicture1Button.isHidden = false
+            takePicture2Button.isHidden = false
         }
     }
     
