@@ -92,6 +92,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         addChecklists()
         addChecklistItems()
         
+        // TODO 04/19/18: Allow user to pick the Equipment Unit from
+        // a previous screen that needs to be created.
+        // Allow the user to scan a barcode that will pick the
+        // Unit which will dynamically select the equipment type
+        // instead of being hard coded.
         equipmentTypeSelected = "2"
         
         loadItems()
@@ -233,9 +238,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     func loadItems() {
         let checklist = ChecklistCoreDataHandler.filterData(fieldName: "id", filterType: "equals", queryString: equipmentTypeSelected)
         let checklistitem = ChecklistItemCoreDataHandler.fetchObject()
-        
-        
-        
+
         if (checklist != nil) {
             for j in checklist! {
                 let id = j.id
@@ -244,8 +247,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
                 
 //                let checklist_json: [String: [String:Any]] = j.checklist_json
                 
-                print(id)
-                print(equipmenttype_id)
+//                print(id)
+//                print(equipmenttype_id)
 //                print(checklist_json)
                 
                 // https://www.swiftyninja.com/escaped-string-json-using-swift/
@@ -272,10 +275,21 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
                     
                     let unsafeChars = CharacterSet.alphanumerics.inverted  // Remove the .inverted to get the opposite result.
                     
-                    let blah = preStartDataArr[0].components(separatedBy: unsafeChars).joined(separator: "")
+//                    print(preStartDataArr.count)
+//                    print(preStartDataArr[0])
+//                    print(preStartDataArr[preStartDataArr.count-1])
+                    for index in 0...preStartDataArr.count-1 {
+                        let checklistItemId = preStartDataArr[index].components(separatedBy: unsafeChars).joined(separator: "")
+                    
+//                        print("TEST: \(checklistItemId)")
+                        
+                        appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!)
+                    }
+                    
+//                    let blah = preStartDataArr[0].components(separatedBy: unsafeChars).joined(separator: "")
 
                     
-                    print("@\(blah)@")
+//                    print("@\(blah)@")
 //                    print("@\(blah1)@")
                 } catch {
                     print(error.localizedDescription)
@@ -284,19 +298,24 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
 //                parseChecklistJson(checklist_json : JSON)
             }
         }
-        
+    }
+    
+    func appendToChecklistItemArray(id: String, checklistitem: [ChecklistItem]) {
         if (checklistitem != nil) {
-            for i in checklistitem! {
-                let id = i.id
-                let item = i.item!
+            for i in checklistitem {
+                let thisChecklistitemId = i.id
+                let thisChecklistitemItem = i.item!
                 
-                let dict = ["id": "\(id)", "item": "\(String(describing: item))"]
-                
-                checklistitemArray.append(dict)
+                if(String(id) == String(thisChecklistitemId)) {
+                    let dict = ["id": "\(thisChecklistitemId)", "item": "\(String(describing: thisChecklistitemItem))"]
+                    
+                    checklistitemArray.append(dict)
+                }
             }
-        } else {
-            print("Error fetching checklistitems")
         }
+//        else {
+//            print("Error fetching checklistitems")
+//        }
     }
     
     func appendFormData(rating: String) {
