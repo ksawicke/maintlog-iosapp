@@ -11,7 +11,7 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
-class InspectionEntryController: UIViewController, UITextFieldDelegate {
+class InspectionEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     var checklistitemPrestartArray = [[String: String]]()
     var checklistitemPoststartArray = [[String: String]]()
@@ -20,6 +20,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
     var questionNumber : Int = 0
     var currentSection : String = ""
     var checklistitem:[ChecklistItem]? = nil
+    var imagePickerController : UIImagePickerController!
     
     //Constants
 //    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -36,20 +37,30 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var takePicture1Button: UIButton!
     @IBOutlet weak var takePicture2Button: UIButton!
+    @IBOutlet weak var picture1: UIImageView!
+    @IBOutlet weak var picture2: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickTakePicture(_ sender: Any) {
         print((sender as AnyObject).tag)
+        
+        imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .camera
+        imagePickerController.view.tag = (sender as AnyObject).tag;
+        
+        present(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBOutlet weak var onClickTakePicture: UIButton!
     @IBAction func onClickNext(_ sender: Any) {
         hideKeyboard()
         currentInspectionItemBadNoteLabel.isHidden = true
         currentInspectionItemBadNote.isHidden = true
         takePicture1Button.isHidden = true
         takePicture2Button.isHidden = true
+        picture1.isHidden = true
+        picture2.isHidden = true
         nextButton.isHidden = true
         
         appendFormData(rating: "0")
@@ -84,6 +95,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
             currentInspectionItemBadNote.isHidden = false
             takePicture1Button.isHidden = false
             takePicture2Button.isHidden = false
+            picture1.isHidden = false
+            picture2.isHidden = false
         }
     }
     
@@ -157,6 +170,16 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate {
         nextButton.isHidden = false
         
         return true
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        imagePickerController.dismiss(animated: true, completion: nil)
+        if(picker.view.tag == 1) {
+            picture1.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        } else if (picker.view.tag == 2) {
+            picture2.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        }
     }
     
 //    func getWeatherData(url: String, parameters: [String : String]) {
