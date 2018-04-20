@@ -43,8 +43,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickTakePicture(_ sender: Any) {
-        print((sender as AnyObject).tag)
-        
         imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.sourceType = .camera
@@ -59,6 +57,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         currentInspectionItemBadNote.isHidden = true
         takePicture1Button.isHidden = true
         takePicture2Button.isHidden = true
+        picture1.image = nil
+        picture2.image = nil
         picture1.isHidden = true
         picture2.isHidden = true
         nextButton.isHidden = true
@@ -175,10 +175,17 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         imagePickerController.dismiss(animated: true, completion: nil)
+        
+        let pictureTaken = info[UIImagePickerControllerOriginalImage] as? UIImage
+ 
         if(picker.view.tag == 1) {
-            picture1.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            picture1.image = pictureTaken?.imageFlippedForRightToLeftLayoutDirection()
+            picture1.isHidden = false
+            takePicture1Button.isHidden = true
         } else if (picker.view.tag == 2) {
-            picture2.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            picture2.image = pictureTaken?.imageFlippedForRightToLeftLayoutDirection()
+            picture2.isHidden = false
+            takePicture2Button.isHidden = true
         }
     }
     
