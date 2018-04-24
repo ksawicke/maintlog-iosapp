@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
+		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
+		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 				65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */,
 				65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */,
 				65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */,
+				656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */,
+				656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -266,8 +272,10 @@
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
 				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
 				65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */,
+				656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
+				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

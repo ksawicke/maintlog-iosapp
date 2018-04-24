@@ -15,9 +15,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 
     var checklistitemPrestartArray = [[String: String]]()
     var checklistitemPoststartArray = [[String: String]]()
+    var imagesTaken = [[String: Any]]()
     var userFormData = [[String: String]]()
     var equipmentTypeSelected : String = ""
     var questionNumber : Int = 0
+    var equipmentUnit : String = ""
     var currentSection : String = ""
     var checklistitem:[ChecklistItem]? = nil
     var imagePickerController : UIImagePickerController!
@@ -57,8 +59,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         currentInspectionItemBadNote.isHidden = true
         takePicture1Button.isHidden = true
         takePicture2Button.isHidden = true
-        picture1.image = nil
-        picture2.image = nil
         picture1.isHidden = true
         picture2.isHidden = true
         nextButton.isHidden = true
@@ -66,6 +66,9 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         appendFormData(rating: "0")
         
         questionNumber += 1
+        
+        picture1.image = nil
+        picture2.image = nil
         
         nextInspectionItem()
     }
@@ -125,6 +128,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         // Unit which will dynamically select the equipment type
         // instead of being hard coded.
         equipmentTypeSelected = "2"
+        equipmentUnit = "FBFC-3325-BBCD-2222"
         
         loadItems()
         
@@ -349,6 +353,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveItem : String = "";
         var saveRating : String = "";
         var saveNote : String = "";
+        var equipmentUnitId : String = equipmentUnit
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -382,10 +387,29 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
-        
-        let saveDict = ["id": "\(saveId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
+
+        let saveDict = ["id": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
         userFormData.append(saveDict)
+        
+        if picture1.image != nil {
+            appendPicture(inspectionID: saveId, photoId: "1", image: picture1.image!)
+        }
+        
+        if picture2.image != nil {
+            appendPicture(inspectionID: saveId, photoId: "2", image: picture2.image!)
+        }
+        
+        saveInspectionLocally()
+        
+//        print(imagesTaken)
+//        print(userFormData)
+    }
+    
+    func appendPicture(inspectionID: String, photoId: String, image: UIImage) {
+        let imageDict = ["inspectionId": "\(inspectionID)", "photoId": "\(photoId)", "image": image] as [String : Any]
+        
+        imagesTaken.append(imageDict)
     }
     
     func nextInspectionItem() {
@@ -393,7 +417,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var counter = questionNumber
         var sectionLabel : String = ""
         var itemLabel : String = ""
-
+        
         if questionNumber < numChecklistItems {
             // Get next Checklist Item
             
@@ -423,6 +447,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             updateUI(sectionLabel: sectionLabel, itemLabel: itemLabel)
         } else {
+            saveInspectionLocally()
+            
             let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
             
             let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action: UIAlertAction!) in
@@ -433,6 +459,34 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func saveInspectionLocally() {
+        for (index, item) in userFormData.enumerated() {
+//            var id = item["id"]
+//            var equipmentUnitId = equipmentUnit
+//            var item = item["item"]
+//            var rating = item!["rating"]
+//            var note = item!["note"]
+//            
+//            _ = InspectionRatingCoreDataHandler.saveObject(id: id, equipmentUnitId: equipmentUnitId, item: item, rating: rating, note: note)
+//            _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipment_type: "Loader")
+        }
+        
+        // userFormData
+//        [
+//         ["note": "shshsh", "rating": "0", "id": "42", "item": "Suspension"],
+//         ["note": "shshshs", "rating": "0", "id": "38", "item": "Tires"],
+//         ["note": "", "rating": "1", "id": "30", "item": "Horn/Alarm/Lights"],
+//         ["note": "", "rating": "1", "id": "33", "item": "Leak Evidence"],
+//         ["note": "", "rating": "1", "id": "47", "item": "Seat Belt"]
+//        ]
+        
+        // imagesTaken
+//        [
+//         ["photoId": "1", "image": <UIImage: 0x1c02acc60> size {3024, 4032} orientation 3 scale 1.000000, "inspectionId": "42"],
+//         ["photoId": "2", "image": <UIImage: 0x1c02a55e0> size {3024, 4032} orientation 3 scale 1.000000, "inspectionId": "38"]
+//        ]
     }
     
     func startOver() {
