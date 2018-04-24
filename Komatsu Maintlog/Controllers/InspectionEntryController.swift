@@ -446,14 +446,14 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func updateUI(sectionLabel: String, itemLabel: String) {
         let windowWidth = view.frame.size.width
         let numTotalItems = CGFloat(checklistitemPrestartArray.count) + CGFloat(checklistitemPoststartArray.count)
-        let piece = (windowWidth - 10) / numTotalItems
+        let piece = (windowWidth - 20) / numTotalItems
         let totalWidth = piece * CGFloat(questionNumber)
         
         currentSectionLabel.text = sectionLabel
         currentInspectionItemLabel.text = itemLabel
         currentInspectionItemBadNote.text = ""
         
-        progressBar.frame.size.width = totalWidth + 10
+        progressBar.frame.size.width = totalWidth + 20
     }
     
 }
