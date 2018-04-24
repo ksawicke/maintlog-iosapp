@@ -142,7 +142,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txh-gy-ZIi" userLabel="Inspection Choice Good Area">
                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
-                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6" userLabel="Inspection Choice Good">
+                                                    <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6" userLabel="Inspection Choice Good">
                                                         <rect key="frame" x="23" y="-5" width="160" height="160"/>
                                                         <state key="normal" image="icons8-good"/>
                                                         <connections>
@@ -158,7 +158,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="up3-zf-Zkz" userLabel="Inspection Choice Bad Area">
                                                 <rect key="frame" x="207" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K" userLabel="Inspection Choice Bad">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K" userLabel="Inspection Choice Bad">
                                                         <rect key="frame" x="24" y="-5" width="160" height="160"/>
                                                         <state key="normal" image="icons8-bad"/>
                                                         <connections>
@@ -179,10 +179,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NG9-78-NP6" userLabel="Picture 1 Area">
                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="149.33333333333334"/>
                                                 <subviews>
-                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtP-Sw-hdN">
+                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtP-Sw-hdN">
                                                         <rect key="frame" x="20" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
-                                                    <button hidden="YES" opaque="NO" tag="1" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puI-X7-TPS" userLabel="Camera1 Button">
+                                                    <button hidden="YES" opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puI-X7-TPS" userLabel="Camera1 Button">
                                                         <rect key="frame" x="23" y="-5.3333333333333712" width="160" height="160"/>
                                                         <state key="normal" image="icons8-camera"/>
                                                         <connections>
@@ -204,7 +204,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcb-jE-clA" userLabel="Picture 2 Area">
                                                 <rect key="frame" x="207" y="0.0" width="207" height="149.33333333333334"/>
                                                 <subviews>
-                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-81-YJ8">
+                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-81-YJ8">
                                                         <rect key="frame" x="10" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
                                                     <button hidden="YES" opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-JZ-Sq8" userLabel="Camera2 Button">
