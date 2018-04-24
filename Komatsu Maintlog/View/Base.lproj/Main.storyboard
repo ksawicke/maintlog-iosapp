@@ -143,8 +143,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6" userLabel="Inspection Choice Good">
-                                                        <rect key="frame" x="23" y="-5" width="160" height="160"/>
-                                                        <state key="normal" image="icons8-good"/>
+                                                        <rect key="frame" x="-57" y="-85.333333333333329" width="320.33333333333331" height="320"/>
+                                                        <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
+                                                        <state key="normal" image="icons8-ok"/>
                                                         <connections>
                                                             <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="qJY-vj-1YH"/>
                                                         </connections>
@@ -159,8 +160,9 @@
                                                 <rect key="frame" x="207" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K" userLabel="Inspection Choice Bad">
-                                                        <rect key="frame" x="24" y="-5" width="160" height="160"/>
-                                                        <state key="normal" image="icons8-bad"/>
+                                                        <rect key="frame" x="-56" y="-85" width="320" height="320"/>
+                                                        <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
+                                                        <state key="normal" image="icons8-cancel"/>
                                                         <connections>
                                                             <action selector="onChooseInspectionValue:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="56k-nl-IDr"/>
                                                         </connections>
@@ -183,7 +185,8 @@
                                                         <rect key="frame" x="20" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
                                                     <button hidden="YES" opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puI-X7-TPS" userLabel="Camera1 Button">
-                                                        <rect key="frame" x="23" y="-5.3333333333333712" width="160" height="160"/>
+                                                        <rect key="frame" x="-57" y="-85.333333333333343" width="320" height="320"/>
+                                                        <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
                                                         <state key="normal" image="icons8-camera"/>
                                                         <connections>
                                                             <action selector="onClickTakePicture:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="RaA-qI-PHX"/>
@@ -208,7 +211,8 @@
                                                         <rect key="frame" x="10" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
                                                     <button hidden="YES" opaque="NO" tag="2" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-JZ-Sq8" userLabel="Camera2 Button">
-                                                        <rect key="frame" x="23" y="-5.3333333333333712" width="160" height="160"/>
+                                                        <rect key="frame" x="-57" y="-85.333333333333343" width="320" height="320"/>
+                                                        <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
                                                         <state key="normal" image="icons8-camera"/>
                                                         <connections>
                                                             <action selector="onClickTakePicture:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="4cP-mk-5fu"/>
@@ -382,10 +386,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-bad" width="160" height="160"/>
-        <image name="icons8-camera" width="160" height="160"/>
-        <image name="icons8-good" width="160" height="160"/>
+        <image name="icons8-camera" width="320" height="320"/>
+        <image name="icons8-cancel" width="320" height="320"/>
         <image name="icons8-menu-filled" width="33" height="33"/>
+        <image name="icons8-ok" width="320" height="320"/>
         <image name="komatsu-logo" width="170" height="33"/>
     </resources>
 </document>
