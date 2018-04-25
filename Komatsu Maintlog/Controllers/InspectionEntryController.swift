@@ -23,6 +23,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var currentSection : String = ""
     var checklistitem:[ChecklistItem]? = nil
     var imagePickerController : UIImagePickerController!
+    var progressLabelText : String = ""
     
     //Constants
 //    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -34,9 +35,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     @IBOutlet weak var currentSectionLabel: UILabel!
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
+    @IBOutlet weak var inspectionGoodButton: UIButton!
+    @IBOutlet weak var inspectionBadButton: UIButton!
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
-
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var takePicture1Button: UIButton!
     @IBOutlet weak var takePicture2Button: UIButton!
     @IBOutlet weak var picture1: UIImageView!
@@ -83,6 +86,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     
     @IBAction func onChooseInspectionValue(_ sender: UIButton) {
         if (sender as AnyObject).tag == 1 && currentInspectionItemBadNote.isHidden == true {
+            inspectionGoodButton.setImage(UIImage(named: "icons8-ok"), for: [])
             sender.shake()
             
             appendFormData(rating: "1")
@@ -91,6 +95,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             nextInspectionItem()
         } else if (sender as AnyObject).tag == 0 && currentInspectionItemBadNote.isHidden == true {
+            inspectionBadButton.setImage(UIImage(named: "icons8-cancel"), for: [])
             sender.shake()
             
             // Unhide UI elements for Bad Notes
@@ -186,10 +191,15 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             picture1.image = pictureTaken?.imageFlippedForRightToLeftLayoutDirection()
             picture1.isHidden = false
             takePicture1Button.isHidden = true
+            takePicture1Button.setImage(UIImage(named: "icons8-camera"), for: [])
+            takePicture2Button.isEnabled = true
         } else if (picker.view.tag == 2) {
             picture2.image = pictureTaken?.imageFlippedForRightToLeftLayoutDirection()
             picture2.isHidden = false
             takePicture2Button.isHidden = true
+            takePicture1Button.isEnabled = false
+            takePicture2Button.isEnabled = false
+            takePicture1Button.setImage(UIImage(named: "icons8-camera"), for: [])
         }
     }
     
@@ -353,7 +363,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveItem : String = "";
         var saveRating : String = "";
         var saveNote : String = "";
-        var equipmentUnitId : String = equipmentUnit
+        let equipmentUnitId : String = equipmentUnit
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -462,7 +472,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func saveInspectionLocally() {
-        for (index, item) in userFormData.enumerated() {
+//        for (index, item) in userFormData.enumerated() {
 //            var id = item["id"]
 //            var equipmentUnitId = equipmentUnit
 //            var item = item["item"]
@@ -471,7 +481,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //            
 //            _ = InspectionRatingCoreDataHandler.saveObject(id: id, equipmentUnitId: equipmentUnitId, item: item, rating: rating, note: note)
 //            _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipment_type: "Loader")
-        }
+//        }
         
         // userFormData
 //        [
@@ -490,7 +500,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func startOver() {
-        loadItems()
+//        loadItems()
         
         questionNumber = 0
         
@@ -500,14 +510,25 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func updateUI(sectionLabel: String, itemLabel: String) {
         let windowWidth = view.frame.size.width
         let numTotalItems = CGFloat(checklistitemPrestartArray.count) + CGFloat(checklistitemPoststartArray.count)
-        let piece = (windowWidth - 20) / numTotalItems
-        let totalWidth = piece * CGFloat(questionNumber)
+        let piece = CGFloat(CGFloat(windowWidth) / CGFloat(numTotalItems))
+        let totalWidth = CGFloat(CGFloat(piece) * CGFloat(questionNumber))
         
+        takePicture1Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
+        takePicture2Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
+
         currentSectionLabel.text = sectionLabel
         currentInspectionItemLabel.text = itemLabel
         currentInspectionItemBadNote.text = ""
+        takePicture1Button.isEnabled = true
+        takePicture2Button.isEnabled = false
         
-        progressBar.frame.size.width = totalWidth + 20
+        progressBar.frame.size.width = totalWidth
+        progressLabel.text = "\(Int(questionNumber)) / \(Int(numTotalItems))"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.inspectionGoodButton.setImage(UIImage(named: "icons8-ok-unselected"), for: [])
+            self.inspectionBadButton.setImage(UIImage(named: "icons8-cancel-unselected"), for: [])
+        }
     }
     
 }
