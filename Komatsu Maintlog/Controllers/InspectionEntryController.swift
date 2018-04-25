@@ -470,6 +470,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func saveInspectionLocally() {
+        print("----")
+        print(userFormData)
         for (_, item) in userFormData.enumerated() {
             let checklistId = item["checklistId"]
             let equipmentUnitId = equipmentUnit
