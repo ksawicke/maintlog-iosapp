@@ -19,17 +19,18 @@
         <attribute name="photoId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="InspectionRating" representedClassName="InspectionRating" syncable="YES" codeGenerationType="class">
+        <attribute name="checklistId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="equipmentUnitId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
         <element name="Checklist" positionX="-380" positionY="-138" width="128" height="90"/>
         <element name="ChecklistItem" positionX="-36" positionY="63" width="128" height="75"/>
         <element name="EquipmentType" positionX="-189" positionY="-135" width="128" height="75"/>
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="90"/>
-        <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="120"/>
+        <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="135"/>
     </elements>
 </model>

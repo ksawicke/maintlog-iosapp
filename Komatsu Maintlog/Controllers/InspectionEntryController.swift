@@ -337,7 +337,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func appendToChecklistItemArray(id: String, checklistitem: [ChecklistItem], appendTo: String) {
-        if (checklistitem != nil) {
+//        if (checklistitem != nil) {
             for i in checklistitem {
                 let thisChecklistitemId = i.id
                 let thisChecklistitemItem = i.item!
@@ -352,7 +352,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                     }
                 }
             }
-        }
+//        }
     }
     
     func appendFormData(rating: String) {
@@ -398,7 +398,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
 
-        let saveDict = ["id": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
+        let saveDict = ["checklistId": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
         userFormData.append(saveDict)
         
@@ -409,8 +409,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         if picture2.image != nil {
             appendPicture(inspectionID: saveId, photoId: "2", image: picture2.image!)
         }
-        
-        saveInspectionLocally()
         
 //        print(imagesTaken)
 //        print(userFormData)
@@ -472,16 +470,38 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func saveInspectionLocally() {
-//        for (index, item) in userFormData.enumerated() {
-//            var id = item["id"]
-//            var equipmentUnitId = equipmentUnit
-//            var item = item["item"]
-//            var rating = item!["rating"]
-//            var note = item!["note"]
-//            
-//            _ = InspectionRatingCoreDataHandler.saveObject(id: id, equipmentUnitId: equipmentUnitId, item: item, rating: rating, note: note)
-//            _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipment_type: "Loader")
+        for (_, item) in userFormData.enumerated() {
+            let checklistId = item["checklistId"]
+            let equipmentUnitId = equipmentUnit
+            let thisItem = item["item"]
+            let rating = item["rating"]
+            let note = item["note"]
+            
+//            print("\(id)")
+//            print("\(equipmentUnitId)")
+//            print("\(thisItem)")
+//            print("\(rating)")
+//            print("\(note)")
+//            print("=========")
+//
+            _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(checklistId!)!, equipmentUnitId: equipmentUnitId, item: thisItem!, rating: Int32(rating!)!, note: note!)
+        }
+        
+//        for (_, item) in imagesTaken.enumerated() {
+//            let inspectionId = item["inspectionId"]
+//            let photoId = item["photoId"]
+//            let image = item["image"]
+        
+//            print(inspectionId)
+//            print(photoId)
+//            print(image)
+            
+//            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId as! Int32, photoId: photoId as! Int32, image: image as! UIImage)
 //        }
+        
+//        let imageDict = ["inspectionId": "\(inspectionID)", "photoId": "\(photoId)", "image": image] as [String : Any]
+//
+//        imagesTaken.append(imageDict)
         
         // userFormData
 //        [

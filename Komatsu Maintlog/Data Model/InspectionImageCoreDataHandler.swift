@@ -17,7 +17,7 @@ class InspectionImageCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: Int32, photoId: Int32, image: String) -> Bool {
+    class func saveObject(inspectionId: Int32, photoId: Int32, image: UIImage) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionImage", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
