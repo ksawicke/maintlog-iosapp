@@ -136,7 +136,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         loadItems()
         
-        print(dataFilePath)
+//        print(dataFilePath)
         
         nextInspectionItem()
     }
