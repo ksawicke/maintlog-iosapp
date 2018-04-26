@@ -28,9 +28,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     //Constants
 //    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
 //    let APP_ID = "27474384dc09e3a1d2109468edeee08f"
-
     
-//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
     @IBOutlet weak var currentSectionLabel: UILabel!
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
@@ -136,6 +135,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         equipmentUnit = "FBFC-3325-BBCD-2222"
         
         loadItems()
+        
+        print(dataFilePath)
         
         nextInspectionItem()
     }
@@ -364,6 +365,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveRating : String = "";
         var saveNote : String = "";
         let equipmentUnitId : String = equipmentUnit
+        let inspectionId : Int32 = 100
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -398,16 +400,22 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
 
-        let saveDict = ["checklistId": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
+//        let saveDict = ["checklistId": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
-        userFormData.append(saveDict)
+        _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(saveId)!, equipmentUnitId: equipmentUnitId, item: saveItem, rating: Int32(saveRating)!, note:saveNote)
+        
+//        userFormData.append(saveDict)
         
         if picture1.image != nil {
-            appendPicture(inspectionID: saveId, photoId: "1", image: picture1.image!)
+            let image1Data = UIImagePNGRepresentation(picture1.image!)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData)
+////            appendPicture(inspectionID: saveId, photoId: "1", image: picture1.image!)
         }
-        
+//
         if picture2.image != nil {
-            appendPicture(inspectionID: saveId, photoId: "2", image: picture2.image!)
+            let image2Data = UIImagePNGRepresentation(picture2.image!)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 2, image: image2Data! as NSData)
+////            appendPicture(inspectionID: saveId, photoId: "2", image: picture2.image!)
         }
         
 //        print(imagesTaken)
@@ -455,7 +463,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             updateUI(sectionLabel: sectionLabel, itemLabel: itemLabel)
         } else {
-            saveInspectionLocally()
+//            saveInspectionLocally()
             
             let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
             
@@ -486,7 +494,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //            print("\(note)")
 //            print("=========")
 //
-            _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(checklistId!)!, equipmentUnitId: equipmentUnitId, item: thisItem!, rating: Int32(rating!)!, note: note!)
+//            _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(checklistId!)!, equipmentUnitId: equipmentUnitId, item: thisItem!, rating: Int32(rating!)!, note: note!)
         }
         
 //        for (_, item) in imagesTaken.enumerated() {

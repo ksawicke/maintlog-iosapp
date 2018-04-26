@@ -1,5 +1,5 @@
 //
-//  CoreDataHandler.swift
+//  ChecklistItemCoreDataHandler.swift
 //  Komatsu Maintlog
 //
 //  Created by Kevin Sawicke <kevin@rinconmountaintech.com> on 4/18/18.

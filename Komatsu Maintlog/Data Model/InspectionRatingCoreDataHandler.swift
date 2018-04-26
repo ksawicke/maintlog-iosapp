@@ -19,7 +19,7 @@ class InspectionRatingCoreDataHandler: NSObject {
     
     class func saveObject(checklistId: Int32, equipmentUnitId: String, item: String, rating: Int32, note: String) -> Bool {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "InspectionImage", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: "InspectionRating", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(checklistId, forKey: "checklistId")
