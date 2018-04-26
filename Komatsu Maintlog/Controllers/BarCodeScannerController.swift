@@ -4,7 +4,6 @@
 //
 //  Created by Kevin Sawicke <kevin@rinconmountaintech.com> on 4/26/18.
 //  Copyright © 2018 Komatsu NA. All rights reserved.
-//
 
 import UIKit
 import AVFoundation
@@ -89,7 +88,7 @@ class BarCodeScannerController: UIViewController {
         
         if let qrCodeFrameView = qrCodeFrameView {
             qrCodeFrameView.layer.borderColor = UIColor.red.cgColor
-            qrCodeFrameView.layer.borderWidth = 2 // 2 seems to work well here
+            qrCodeFrameView.layer.borderWidth = 2
             view.addSubview(qrCodeFrameView)
             view.bringSubview(toFront: qrCodeFrameView)
         }
