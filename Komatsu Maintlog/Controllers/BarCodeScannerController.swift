@@ -88,7 +88,7 @@ class BarCodeScannerController: UIViewController {
         qrCodeFrameView = UIView()
         
         if let qrCodeFrameView = qrCodeFrameView {
-            qrCodeFrameView.layer.borderColor = UIColor.green.cgColor
+            qrCodeFrameView.layer.borderColor = UIColor.red.cgColor
             qrCodeFrameView.layer.borderWidth = 2
             view.addSubview(qrCodeFrameView)
             view.bringSubview(toFront: qrCodeFrameView)
@@ -134,7 +134,7 @@ extension BarCodeScannerController: AVCaptureMetadataOutputObjectsDelegate {
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
-            barcodeDetectedLabel.text = "No QR code is detected"
+            barcodeDetectedLabel.text = "Barcode not detected"
             return
         }
         
