@@ -35,7 +35,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="kLd-ml-HGc" kind="show" id="qRk-HC-LxR"/>
+                                    <segue destination="Y0a-uA-qWq" kind="show" id="4e6-om-XPv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
@@ -46,7 +46,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pcu-lO-5Us" kind="show" id="77P-x6-UFE"/>
+                                    <segue destination="Y0a-uA-qWq" kind="show" id="LtO-Wk-Eyk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -68,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197.59999999999999" y="-120.08995502248877"/>
+            <point key="canvasLocation" x="-487" y="-83"/>
         </scene>
         <!--Inspection Entry Controller-->
         <scene sceneID="Fg0-m5-NJh">
@@ -335,7 +335,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-bu-Uep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492.75362318840581" y="-120.65217391304348"/>
+            <point key="canvasLocation" x="1061" y="285"/>
+        </scene>
+        <!--Bar Code Scanner Controller-->
+        <scene sceneID="SJe-T0-G10">
+            <objects>
+                <viewController id="Y0a-uA-qWq" customClass="BarCodeScannerController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vIi-o3-d0k">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5W-Rv-gnx" userLabel="Scan Header">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Equipment Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-7E-QAr">
+                                        <rect key="frame" x="99" y="40" width="216" height="25"/>
+                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DP0-ZZ-IWj" userLabel="Close Button">
+                                        <rect key="frame" x="18" y="37" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="VYZ-je-SoM"/>
+                                            <constraint firstAttribute="width" constant="18" id="dd3-qV-ijF"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="cross"/>
+                                        <connections>
+                                            <action selector="onCloseScanBarcode:" destination="Y0a-uA-qWq" eventType="touchUpInside" id="VJf-9M-pvg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="JyA-Jx-ZAi"/>
+                                    <constraint firstAttribute="bottom" secondItem="DP0-ZZ-IWj" secondAttribute="bottom" constant="15" id="U1c-wx-mw7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y32-7E-QAr" secondAttribute="bottom" constant="15" id="dgJ-Ij-eLj"/>
+                                    <constraint firstItem="DP0-ZZ-IWj" firstAttribute="leading" secondItem="A5W-Rv-gnx" secondAttribute="leading" constant="18" id="es4-iB-XOQ"/>
+                                    <constraint firstItem="Y32-7E-QAr" firstAttribute="centerX" secondItem="A5W-Rv-gnx" secondAttribute="centerX" id="iQM-oj-h1z"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y32-7E-QAr" secondAttribute="bottom" constant="5" id="pqj-2s-lI7"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8wS-uq-sHw">
+                                <rect key="frame" x="0.0" y="696" width="414" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bto-uz-w8C">
+                                        <rect key="frame" x="186" y="10" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="YGC-in-MBJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="A5W-Rv-gnx" secondAttribute="trailing" id="BNm-Gf-eed"/>
+                            <constraint firstAttribute="bottom" secondItem="8wS-uq-sHw" secondAttribute="bottom" id="Sv1-e3-RTp"/>
+                            <constraint firstItem="A5W-Rv-gnx" firstAttribute="leading" secondItem="vIi-o3-d0k" secondAttribute="leading" id="XvF-bN-BFn"/>
+                            <constraint firstItem="A5W-Rv-gnx" firstAttribute="top" secondItem="vIi-o3-d0k" secondAttribute="top" id="bWo-Xh-xe8"/>
+                            <constraint firstAttribute="trailing" secondItem="8wS-uq-sHw" secondAttribute="trailing" id="bZR-n1-vPC"/>
+                            <constraint firstItem="8wS-uq-sHw" firstAttribute="leading" secondItem="vIi-o3-d0k" secondAttribute="leading" id="wBN-0w-ZL1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eux-nB-I4P"/>
+                    </view>
+                    <connections>
+                        <outlet property="barcodeDetectedLabel" destination="Bto-uz-w8C" id="1ZU-za-DQn"/>
+                        <outlet property="barcodeScannerHeader" destination="A5W-Rv-gnx" id="0rs-bQ-Hyb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vs2-Ap-Ccd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="293" y="-83"/>
         </scene>
         <!--Log Entry Controller-->
         <scene sceneID="8C0-SZ-i0A">
@@ -384,14 +461,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybX-V9-T7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1234" y="-118"/>
+            <point key="canvasLocation" x="1061" y="-387"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cross" width="40" height="40"/>
         <image name="icons8-camera-unselected" width="320" height="320"/>
         <image name="icons8-cancel-unselected" width="320" height="320"/>
         <image name="icons8-menu-filled" width="33" height="33"/>
         <image name="icons8-ok-unselected" width="320" height="320"/>
         <image name="komatsu-logo" width="170" height="33"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="LtO-Wk-Eyk"/>
+    </inferredMetricsTieBreakers>
 </document>

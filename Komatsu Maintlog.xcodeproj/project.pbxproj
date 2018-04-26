@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				8AEA56EC207818BF00B827F2 /* SelectScreenController.swift */,
 				8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */,
 				8AEA56EA2078179500B827F2 /* LogEntryController.swift */,
+				65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
 				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,
+				65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */,
 				8AE7FA6D207D70F600945D73 /* DataModel.xcdatamodeld in Sources */,
 				65875F732083FE4800303D20 /* UITextField.swift in Sources */,
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
