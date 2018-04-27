@@ -8,7 +8,23 @@
 import UIKit
 import AVFoundation
 
+//Write the protocol declaration here:
+// STEP 1: create a protocol with a name and a required method
+protocol ChangeEquipmentUnitDelegate {
+    
+    func userScannedANewBarcode (equipmentUnit : String)
+    
+}
+
 class BarCodeScannerController: UIViewController {
+    
+    //Declare the delegate variable here:
+    // STEP 3: create a delegate property (this is standard accepted practice)
+    // We set it to type "ChangeEquipmentUnitDelegate" which is the same name as our protocol from step 1
+    // At the end we put a ? since it is an Optional. It might be nil. If nil, line
+    // below in getWeatherPressed starting with delegate? will not be triggered.
+    // This means the data won't be sent to the other Controller
+    var delegate : ChangeEquipmentUnitDelegate?
     
     @IBOutlet var barcodeDetectedLabel:UILabel!
     @IBOutlet var barcodeScannerHeader:UIView!
@@ -107,14 +123,35 @@ class BarCodeScannerController: UIViewController {
             return
         }
         
-        let alertPrompt = UIAlertController(title: "Open App", message: "You're going to open \(decodedURL)", preferredStyle: .actionSheet)
-        let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+        let alertPrompt = UIAlertController(title: "Equipment Unit found:", message: "\(decodedURL)", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Correct", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+
+            // 1. Get the equipmentUnit the user scanned
+            let equipmentUnit = decodedURL
             
-            if let url = URL(string: decodedURL) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
+            // 2. If we have a delegate set, call the method userScannedANewBarcode
+            // delegate?  means if delegate is set then
+            // called Optional Chaining
+            self.delegate?.userScannedANewBarcode(equipmentUnit: equipmentUnit)
+            
+            // 3. Now go to the Inspection Entry Controller for now.
+            // TODO: Later we need to determine which Controller
+            // the user actually wanted to go to since the scanner
+            // can be used also for the Log Entry section
+            
+            self.dismiss(animated: true, completion: nil)
+            
+//            let vc = InspectionEntryController(
+//                nibName: "InspectionEntryController",
+//                bundle: nil)
+//            self.navigationController?.pushViewController(vc,
+//                                                     animated: true)
+            
+//            if let url = URL(string: decodedURL) {
+//                if UIApplication.shared.canOpenURL(url) {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)

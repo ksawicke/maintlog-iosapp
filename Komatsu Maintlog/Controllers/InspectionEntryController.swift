@@ -465,10 +465,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         } else {
 //            saveInspectionLocally()
             
-            let alert = UIAlertController(title: "Awesome", message: "You finished this inspection. Start over?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Inspection Complete", message: "Return to Main Menu", preferredStyle: .alert)
             
-            let restartAction = UIAlertAction(title: "Restart", style: .default, handler: { (action: UIAlertAction!) in
+            let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
                 self.startOver()
+                self.dismiss(animated: true, completion: nil)
             })
             
             alert.addAction(restartAction)
@@ -552,7 +553,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         takePicture1Button.isEnabled = true
         takePicture2Button.isEnabled = false
         
-        progressBar.frame.size.width = totalWidth
+//        progressBar.frame.size.width = totalWidth
         progressLabel.text = "\(Int(questionNumber)) / \(Int(numTotalItems))"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
