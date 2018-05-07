@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
+		65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65424E1720A0A7E20004FF6D /* LoginController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
+		65424E1720A0A7E20004FF6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				8AEA56E82078177F00B827F2 /* InspectionEntryController.swift */,
 				8AEA56EA2078179500B827F2 /* LogEntryController.swift */,
 				65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */,
+				65424E1720A0A7E20004FF6D /* LoginController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
+				65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +430,7 @@
 				DEVELOPMENT_TEAM = 2HXVRM98MN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Komatsu Maintlog/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rinconmountaintech.KomatsuMaintlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,6 +448,7 @@
 				DEVELOPMENT_TEAM = 2HXVRM98MN;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Komatsu Maintlog/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rinconmountaintech.KomatsuMaintlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";

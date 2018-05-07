@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mxM-Zh-ZnC">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -337,6 +337,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-bu-Uep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="387" y="276"/>
+        </scene>
+        <!--Login Controller-->
+        <scene sceneID="FBr-1c-9dE">
+            <objects>
+                <viewController id="mxM-Zh-ZnC" customClass="LoginController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f1B-Xv-6Cx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="komatsu-logo" translatesAutoresizingMaskIntoConstraints="NO" id="JPd-QG-UGI">
+                                <rect key="frame" x="122" y="35" width="170" height="33"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maintenance Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2q-EZ-03o">
+                                <rect key="frame" x="138" y="78" width="137" height="25"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
+                                <color key="textColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2I-Vb-rZ7">
+                                <rect key="frame" x="191.66666666666666" y="203" width="31" height="25"/>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nx8-gu-tag">
+                                <rect key="frame" x="15" y="290" width="75" height="37"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="aas-7w-AvI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickLogIn:" destination="mxM-Zh-ZnC" eventType="touchUpInside" id="GIT-oO-985"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Z1-pFu" userLabel="PIN Field">
+                                <rect key="frame" x="15" y="243" width="384" height="32"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JPd-QG-UGI" firstAttribute="top" secondItem="n1A-gi-40s" secondAttribute="top" constant="15" id="4gv-Vu-s7C"/>
+                            <constraint firstItem="p2q-EZ-03o" firstAttribute="centerX" secondItem="f1B-Xv-6Cx" secondAttribute="centerX" id="4wl-R3-ax7"/>
+                            <constraint firstItem="U2I-Vb-rZ7" firstAttribute="top" secondItem="p2q-EZ-03o" secondAttribute="bottom" constant="100" id="7Eu-ct-Zr7"/>
+                            <constraint firstItem="U2I-Vb-rZ7" firstAttribute="centerX" secondItem="f1B-Xv-6Cx" secondAttribute="centerX" id="P6F-4j-K8S"/>
+                            <constraint firstItem="JPd-QG-UGI" firstAttribute="centerX" secondItem="f1B-Xv-6Cx" secondAttribute="centerX" id="TXI-MG-YcU"/>
+                            <constraint firstItem="Oth-Z1-pFu" firstAttribute="top" secondItem="U2I-Vb-rZ7" secondAttribute="bottom" constant="15" id="d5t-ya-P9y"/>
+                            <constraint firstItem="n1A-gi-40s" firstAttribute="trailing" secondItem="Oth-Z1-pFu" secondAttribute="trailing" constant="15" id="hQf-7H-lJC"/>
+                            <constraint firstItem="nx8-gu-tag" firstAttribute="leading" secondItem="n1A-gi-40s" secondAttribute="leading" constant="15" id="i5x-zk-F8u"/>
+                            <constraint firstItem="p2q-EZ-03o" firstAttribute="top" secondItem="JPd-QG-UGI" secondAttribute="bottom" constant="10" id="mA1-rV-fkJ"/>
+                            <constraint firstItem="nx8-gu-tag" firstAttribute="top" secondItem="Oth-Z1-pFu" secondAttribute="bottom" constant="15" id="u1w-Jk-JqF"/>
+                            <constraint firstItem="Oth-Z1-pFu" firstAttribute="leading" secondItem="n1A-gi-40s" secondAttribute="leading" constant="15" id="wbG-7V-xSY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n1A-gi-40s"/>
+                    </view>
+                    <connections>
+                        <outlet property="userPin" destination="Oth-Z1-pFu" id="RCZ-8m-bze"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5uG-vd-n7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-480" y="-742"/>
         </scene>
         <!--Bar Code Scanner Controller-->
         <scene sceneID="SJe-T0-G10">
