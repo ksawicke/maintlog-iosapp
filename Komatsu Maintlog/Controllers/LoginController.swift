@@ -14,7 +14,7 @@ import SwiftyJSON
 class LoginController: UIViewController {
 
     //Constants
-    let LOGIN_DEV_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php/auth/check"
+    let LOGIN_DEV_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/check_login"
     let APP_ID = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [ "content-type": "x-www-form-urlencoded"]
     
@@ -62,21 +62,21 @@ class LoginController: UIViewController {
         
         Alamofire.request(url, method: .post, parameters: params2, encoding: JSONEncoding.default).responseJSON { response in
             print(response.request!)    // initial request
-            print (response.response!) // response
+            print(response.response!) // response
             print(response.data!)     // server data
             print(response.result)   // result of response serialization
         }
         
 //        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-//            
+//
 //            switch(response.result) {
 //                case.success(let data):
 //                    print("success",data)
-//                
+//
 //                case.failure(let error):
 //                    print("Not Success",error)
 //            }
-//            
+//
 //        }
         
 //        Alamofire.request(url, method: .post, parameters: parameters, headers: headers).responseJSON {
