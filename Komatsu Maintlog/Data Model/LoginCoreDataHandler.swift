@@ -84,17 +84,17 @@ class LoginCoreDataHandler: NSObject {
         var login:[Login]? = nil
         
         switch(filterType) {
-        case "equals":
-            let predicate = NSPredicate(format: "\(fieldName) == %@", queryString)
-            fetchRequest.predicate = predicate
-            
-        case "contains":
-            let predicate = NSPredicate(format: "\(fieldName) contains[c] %@", queryString)
-            fetchRequest.predicate = predicate
-            
-        default:
-            let predicate = NSPredicate(format: "\(fieldName) == %@", queryString)
-            fetchRequest.predicate = predicate
+            case "equals":
+                let predicate = NSPredicate(format: "\(fieldName) == %@", queryString)
+                fetchRequest.predicate = predicate
+                
+            case "contains":
+                let predicate = NSPredicate(format: "\(fieldName) contains[c] %@", queryString)
+                fetchRequest.predicate = predicate
+                
+            default:
+                let predicate = NSPredicate(format: "\(fieldName) == %@", queryString)
+                fetchRequest.predicate = predicate
         }
         
         do {

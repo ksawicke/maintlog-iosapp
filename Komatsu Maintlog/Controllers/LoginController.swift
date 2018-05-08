@@ -19,30 +19,32 @@ class LoginController: UIViewController {
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
     ]
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let loggedInUserId = 0
     
     @IBOutlet weak var userPin: UITextField!
     
     @IBAction func onClickLogIn(_ sender: UIButton) {
-//        print("clicked Log In")
-//        print("\(String(describing: userPin.text))")
-        
-//        let params : Parameters = [
-//            "user_pin" : "5555",
-//            "api_key" : API_KEY
-//        ]
         let userPinEntered: String = userPin.text!
         var URL = LOGIN_DEV_URL
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
-        
-        print(URL)
-        
-        doAuthCheck(url: URL)
+
+        if !isLoggedIn() {
+            print("not logged in")
+            _ = LoginCoreDataHandler.cleanDelete()
+            doAuthCheck(url: URL)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if isLoggedIn() {
+            print("logged in")
+            self.performSegue(withIdentifier: "selectScreen", sender: nil)
+//            goToPostLoginScreen()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,19 +52,25 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func doAuthCheck(url: String) {
+    func isLoggedIn() -> Bool {
+        let adminCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "admin")
+        let userCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "user")
         
-        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            
-            if let responseJSON : JSON = JSON(response.result.value!) {
-            
-                if responseJSON["status"] == true {
-    //                print(responseJSON["userData"]["username"])
-                    
-                    let userData = responseJSON["userData"]
+        let loggedInCount = (adminCount?.count)! + (userCount?.count)!
+        
+        if loggedInCount > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func doAuthCheck(url: String) {
 
-                    print(userData)
-                    
+        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let userData = responseJSON["userData"]
                     let userId = userData["user_id"].int32!
                     let userName = userData["username"].string!
                     let firstName = userData["first_name"].string!
@@ -72,103 +80,17 @@ class LoginController: UIViewController {
                     
                     _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
                     
+                    self.goToPostLoginScreen()
                 } else {
                     let message = responseJSON["message"]
                     print("ERROR: \(message)")
                 }
-                
             }
-//            print(responseJSON)
-            
-//            if response.result.isSuccess {
-//                print("Success! Got the user data")
-//
-//                let userJSON : JSON = JSON(response.result.value!)
-//
-//                print(userJSON)
-//
-////                self.updateUserData(json: userJSON)
-//
-//            } else {
-//                print("ERROR getting user data...") // response.result.error
-////                self.cityLabel.text = "Connection Issues"
-//            }
-//
-//
-//            print("****")
-//
-//            if let result = response.result.value {
-//                let JSON = result as! NSDictionary
-//                print(JSON)
-//            }
-//
-//            print("REQUEST")
-//            print(response.request!)    // initial request
-////
-//            print("RESPONSE")
-//            print(response.response!) // response
-//
-//            print("DATA")
-//            print(response.data!)     // server data
-//////
-//            print("RESULT")
-//            print(response.result)   // result of response serialization
-//////
-//            print("ALL HEADER FIELDS")
-//            print(response.response?.allHeaderFields)
-////
-//            print("STATUS CODE: \(String(describing: response.response?.statusCode))")
-//            print("\(String(describing: response.result))")
-//            print("****")
-//            print("-----")
         }
-        
-//        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-//
-//            switch(response.result) {
-//                case.success(let data):
-//                    print("success",data)
-//
-//                case.failure(let error):
-//                    print("Not Success",error)
-//            }
-//
-//        }
-        
-//        Alamofire.request(url, method: .post, parameters: parameters, headers: headers).responseJSON {
-//            response in
-//            if response.result.isSuccess {
-//                print("Success!")
-//
-//                let responseJSON : JSON = JSON(response.result.value!)
-//
-//                print(responseJSON)
-//
-////                self.updateWeatherData(json: weatherJSON)
-//
-//            } else {
-//                print(response)
-//                print("ERROR getting data...") // response.result.error
-////                self.cityLabel.text = "Connection Issues"
-//            }
-//        }
-        
     }
     
-//    func updateUserData(json : JSON) {
-//
-//        if let tempResult = json["userData"] {
-//
-//            print(tempResult["first_name"])
-//            print(tempResult["last_name"])
-//            print(tempResult["role"])
-//
-//        } else {
-//
-//            print("User data unavailable")
-//
-//        }
-//
-//    }
+    func goToPostLoginScreen() {
+        
+    }
 
 }

@@ -14,7 +14,7 @@
         <!--Select Screen Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SelectScreenController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectScreenController" id="BYZ-38-t0r" customClass="SelectScreenController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,7 +36,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y0a-uA-qWq" kind="show" id="u6z-3u-goX"/>
+                                    <segue destination="Y0a-uA-qWq" kind="show" identifier="scanBarcode" id="u6z-3u-goX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
@@ -47,7 +47,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pcu-lO-5Us" kind="show" id="d8s-fe-sud"/>
+                                    <segue destination="Pcu-lO-5Us" kind="show" identifier="enterInspection" id="d8s-fe-sud"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -400,11 +400,12 @@
                     </view>
                     <connections>
                         <outlet property="userPin" destination="Oth-Z1-pFu" id="RCZ-8m-bze"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="selectScreen" id="ult-mJ-0Y6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5uG-vd-n7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-480" y="-742"/>
+            <point key="canvasLocation" x="-488" y="-830"/>
         </scene>
         <!--Bar Code Scanner Controller-->
         <scene sceneID="SJe-T0-G10">
