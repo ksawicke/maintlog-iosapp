@@ -26,11 +26,21 @@
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="emailAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="role" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Checklist" positionX="-380" positionY="-138" width="128" height="90"/>
         <element name="ChecklistItem" positionX="-36" positionY="63" width="128" height="75"/>
         <element name="EquipmentType" positionX="-189" positionY="-135" width="128" height="75"/>
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="90"/>
         <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="135"/>
+        <element name="Login" positionX="-207" positionY="-18" width="128" height="150"/>
     </elements>
 </model>

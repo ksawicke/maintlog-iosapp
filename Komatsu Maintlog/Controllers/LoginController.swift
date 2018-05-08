@@ -54,15 +54,31 @@ class LoginController: UIViewController {
         
         Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
-            let responseJSON : JSON = JSON(response.result.value!)
+            if let responseJSON : JSON = JSON(response.result.value!) {
             
-            if responseJSON["status"] == false {
-                var message = responseJSON["message"]
-                print("ERROR: \(message)")
-            } else {
-                print(responseJSON["userData"]["username"])
+                if responseJSON["status"] == true {
+    //                print(responseJSON["userData"]["username"])
+                    
+                    let userData = responseJSON["userData"]
+
+                    print(userData)
+                    
+                    let userId = userData["user_id"].int32!
+                    let userName = userData["username"].string!
+                    let firstName = userData["first_name"].string!
+                    let lastName = userData["last_name"].string!
+                    let emailAddress = userData["email_address"].string!
+                    let role = userData["role"].string!
+                    
+                    _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+                    
+                } else {
+                    let message = responseJSON["message"]
+                    print("ERROR: \(message)")
+                }
+                
             }
-            print(responseJSON)
+//            print(responseJSON)
             
 //            if response.result.isSuccess {
 //                print("Success! Got the user data")

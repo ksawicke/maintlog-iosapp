@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */; };
 		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
 		65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65424E1720A0A7E20004FF6D /* LoginController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoreDataHandler.swift; sourceTree = "<group>"; };
 		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
 		65424E1720A0A7E20004FF6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */,
 				656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */,
 				656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */,
+				65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
+				65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */,
 				65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
