@@ -13,10 +13,12 @@ import SwiftyJSON
 
 class LoginController: UIViewController {
 
-    //Constants
-    let LOGIN_DEV_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/check_login"
-    let APP_ID = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
-    let headers: HTTPHeaders = [ "content-type": "x-www-form-urlencoded"]
+    // Constants
+    var LOGIN_DEV_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/check_login"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
     
     @IBOutlet weak var userPin: UITextField!
     
@@ -24,12 +26,17 @@ class LoginController: UIViewController {
 //        print("clicked Log In")
 //        print("\(String(describing: userPin.text))")
         
-        let params : [String : String] = [
-            "pin" : String(describing: userPin.text),
-//            "appid" : APP_ID
-        ]
+//        let params : Parameters = [
+//            "user_pin" : "5555",
+//            "api_key" : API_KEY
+//        ]
+        let userPinEntered: String = userPin.text!
+        var URL = LOGIN_DEV_URL
+        URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
         
-        doAuthCheck(url: LOGIN_DEV_URL, parameters: params)
+        print(URL)
+        
+        doAuthCheck(url: URL)
     }
     
     override func viewDidLoad() {
@@ -43,28 +50,61 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func doAuthCheck(url: String, parameters: [String : String]) {
-
-//        let headers = [
-//            "Content-Type": "application/x-www-form-urlencoded"
-//        ]
-//        let parameters = [
+    func doAuthCheck(url: String) {
+        
+        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            let responseJSON : JSON = JSON(response.result.value!)
+            
+            if responseJSON["status"] == false {
+                var message = responseJSON["message"]
+                print("ERROR: \(message)")
+            } else {
+                print(responseJSON["userData"]["username"])
+            }
+            print(responseJSON)
+            
+//            if response.result.isSuccess {
+//                print("Success! Got the user data")
 //
-//        ]
-        
-        print("****")
-        print(url)
-        print(parameters)
-        
-        let params2 : Dictionary = ["pin" : "1234"]
-        
-        
-        
-        Alamofire.request(url, method: .post, parameters: params2, encoding: JSONEncoding.default).responseJSON { response in
-            print(response.request!)    // initial request
-            print(response.response!) // response
-            print(response.data!)     // server data
-            print(response.result)   // result of response serialization
+//                let userJSON : JSON = JSON(response.result.value!)
+//
+//                print(userJSON)
+//
+////                self.updateUserData(json: userJSON)
+//
+//            } else {
+//                print("ERROR getting user data...") // response.result.error
+////                self.cityLabel.text = "Connection Issues"
+//            }
+//
+//
+//            print("****")
+//
+//            if let result = response.result.value {
+//                let JSON = result as! NSDictionary
+//                print(JSON)
+//            }
+//
+//            print("REQUEST")
+//            print(response.request!)    // initial request
+////
+//            print("RESPONSE")
+//            print(response.response!) // response
+//
+//            print("DATA")
+//            print(response.data!)     // server data
+//////
+//            print("RESULT")
+//            print(response.result)   // result of response serialization
+//////
+//            print("ALL HEADER FIELDS")
+//            print(response.response?.allHeaderFields)
+////
+//            print("STATUS CODE: \(String(describing: response.response?.statusCode))")
+//            print("\(String(describing: response.result))")
+//            print("****")
+//            print("-----")
         }
         
 //        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
@@ -98,5 +138,21 @@ class LoginController: UIViewController {
 //        }
         
     }
+    
+//    func updateUserData(json : JSON) {
+//
+//        if let tempResult = json["userData"] {
+//
+//            print(tempResult["first_name"])
+//            print(tempResult["last_name"])
+//            print(tempResult["role"])
+//
+//        } else {
+//
+//            print("User data unavailable")
+//
+//        }
+//
+//    }
 
 }
