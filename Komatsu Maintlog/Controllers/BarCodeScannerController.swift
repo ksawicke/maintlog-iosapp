@@ -30,7 +30,17 @@ class BarCodeScannerController: UIViewController {
     @IBOutlet var barcodeScannerHeader:UIView!
     
     @IBAction func onCloseScanBarcode(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        
+        //2 If we have a delegate set, call the method userEnteredANewCityName
+        // delegate?  means if delegate is set then
+        // called Optional Chaining
+        delegate?.userScannedANewBarcode(equipmentUnit: "")
+        
+        //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
+        // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
+        self.dismiss(animated: true, completion: nil)
+        
+//        dismiss(animated: true, completion: nil)
     }
     var captureSession = AVCaptureSession()
     

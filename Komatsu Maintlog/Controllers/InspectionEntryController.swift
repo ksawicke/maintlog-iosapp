@@ -11,8 +11,18 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
-class InspectionEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class InspectionEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ChangeEquipmentUnitDelegate {
 
+    //Declare the delegate variable here:
+    // STEP 3: create a delegate property (this is standard accepted practice)
+    // We set it to type "ChangeEquipmentUnitDelegate" which is the same name as our protocol from step 1
+    // At the end we put a ? since it is an Optional. It might be nil. If nil, line
+    // below in getWeatherPressed starting with delegate? will not be triggered.
+    // This means the data won't be sent to the other Controller
+    var delegate : ChangeEquipmentUnitDelegate?
+    
+    var barCodeScanned : Bool = false
+    var barCodeValue : String = ""
     var checklistitemPrestartArray = [[String: String]]()
     var checklistitemPoststartArray = [[String: String]]()
     var imagesTaken = [[String: Any]]()
@@ -31,6 +41,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
+    @IBOutlet weak var barcodeScannedLabel: UILabel!
     @IBOutlet weak var currentSectionLabel: UILabel!
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
@@ -133,6 +144,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         // instead of being hard coded.
         equipmentTypeSelected = "2"
         equipmentUnit = "FBFC-3325-BBCD-2222"
+        
+        print("BAR CODE SCANNED?: \(barCodeScanned)")
+        print("BAR CODE NUMBER: \(barCodeValue)")
+        
+        barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
         
         loadItems()
         
@@ -560,6 +576,38 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             self.inspectionGoodButton.setImage(UIImage(named: "icons8-ok-unselected"), for: [])
             self.inspectionBadButton.setImage(UIImage(named: "icons8-cancel-unselected"), for: [])
         }
+    }
+    
+    func userScannedANewBarcode(equipmentUnit: String) {
+        barCodeScanned = true
+        barCodeValue = equipmentUnit
+        
+        
+        print("NO NO NO")
+        print("INSPECTION ENTRY SCREEN BARCODE IS: \(barCodeValue)")
+    }
+    
+    //Write the PrepareForSegue Method here
+    // STEP 4: Set the second VC's delegate as the current VC, meaning this VC will receive the data
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToInspectionEntry" {
+            print("LA LA LA")
+            //2 If we have a delegate set, call the method userEnteredANewCityName
+            // delegate?  means if delegate is set then
+            // called Optional Chaining
+            //            delegate?.userScannedANewBarcode(equipmentUnit: barCodeValue)
+            
+            //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
+            // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
+            //            self.dismiss(animated: true, completion: nil)
+            
+            let destinationVC = segue.destination as! InspectionEntryController
+            
+            destinationVC.delegate = self
+            
+        }
+        
     }
     
 }
