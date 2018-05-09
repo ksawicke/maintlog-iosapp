@@ -11,6 +11,13 @@ import CoreData
 
 class SelectScreenController: UIViewController {
     
+    var barCodeScanned : Bool = false
+    var barCodeValue : String = ""
+    
+    @IBOutlet weak var barcodeSelectedLabel: UILabel!
+    @IBOutlet weak var scanBarcodeButton: UIButton!
+    @IBOutlet weak var inspectionEntryButton: UIButton!
+
     @IBAction func onClickLogOut(_ sender: UIButton) {
     
         _ = LoginCoreDataHandler.cleanDelete()
@@ -21,6 +28,10 @@ class SelectScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        barcodeSelectedLabel.text = "Click Scan Barcode to continue"
+        barcodeSelectedLabel.isHidden = false
+        scanBarcodeButton.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {

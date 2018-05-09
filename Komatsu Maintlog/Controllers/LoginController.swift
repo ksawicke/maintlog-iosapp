@@ -23,6 +23,7 @@ class LoginController: UIViewController {
     let loggedInUserId = 0
     
     @IBOutlet weak var loginErrorLabel: UILabel!
+    @IBOutlet weak var pinLabel: UILabel!
     @IBOutlet weak var userPin: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
@@ -55,9 +56,12 @@ class LoginController: UIViewController {
 
         // Do any additional setup after loading the view.
         if isLoggedIn() {
-            print("logged in")
-            performSegue(withIdentifier: "goToSelectScreen", sender: self)
-//            goToPostLoginScreen()
+            loginErrorLabel.text = "Session active. Click Continue to proceed."
+            loginErrorLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
+            loginErrorLabel.isHidden = false
+            pinLabel.isHidden = true
+            userPin.isHidden = true
+            loginButton.setTitle("Continue", for: .normal)
         }
     }
 
@@ -81,7 +85,11 @@ class LoginController: UIViewController {
     
     func doAuthCheck(url: String) {
 
+        print(url)
+        print("**")
+        
         Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
             if let responseJSON : JSON = JSON(response.result.value!) {
                 if responseJSON["status"] == true {
                     let userData = responseJSON["userData"]
@@ -91,21 +99,22 @@ class LoginController: UIViewController {
                     let lastName = userData["last_name"].string!
                     let emailAddress = userData["email_address"].string!
                     let role = userData["role"].string!
-                    
+
                     _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
-                    
+
                     self.performSegue(withIdentifier: "goToSelectScreen", sender: self)
                 } else {
                     let loginErrorMessage = responseJSON["message"].string!
-                    
+
                     print(loginErrorMessage)
-                    
-                    self.userPin.layer.borderColor = UIColor.red.cgColor
+
+                    self.userPin.layer.borderColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0) as! CGColor
                     self.userPin.layer.borderWidth = 2
                     self.loginErrorLabel.text = loginErrorMessage
                     self.loginErrorLabel.isHidden = false
                 }
             }
+            
         }
     }
 
