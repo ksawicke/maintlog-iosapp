@@ -19,20 +19,34 @@ class LoginController: UIViewController {
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
     ]
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let loggedInUserId = 0
     
+    @IBOutlet weak var loginErrorLabel: UILabel!
     @IBOutlet weak var userPin: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBAction func onUserPinChanged(_ sender: Any) {
+        loginErrorLabel.isHidden = true
+        loginErrorLabel.text = ""
+        userPin.layer.borderColor = UIColor.black.cgColor
+        userPin.layer.borderWidth = 1
+        loginButton.isEnabled = true
+    }
     
     @IBAction func onClickLogIn(_ sender: UIButton) {
         let userPinEntered: String = userPin.text!
         var URL = LOGIN_DEV_URL
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
 
+        loginButton.isEnabled = false
+        
         if !isLoggedIn() {
             print("not logged in")
             _ = LoginCoreDataHandler.cleanDelete()
             doAuthCheck(url: URL)
+        } else {
+            performSegue(withIdentifier: "goToSelectScreen", sender: self)
         }
     }
     
@@ -42,7 +56,7 @@ class LoginController: UIViewController {
         // Do any additional setup after loading the view.
         if isLoggedIn() {
             print("logged in")
-            self.performSegue(withIdentifier: "selectScreen", sender: nil)
+            performSegue(withIdentifier: "goToSelectScreen", sender: self)
 //            goToPostLoginScreen()
         }
     }
@@ -80,17 +94,19 @@ class LoginController: UIViewController {
                     
                     _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
                     
-                    self.goToPostLoginScreen()
+                    self.performSegue(withIdentifier: "goToSelectScreen", sender: self)
                 } else {
-                    let message = responseJSON["message"]
-                    print("ERROR: \(message)")
+                    let loginErrorMessage = responseJSON["message"].string!
+                    
+                    print(loginErrorMessage)
+                    
+                    self.userPin.layer.borderColor = UIColor.red.cgColor
+                    self.userPin.layer.borderWidth = 2
+                    self.loginErrorLabel.text = loginErrorMessage
+                    self.loginErrorLabel.isHidden = false
                 }
             }
         }
-    }
-    
-    func goToPostLoginScreen() {
-        
     }
 
 }

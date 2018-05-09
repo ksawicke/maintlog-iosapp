@@ -36,7 +36,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y0a-uA-qWq" kind="show" identifier="scanBarcode" id="u6z-3u-goX"/>
+                                    <segue destination="Y0a-uA-qWq" kind="show" identifier="goToScanBarcode" id="u6z-3u-goX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
@@ -47,7 +47,18 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pcu-lO-5Us" kind="show" identifier="enterInspection" id="d8s-fe-sud"/>
+                                    <segue destination="Pcu-lO-5Us" kind="show" identifier="goToInspectionEntry" id="d8s-fe-sud"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ez-xn-XYO" userLabel="Inspection Entry Button">
+                                <rect key="frame" x="15" y="685" width="384" height="36"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickLogOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Die-NJ-lwm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -56,7 +67,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PUU-IH-D1v" secondAttribute="trailing" constant="15" id="1nL-eP-rRQ"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3IL-k6-hmK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ISi-Vf-XBT" secondAttribute="trailing" constant="15" id="DzD-jB-FlL"/>
+                            <constraint firstItem="4ez-xn-XYO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="E0m-aX-WU5"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="JP4-pu-YgD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4ez-xn-XYO" secondAttribute="trailing" constant="15" id="La4-5e-6DE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4ez-xn-XYO" secondAttribute="bottom" constant="15" id="RBH-yO-cRh"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="top" secondItem="PUU-IH-D1v" secondAttribute="bottom" constant="15" id="SFR-yQ-qII"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="top" secondItem="dFr-C1-qlq" secondAttribute="bottom" constant="10" id="Se8-5s-hux"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XaH-V7-w8m"/>
@@ -66,6 +80,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="mxM-Zh-ZnC" kind="show" identifier="goToLoginScreen" id="Yju-vi-Ylu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -375,12 +392,23 @@
                                     <action selector="onClickLogIn:" destination="mxM-Zh-ZnC" eventType="touchUpInside" id="GIT-oO-985"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Z1-pFu" userLabel="PIN Field">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Z1-pFu" userLabel="PIN Field">
                                 <rect key="frame" x="15" y="243" width="384" height="32"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="onUserPinChanged:" destination="mxM-Zh-ZnC" eventType="editingChanged" id="ITU-Oh-SQc"/>
+                                </connections>
                             </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loginErrorLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="918-2y-LPy" userLabel="Login Error">
+                                <rect key="frame" x="15" y="163.33333333333334" width="384" height="24.666666666666657"/>
+                                <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -389,18 +417,23 @@
                             <constraint firstItem="U2I-Vb-rZ7" firstAttribute="top" secondItem="p2q-EZ-03o" secondAttribute="bottom" constant="100" id="7Eu-ct-Zr7"/>
                             <constraint firstItem="U2I-Vb-rZ7" firstAttribute="centerX" secondItem="f1B-Xv-6Cx" secondAttribute="centerX" id="P6F-4j-K8S"/>
                             <constraint firstItem="JPd-QG-UGI" firstAttribute="centerX" secondItem="f1B-Xv-6Cx" secondAttribute="centerX" id="TXI-MG-YcU"/>
+                            <constraint firstItem="n1A-gi-40s" firstAttribute="trailing" secondItem="918-2y-LPy" secondAttribute="trailing" constant="15" id="VwQ-B3-9ar"/>
+                            <constraint firstItem="U2I-Vb-rZ7" firstAttribute="top" secondItem="918-2y-LPy" secondAttribute="bottom" constant="15" id="ZOa-Dh-Pe3"/>
                             <constraint firstItem="Oth-Z1-pFu" firstAttribute="top" secondItem="U2I-Vb-rZ7" secondAttribute="bottom" constant="15" id="d5t-ya-P9y"/>
                             <constraint firstItem="n1A-gi-40s" firstAttribute="trailing" secondItem="Oth-Z1-pFu" secondAttribute="trailing" constant="15" id="hQf-7H-lJC"/>
                             <constraint firstItem="nx8-gu-tag" firstAttribute="leading" secondItem="n1A-gi-40s" secondAttribute="leading" constant="15" id="i5x-zk-F8u"/>
                             <constraint firstItem="p2q-EZ-03o" firstAttribute="top" secondItem="JPd-QG-UGI" secondAttribute="bottom" constant="10" id="mA1-rV-fkJ"/>
                             <constraint firstItem="nx8-gu-tag" firstAttribute="top" secondItem="Oth-Z1-pFu" secondAttribute="bottom" constant="15" id="u1w-Jk-JqF"/>
+                            <constraint firstItem="918-2y-LPy" firstAttribute="leading" secondItem="n1A-gi-40s" secondAttribute="leading" constant="15" id="vXX-X6-SBW"/>
                             <constraint firstItem="Oth-Z1-pFu" firstAttribute="leading" secondItem="n1A-gi-40s" secondAttribute="leading" constant="15" id="wbG-7V-xSY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n1A-gi-40s"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="nx8-gu-tag" id="yal-XA-QET"/>
+                        <outlet property="loginErrorLabel" destination="918-2y-LPy" id="Xjk-d3-t3e"/>
                         <outlet property="userPin" destination="Oth-Z1-pFu" id="RCZ-8m-bze"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="selectScreen" id="ult-mJ-0Y6"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToSelectScreen" id="ult-mJ-0Y6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5uG-vd-n7p" userLabel="First Responder" sceneMemberID="firstResponder"/>

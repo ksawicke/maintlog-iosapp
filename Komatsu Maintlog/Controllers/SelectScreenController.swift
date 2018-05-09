@@ -7,8 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class SelectScreenController: UIViewController {
+    
+    @IBAction func onClickLogOut(_ sender: UIButton) {
+    
+        _ = LoginCoreDataHandler.cleanDelete()
+        performSegue(withIdentifier: "goToLoginScreen", sender: self)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
