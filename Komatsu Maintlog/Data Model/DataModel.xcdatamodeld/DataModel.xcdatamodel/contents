@@ -21,7 +21,7 @@
     <entity name="InspectionRating" representedClassName="InspectionRating" syncable="YES" codeGenerationType="class">
         <attribute name="checklistId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="equipmentUnitId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inspectionId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>

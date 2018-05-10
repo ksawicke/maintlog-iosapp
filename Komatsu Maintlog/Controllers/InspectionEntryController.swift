@@ -142,19 +142,27 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         // Allow the user to scan a barcode that will pick the
         // Unit which will dynamically select the equipment type
         // instead of being hard coded.
-        equipmentTypeSelected = "2"
-        equipmentUnit = "FBFC-3325-BBCD-2222"
         
-        print("BAR CODE SCANNED?: \(barCodeScanned)")
-        print("BAR CODE NUMBER: \(barCodeValue)")
         
-        barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
+        if barCodeValue != "" {
+            equipmentTypeSelected = "2"
+            equipmentUnit = barCodeValue
+        
+//        print("BAR CODE SCANNED?: \(barCodeScanned)")
+//        print("BAR CODE NUMBER: \(barCodeValue)")
+        
+            barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
+        }
         
         loadItems()
         
 //        print(dataFilePath)
         
         nextInspectionItem()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.userScannedANewBarcode(equipmentUnit: "")
     }
     
     deinit {
@@ -377,7 +385,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var counter = questionNumber
         
         var saveId : String = "";
-        var saveItem : String = "";
         var saveRating : String = "";
         var saveNote : String = "";
         let equipmentUnitId : String = equipmentUnit
@@ -391,9 +398,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 if(key=="id") {
                     saveId = value
                 }
-                if(key=="item") {
-                    saveItem = "\(value)"
-                }
             }
             
             currentSection = "preStart"
@@ -405,9 +409,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 if(key=="id") {
                     saveId = value
                 }
-                if(key=="item") {
-                    saveItem = "\(value)"
-                }
             }
             
             currentSection = "postStart"
@@ -415,27 +416,18 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
-
-//        let saveDict = ["checklistId": "\(saveId)", "equipmentUnitId": "\(equipmentUnitId)", "item": "\(saveItem)", "rating": "\(saveRating)", "note": "\(saveNote)"]
         
-        _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(saveId)!, equipmentUnitId: equipmentUnitId, item: saveItem, rating: Int32(saveRating)!, note:saveNote)
-        
-//        userFormData.append(saveDict)
+        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: Int32(inspectionId), checklistId: Int32(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int32(saveRating)!, note:saveNote)
         
         if picture1.image != nil {
             let image1Data = UIImagePNGRepresentation(picture1.image!)
             _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData)
-////            appendPicture(inspectionID: saveId, photoId: "1", image: picture1.image!)
         }
-//
+        
         if picture2.image != nil {
             let image2Data = UIImagePNGRepresentation(picture2.image!)
             _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 2, image: image2Data! as NSData)
-////            appendPicture(inspectionID: saveId, photoId: "2", image: picture2.image!)
         }
-        
-//        print(imagesTaken)
-//        print(userFormData)
     }
     
     func appendPicture(inspectionID: String, photoId: String, image: UIImage) {
@@ -485,6 +477,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
                 self.startOver()
+                
+                print("Q 1")
+                
+                self.userScannedANewBarcode(equipmentUnit: "")
+                
                 self.dismiss(animated: true, completion: nil)
             })
             
@@ -550,6 +547,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //        loadItems()
         
         questionNumber = 0
+        barCodeScanned = false
+        barCodeValue = ""
         
         nextInspectionItem()
     }
@@ -579,12 +578,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func userScannedANewBarcode(equipmentUnit: String) {
-        barCodeScanned = true
-        barCodeValue = equipmentUnit
-        
-        
-        print("NO NO NO")
-        print("INSPECTION ENTRY SCREEN BARCODE IS: \(barCodeValue)")
+        if equipmentUnit != "" {
+            barCodeScanned = true
+            barCodeValue = equipmentUnit
+        }
     }
     
     //Write the PrepareForSegue Method here
@@ -592,11 +589,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "goToInspectionEntry" {
-            print("LA LA LA")
             //2 If we have a delegate set, call the method userEnteredANewCityName
             // delegate?  means if delegate is set then
             // called Optional Chaining
-            //            delegate?.userScannedANewBarcode(equipmentUnit: barCodeValue)
+//                        delegate?.userScannedANewBarcode(equipmentUnit: "")
             
             //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
             // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
@@ -605,7 +601,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             let destinationVC = segue.destination as! InspectionEntryController
             
             destinationVC.delegate = self
-            
         }
         
     }

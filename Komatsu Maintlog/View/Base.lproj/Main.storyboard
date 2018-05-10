@@ -23,15 +23,15 @@
                                 <rect key="frame" x="122" y="35" width="170" height="33"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maintenance Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T9-Ut-Dd9">
-                                <rect key="frame" x="138.66666666666666" y="78" width="136.99999999999997" height="25"/>
-                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
+                                <rect key="frame" x="138" y="78" width="138.66666666666663" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUU-IH-D1v" userLabel="Log Entry Button">
-                                <rect key="frame" x="15" y="208" width="384" height="36"/>
+                                <rect key="frame" x="15" y="204.66666666666666" width="384" height="33"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="Scan Barcode">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -40,9 +40,9 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
-                                <rect key="frame" x="15" y="259" width="384" height="36"/>
+                                <rect key="frame" x="15" y="252.66666666666663" width="384" height="33"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="Inspection Entry">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -62,7 +62,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOA-OU-t43" userLabel="Barcode Selected Label">
-                                <rect key="frame" x="15" y="118" width="384" height="75"/>
+                                <rect key="frame" x="15" y="114.66666666666669" width="384" height="75"/>
                                 <color key="backgroundColor" red="0.80392156859999997" green="0.2666666667" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="fC0-5w-e07"/>
@@ -116,8 +116,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebz-EK-t2A">
-                                        <rect key="frame" x="137" y="45" width="140" height="24.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                        <rect key="frame" x="136.33333333333334" y="45" width="142.00000000000003" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -143,21 +143,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3w5-KK-bYu" userLabel="Inspection Item Label Area">
                                 <rect key="frame" x="0.0" y="72" width="414" height="140"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current Section Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFT-q1-F0v">
-                                        <rect key="frame" x="104.00000000000001" y="39.999999999999886" width="205.33333333333337" height="23.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Section Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFT-q1-F0v">
+                                        <rect key="frame" x="104.66666666666667" y="49" width="204.66666666666663" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Barcode Scanned Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCl-vW-sDo" userLabel="Barcode Scanned Label">
-                                        <rect key="frame" x="111.99999999999999" y="10" width="190.66666666666663" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode Scanned Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCl-vW-sDo" userLabel="Barcode Scanned Label">
+                                        <rect key="frame" x="104.33333333333331" y="15" width="206" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current Inspection Item Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
-                                        <rect key="frame" x="40.666666666666657" y="73.333333333333371" width="334" height="23.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Inspection Item Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2j-Pe-FZU">
+                                        <rect key="frame" x="27.666666666666657" y="83" width="358.66666666666674" height="31.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -166,25 +166,24 @@
                                 <constraints>
                                     <constraint firstItem="w2j-Pe-FZU" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="IrS-GW-wXD"/>
                                     <constraint firstAttribute="height" constant="140" id="ZBA-QA-AGg"/>
-                                    <constraint firstAttribute="bottom" secondItem="w2j-Pe-FZU" secondAttribute="bottom" constant="10" id="fRc-Md-7gQ"/>
+                                    <constraint firstItem="w2j-Pe-FZU" firstAttribute="top" secondItem="DFT-q1-F0v" secondAttribute="bottom" constant="10" id="gYJ-Zf-dfK"/>
                                     <constraint firstItem="DFT-q1-F0v" firstAttribute="top" secondItem="UCl-vW-sDo" secondAttribute="bottom" constant="10" id="n9r-Mh-OUn"/>
-                                    <constraint firstItem="UCl-vW-sDo" firstAttribute="top" secondItem="3w5-KK-bYu" secondAttribute="top" constant="10" id="o9v-Jw-IS2"/>
+                                    <constraint firstItem="UCl-vW-sDo" firstAttribute="top" secondItem="3w5-KK-bYu" secondAttribute="top" constant="15" id="o9v-Jw-IS2"/>
                                     <constraint firstItem="DFT-q1-F0v" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="oKi-1q-HxA"/>
-                                    <constraint firstItem="w2j-Pe-FZU" firstAttribute="top" secondItem="DFT-q1-F0v" secondAttribute="bottom" constant="10" id="tbR-nA-N0g"/>
                                     <constraint firstItem="UCl-vW-sDo" firstAttribute="centerX" secondItem="3w5-KK-bYu" secondAttribute="centerX" id="zAS-6m-GfP"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MQ2-z0-FKq" userLabel="Inspection Button Area">
-                                <rect key="frame" x="0.0" y="212" width="414" height="249"/>
+                                <rect key="frame" x="0.0" y="212" width="414" height="299"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="W5Q-Ha-fh7" userLabel="Good Bad Area">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="124.66666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="149.66666666666666"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txh-gy-ZIi" userLabel="Inspection Choice Good Area">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="124.66666666666667"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CT-gE-Vr6" userLabel="Inspection Choice Good">
-                                                        <rect key="frame" x="-57" y="-98.333333333333329" width="320.33333333333331" height="320"/>
+                                                        <rect key="frame" x="-57" y="-86" width="320.33333333333331" height="320"/>
                                                         <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
                                                         <state key="normal" image="icons8-ok-unselected"/>
                                                         <connections>
@@ -198,10 +197,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="up3-zf-Zkz" userLabel="Inspection Choice Bad Area">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="124.66666666666667"/>
+                                                <rect key="frame" x="207" y="0.0" width="207" height="149.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6q-En-x2K" userLabel="Inspection Choice Bad">
-                                                        <rect key="frame" x="-56" y="-98" width="320" height="320"/>
+                                                        <rect key="frame" x="-56" y="-85.666666666666671" width="320" height="320"/>
                                                         <inset key="imageEdgeInsets" minX="75" minY="75" maxX="75" maxY="75"/>
                                                         <state key="normal" image="icons8-cancel-unselected"/>
                                                         <connections>
@@ -217,13 +216,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kYo-Sk-zUs" userLabel="Picture Area">
-                                        <rect key="frame" x="0.0" y="124.66666666666669" width="414" height="124.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="149.66666666666669" width="414" height="149.33333333333331"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NG9-78-NP6" userLabel="Picture 1 Area">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="124.33333333333333"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="149.33333333333334"/>
                                                 <subviews>
                                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtP-Sw-hdN">
-                                                        <rect key="frame" x="20" y="0.0" width="177" height="124.33333333333333"/>
+                                                        <rect key="frame" x="20" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
                                                     <button hidden="YES" opaque="NO" tag="1" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puI-X7-TPS" userLabel="Camera1 Button">
                                                         <rect key="frame" x="-57" y="-85.666666666666686" width="320" height="320"/>
@@ -243,10 +242,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcb-jE-clA" userLabel="Picture 2 Area">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="124.33333333333333"/>
+                                                <rect key="frame" x="207" y="0.0" width="207" height="149.33333333333334"/>
                                                 <subviews>
                                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-81-YJ8">
-                                                        <rect key="frame" x="10" y="0.0" width="177" height="124.33333333333333"/>
+                                                        <rect key="frame" x="10" y="0.0" width="177" height="149.33333333333334"/>
                                                     </imageView>
                                                     <button hidden="YES" opaque="NO" tag="2" contentMode="scaleAspectFit" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-JZ-Sq8" userLabel="Camera2 Button">
                                                         <rect key="frame" x="-57" y="-85.666666666666686" width="320" height="320"/>
@@ -270,27 +269,27 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-VS-jDY" userLabel="Bad Note Area">
-                                <rect key="frame" x="0.0" y="461" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="511" width="414" height="150"/>
                                 <subviews>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5V-y2-O4W">
-                                        <rect key="frame" x="20.000000000000004" y="20" width="50.333333333333343" height="24.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                        <rect key="frame" x="20.000000000000004" y="10.000000000000002" width="51.333333333333343" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ig-4B-nUA">
-                                        <rect key="frame" x="20" y="64.666666666666629" width="374" height="28"/>
+                                        <rect key="frame" x="20" y="51.666666666666629" width="374" height="28"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lbd-kj-MKI">
-                                        <rect key="frame" x="329" y="112.66666666666663" width="65" height="36"/>
+                                        <rect key="frame" x="329" y="99.666666666666629" width="65" height="33"/>
                                         <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="65" id="6br-bV-5yd"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -306,9 +305,8 @@
                                     <constraint firstItem="2ig-4B-nUA" firstAttribute="top" secondItem="J5V-y2-O4W" secondAttribute="bottom" constant="20" id="GCR-7j-T7o"/>
                                     <constraint firstItem="2ig-4B-nUA" firstAttribute="leading" secondItem="aHV-VS-jDY" secondAttribute="leading" constant="20" id="MsW-Iw-hEm"/>
                                     <constraint firstAttribute="trailing" secondItem="Lbd-kj-MKI" secondAttribute="trailing" constant="20" id="Nb7-fQ-WDB"/>
-                                    <constraint firstItem="J5V-y2-O4W" firstAttribute="top" secondItem="aHV-VS-jDY" secondAttribute="top" constant="20" id="hPL-ez-mNP"/>
-                                    <constraint firstItem="J5V-y2-O4W" firstAttribute="top" secondItem="aHV-VS-jDY" secondAttribute="top" constant="20" id="jL4-XS-TW3"/>
-                                    <constraint firstAttribute="height" constant="200" id="ryZ-kM-JFf"/>
+                                    <constraint firstItem="J5V-y2-O4W" firstAttribute="top" secondItem="aHV-VS-jDY" secondAttribute="top" constant="10" id="hPL-ez-mNP"/>
+                                    <constraint firstAttribute="height" constant="150" id="ryZ-kM-JFf"/>
                                     <constraint firstItem="Lbd-kj-MKI" firstAttribute="top" secondItem="2ig-4B-nUA" secondAttribute="bottom" constant="20" id="xRB-w6-Tie"/>
                                 </constraints>
                             </view>
@@ -393,21 +391,21 @@
                                 <rect key="frame" x="122" y="35" width="170" height="33"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maintenance Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2q-EZ-03o">
-                                <rect key="frame" x="138" y="78" width="137" height="25"/>
-                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
+                                <rect key="frame" x="137.33333333333337" y="78" width="138.66666666666663" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2I-Vb-rZ7">
-                                <rect key="frame" x="191.66666666666666" y="203" width="31" height="25"/>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <rect key="frame" x="192" y="199.66666666666666" width="30.333333333333343" height="21.666666666666657"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nx8-gu-tag">
-                                <rect key="frame" x="15" y="290" width="384" height="37"/>
+                                <rect key="frame" x="15" y="279.33333333333331" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -416,22 +414,22 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Z1-pFu" userLabel="PIN Field">
-                                <rect key="frame" x="15" y="243" width="384" height="32"/>
+                                <rect key="frame" x="15" y="236.33333333333334" width="384" height="28.000000000000028"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="onUserPinChanged:" destination="mxM-Zh-ZnC" eventType="editingChanged" id="ITU-Oh-SQc"/>
                                 </connections>
                             </textField>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loginErrorLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="918-2y-LPy" userLabel="Login Error">
-                                <rect key="frame" x="15" y="148" width="384" height="40"/>
+                                <rect key="frame" x="15" y="144.66666666666666" width="384" height="40"/>
                                 <color key="backgroundColor" red="0.80392156862745101" green="0.26666666666666666" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Qhn-oF-yGB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AlNile" family="Al Nile" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -480,8 +478,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Equipment Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-7E-QAr">
-                                        <rect key="frame" x="99" y="45" width="216" height="25"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                        <rect key="frame" x="98.666666666666686" y="45" width="217" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -507,13 +505,13 @@
                                     <constraint firstAttribute="height" constant="75" id="wQX-6M-2Mg"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode not detected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQe-Nq-5MF">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Equipment Unit QR Code not scanned" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQe-Nq-5MF">
                                 <rect key="frame" x="0.0" y="686" width="414" height="50"/>
-                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.80392156859999997" green="0.2666666667" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Uca-fP-CmC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

@@ -39,11 +39,14 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        barcodeSelectedLabel.text = "You must first scan an Equipment Unit"
-        barcodeSelectedLabel.isHidden = false
-        scanBarcodeButton.isHidden = false
+        // Do any additional setup after loading the view, typically from a nib.
+        resetDefaultValues()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("SelectScreenController VIEW WILL APPEAR")
+        print("BAR CODE CHECK: \(barCodeValue)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,14 +54,29 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func resetDefaultValues() {
+        barcodeSelectedLabel.text = "Equipment Unit QR Code not scanned"
+        barcodeSelectedLabel.isHidden = false
+        scanBarcodeButton.isHidden = false
+    }
+    
     func userScannedANewBarcode(equipmentUnit: String) {
-        barCodeScanned = true
-        barCodeValue = equipmentUnit
-        
-        barcodeSelectedLabel.text = "Equipment Unit: \(barCodeValue)"
-        barcodeSelectedLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
-        scanBarcodeButton.setTitle("Scan Another Barcode", for: .normal)
-        inspectionEntryButton.isHidden = false
+        if equipmentUnit != "" {
+            barCodeScanned = true
+            barCodeValue = equipmentUnit
+            
+            barcodeSelectedLabel.text = "Equipment Unit: \(barCodeValue)"
+            barcodeSelectedLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
+            scanBarcodeButton.setTitle("Scan Another Barcode", for: .normal)
+            inspectionEntryButton.isHidden = false
+        } else {
+            barCodeScanned = false
+            barCodeValue = ""
+            
+            barcodeSelectedLabel.text = "Equipment Unit QR Code not scanned"
+            barcodeSelectedLabel.backgroundColor = UIColor(red: 205/255, green: 68/255, blue: 74/255, alpha: 1.0)
+            inspectionEntryButton.isHidden = true
+        }
     }
     
     //Write the PrepareForSegue Method here
@@ -74,8 +92,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
         
         if segue.identifier == "goToInspectionEntry" {
-            
-            print("YO YO YO YO YO")
             
             //2 If we have a delegate set, call the method userEnteredANewCityName
             // delegate?  means if delegate is set then
