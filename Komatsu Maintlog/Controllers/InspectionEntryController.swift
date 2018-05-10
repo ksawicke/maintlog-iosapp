@@ -275,7 +275,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         print("Connecting to \(URL)")
         
-        Alamofire.request("https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/checklist?api_key=2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf", method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let responseJSON : JSON = JSON(response.result.value!) {
                 if responseJSON["status"] == true {
@@ -283,14 +283,13 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //
                     print("CHECKLIST CHECK")
                     print(checklists)
-//                    let userId = userData["user_id"].int32!
-//                    let userName = userData["username"].string!
-//                    let firstName = userData["first_name"].string!
-//                    let lastName = userData["last_name"].string!
-//                    let emailAddress = userData["email_address"].string!
-//                    let role = userData["role"].string!
                     
-//                    _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+                    let id = checklists["id"].int32!
+//                    let equipmentType = checklists["equipment_type"].string!
+                    
+                    //        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
+                    
+                    
                 } else {
                     let errorMessage = responseJSON["message"].string!
 //
@@ -299,8 +298,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             }
             
         }
-        
-//        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
+
     }
     
     func addChecklistItems() {
