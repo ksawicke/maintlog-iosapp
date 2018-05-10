@@ -35,9 +35,14 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var imagePickerController : UIImagePickerController!
     var progressLabelText : String = ""
     
-    //Constants
-//    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-//    let APP_ID = "27474384dc09e3a1d2109468edeee08f"
+    // Constants
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_CHECKLIST = "/api/checklist"
+    var API_CHECKLISTITEM = "/api/checklistitem"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
@@ -265,7 +270,37 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //    }
     
     func addChecklists() {
-        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
+        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        print("Connecting to \(URL)")
+        
+        Alamofire.request("https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/checklist?api_key=2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf", method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let checklists = responseJSON["checklists"]
+//
+                    print("CHECKLIST CHECK")
+                    print(checklists)
+//                    let userId = userData["user_id"].int32!
+//                    let userName = userData["username"].string!
+//                    let firstName = userData["first_name"].string!
+//                    let lastName = userData["last_name"].string!
+//                    let emailAddress = userData["email_address"].string!
+//                    let role = userData["role"].string!
+                    
+//                    _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+//
+                    print(errorMessage)
+                }
+            }
+            
+        }
+        
+//        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
     }
     
     func addChecklistItems() {

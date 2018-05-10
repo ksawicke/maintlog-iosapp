@@ -14,7 +14,8 @@ import SwiftyJSON
 class LoginController: UIViewController {
 
     // Constants
-    var LOGIN_DEV_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php/api/check_login"
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_AUTHENTICATE = "/api/authenticate"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
@@ -37,7 +38,7 @@ class LoginController: UIViewController {
     
     @IBAction func onClickLogIn(_ sender: UIButton) {
         let userPinEntered: String = userPin.text!
-        var URL = LOGIN_DEV_URL
+        var URL = "\(API_DEV_BASE_URL)\(API_AUTHENTICATE)"
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
 
         loginButton.isEnabled = false
@@ -85,9 +86,6 @@ class LoginController: UIViewController {
     
     func doAuthCheck(url: String) {
 
-        print(url)
-        print("**")
-        
         Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let responseJSON : JSON = JSON(response.result.value!) {
