@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Checklist" representedClassName="Checklist" syncable="YES" codeGenerationType="class">
-        <attribute name="checklist_json" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="equipmenttype_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="checklistJson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="equipmentTypeId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="ChecklistItem" representedClassName="ChecklistItem" syncable="YES" codeGenerationType="class">
@@ -10,7 +10,7 @@
         <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="EquipmentType" representedClassName="EquipmentType" syncable="YES" codeGenerationType="class">
-        <attribute name="equipment_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="equipmentType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="InspectionImage" representedClassName="InspectionImage" syncable="YES" codeGenerationType="class">

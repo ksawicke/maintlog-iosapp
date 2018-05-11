@@ -17,14 +17,14 @@ class ChecklistCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int32, equipmenttype_id: Int32, checklist_json: String) -> Bool {
+    class func saveObject(id: Int32, equipmentTypeId: Int32, checklistJson: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Checklist", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(id, forKey: "id")
-        managedObject.setValue(equipmenttype_id, forKey: "equipmenttype_id")
-        managedObject.setValue(checklist_json, forKey: "checklist_json")
+        managedObject.setValue(equipmentTypeId, forKey: "equipmentTypeId")
+        managedObject.setValue(checklistJson, forKey: "checklistJson")
         
         do {
             try context.save()

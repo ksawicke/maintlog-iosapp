@@ -284,8 +284,19 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                     print("CHECKLIST CHECK")
                     print(checklists)
                     
-                    let id = checklists["id"].int32!
-//                    let equipmentType = checklists["equipment_type"].string!
+                    for (_, checklist) in checklists {
+                        print(checklist["id"])
+                        print(checklist["equipmenttype_id"])
+                        print(checklist["checklist_json"])
+//                        let id = checklist["id"].int32!
+//                        let equipmentTypeId = checklist["equipmenttype_id"].int32!
+//                        let checklistJson = checklist["checklist_json"].string!
+//
+//                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
+                        
+                    }
+                    
+
                     
                     //        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
                     
@@ -328,21 +339,21 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func addEquipmentTypes() {
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipment_type: "Loader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 6, equipment_type: "Fork Lift")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 7, equipment_type: "Other")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 8, equipment_type: "Light Vehicle")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 9, equipment_type: "Generators")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 10, equipment_type: "Welders")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 11, equipment_type: "Rental Equipment")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 13, equipment_type: "Backhoe Loader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 14, equipment_type: "Manlift")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 16, equipment_type: "Sweeper")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 17, equipment_type: "Sweeper Mop")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 19, equipment_type: "Haul Truck")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 20, equipment_type: "Dozer")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 21, equipment_type: "Motor Grader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 22, equipment_type: "Drill")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipmentType: "Loader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 6, equipmentType: "Fork Lift")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 7, equipmentType: "Other")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 8, equipmentType: "Light Vehicle")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 9, equipmentType: "Generators")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 10, equipmentType: "Welders")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 11, equipmentType: "Rental Equipment")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 13, equipmentType: "Backhoe Loader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 14, equipmentType: "Manlift")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 16, equipmentType: "Sweeper")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 17, equipmentType: "Sweeper Mop")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 19, equipmentType: "Haul Truck")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 20, equipmentType: "Dozer")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 21, equipmentType: "Motor Grader")
+        _ = EquipmentTypeCoreDataHandler.saveObject(id: 22, equipmentType: "Drill")
     }
     
     func deleteItems() {
@@ -359,7 +370,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             for j in checklist! {
                 // https://www.swiftyninja.com/escaped-string-json-using-swift/
                 
-                let jsonData = j.checklist_json?.data(using: .utf8)
+                let jsonData = j.checklistJson?.data(using: .utf8)
                 
                 var dic: [String : Any]?
                 

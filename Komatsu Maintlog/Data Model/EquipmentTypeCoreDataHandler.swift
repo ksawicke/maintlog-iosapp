@@ -17,13 +17,13 @@ class EquipmentTypeCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int32, equipment_type: String) -> Bool {
+    class func saveObject(id: Int32, equipmentType: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "EquipmentType", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(id, forKey: "id")
-        managedObject.setValue(equipment_type, forKey: "equipment_type")
+        managedObject.setValue(equipmentType, forKey: "equipmentType")
         
         do {
             try context.save()
