@@ -27,7 +27,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var checklistitemPoststartArray = [[String: String]]()
     var imagesTaken = [[String: Any]]()
     var userFormData = [[String: String]]()
-    var equipmentTypeSelected : String = ""
+    var equipmentTypeSelected : NSNumber = 0
     var questionNumber : Int = 0
     var equipmentUnit : String = ""
     var currentSection : String = ""
@@ -39,6 +39,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
+    var API_EQUIPMENTTYPE = "/api/equipmenttype"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
@@ -141,16 +142,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         addEquipmentTypes()
         addChecklists()
         addChecklistItems()
-        
-        // TODO 04/19/18: Allow user to pick the Equipment Unit from
-        // a previous screen that needs to be created.
-        // Allow the user to scan a barcode that will pick the
-        // Unit which will dynamically select the equipment type
-        // instead of being hard coded.
-        
+    
         
         if barCodeValue != "" {
-            equipmentTypeSelected = "2"
+            equipmentTypeSelected = 2
             equipmentUnit = barCodeValue
         
 //        print("BAR CODE SCANNED?: \(barCodeScanned)")
@@ -272,88 +267,71 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func addChecklists() {
         var URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
         URL.append("?api_key=\(API_KEY)")
-        
-        print("Connecting to \(URL)")
-        
+
         Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let responseJSON : JSON = JSON(response.result.value!) {
                 if responseJSON["status"] == true {
                     let checklists = responseJSON["checklists"]
-//
-                    print("CHECKLIST CHECK")
-                    print(checklists)
                     
                     for (_, checklist) in checklists {
-                        print(checklist["id"])
-                        print(checklist["equipmenttype_id"])
-                        print(checklist["checklist_json"])
-//                        let id = checklist["id"].int32!
-//                        let equipmentTypeId = checklist["equipmenttype_id"].int32!
-//                        let checklistJson = checklist["checklist_json"].string!
-//
-//                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
-                        
-                    }
-                    
+                        let id = checklist["id"].int32!
+                        let equipmentTypeId = checklist["equipmenttype_id"].int32!
+                        let checklistJson = checklist["checklist_json"].string!
 
-                    
-                    //        _ = ChecklistCoreDataHandler.saveObject(id: 2, equipmenttype_id: 8, checklist_json: "{\"preStartData\":[\"42\",\"38\",\"30\",\"33\",\"47\",\"29\",\"39\",\"31\",\"44\",\"35\",\"37\"],\"postStartData\":[\"50\",\"46\",\"40\",\"41\",\"48\",\"49\"]}")
-                    
-                    
+                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
+                    }
                 } else {
                     let errorMessage = responseJSON["message"].string!
-//
-                    print(errorMessage)
                 }
             }
-            
         }
-
     }
     
     func addChecklistItems() {
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 28, item: "Secured Cargo")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 29, item: "Mirrors")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 30, item: "Horn/Alarm/Lights")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 31, item: "Test Instruments")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 32, item: "Handrails")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 33, item: "Leak Evidence")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 34, item: "Operators Manual")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 35, item: "First Aid Kit")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 36, item: "Blade/Bucket/Tool")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 37, item: "Visibility Flag Whip")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 38, item: "Tires")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 39, item: "Windows/Wipers")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 40, item: "Seat Controls")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 41, item: "Air Conditioner")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 42, item: "Suspension")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 43, item: "Seat Belt/Suspension")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 44, item: "Doors & Latches")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 45, item: "Brakes/Retard")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 46, item: "Brakes")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 47, item: "Seat Belt")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 48, item: "Dash Controls")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 49, item: "Displays/Gauges")
-        _ = ChecklistItemCoreDataHandler.saveObject(id: 50, item: "Steering")
+        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLISTITEM)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let checklistitems = responseJSON["checklistitems"]
+                    
+                    for (_, checklistitem) in checklistitems {
+                        let id = checklistitem["id"].int32!
+                        let item = checklistitem["item"].string!
+                        
+                        _ = ChecklistItemCoreDataHandler.saveObject(id: id, item: item)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
     }
     
     func addEquipmentTypes() {
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 5, equipmentType: "Loader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 6, equipmentType: "Fork Lift")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 7, equipmentType: "Other")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 8, equipmentType: "Light Vehicle")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 9, equipmentType: "Generators")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 10, equipmentType: "Welders")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 11, equipmentType: "Rental Equipment")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 13, equipmentType: "Backhoe Loader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 14, equipmentType: "Manlift")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 16, equipmentType: "Sweeper")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 17, equipmentType: "Sweeper Mop")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 19, equipmentType: "Haul Truck")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 20, equipmentType: "Dozer")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 21, equipmentType: "Motor Grader")
-        _ = EquipmentTypeCoreDataHandler.saveObject(id: 22, equipmentType: "Drill")
+        var URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTTYPE)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let equipmenttypes = responseJSON["equipmenttypes"]
+                    
+                    for (_, equipmenttype) in equipmenttypes {
+                        let id = equipmenttype["id"].int32!
+                        let equipmentType = equipmenttype["equipment_type"].string!
+                        
+                        _ = EquipmentTypeCoreDataHandler.saveObject(id: id, equipmentType: equipmentType)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
     }
     
     func deleteItems() {
@@ -363,9 +341,12 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func loadItems() {
-        let checklist = ChecklistCoreDataHandler.filterData(fieldName: "id", filterType: "equals", queryString: equipmentTypeSelected)
+        let checklist = ChecklistCoreDataHandler.filterDataById(fieldName: "id", filterType: "equals", queryString: equipmentTypeSelected)
         let checklistitem = ChecklistItemCoreDataHandler.fetchObject()
-
+        
+        print(checklist)
+        print(checklistitem)
+        
         if (checklist != nil) {
             for j in checklist! {
                 // https://www.swiftyninja.com/escaped-string-json-using-swift/
