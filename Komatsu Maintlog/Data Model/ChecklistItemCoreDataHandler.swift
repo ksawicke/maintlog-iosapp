@@ -73,6 +73,23 @@ class ChecklistItemCoreDataHandler: NSObject {
         }
     }
     
+    class func filterDataById(id:String) -> [ChecklistItem]? {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()
+        var checklist:[ChecklistItem]? = nil
+        
+        let predicate = NSPredicate(format: "id = %@", id)
+        fetchRequest.predicate = predicate
+        
+        do {
+            checklist = try context.fetch(fetchRequest)
+            
+            return checklist
+        } catch {
+            return checklist
+        }
+    }
+    
     class func filterData(fieldName:String, filterType:String, queryString:String) -> [ChecklistItem]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()

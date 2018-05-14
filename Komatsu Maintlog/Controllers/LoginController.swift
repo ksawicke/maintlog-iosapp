@@ -97,6 +97,7 @@ class LoginController: UIViewController {
                     let lastName = userData["last_name"].string!
                     let emailAddress = userData["email_address"].string!
                     let role = userData["role"].string!
+                    // let twelveHoursFromNow = Date().addingTimeInterval(+43200) // TODO: Use to expire
 
                     _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
 

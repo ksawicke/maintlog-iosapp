@@ -134,7 +134,7 @@ class BarCodeScannerController: UIViewController {
         }
         
         let alertPrompt = UIAlertController(title: "Equipment Unit found:", message: "\(decodedURL)", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "Correct", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+        let confirmAction = UIAlertAction(title: "Next", style: UIAlertActionStyle.default, handler: { (action) -> Void in
 
             // 1. Get the equipmentUnit the user scanned
             let equipmentUnit = decodedURL
