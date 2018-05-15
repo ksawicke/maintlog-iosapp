@@ -137,11 +137,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-//        deleteItems()
-//
-//        addEquipmentTypes()
-//        addChecklists()
-//        addChecklistItems()
+        deleteItems()
+
+        addEquipmentTypes()
+        addChecklists()
+        addChecklistItems()
         
         if barCodeValue != "" {
             equipmentTypeSelected = "8"
