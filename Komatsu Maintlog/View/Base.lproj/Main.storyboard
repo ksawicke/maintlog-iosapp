@@ -368,7 +368,7 @@
                         <outlet property="nextButton" destination="Lbd-kj-MKI" id="a2Q-KV-nHQ"/>
                         <outlet property="picture1" destination="jtP-Sw-hdN" id="FlO-eT-qcg"/>
                         <outlet property="picture2" destination="tf0-81-YJ8" id="cnv-xf-DKz"/>
-                        <outlet property="progressBar" destination="KjX-AH-H42" id="tjl-Qk-q5b"/>
+                        <outlet property="progressBar" destination="KjX-AH-H42" id="ZDs-WI-BHJ"/>
                         <outlet property="progressLabel" destination="1An-IU-YQp" id="bWR-Ym-EkO"/>
                         <outlet property="takePicture1Button" destination="puI-X7-TPS" id="t3Z-Ts-eOb"/>
                         <outlet property="takePicture2Button" destination="lGd-JZ-Sq8" id="5N2-7K-QR3"/>

@@ -488,10 +488,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func updateUI(sectionLabel: String, itemLabel: String) {
-        let windowWidth = view.frame.size.width
-        let numTotalItems = CGFloat(checklistitemPrestartArray.count) + CGFloat(checklistitemPoststartArray.count)
-        let piece = CGFloat(CGFloat(windowWidth) / CGFloat(numTotalItems))
-        let totalWidth = CGFloat(CGFloat(piece) * CGFloat(questionNumber))
+        let numTotalItems = Int16(checklistitemPrestartArray.count) + Int16(checklistitemPoststartArray.count)
+        let newProgressBarWidth = (view.frame.size.width / 17) * CGFloat(questionNumber)
+        
+        print("Total items: \(numTotalItems)")
+        print("New progressbar width: \(newProgressBarWidth)")
         
         takePicture1Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
         takePicture2Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
@@ -502,10 +503,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         takePicture1Button.isEnabled = true
         takePicture2Button.isEnabled = false
         
-//        progressBar.frame.size.width = totalWidth
-        progressLabel.text = "\(Int(questionNumber)) / \(Int(numTotalItems))"
+        progressLabel.text = "Completed: \(Int(questionNumber)) / \(Int(numTotalItems))"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.progressBar.frame.size.width = newProgressBarWidth // Keep this call within closure; must be here due to threading
             self.inspectionGoodButton.setImage(UIImage(named: "icons8-ok-unselected"), for: [])
             self.inspectionBadButton.setImage(UIImage(named: "icons8-cancel-unselected"), for: [])
         }
