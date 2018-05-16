@@ -111,6 +111,7 @@
                         <outlet property="barcodeSelectedLabel" destination="oOA-OU-t43" id="rgH-RT-xj9"/>
                         <outlet property="inspectionEntryButton" destination="ISi-Vf-XBT" id="LLs-lO-E2X"/>
                         <outlet property="scanBarcodeButton" destination="PUU-IH-D1v" id="Y5k-Y3-ukZ"/>
+                        <outlet property="uploadInspectionButton" destination="1WZ-96-WOe" id="OZI-hX-eiA"/>
                         <segue destination="mxM-Zh-ZnC" kind="show" identifier="goToLoginScreen" id="Yju-vi-Ylu"/>
                     </connections>
                 </viewController>

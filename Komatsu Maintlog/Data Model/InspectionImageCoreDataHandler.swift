@@ -74,6 +74,24 @@ class InspectionImageCoreDataHandler: NSObject {
         }
     }
     
+    class func countData() -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<InspectionImage> = InspectionImage.fetchRequest()
+        var inspectionImageCount:Int? = nil
+        var _ = 0
+        
+        let predicate = NSPredicate(format: "inspectionId <> 0")
+        fetchRequest.predicate = predicate
+        
+        do {
+            inspectionImageCount = try context.count(for: fetchRequest)
+            
+            return inspectionImageCount!
+        } catch {
+            return inspectionImageCount!
+        }
+    }
+    
     class func filterData(fieldName: String, filterType: String, queryString: String) -> [InspectionImage]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<InspectionImage> = InspectionImage.fetchRequest()

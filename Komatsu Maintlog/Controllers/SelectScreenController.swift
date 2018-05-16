@@ -8,12 +8,22 @@
 
 import UIKit
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 // STEP 2: In the View Controller that will receive data, conform to the protocol defined in step 1;
 // Then implement the required method (see below, func userEnteredANewCityName)
 // This is where we do something with the data that is received from the other View Controller, in this case
 // ChangeCityViewController
 class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
+    
+    // Constants
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_UPLOAD_INSPECTIONS = "/api/upload_inspections"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
     
     //Declare the delegate variable here:
     // STEP 3: create a delegate property (this is standard accepted practice)
@@ -29,11 +39,13 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var barcodeSelectedLabel: UILabel!
     @IBOutlet weak var scanBarcodeButton: UIButton!
     @IBOutlet weak var inspectionEntryButton: UIButton!
-
-    @IBAction func onClickUploadInspections(_ sender: UIButton) {
+    @IBOutlet weak var uploadInspectionButton: UIButton!
     
-        print("Clicked on upload inspections button...")
-        
+    @IBAction func onClickUploadInspections(_ sender: UIButton) {
+        var URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTIONS)"
+        URL.append("?&api_key=\(API_KEY)")
+    
+        uploadInspections(url: URL)
     }
     
     @IBAction func onClickLogOut(_ sender: UIButton) {
@@ -49,17 +61,12 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         resetDefaultValues()
 
-        var test1 = InspectionRatingCoreDataHandler.countData()
-        var test2 = InspectionRatingCoreDataHandler.countData()
+        var countInspectionRating = InspectionRatingCoreDataHandler.countData()
+        var countInspectionImage = InspectionImageCoreDataHandler.countData()
         
-        print("count 1: \(String(describing: test1))")
-        print("count 2: \(String(describing: test2))")
-        
-//        print(count(test1))
-//        print(count(test2))
-        
-//        var countRatings = InspectionRatingCoreDataHandler.countInspectionRating()
-//        print("Count ratings: \(countRatings)")
+        if countInspectionRating > 0 || countInspectionImage > 0 {
+            enableUploadButton()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,10 +78,15 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func enableUploadButton() {
+        uploadInspectionButton.isEnabled = true
+    }
+    
     func resetDefaultValues() {
         barcodeSelectedLabel.text = "Equipment Unit QR Code not scanned"
         barcodeSelectedLabel.isHidden = false
         scanBarcodeButton.isHidden = false
+        uploadInspectionButton.isEnabled = false
     }
     
     func userScannedANewBarcode(equipmentUnit: String) {
@@ -94,6 +106,23 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             barcodeSelectedLabel.backgroundColor = UIColor(red: 205/255, green: 68/255, blue: 74/255, alpha: 1.0)
             inspectionEntryButton.isHidden = true
         }
+    }
+    
+    func uploadInspections(url: String) {
+
+        // TODO: Continue implementation
+        
+//        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+//                } else {
+//                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+//                }
+//            }
+//        }
+        
     }
     
     //Write the PrepareForSegue Method here
