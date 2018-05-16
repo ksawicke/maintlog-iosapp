@@ -76,6 +76,24 @@ class InspectionRatingCoreDataHandler: NSObject {
         }
     }
     
+    class func countData() -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<InspectionRating> = InspectionRating.fetchRequest()
+        var inspectionRating:Int? = nil
+        var _ = 0
+        
+        let predicate = NSPredicate(format: "rating == 0 OR rating == 1")
+        fetchRequest.predicate = predicate
+        
+        do {
+            inspectionRating = try context.count(for: fetchRequest)
+            
+            return inspectionRating!
+        } catch {
+            return inspectionRating!
+        }
+    }
+    
     class func filterData(fieldName: String, filterType: String, queryString: String) -> [InspectionRating]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<InspectionRating> = InspectionRating.fetchRequest()

@@ -87,7 +87,7 @@ class LoginController: UIViewController {
     
     func doAuthCheck(url: String) {
 
-        Alamofire.request(url, method: .post, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             
             if let responseJSON : JSON = JSON(response.result.value!) {
                 if responseJSON["status"] == true {

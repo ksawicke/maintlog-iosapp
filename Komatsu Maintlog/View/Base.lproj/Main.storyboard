@@ -29,9 +29,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUU-IH-D1v" userLabel="Log Entry Button">
-                                <rect key="frame" x="15" y="204.66666666666666" width="384" height="33"/>
+                                <rect key="frame" x="15" y="204.66666666666666" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Scan Barcode">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -40,9 +40,9 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">
-                                <rect key="frame" x="15" y="252.66666666666663" width="384" height="33"/>
+                                <rect key="frame" x="15" y="253.66666666666663" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Inspection Entry">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -50,10 +50,10 @@
                                     <segue destination="Pcu-lO-5Us" kind="show" identifier="goToInspectionEntry" id="d8s-fe-sud"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ez-xn-XYO" userLabel="Inspection Entry Button">
-                                <rect key="frame" x="15" y="685" width="384" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ez-xn-XYO" userLabel="Log Out Button">
+                                <rect key="frame" x="15" y="687" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Log Out">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -71,12 +71,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WZ-96-WOe" userLabel="Upload Button">
+                                <rect key="frame" x="15" y="638" width="384" height="34"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Upload Inspections">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickUploadInspections:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zAf-eo-zdo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.81960784313725488" green="0.83529411764705885" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="oOA-OU-t43" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="15L-Wx-nNF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PUU-IH-D1v" secondAttribute="trailing" constant="15" id="1nL-eP-rRQ"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3IL-k6-hmK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1WZ-96-WOe" secondAttribute="trailing" constant="15" id="AOB-9p-xKj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ISi-Vf-XBT" secondAttribute="trailing" constant="15" id="DzD-jB-FlL"/>
                             <constraint firstItem="4ez-xn-XYO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="E0m-aX-WU5"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="JP4-pu-YgD"/>
@@ -85,11 +97,13 @@
                             <constraint firstItem="PUU-IH-D1v" firstAttribute="top" secondItem="oOA-OU-t43" secondAttribute="bottom" constant="15" id="S7B-bj-shr"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="top" secondItem="PUU-IH-D1v" secondAttribute="bottom" constant="15" id="SFR-yQ-qII"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="top" secondItem="dFr-C1-qlq" secondAttribute="bottom" constant="10" id="Se8-5s-hux"/>
+                            <constraint firstItem="4ez-xn-XYO" firstAttribute="top" secondItem="1WZ-96-WOe" secondAttribute="bottom" constant="15" id="TQe-1z-ITW"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XaH-V7-w8m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oOA-OU-t43" secondAttribute="trailing" constant="15" id="dyI-KL-IuJ"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="keE-Id-Yna"/>
                             <constraint firstItem="PUU-IH-D1v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="kyo-yC-9tG"/>
                             <constraint firstItem="oOA-OU-t43" firstAttribute="top" secondItem="5T9-Ut-Dd9" secondAttribute="bottom" constant="15" id="oGK-uy-91e"/>
+                            <constraint firstItem="1WZ-96-WOe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="qwe-bD-gjz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -102,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-487" y="-83"/>
+            <point key="canvasLocation" x="-488.40579710144931" y="-83.152173913043484"/>
         </scene>
         <!--Inspection Entry Controller-->
         <scene sceneID="Fg0-m5-NJh">

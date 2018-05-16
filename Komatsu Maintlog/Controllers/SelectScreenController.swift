@@ -30,6 +30,12 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var scanBarcodeButton: UIButton!
     @IBOutlet weak var inspectionEntryButton: UIButton!
 
+    @IBAction func onClickUploadInspections(_ sender: UIButton) {
+    
+        print("Clicked on upload inspections button...")
+        
+    }
+    
     @IBAction func onClickLogOut(_ sender: UIButton) {
     
         _ = LoginCoreDataHandler.cleanDelete()
@@ -42,6 +48,18 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         resetDefaultValues()
+
+        var test1 = InspectionRatingCoreDataHandler.countData()
+        var test2 = InspectionRatingCoreDataHandler.countData()
+        
+        print("count 1: \(String(describing: test1))")
+        print("count 2: \(String(describing: test2))")
+        
+//        print(count(test1))
+//        print(count(test2))
+        
+//        var countRatings = InspectionRatingCoreDataHandler.countInspectionRating()
+//        print("Count ratings: \(countRatings)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
