@@ -17,7 +17,7 @@ class InspectionRatingCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: Int32, checklistId: Int32, equipmentUnitId: String, rating: Int32, note: String) -> Bool {
+    class func saveObject(inspectionId: Int16, checklistId: Int16, equipmentUnitId: String, rating: Int16, note: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionRating", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -76,7 +76,7 @@ class InspectionRatingCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName:String, filterType:String, queryString:String) -> [InspectionRating]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [InspectionRating]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<InspectionRating> = InspectionRating.fetchRequest()
         var inspectionRating:[InspectionRating]? = nil

@@ -17,7 +17,7 @@ class EquipmentTypeCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int32, equipmentType: String) -> Bool {
+    class func saveObject(id: Int16, equipmentType: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "EquipmentType", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -73,7 +73,7 @@ class EquipmentTypeCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName:String, filterType:String, queryString:String) -> [EquipmentType]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [EquipmentType]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<EquipmentType> = EquipmentType.fetchRequest()
         var equipmenttype:[EquipmentType]? = nil

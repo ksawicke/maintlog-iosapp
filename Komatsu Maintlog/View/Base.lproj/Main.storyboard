@@ -318,11 +318,10 @@
                                         <attributedString key="attributedText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="KjX-AH-H42">
+                                    <view contentMode="left" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KjX-AH-H42">
                                         <rect key="frame" x="0.0" y="50" width="15" height="25"/>
                                         <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="15" id="3oB-8S-5zf"/>
                                             <constraint firstAttribute="height" constant="25" id="etD-rj-djU"/>
                                         </constraints>
                                     </view>

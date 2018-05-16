@@ -17,7 +17,7 @@ class LoginCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(userId: Int32, userName: String, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
+    class func saveObject(userId: Int16, userName: String, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Login", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -78,7 +78,7 @@ class LoginCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName:String, filterType:String, queryString:String) -> [Login]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [Login]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<Login> = Login.fetchRequest()
         var login:[Login]? = nil

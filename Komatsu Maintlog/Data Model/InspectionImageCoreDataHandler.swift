@@ -17,7 +17,7 @@ class InspectionImageCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: Int32, photoId: Int32, image: NSData) -> Bool {
+    class func saveObject(inspectionId: Int16, photoId: Int16, image: NSData) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionImage", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -74,7 +74,7 @@ class InspectionImageCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName:String, filterType:String, queryString:String) -> [InspectionImage]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [InspectionImage]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<InspectionImage> = InspectionImage.fetchRequest()
         var inspectionImage:[InspectionImage]? = nil

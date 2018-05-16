@@ -17,7 +17,7 @@ class ChecklistCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int32, equipmentTypeId: Int32, checklistJson: String) -> Bool {
+    class func saveObject(id: Int16, equipmentTypeId: Int16, checklistJson: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Checklist", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -74,7 +74,7 @@ class ChecklistCoreDataHandler: NSObject {
         }
     }
     
-    class func filterDataByEquipmentTypeId(equipmentTypeId:Int32) -> [Checklist]? {
+    class func filterDataByEquipmentTypeId(equipmentTypeId: Int16) -> [Checklist]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<Checklist> = Checklist.fetchRequest()
         var checklist:[Checklist]? = nil
@@ -92,7 +92,7 @@ class ChecklistCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName:String, filterType:String, queryString:String) -> [Checklist]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [Checklist]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<Checklist> = Checklist.fetchRequest()
         var checklist:[Checklist]? = nil

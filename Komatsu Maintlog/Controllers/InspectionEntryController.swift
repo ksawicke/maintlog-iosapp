@@ -27,7 +27,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var checklistitemPoststartArray = [[String: String]]()
     var imagesTaken = [[String: Any]]()
     var userFormData = [[String: String]]()
-    var equipmentTypeSelected : String = ""
+    var equipmentTypeSelected : Int16 = 0
     var questionNumber : Int = 0
     var equipmentUnit : String = ""
     var currentSection : String = ""
@@ -137,25 +137,13 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-//        deleteItems()
-//
-//        addEquipmentTypes()
-//        addChecklists()
-//        addChecklistItems()
-        
         if barCodeValue != "" {
-            equipmentTypeSelected = "8"
+            equipmentTypeSelected = 8
             equipmentUnit = barCodeValue
-        
-//        print("BAR CODE SCANNED?: \(barCodeScanned)")
-//        print("BAR CODE NUMBER: \(barCodeValue)")
-        
             barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
         }
         
         loadItems()
-        
-//        print(dataFilePath)
         
         nextInspectionItem()
     }
@@ -263,95 +251,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     
 //    }
     
-    func addChecklists() {
-        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
-        URL.append("?api_key=\(API_KEY)")
-
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            
-            if let responseJSON : JSON = JSON(response.result.value!) {
-                if responseJSON["status"] == true {
-                    let checklists = responseJSON["checklists"]
-                    
-//                    print(checklists)
-                    
-                    for (_, checklist) in checklists {
-                        let id = checklist["id"].int32!
-                        let equipmentTypeId = checklist["equipmenttype_id"].int32!
-                        let checklistJson = checklist["checklist_json"].string!
-                        
-//                        print(checklistJson)
-//
-                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
-                    }
-                } else {
-                    let errorMessage = responseJSON["message"].string!
-                }
-            }
-        }
-    }
-    
-    func addChecklistItems() {
-        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLISTITEM)"
-        URL.append("?api_key=\(API_KEY)")
-        
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            
-            if let responseJSON : JSON = JSON(response.result.value!) {
-                if responseJSON["status"] == true {
-                    let checklistitems = responseJSON["checklistitems"]
-                    
-//                    print(checklistitems)
-                    
-                    for (_, checklistitem) in checklistitems {
-                        let id = checklistitem["id"].int32!
-                        let item = checklistitem["item"].string!
-
-                        _ = ChecklistItemCoreDataHandler.saveObject(id: id, item: item)
-                    }
-                } else {
-                    let errorMessage = responseJSON["message"].string!
-                }
-            }
-        }
-    }
-    
-    func addEquipmentTypes() {
-        var URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTTYPE)"
-        URL.append("?api_key=\(API_KEY)")
-        
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            
-            if let responseJSON : JSON = JSON(response.result.value!) {
-                if responseJSON["status"] == true {
-                    let equipmenttypes = responseJSON["equipmenttypes"]
-                    
-//                    print(equipmenttypes)
-                    
-                    for (_, equipmenttype) in equipmenttypes {
-                        let id = equipmenttype["id"].int32!
-                        let equipmentType = equipmenttype["equipment_type"].string!
-
-                        _ = EquipmentTypeCoreDataHandler.saveObject(id: id, equipmentType: equipmentType)
-                    }
-                } else {
-                    let errorMessage = responseJSON["message"].string!
-                }
-            }
-        }
-    }
-    
-    func deleteItems() {
-        _ = EquipmentTypeCoreDataHandler.cleanDelete()
-        _ = ChecklistCoreDataHandler.cleanDelete()
-        _ = ChecklistItemCoreDataHandler.cleanDelete()
-    }
-    
     func loadItems() {
-        let checklist = ChecklistCoreDataHandler.filterDataByEquipmentTypeId(equipmentTypeId: 8)
-        
-        print("checklist check?")
-        print(checklist!)
+        let checklist = ChecklistCoreDataHandler.filterDataByEquipmentTypeId(equipmentTypeId: equipmentTypeSelected)
         
         if (checklist != nil) {
             for j in checklist! {
@@ -421,7 +322,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveRating : String = "";
         var saveNote : String = "";
         let equipmentUnitId : String = equipmentUnit
-        let inspectionId : Int32 = 100
+        let inspectionId : Int16 = 100
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -450,7 +351,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
         
-        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: Int32(inspectionId), checklistId: Int32(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int32(saveRating)!, note:saveNote)
+        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: Int16(inspectionId), checklistId: Int16(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int16(saveRating)!, note:saveNote)
         
         if picture1.image != nil {
             let image1Data = UIImagePNGRepresentation(picture1.image!)

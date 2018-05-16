@@ -16,11 +16,13 @@ class LoginController: UIViewController {
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
     var API_AUTHENTICATE = "/api/authenticate"
+    var API_CHECKLIST = "/api/checklist"
+    var API_CHECKLISTITEM = "/api/checklistitem"
+    var API_EQUIPMENTTYPE = "/api/equipmenttype"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
     ]
-//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let loggedInUserId = 0
     
     @IBOutlet weak var loginErrorLabel: UILabel!
@@ -44,7 +46,6 @@ class LoginController: UIViewController {
         loginButton.isEnabled = false
         
         if !isLoggedIn() {
-            print("not logged in")
             _ = LoginCoreDataHandler.cleanDelete()
             doAuthCheck(url: URL)
         } else {
@@ -90,31 +91,127 @@ class LoginController: UIViewController {
             
             if let responseJSON : JSON = JSON(response.result.value!) {
                 if responseJSON["status"] == true {
-                    let userData = responseJSON["userData"]
-                    let userId = userData["user_id"].int32!
-                    let userName = userData["username"].string!
-                    let firstName = userData["first_name"].string!
-                    let lastName = userData["last_name"].string!
-                    let emailAddress = userData["email_address"].string!
-                    let role = userData["role"].string!
-                    // let twelveHoursFromNow = Date().addingTimeInterval(+43200) // TODO: Use to expire
-
-                    _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
-
-                    self.performSegue(withIdentifier: "goToSelectScreen", sender: self)
+                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
                 } else {
-                    let loginErrorMessage = responseJSON["message"].string!
-
-                    print(loginErrorMessage)
-
-                    self.userPin.layer.borderColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0) as! CGColor
-                    self.userPin.layer.borderWidth = 2
-                    self.loginErrorLabel.text = loginErrorMessage
-                    self.loginErrorLabel.isHidden = false
+                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
                 }
             }
-            
         }
+    }
+    
+    func doSuccessfulAuthTasks(responseJSON: JSON) {
+        let userData = responseJSON["userData"]
+        let userId = userData["user_id"].int16!
+        let userName = userData["username"].string!
+        let firstName = userData["first_name"].string!
+        let lastName = userData["last_name"].string!
+        let emailAddress = userData["email_address"].string!
+        let role = userData["role"].string!
+        // let twelveHoursFromNow = Date().addingTimeInterval(+43200) // TODO: Use to expire
+        
+        _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+        
+        deleteItems()
+        addEquipmentTypes()
+        addChecklists()
+        addChecklistItems()
+        
+        performSegue(withIdentifier: "goToSelectScreen", sender: self)
+    }
+    
+    func doUnsuccessfulAuthTasks(responseJSON: JSON) {
+        let loginErrorMessage = responseJSON["message"].string!
+        
+        print(loginErrorMessage)
+        
+        //                    self.userPin.layer.borderColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0) as! CGColor
+        userPin.layer.borderWidth = 2
+        loginErrorLabel.text = loginErrorMessage
+        loginErrorLabel.isHidden = false
+    }
+    
+    func addChecklists() {
+        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let checklists = responseJSON["checklists"]
+                    
+                    //                    print(checklists)
+                    
+                    for (_, checklist) in checklists {
+                        let id = checklist["id"].int16!
+                        let equipmentTypeId = checklist["equipmenttype_id"].int16!
+                        let checklistJson = checklist["checklist_json"].string!
+                        
+                        //                        print(checklistJson)
+                        //
+                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
+    func addChecklistItems() {
+        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLISTITEM)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let checklistitems = responseJSON["checklistitems"]
+                    
+                    //                    print(checklistitems)
+                    
+                    for (_, checklistitem) in checklistitems {
+                        let id = checklistitem["id"].int16!
+                        let item = checklistitem["item"].string!
+                        
+                        _ = ChecklistItemCoreDataHandler.saveObject(id: id, item: item)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
+    func addEquipmentTypes() {
+        var URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTTYPE)"
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let equipmenttypes = responseJSON["equipmenttypes"]
+                    
+                    //                    print(equipmenttypes)
+                    
+                    for (_, equipmenttype) in equipmenttypes {
+                        let id = equipmenttype["id"].int16!
+                        let equipmentType = equipmenttype["equipment_type"].string!
+                        
+                        _ = EquipmentTypeCoreDataHandler.saveObject(id: id, equipmentType: equipmentType)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
+    func deleteItems() {
+        _ = EquipmentTypeCoreDataHandler.cleanDelete()
+        _ = ChecklistCoreDataHandler.cleanDelete()
+        _ = ChecklistItemCoreDataHandler.cleanDelete()
     }
 
 }
