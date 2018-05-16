@@ -78,8 +78,9 @@ class ChecklistItemCoreDataHandler: NSObject {
         let fetchRequest:NSFetchRequest<ChecklistItem> = ChecklistItem.fetchRequest()
         var checklist:[ChecklistItem]? = nil
         
-        let predicate = NSPredicate(format: "id = %@", id)
+        let predicate = NSPredicate(format: "id == %@", "\(id)")
         fetchRequest.predicate = predicate
+        fetchRequest.returnsObjectsAsFaults = false // Critical this stays here to get data out of the call!
         
         do {
             checklist = try context.fetch(fetchRequest)

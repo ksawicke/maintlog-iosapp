@@ -137,11 +137,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-        deleteItems()
-
-        addEquipmentTypes()
-        addChecklists()
-        addChecklistItems()
+//        deleteItems()
+//
+//        addEquipmentTypes()
+//        addChecklists()
+//        addChecklistItems()
         
         if barCodeValue != "" {
             equipmentTypeSelected = "8"
@@ -273,14 +273,14 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 if responseJSON["status"] == true {
                     let checklists = responseJSON["checklists"]
                     
-                    print(checklists)
+//                    print(checklists)
                     
                     for (_, checklist) in checklists {
                         let id = checklist["id"].int32!
                         let equipmentTypeId = checklist["equipmenttype_id"].int32!
                         let checklistJson = checklist["checklist_json"].string!
                         
-                        print(checklistJson)
+//                        print(checklistJson)
 //
                         _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
                     }
@@ -301,7 +301,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 if responseJSON["status"] == true {
                     let checklistitems = responseJSON["checklistitems"]
                     
-                    print(checklistitems)
+//                    print(checklistitems)
                     
                     for (_, checklistitem) in checklistitems {
                         let id = checklistitem["id"].int32!
@@ -326,7 +326,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 if responseJSON["status"] == true {
                     let equipmenttypes = responseJSON["equipmenttypes"]
                     
-                    print(equipmenttypes)
+//                    print(equipmenttypes)
                     
                     for (_, equipmenttype) in equipmenttypes {
                         let id = equipmenttype["id"].int32!
@@ -350,23 +350,26 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func loadItems() {
         let checklist = ChecklistCoreDataHandler.filterDataByEquipmentTypeId(equipmentTypeId: 8)
         
+        print("checklist check?")
+        print(checklist!)
+        
         if (checklist != nil) {
             for j in checklist! {
                 let id = j.id
                 let checklistJson = j.checklistJson!
-
-                // https://www.swiftyninja.com/escaped-string-json-using-swift/
-                // https://stackoverflow.com/questions/25678373/swift-split-a-string-into-an-array
-                // https://stackoverflow.com/questions/36594179/remove-all-non-numeric-characters-from-a-string-in-swift
+//
+//                // https://www.swiftyninja.com/escaped-string-json-using-swift/
+//                // https://stackoverflow.com/questions/25678373/swift-split-a-string-into-an-array
+//                // https://stackoverflow.com/questions/36594179/remove-all-non-numeric-characters-from-a-string-in-swift
                 let jsonData = checklistJson.data(using: .utf8)
-                
+//
                 var dic: [String : Any]?
                 do {
                     dic = try JSONSerialization.jsonObject(with: jsonData!, options: []) as? [String : Any]
-                    
+
                     let preStartData = ("\(dic!["preStartData"]!)")
                     let postStartData = ("\(dic!["postStartData"]!)")
-                    
+
                     let preStartDataArr = (preStartData as AnyObject).components(separatedBy: ",")
                     let postStartDataArr = (postStartData as AnyObject).components(separatedBy: ",")
                     let unsafeChars = CharacterSet.alphanumerics.inverted  // Remove the .inverted to get the opposite result.
@@ -377,11 +380,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 
                         appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!, appendTo: "preStart")
                     }
-                    
+
                     for index in 0...postStartDataArr.count-1 {
-                        let checklistItemId = postStartDataArr[index].components(separatedBy: unsafeChars).joined(separator: "")
+                        let checklistItemId: String = postStartDataArr[index].components(separatedBy: unsafeChars).joined(separator: "")
                         let checklistitem = ChecklistItemCoreDataHandler.filterDataById(id: checklistItemId)
-                        
+
                         appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!, appendTo: "postStart")
                     }
                 } catch {
@@ -390,16 +393,16 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             }
         }
     }
-    
+
     func appendToChecklistItemArray(id: String, checklistitem: [ChecklistItem], appendTo: String) {
 //        if (checklistitem != nil) {
             for i in checklistitem {
                 let thisChecklistitemId = i.id
                 let thisChecklistitemItem = i.item!
-                
+
                 if(String(id) == String(thisChecklistitemId)) {
                     let dict = ["id": "\(thisChecklistitemId)", "item": "\(String(describing: thisChecklistitemItem))"]
-                    
+
                     if appendTo=="preStart" {
                         checklistitemPrestartArray.append(dict)
                     } else if appendTo=="postStart" {
