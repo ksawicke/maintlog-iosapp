@@ -45,8 +45,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("SelectScreenController VIEW WILL APPEAR")
-        print("BAR CODE CHECK: \(barCodeValue)")
+        
     }
     
     override func didReceiveMemoryWarning() {

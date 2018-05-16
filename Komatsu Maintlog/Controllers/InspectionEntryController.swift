@@ -169,8 +169,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     @objc func keyboardWillChange(notification: Notification) {
-//        print("Keyboard will show: \(notification.name.rawValue)")
-        
         guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
@@ -184,8 +182,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("Return pressed")
-        
         hideKeyboard()
         
         nextButton.isHidden = false
@@ -215,42 +211,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         }
     }
     
-//    func getWeatherData(url: String, parameters: [String : String]) {
-//
-//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON {
-//            response in
-//            if response.result.isSuccess {
-//                print("Success! Got the weather data")
-//
-//                let weatherJSON : JSON = JSON(response.result.value!)
-//                self.updateWeatherData(json: weatherJSON)
-//
-//            } else {
-//                print("ERROR getting weather data...") // response.result.error
-//                self.cityLabel.text = "Connection Issues"
-//            }
-//        }
-//
-//    }
-    
-//    func parseChecklistJson(checklist_json : JSON) {
-    
-//        if let preStartData = checklist_json["preStart"] {
-        
-//            weatherDataModel.condition = json["weather"][0]["id"].intValue
-//            weatherDataModel.city = json["name"].stringValue
-//            weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
-//
-//            updateUIWithWeatherData()
-            
-//        } else {
-    
-//            cityLabel.text = "Weather Unavailable"
-            
-//        }
-    
-//    }
-    
     func loadItems() {
         let checklist = ChecklistCoreDataHandler.filterDataByEquipmentTypeId(equipmentTypeId: equipmentTypeSelected)
         
@@ -258,7 +218,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             for j in checklist! {
                 let id = j.id
                 let checklistJson = j.checklistJson!
-//
+                
 //                // https://www.swiftyninja.com/escaped-string-json-using-swift/
 //                // https://stackoverflow.com/questions/25678373/swift-split-a-string-into-an-array
 //                // https://stackoverflow.com/questions/36594179/remove-all-non-numeric-characters-from-a-string-in-swift
@@ -405,14 +365,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             updateUI(sectionLabel: sectionLabel, itemLabel: itemLabel)
         } else {
-//            saveInspectionLocally()
             
             let alert = UIAlertController(title: "Inspection Complete", message: "Return to Main Menu", preferredStyle: .alert)
             
             let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
                 self.startOver()
-                
-                print("Q 1")
                 
                 self.userScannedANewBarcode(equipmentUnit: "")
                 
@@ -423,58 +380,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             present(alert, animated: true, completion: nil)
         }
-    }
-    
-    func saveInspectionLocally() {
-        print("----")
-        print(userFormData)
-        for (_, item) in userFormData.enumerated() {
-            let checklistId = item["checklistId"]
-            let equipmentUnitId = equipmentUnit
-            let thisItem = item["item"]
-            let rating = item["rating"]
-            let note = item["note"]
-            
-//            print("\(id)")
-//            print("\(equipmentUnitId)")
-//            print("\(thisItem)")
-//            print("\(rating)")
-//            print("\(note)")
-//            print("=========")
-//
-//            _ = InspectionRatingCoreDataHandler.saveObject(checklistId: Int32(checklistId!)!, equipmentUnitId: equipmentUnitId, item: thisItem!, rating: Int32(rating!)!, note: note!)
-        }
-        
-//        for (_, item) in imagesTaken.enumerated() {
-//            let inspectionId = item["inspectionId"]
-//            let photoId = item["photoId"]
-//            let image = item["image"]
-        
-//            print(inspectionId)
-//            print(photoId)
-//            print(image)
-            
-//            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId as! Int32, photoId: photoId as! Int32, image: image as! UIImage)
-//        }
-        
-//        let imageDict = ["inspectionId": "\(inspectionID)", "photoId": "\(photoId)", "image": image] as [String : Any]
-//
-//        imagesTaken.append(imageDict)
-        
-        // userFormData
-//        [
-//         ["note": "shshsh", "rating": "0", "id": "42", "item": "Suspension"],
-//         ["note": "shshshs", "rating": "0", "id": "38", "item": "Tires"],
-//         ["note": "", "rating": "1", "id": "30", "item": "Horn/Alarm/Lights"],
-//         ["note": "", "rating": "1", "id": "33", "item": "Leak Evidence"],
-//         ["note": "", "rating": "1", "id": "47", "item": "Seat Belt"]
-//        ]
-        
-        // imagesTaken
-//        [
-//         ["photoId": "1", "image": <UIImage: 0x1c02acc60> size {3024, 4032} orientation 3 scale 1.000000, "inspectionId": "42"],
-//         ["photoId": "2", "image": <UIImage: 0x1c02a55e0> size {3024, 4032} orientation 3 scale 1.000000, "inspectionId": "38"]
-//        ]
     }
     
     func startOver() {
@@ -490,9 +395,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     func updateUI(sectionLabel: String, itemLabel: String) {
         let numTotalItems = Int16(checklistitemPrestartArray.count) + Int16(checklistitemPoststartArray.count)
         let newProgressBarWidth = (view.frame.size.width / 17) * CGFloat(questionNumber)
-        
-        print("Total items: \(numTotalItems)")
-        print("New progressbar width: \(newProgressBarWidth)")
         
         takePicture1Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
         takePicture2Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
