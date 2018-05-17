@@ -120,29 +120,29 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             "images": []
         ]
 
-//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
 
-//        for inspectionRating in inspectionRatings! {
-//            let checklistId = inspectionRating.checklistId
-//            let equipmentUnitId = inspectionRating.equipmentUnitId
-//            let inspectionId = inspectionRating.inspectionId
-//            let note = inspectionRating.note
-//            let rating = inspectionRating.rating
-//            let uuid = inspectionRating.uuid
-//
-//            let inspectionRatingItem: [String: Any] = [
-//                "checklistId": checklistId,
-//                "equipmentUnitId": equipmentUnitId,
-//                "inspectionId": inspectionId,
-//                "note": note,
-//                "rating": rating,
-//                "uuid": uuid
-//            ]
-//
-//            // Append Inspection Item
-//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
-//        }
+        for inspectionRating in inspectionRatings! {
+            let checklistId = inspectionRating.checklistId
+            let equipmentUnitId = inspectionRating.equipmentUnitId
+            let inspectionId = inspectionRating.inspectionId
+            let note = inspectionRating.note
+            let rating = inspectionRating.rating
+            let uuid = inspectionRating.uuid
+
+            let inspectionRatingItem: [String: Any] = [
+                "checklistId": checklistId,
+                "equipmentUnitId": equipmentUnitId,
+                "inspectionId": inspectionId,
+                "note": note,
+                "rating": rating,
+                "uuid": uuid
+            ]
+
+            // Append Inspection Item
+            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
+        }
         
         for inspectionImage in inspectionImages! {
             let image = inspectionImage.image
