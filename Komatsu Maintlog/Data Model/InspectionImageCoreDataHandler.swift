@@ -38,11 +38,13 @@ class InspectionImageCoreDataHandler: NSObject {
     class func fetchObject() -> [InspectionImage]? {
         let context = getContext()
         let inspectionImage:[InspectionImage]? = nil
+        let fetchRequest:NSFetchRequest<InspectionImage> = InspectionImage.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false // Critical this stays here to get data out of the call!
         
         do {
-            let inspectionImage = try context.fetch(InspectionImage.fetchRequest())
+            let inspectionImage = try context.fetch(fetchRequest)
             
-            return inspectionImage as? [InspectionImage]
+            return inspectionImage as [InspectionImage]
         } catch {
             return inspectionImage
         }

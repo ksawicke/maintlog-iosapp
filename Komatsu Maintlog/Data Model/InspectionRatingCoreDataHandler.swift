@@ -40,11 +40,13 @@ class InspectionRatingCoreDataHandler: NSObject {
     class func fetchObject() -> [InspectionRating]? {
         let context = getContext()
         let inspectionRating:[InspectionRating]? = nil
+        let fetchRequest:NSFetchRequest<InspectionRating> = InspectionRating.fetchRequest()
+        fetchRequest.returnsObjectsAsFaults = false // Critical this stays here to get data out of the call!
         
         do {
-            let inspectionRating = try context.fetch(InspectionRating.fetchRequest())
+            let inspectionRating = try context.fetch(fetchRequest)
             
-            return inspectionRating as? [InspectionRating]
+            return inspectionRating as [InspectionRating]
         } catch {
             return inspectionRating
         }

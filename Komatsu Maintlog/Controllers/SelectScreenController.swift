@@ -111,8 +111,59 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     func uploadInspections(url: String) {
 
         // TODO: Continue implementation
+        // https://stackoverflow.com/questions/40702845/alamofire-4-swift-3-and-building-a-json-body
         
-//        Alamofire.request(url, method: .put, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//        var params = [String: [String]]()
+        
+        var params: [String: Any] = [
+            "ratings": [],
+            "images": []
+        ]
+
+//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+        var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
+
+//        for inspectionRating in inspectionRatings! {
+//            let checklistId = inspectionRating.checklistId
+//            let equipmentUnitId = inspectionRating.equipmentUnitId
+//            let inspectionId = inspectionRating.inspectionId
+//            let note = inspectionRating.note
+//            let rating = inspectionRating.rating
+//            let uuid = inspectionRating.uuid
+//
+//            let inspectionRatingItem: [String: Any] = [
+//                "checklistId": checklistId,
+//                "equipmentUnitId": equipmentUnitId,
+//                "inspectionId": inspectionId,
+//                "note": note,
+//                "rating": rating,
+//                "uuid": uuid
+//            ]
+//
+//            // Append Inspection Item
+//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
+//        }
+        
+        for inspectionImage in inspectionImages! {
+            let image = inspectionImage.image
+            let inspectionId = inspectionImage.inspectionId
+            let photoId = inspectionImage.photoId
+            
+            let inspectionImageItem: [String: Any] = [
+//                "image": UIImage(data: image!),
+                "inspectionId": inspectionId,
+                "photoId": photoId
+            ]
+            
+            
+            
+            // Append Inspection Item
+            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
+        }
+        
+        print(JSON(params))
+        
+//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 //
 //            if let responseJSON : JSON = JSON(response.result.value!) {
 //                if responseJSON["status"] == true {
