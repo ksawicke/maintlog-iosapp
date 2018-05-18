@@ -13,6 +13,7 @@
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
+		6594508220AF399000990ADF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6594508120AF399000990ADF /* Settings.bundle */; };
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
 		65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */; };
@@ -35,6 +36,7 @@
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		6594508120AF399000990ADF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentTypeCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6594508320AF39B200990ADF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6594508120AF399000990ADF /* Settings.bundle */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		8A396EBD207D4D9500B50BFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +90,7 @@
 		8AD02ADC207804CD00AD05BC = {
 			isa = PBXGroup;
 			children = (
+				6594508320AF39B200990ADF /* Settings */,
 				8AD02AE7207804CD00AD05BC /* Komatsu Maintlog */,
 				8AD02AE6207804CD00AD05BC /* Products */,
 				E36BA224212E08FBF399BED9 /* Pods */,
@@ -220,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6594508220AF399000990ADF /* Settings.bundle in Resources */,
 				8AD02AF3207804CD00AD05BC /* LaunchScreen.storyboard in Resources */,
 				8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */,
 				8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */,

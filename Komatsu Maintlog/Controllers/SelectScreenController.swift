@@ -119,35 +119,43 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             "ratings": [],
             "images": []
         ]
+        
+        print(params)
 
-        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
 
-        for inspectionRating in inspectionRatings! {
-            let checklistId = inspectionRating.checklistId
-            let equipmentUnitId = inspectionRating.equipmentUnitId
-            let inspectionId = inspectionRating.inspectionId
-            let note = inspectionRating.note
-            let rating = inspectionRating.rating
-            let uuid = inspectionRating.uuid
-
-            let inspectionRatingItem: [String: Any] = [
-                "checklistId": checklistId,
-                "equipmentUnitId": equipmentUnitId,
-                "inspectionId": inspectionId,
-                "note": note,
-                "rating": rating,
-                "uuid": uuid
-            ]
-
-            // Append Inspection Item
-            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
-        }
+//        for inspectionRating in inspectionRatings! {
+//            let checklistId = inspectionRating.checklistId
+//            let equipmentUnitId = inspectionRating.equipmentUnitId
+//            let inspectionId = inspectionRating.inspectionId
+//            let note = inspectionRating.note
+//            let rating = inspectionRating.rating
+//            let uuid = inspectionRating.uuid
+//
+//            let inspectionRatingItem: [String: Any] = [
+//                "checklistId": checklistId,
+//                "equipmentUnitId": equipmentUnitId,
+//                "inspectionId": inspectionId,
+//                "note": note,
+//                "rating": rating,
+//                "uuid": uuid
+//            ]
+//
+//            // Append Inspection Item
+//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
+//        }
+        
+        // Close...but this looks like it uses the actual UIImage...
+        // https://www.prisma.io/forum/t/upload-image-from-ios-with-alamofire/874
         
         for inspectionImage in inspectionImages! {
             let image = inspectionImage.image
             let inspectionId = inspectionImage.inspectionId
             let photoId = inspectionImage.photoId
+            
+//            print(image!)
+//            print(UIImage(data: image!))
             
             let inspectionImageItem: [String: Any] = [
 //                "image": UIImage(data: image!),
@@ -155,13 +163,19 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 "photoId": photoId
             ]
             
+            var URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTIONS)"
+            URL.append("?&api_key=\(API_KEY)")
+
+            uploadImage(endUrl: URL, imageData: image, parameters: inspectionImageItem)
             
-            
-            // Append Inspection Item
-            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
+//
+//
+//
+//            // Append Inspection Item
+//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
         }
         
-        print(JSON(params))
+//        print(JSON(params))
         
 //        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 //
@@ -174,6 +188,42 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //            }
 //        }
         
+    }
+    
+    func uploadImage(endUrl: String, imageData: Data?, parameters: [String : Any], onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil) {
+        
+//        let url = "http://google.com" /* your API url */
+        
+        let headers: HTTPHeaders = [
+            /* "Authorization": "your_access_token",  in case you need authorization header */
+            "Content-type": "multipart/form-data"
+        ]
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            
+            if let data = imageData{
+                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+            }
+            
+        }, usingThreshold: UInt64.init(), to: endUrl, method: .post, headers: headers) { (result) in
+            switch result{
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        print("Succesfully uploaded")
+                        if let err = response.error{
+                            onError?(err)
+                            return
+                        }
+                        onCompletion?(nil)
+                    }
+                case .failure(let error):
+                    print("Error in upload: \(error.localizedDescription)")
+                    onError?(error)
+            }
+        }
     }
     
     //Write the PrepareForSegue Method here

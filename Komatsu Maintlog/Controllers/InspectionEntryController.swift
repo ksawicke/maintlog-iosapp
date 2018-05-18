@@ -313,6 +313,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: Int16(inspectionId), checklistId: Int16(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int16(saveRating)!, note:saveNote)
         
+        // Saving the image as Binary Data to the Entity.
+        // Using UIImagePNGRepresentation as primary method.
+        // TODO: Condider using UIImageJPEGRepresentation as an alternate or fallback method.
+        
         if picture1.image != nil {
             let image1Data = UIImagePNGRepresentation(picture1.image!)
             _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData)
