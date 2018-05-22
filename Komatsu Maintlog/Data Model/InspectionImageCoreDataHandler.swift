@@ -40,6 +40,7 @@ class InspectionImageCoreDataHandler: NSObject {
         let inspectionImage:[InspectionImage]? = nil
         let fetchRequest:NSFetchRequest<InspectionImage> = InspectionImage.fetchRequest()
         fetchRequest.returnsObjectsAsFaults = false // Critical this stays here to get data out of the call!
+        fetchRequest.fetchLimit = 1
         
         do {
             let inspectionImage = try context.fetch(fetchRequest)

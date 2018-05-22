@@ -46,8 +46,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var uploadInspectionButton: UIButton!
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
-        let params = getUploadInspectionParams() as [String: Any]
-        print(params["images"]!)
+        uploadImages()
+//        let params = getUploadInspectionParams() as [String: Any]
+//        print(params["images"]!)
 //        print(type(of: params["images"]!))
         
 //        var arrayTest: [[(String, Int)]] = []
@@ -143,42 +144,10 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
     }
     
-    func getUploadInspectionParams() -> [String: Any] {
-
-        // TODO: Continue implementation
-        // https://stackoverflow.com/questions/40702845/alamofire-4-swift-3-and-building-a-json-body
-        
-        var params: [String: Any] = [
-            "ratings": [],
-            "images": []
-        ]
-
-        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+    func uploadImages() {
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
-
-        for inspectionRating in inspectionRatings! {
-            let checklistId = inspectionRating.checklistId
-            let equipmentUnitId = inspectionRating.equipmentUnitId!
-            let inspectionId = inspectionRating.inspectionId
-            let note = inspectionRating.note!
-            let rating = inspectionRating.rating
-            let uuid = inspectionRating.uuid
-
-            let inspectionRatingItem: [String: Any] = [
-                "checklistId": checklistId,
-                "equipmentUnitId": equipmentUnitId,
-                "inspectionId": inspectionId,
-                "note": note,
-                "rating": rating,
-                "uuid": uuid
-            ]
-
-            // Append Inspection Item
-            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
-        }
-        
-        // Close...but this looks like it uses the actual UIImage...
-        // https://www.prisma.io/forum/t/upload-image-from-ios-with-alamofire/874
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
         for inspectionImage in inspectionImages! {
             let image = inspectionImage.image
@@ -186,17 +155,123 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let photoId = inspectionImage.photoId
             
             let inspectionImageItem: [String: Any] = [
-                "image": UIImage(data: image!)! as Any,
+//                "image": UIImage(data: image!)! as Any,
                 "inspectionId": inspectionId,
                 "photoId": photoId
             ]
             
+            // Later?: https://medium.com/@linesapp/use-brightfutures-alamofire-and-operations-to-queue-the-upload-of-multiple-images-23facd3b44f
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in inspectionImageItem {
+                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                }
+                
+                if let imageData = UIImagePNGRepresentation(UIImage(data: image!)!) {
+                    multipartFormData.append(imageData, withName: "d", fileName: "picture.png", mimeType: "image/png")
+                }
+    
+            }, usingThreshold: UInt64.init(), to: UPLOAD_INSPECTION_IMAGES_URL, method: .post, headers: headersMultipart) { (result) in
+                switch result {
+                    case .success(let upload, _, _):
+                        upload.uploadProgress { progress in
+                            print(Float(progress.fractionCompleted))
+//                            progressCompletion(Float(progress.fractionCompleted))
+                        }
+                        upload.validate()
+                        upload.responseJSON { response in
+                            print(response)
+                        }
+                        print("Image upload OK")
+                        print("##")
+                    case .failure(let encodingError):
+                        print(encodingError)
+                        print("Image upload FAIL")
+                        print("##")
+                    }
+                
+//                switch result{
+//                    case .success(let upload, _, _):
+//                        upload.responseJSON { response in
+//                            print("Succesfully uploaded")
+//                            if let err = response.error {
+//                                print(err)
+//                                return
+//                            }
+//    //                        onCompletion?(nil)
+//                        }
+//                    case .failure(let error):
+//                        print("Error in upload: \(error.localizedDescription)")
+//    //                    onError?(error)
+//                }
+            }
+            
+//            for (key, value) in inspectionImageItem {
+//                print("\(key): \(value)")
+//            }
+            
             // Append Inspection Item
-            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
+//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
         }
-        
-        return params
-        
+    }
+    
+//    func getUploadInspectionParams() -> [String: Any] {
+//
+//        // TODO: Continue implementation
+//        // https://stackoverflow.com/questions/40702845/alamofire-4-swift-3-and-building-a-json-body
+//
+//        var params: [String: Any] = [
+//            "ratings": [],
+//            "images": []
+//        ]
+//
+//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+//        var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
+//
+//        for inspectionRating in inspectionRatings! {
+//            let checklistId = inspectionRating.checklistId
+//            let equipmentUnitId = inspectionRating.equipmentUnitId!
+//            let inspectionId = inspectionRating.inspectionId
+//            let note = inspectionRating.note!
+//            let rating = inspectionRating.rating
+//            let uuid = inspectionRating.uuid
+//
+//            let inspectionRatingItem: [String: Any] = [
+//                "checklistId": checklistId,
+//                "equipmentUnitId": equipmentUnitId,
+//                "inspectionId": inspectionId,
+//                "note": note,
+//                "rating": rating,
+//                "uuid": uuid
+//            ]
+//
+//            // Append Inspection Item
+//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
+//        }
+//
+//        // Close...but this looks like it uses the actual UIImage...
+//        // https://www.prisma.io/forum/t/upload-image-from-ios-with-alamofire/874
+//
+//        for inspectionImage in inspectionImages! {
+//            let image = inspectionImage.image
+//            let inspectionId = inspectionImage.inspectionId
+//            let photoId = inspectionImage.photoId
+//
+//            let inspectionImageItem: [String: Any] = [
+//                "image": UIImage(data: image!)! as Any,
+//                "inspectionId": inspectionId,
+//                "photoId": photoId
+//            ]
+//
+//            for (key, value) in inspectionImageItem {
+//                print("\(key): \(value)")
+//            }
+//
+//            // Append Inspection Item
+//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
+//        }
+//
+//        return params
+    
 //        print(JSON(params))
         
 //        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -210,7 +285,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //            }
 //        }
         
-    }
+//    }
     
     func uploadRatings(parameters: Any) {
         var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
