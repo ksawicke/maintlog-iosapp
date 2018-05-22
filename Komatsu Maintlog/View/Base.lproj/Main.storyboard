@@ -82,6 +82,14 @@
                                     <action selector="onClickUploadInspections:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zAf-eo-zdo"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJ1-jg-fdW" userLabel="Upload Progress Bar">
+                                <rect key="frame" x="15" y="634" width="0.0" height="4"/>
+                                <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="1bj-D3-rvr"/>
+                                    <constraint firstAttribute="width" id="D2c-b9-Z8T"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.81960784313725488" green="0.83529411764705885" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -93,12 +101,14 @@
                             <constraint firstItem="4ez-xn-XYO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="E0m-aX-WU5"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="JP4-pu-YgD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4ez-xn-XYO" secondAttribute="trailing" constant="15" id="La4-5e-6DE"/>
+                            <constraint firstItem="JJ1-jg-fdW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="P4b-Q1-GR5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4ez-xn-XYO" secondAttribute="bottom" constant="15" id="RBH-yO-cRh"/>
                             <constraint firstItem="PUU-IH-D1v" firstAttribute="top" secondItem="oOA-OU-t43" secondAttribute="bottom" constant="15" id="S7B-bj-shr"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="top" secondItem="PUU-IH-D1v" secondAttribute="bottom" constant="15" id="SFR-yQ-qII"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="top" secondItem="dFr-C1-qlq" secondAttribute="bottom" constant="10" id="Se8-5s-hux"/>
                             <constraint firstItem="4ez-xn-XYO" firstAttribute="top" secondItem="1WZ-96-WOe" secondAttribute="bottom" constant="15" id="TQe-1z-ITW"/>
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XaH-V7-w8m"/>
+                            <constraint firstItem="1WZ-96-WOe" firstAttribute="top" secondItem="JJ1-jg-fdW" secondAttribute="bottom" id="bwt-bb-lC6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oOA-OU-t43" secondAttribute="trailing" constant="15" id="dyI-KL-IuJ"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="keE-Id-Yna"/>
                             <constraint firstItem="PUU-IH-D1v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="kyo-yC-9tG"/>
@@ -112,6 +122,7 @@
                         <outlet property="inspectionEntryButton" destination="ISi-Vf-XBT" id="LLs-lO-E2X"/>
                         <outlet property="scanBarcodeButton" destination="PUU-IH-D1v" id="Y5k-Y3-ukZ"/>
                         <outlet property="uploadInspectionButton" destination="1WZ-96-WOe" id="OZI-hX-eiA"/>
+                        <outlet property="uploadProgressBar" destination="JJ1-jg-fdW" id="VOo-yP-aWn"/>
                         <segue destination="mxM-Zh-ZnC" kind="show" identifier="goToLoginScreen" id="Yju-vi-Ylu"/>
                     </connections>
                 </viewController>

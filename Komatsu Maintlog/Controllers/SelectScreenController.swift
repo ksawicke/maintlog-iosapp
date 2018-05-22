@@ -44,6 +44,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var scanBarcodeButton: UIButton!
     @IBOutlet weak var inspectionEntryButton: UIButton!
     @IBOutlet weak var uploadInspectionButton: UIButton!
+    @IBOutlet weak var uploadProgressBar: UIView!
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
         uploadImages()
@@ -92,8 +93,11 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         print(countInspectionRating)
         print(countInspectionImage)
         
-        if countInspectionRating > 0 || countInspectionImage > 0 {
-            enableUploadButton()
+        let totalUploads = countInspectionRating + countInspectionImage
+        
+        if totalUploads > 0 {
+//        if countInspectionRating > 0 || countInspectionImage > 0 {
+            enableUploadButton(totalUploads: totalUploads)
         } else {
             disableUploadButton()
         }
@@ -108,7 +112,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func enableUploadButton() {
+    func enableUploadButton(totalUploads: Int) {
+        uploadInspectionButton.setTitle("Upload Inspections (\(totalUploads))", for: .normal)
+        
         uploadInspectionButton.isEnabled = true
         uploadInspectionButton.isHidden = false
     }
@@ -149,18 +155,19 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         var UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
         UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
+        uploadProgressBar.isHidden = true
+        uploadProgressBar.frame.size.width = 0
+        
         for inspectionImage in inspectionImages! {
             let image = inspectionImage.image
             let inspectionId = inspectionImage.inspectionId
             let photoId = inspectionImage.photoId
             
             let inspectionImageItem: [String: Any] = [
-//                "image": UIImage(data: image!)! as Any,
                 "inspectionId": inspectionId,
                 "photoId": photoId
             ]
             
-            // Later?: https://medium.com/@linesapp/use-brightfutures-alamofire-and-operations-to-queue-the-upload-of-multiple-images-23facd3b44f
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 for (key, value) in inspectionImageItem {
                     multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
@@ -173,44 +180,28 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             }, usingThreshold: UInt64.init(), to: UPLOAD_INSPECTION_IMAGES_URL, method: .post, headers: headersMultipart) { (result) in
                 switch result {
                     case .success(let upload, _, _):
+                        self.uploadProgressBar.isHidden = false
+                        
                         upload.uploadProgress { progress in
-                            print(Float(progress.fractionCompleted))
-//                            progressCompletion(Float(progress.fractionCompleted))
+                            let percentComplete = Float(progress.fractionCompleted)
+                            let newProgressBarWidth = (self.view.frame.size.width - 30) * CGFloat(percentComplete)
+                            self.uploadProgressBar.frame.size.width = newProgressBarWidth
                         }
                         upload.validate()
                         upload.responseJSON { response in
                             print(response)
+                            self.uploadProgressBar.isHidden = true
+                            self.uploadProgressBar.frame.size.width = 0
                         }
-                        print("Image upload OK")
-                        print("##")
+                    
                     case .failure(let encodingError):
                         print(encodingError)
                         print("Image upload FAIL")
                         print("##")
+                        self.uploadProgressBar.isHidden = true
+                        self.uploadProgressBar.frame.size.width = 0
                     }
-                
-//                switch result{
-//                    case .success(let upload, _, _):
-//                        upload.responseJSON { response in
-//                            print("Succesfully uploaded")
-//                            if let err = response.error {
-//                                print(err)
-//                                return
-//                            }
-//    //                        onCompletion?(nil)
-//                        }
-//                    case .failure(let error):
-//                        print("Error in upload: \(error.localizedDescription)")
-//    //                    onError?(error)
-//                }
             }
-            
-//            for (key, value) in inspectionImageItem {
-//                print("\(key): \(value)")
-//            }
-            
-            // Append Inspection Item
-//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
         }
     }
     
