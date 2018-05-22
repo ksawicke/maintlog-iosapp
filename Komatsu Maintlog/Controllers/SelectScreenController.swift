@@ -19,10 +19,14 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
-    var API_UPLOAD_INSPECTIONS = "/api/upload_inspections"
+    var API_UPLOAD_INSPECTION_RATINGS = "/api/upload_inspection_ratings"
+    var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
-    let headers: HTTPHeaders = [
+    let headersWWWForm: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
+    ]
+    let headersMultipart: HTTPHeaders = [
+        "Content-type": "multipart/form-data"
     ]
     
     //Declare the delegate variable here:
@@ -42,10 +46,18 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var uploadInspectionButton: UIButton!
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
-        var URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTIONS)"
-        URL.append("?&api_key=\(API_KEY)")
-    
-        uploadInspections(url: URL)
+        let params = getUploadInspectionParams() as [String: Any]
+        
+//        print(params)
+        
+//        let blah = type(of: params["ratings"])
+//        print("'\(blah)'")
+        
+//        let typed = type(of: params["images"]) as! Any
+//        print("'\(typed)'")
+        
+        uploadRatings(parameters: params["ratings"]!)
+        uploadImages(parameters: params["images"]!)
     }
     
     @IBAction func onClickLogOut(_ sender: UIButton) {
@@ -61,11 +73,16 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         resetDefaultValues()
 
-        var countInspectionRating = InspectionRatingCoreDataHandler.countData()
-        var countInspectionImage = InspectionImageCoreDataHandler.countData()
+        let countInspectionRating = InspectionRatingCoreDataHandler.countData()
+        let countInspectionImage = InspectionImageCoreDataHandler.countData()
+        
+        print(countInspectionRating)
+        print(countInspectionImage)
         
         if countInspectionRating > 0 || countInspectionImage > 0 {
             enableUploadButton()
+        } else {
+            disableUploadButton()
         }
     }
     
@@ -80,6 +97,12 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     func enableUploadButton() {
         uploadInspectionButton.isEnabled = true
+        uploadInspectionButton.isHidden = false
+    }
+    
+    func disableUploadButton() {
+        uploadInspectionButton.isEnabled = false
+        uploadInspectionButton.isHidden = true
     }
     
     func resetDefaultValues() {
@@ -108,43 +131,39 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
     }
     
-    func uploadInspections(url: String) {
+    func getUploadInspectionParams() -> [String: Any] {
 
         // TODO: Continue implementation
         // https://stackoverflow.com/questions/40702845/alamofire-4-swift-3-and-building-a-json-body
-        
-//        var params = [String: [String]]()
         
         var params: [String: Any] = [
             "ratings": [],
             "images": []
         ]
-        
-        print(params)
 
-//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
 
-//        for inspectionRating in inspectionRatings! {
-//            let checklistId = inspectionRating.checklistId
-//            let equipmentUnitId = inspectionRating.equipmentUnitId
-//            let inspectionId = inspectionRating.inspectionId
-//            let note = inspectionRating.note
-//            let rating = inspectionRating.rating
-//            let uuid = inspectionRating.uuid
-//
-//            let inspectionRatingItem: [String: Any] = [
-//                "checklistId": checklistId,
-//                "equipmentUnitId": equipmentUnitId,
-//                "inspectionId": inspectionId,
-//                "note": note,
-//                "rating": rating,
-//                "uuid": uuid
-//            ]
-//
-//            // Append Inspection Item
-//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
-//        }
+        for inspectionRating in inspectionRatings! {
+            let checklistId = inspectionRating.checklistId
+            let equipmentUnitId = inspectionRating.equipmentUnitId!
+            let inspectionId = inspectionRating.inspectionId
+            let note = inspectionRating.note!
+            let rating = inspectionRating.rating
+            let uuid = inspectionRating.uuid
+
+            let inspectionRatingItem: [String: Any] = [
+                "checklistId": checklistId,
+                "equipmentUnitId": equipmentUnitId,
+                "inspectionId": inspectionId,
+                "note": note,
+                "rating": rating,
+                "uuid": uuid
+            ]
+
+            // Append Inspection Item
+            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
+        }
         
         // Close...but this looks like it uses the actual UIImage...
         // https://www.prisma.io/forum/t/upload-image-from-ios-with-alamofire/874
@@ -154,26 +173,17 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let inspectionId = inspectionImage.inspectionId
             let photoId = inspectionImage.photoId
             
-//            print(image!)
-//            print(UIImage(data: image!))
-            
             let inspectionImageItem: [String: Any] = [
-//                "image": UIImage(data: image!),
+                "image": UIImage(data: image!) as Any,
                 "inspectionId": inspectionId,
                 "photoId": photoId
             ]
             
-            var URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTIONS)"
-            URL.append("?&api_key=\(API_KEY)")
-
-            uploadImage(endUrl: URL, imageData: image, parameters: inspectionImageItem)
-            
-//
-//
-//
-//            // Append Inspection Item
-//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
+            // Append Inspection Item
+            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
         }
+        
+        return params
         
 //        print(JSON(params))
         
@@ -190,40 +200,145 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
     }
     
-    func uploadImage(endUrl: String, imageData: Data?, parameters: [String : Any], onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil) {
+    func uploadRatings(parameters: Any) {
+        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
+
+        print("*****")
+        print(parameters)
         
+//        Alamofire.request(UPLOAD_INSPECTION_RATINGS_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headersWWWForm) { response in
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    print("Upload inspection ratings: GOOD")
+//                } else {
+//                    print("Upload inspection ratings: BAD")
+//                    //                    let errorMessage = responseJSON["message"].string!
+//                }
+//            }
+//        }
+//
+//        Alamofire.request(UPLOAD_INSPECTION_RATINGS_URL, method: .post, encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { response in
+//
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    print("Upload inspection ratings: GOOD")
+//                } else {
+//                    print("Upload inspection ratings: BAD")
+////                    let errorMessage = responseJSON["message"].string!
+//                }
+//            }
+//        }
+
+    }
+    
+//    func requestWith(endUrl: String, imageData: Data?, parameters: [String : Any], onCompletion: ((JSON?) -> Void)? = nil, onError: ((Error?) -> Void)? = nil){
+//
 //        let url = "http://google.com" /* your API url */
+//
+//        let headers: HTTPHeaders = [
+//            /* "Authorization": "your_access_token",  in case you need authorization header */
+//            "Content-type": "multipart/form-data"
+//        ]
+//
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for (key, value) in parameters {
+//                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+//            }
+//
+//            if let data = imageData{
+//                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+//            }
+//
+//        }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
+//            switch result{
+//            case .success(let upload, _, _):
+//                upload.responseJSON { response in
+//                    print("Succesfully uploaded")
+//                    if let err = response.error{
+//                        onError?(err)
+//                        return
+//                    }
+//                    onCompletion?(nil)
+//                }
+//            case .failure(let error):
+//                print("Error in upload: \(error.localizedDescription)")
+//                onError?(error)
+//            }
+//        }
+//    }
+    
+    func uploadImages(parameters: Any) {
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
-        let headers: HTTPHeaders = [
-            /* "Authorization": "your_access_token",  in case you need authorization header */
-            "Content-type": "multipart/form-data"
-        ]
+        print("#####")
+        print(parameters)
         
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for (key, value) in parameters {
-                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-            }
-            
-            if let data = imageData{
-                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
-            }
-            
-        }, usingThreshold: UInt64.init(), to: endUrl, method: .post, headers: headers) { (result) in
-            switch result{
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        print("Succesfully uploaded")
-                        if let err = response.error{
-                            onError?(err)
-                            return
-                        }
-                        onCompletion?(nil)
-                    }
-                case .failure(let error):
-                    print("Error in upload: \(error.localizedDescription)")
-                    onError?(error)
-            }
-        }
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for (key, value) in parameters {
+//                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+//            }
+//
+//            if let data = imageData{
+//                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+//            }
+//
+//        }, usingThreshold: UInt64.init(), to: UPLOAD_INSPECTION_IMAGES_URL, method: .post, headers: headersMultipart) { (result) in
+//            switch result{
+//            case .success(let upload, _, _):
+//                upload.responseJSON { response in
+//                    print("Succesfully uploaded")
+//                    if let err = response.error{
+//                        print(err)
+//                        return
+//                    }
+//                    onCompletion?(nil)
+//                }
+//            case .failure(let error):
+//                print("Error in upload: \(error.localizedDescription)")
+//                onError?(error)
+//            }
+//        }
+        
+//        Alamofire.upload(multipartFormData: { multipartFormData in
+//            multipartFormData.append(UIImagePNGRepresentation(image)!, withName: "image", mimeType: "image/png")
+//        }, with: UPLOAD_INSPECTION_IMAGES_URL) {  result in
+//            switch result {
+//                case .success(let upload, _, _):
+//                    upload.responseJSON { response in
+//                        debugPrint(response)
+//                    }
+//                case .failure(let encodingError):
+//                    print(encodingError)
+//            }
+//        }
+        
+//        Alamofire.upload(multipartFormData: { (multipartFormData) in
+//            for (key, value) in parameters {
+//                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+//            }
+//
+//            if let data = imageData{
+//                multipartFormData.append(data, withName: "image", fileName: "image.png", mimeType: "image/png")
+//            }
+//
+//        }, usingThreshold: UInt64.init(), to: UPLOAD_INSPECTION_IMAGES_URL, method: .post, headers: headersMultipart) { (result) in
+//            switch result{
+//                case .success(let upload, _, _):
+//                    upload.responseJSON { response in
+//                        print("Succesfully uploaded")
+//                        if let err = response.error{
+//                            onError?(err)
+//                            return
+//                        }
+//                        onCompletion?(nil)
+//                    }
+//                case .failure(let error):
+//                    print("Error in upload: \(error.localizedDescription)")
+//                    onError?(error)
+//            }
+//        }
     }
     
     //Write the PrepareForSegue Method here
