@@ -47,6 +47,18 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
         let params = getUploadInspectionParams() as [String: Any]
+        print(params["images"]!)
+//        print(type(of: params["images"]!))
+        
+//        var arrayTest: [[(String, Int)]] = []
+//        arrayTest.append([("Hello", 2)])
+//        arrayTest.append([("Hello", 2)])
+//        arrayTest.append([("Hello", 2)])
+//
+//        print(arrayTest)
+        
+        
+//        let points: [[Int]] = [[10, 20], [30, 40]]
         
 //        print(params)
         
@@ -56,8 +68,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //        let typed = type(of: params["images"]) as! Any
 //        print("'\(typed)'")
         
-        uploadRatings(parameters: params["ratings"]!)
-        uploadImages(parameters: params["images"]!)
+//        uploadRatings(parameters: params["ratings"]!)
+//        uploadImages(parameters: params["images"]!)
     }
     
     @IBAction func onClickLogOut(_ sender: UIButton) {
@@ -174,7 +186,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let photoId = inspectionImage.photoId
             
             let inspectionImageItem: [String: Any] = [
-                "image": UIImage(data: image!) as Any,
+                "image": UIImage(data: image!)! as Any,
                 "inspectionId": inspectionId,
                 "photoId": photoId
             ]
@@ -274,6 +286,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         print("#####")
         print(parameters)
+        
+        
         
 //        Alamofire.upload(multipartFormData: { (multipartFormData) in
 //            for (key, value) in parameters {
