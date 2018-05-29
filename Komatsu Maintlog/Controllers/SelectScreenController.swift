@@ -61,7 +61,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
             // USE DEV URL
-            var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+            UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
         }
         
         UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
@@ -324,6 +324,42 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             params = (params as? [Any] ?? []) + [inspectionRatingItem]
         }
         
+        print("Attempt connect to: \(url)")
+        
+        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                print(responseJSON)
+                
+                if responseJSON["status"] == true {
+                    print("TRUE")
+                    //                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+                } else {
+                    //                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+                }
+            } else {
+                print("Response nil. No connection")
+            }
+        }
+        
+//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
+//            if((responseData.result.value) != nil) {
+//                let responseJSON : JSON = JSON(responseData.result.value!)
+//
+//                print(responseJSON)
+//
+//                if responseJSON["status"] == true {
+//                    print("TRUE")
+////                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+//                } else {
+////                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+//                }
+//            } else {
+//                print("Response nil. No connection")
+//            }
+//        }
+    
         print(params)
     }
     
