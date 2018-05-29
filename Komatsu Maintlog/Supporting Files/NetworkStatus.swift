@@ -13,30 +13,41 @@ class NetworkStatus {
     
     static let sharedInstance = NetworkStatus()
     
+    var isConnected : Bool = false
+    
     private init() {}
     
-    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "10.132.146.48")
+    let reachabilityManager = Alamofire.NetworkReachabilityManager(host: "10.132.146.48") // test.rinconmountaintech.com
     
-    func startNetworkReachabilityObserver() {
+    func startNetworkReachabilityObserver() -> Bool {
         reachabilityManager?.listener = { status in
             
             switch status {
                 
                 case .notReachable:
-                    print("The network is not reachable")
-                    
+                    self.isConnected = false
+//                    print("The network is not reachable")
+                
                 case .unknown :
-                    print("It is unknown whether the network is reachable")
-                    
+                    self.isConnected = false
+//                    print("It is unknown whether the network is reachable")
+                
                 case .reachable(.ethernetOrWiFi):
-                    print("The network is reachable over the WiFi connection")
-                    
+                    self.isConnected = true
+//                    print("The network is reachable over the WiFi connection")
+                
                 case .reachable(.wwan):
-                    print("The network is reachable over the WWAN connection")
+                    self.isConnected = true
+//                    print("The network is reachable over the WWAN connection")
                 
             }
+            
+            print(self.isConnected)
         }
         reachabilityManager?.startListening()
+        
+        print(isConnected)
+        return isConnected
     }
 
 }

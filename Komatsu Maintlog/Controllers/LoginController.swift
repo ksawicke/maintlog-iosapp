@@ -61,12 +61,15 @@ class LoginController: UIViewController {
         }
         
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
+        
+        print(URL)
 
         loginButton.isEnabled = false
         
         if !isLoggedIn() {
             _ = LoginCoreDataHandler.cleanDelete()
-            doAuthCheck(url: URL)        } else {
+            doAuthCheck(url: URL)
+        } else {
             performSegue(withIdentifier: "goToSelectScreen", sender: self)
         }
     }
@@ -95,7 +98,7 @@ class LoginController: UIViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        networkStatus.startNetworkReachabilityObserver()
+        print(networkStatus.startNetworkReachabilityObserver())
     }
     
     func isLoggedIn() -> Bool {
@@ -123,24 +126,15 @@ class LoginController: UIViewController {
             if((responseData.result.value) != nil) {
                 let responseJSON : JSON = JSON(responseData.result.value!)
                 
-                print(responseJSON)
+                if responseJSON["status"] == true {
+                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+                } else {
+                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+                }
             } else {
-                print("Response nil. No connection??")
+                print("Response nil. No connection")
             }
         }
-        
-//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//
-//            if let responseJSON : JSON = JSON(response.result.value!) {
-//                if responseJSON["status"] == true {
-//                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
-//                } else {
-//                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
-//                }
-//            } else {
-//                print("Yikes!")
-//            }
-//        }
     }
     
     func doSuccessfulAuthTasks(responseJSON: JSON) {
