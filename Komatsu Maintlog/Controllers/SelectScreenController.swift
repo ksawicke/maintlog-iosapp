@@ -57,7 +57,20 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
-        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
+        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        }
+        
+        UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
+        
+//        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
+        
+        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
+        
+        
 //        let params = getUploadInspectionParams() as [String: Any]
 //        print(params["images"]!)
 //        print(type(of: params["images"]!))
@@ -286,7 +299,35 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
 //    }
     
-    func uploadRatings(parameters: Any) {
+    func uploadRatings(url: String) {
+        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+        var params: Any = []
+        
+        for inspectionRating in inspectionRatings! {
+            let checklistId = inspectionRating.checklistId
+            let equipmentUnitId = inspectionRating.equipmentUnitId!
+            let inspectionId = inspectionRating.inspectionId
+            let note = inspectionRating.note!
+            let rating = inspectionRating.rating
+            let uuid = inspectionRating.uuid
+
+            let inspectionRatingItem: [String: Any] = [
+                "checklistId": checklistId,
+                "equipmentUnitId": equipmentUnitId,
+                "inspectionId": inspectionId,
+                "note": note,
+                "rating": rating,
+                "uuid": uuid
+            ]
+
+            // Append Inspection Item
+            params = (params as? [Any] ?? []) + [inspectionRatingItem]
+        }
+        
+        print(params)
+    }
+    
+    func uploadRatingsOld(parameters: Any) {
         var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
         
         if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
