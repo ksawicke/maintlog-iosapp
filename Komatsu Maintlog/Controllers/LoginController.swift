@@ -15,6 +15,7 @@ class LoginController: UIViewController {
 
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
     var API_AUTHENTICATE = "/api/authenticate"
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
@@ -24,6 +25,8 @@ class LoginController: UIViewController {
         "Content-Type": "x-www-form-urlencoded"
     ]
     let loggedInUserId = 0
+    
+    let networkStatus = NetworkStatus.sharedInstance
     
     @IBOutlet weak var loginErrorLabel: UILabel!
     @IBOutlet weak var pinLabel: UILabel!
@@ -40,15 +43,30 @@ class LoginController: UIViewController {
     
     @IBAction func onClickLogIn(_ sender: UIButton) {
         let userPinEntered: String = userPin.text!
-        var URL = "\(API_DEV_BASE_URL)\(API_AUTHENTICATE)"
+        var URL = "\(API_PROD_BASE_URL)\(API_AUTHENTICATE)"
+        
+//        if !UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && ConnectivityHelper.isConnectedToKomatsuAmerica() {
+//            print("Mode: PROD. Connect: OK")
+//        } else if !UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && !ConnectivityHelper.isConnectedToKomatsuAmerica() {
+//            print("Mode: PROD. Connect: NOPE")
+//        } else if UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && !ConnectivityHelper.isConnectedToDev() {
+//            print("Mode: DEV. Connect: OK")
+//        } else if UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && !ConnectivityHelper.isConnectedToDev() {
+//            print("Mode: DEV. Connect: NOPE")
+//        }
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            URL = "\(API_DEV_BASE_URL)\(API_AUTHENTICATE)"
+        }
+        
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
 
         loginButton.isEnabled = false
         
         if !isLoggedIn() {
             _ = LoginCoreDataHandler.cleanDelete()
-            doAuthCheck(url: URL)
-        } else {
+            doAuthCheck(url: URL)        } else {
             performSegue(withIdentifier: "goToSelectScreen", sender: self)
         }
     }
@@ -66,10 +84,18 @@ class LoginController: UIViewController {
             loginButton.setTitle("Continue", for: .normal)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        networkStatus.startNetworkReachabilityObserver()
     }
     
     func isLoggedIn() -> Bool {
@@ -87,16 +113,34 @@ class LoginController: UIViewController {
     
     func doAuthCheck(url: String) {
 
-        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            
-            if let responseJSON : JSON = JSON(response.result.value!) {
-                if responseJSON["status"] == true {
-                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
-                } else {
-                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
-                }
+        print("Attempt connecting to: \(url)")
+        print(headers)
+        
+        // http://ashishkakkad.com/2015/10/how-to-use-alamofire-and-swiftyjson-with-swift/
+        // https://stackoverflow.com/questions/35427698/how-to-use-networkreachabilitymanager-in-alamofire
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                print(responseJSON)
+            } else {
+                print("Response nil. No connection??")
             }
         }
+        
+//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+//                } else {
+//                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+//                }
+//            } else {
+//                print("Yikes!")
+//            }
+//        }
     }
     
     func doSuccessfulAuthTasks(responseJSON: JSON) {
@@ -131,7 +175,13 @@ class LoginController: UIViewController {
     }
     
     func addChecklists() {
-        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
+        var URL = "\(API_PROD_BASE_URL)\(API_CHECKLIST)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            URL = "\(API_DEV_BASE_URL)\(API_CHECKLIST)"
+        }
+        
         URL.append("?api_key=\(API_KEY)")
         
         Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -159,7 +209,12 @@ class LoginController: UIViewController {
     }
     
     func addChecklistItems() {
-        var URL = "\(API_DEV_BASE_URL)\(API_CHECKLISTITEM)"
+        var URL = "\(API_PROD_BASE_URL)\(API_CHECKLISTITEM)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_CHECKLISTITEM)"
+        }
+        
         URL.append("?api_key=\(API_KEY)")
         
         Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -184,7 +239,12 @@ class LoginController: UIViewController {
     }
     
     func addEquipmentTypes() {
-        var URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTTYPE)"
+        var URL = "\(API_PROD_BASE_URL)\(API_EQUIPMENTTYPE)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTTYPE)"
+        }
+        
         URL.append("?api_key=\(API_KEY)")
         
         Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in

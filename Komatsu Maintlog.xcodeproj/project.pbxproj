@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */; };
+		651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A02E120BDDBB600E09864 /* NetworkStatus.swift */; };
 		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
 		65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65424E1720A0A7E20004FF6D /* LoginController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
@@ -17,6 +18,8 @@
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
 		65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */; };
+		65DE11A620B602A80072C582 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE11A520B602A80072C582 /* SettingsBundleHelper.swift */; };
+		65F7251520B85A9F00C31969 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7251420B85A9F00C31969 /* Reachability.swift */; };
 		8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD02AE8207804CD00AD05BC /* AppDelegate.swift */; };
 		8AD02AEE207804CD00AD05BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEC207804CD00AD05BC /* Main.storyboard */; };
 		8AD02AF0207804CD00AD05BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AD02AEF207804CD00AD05BC /* Assets.xcassets */; };
@@ -31,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoreDataHandler.swift; sourceTree = "<group>"; };
+		651A02E120BDDBB600E09864 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
 		65424E1720A0A7E20004FF6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -40,6 +44,8 @@
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentTypeCoreDataHandler.swift; sourceTree = "<group>"; };
+		65DE11A520B602A80072C582 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
+		65F7251420B85A9F00C31969 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8AD02AE5207804CD00AD05BC /* Komatsu Maintlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Komatsu Maintlog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD02AE8207804CD00AD05BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AD02AED207804CD00AD05BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +89,9 @@
 				8AD02AEF207804CD00AD05BC /* Assets.xcassets */,
 				8AEAD20A2081249B009F12CC /* UIButtonExtension.swift */,
 				65875F722083FE4800303D20 /* UITextField.swift */,
+				65DE11A520B602A80072C582 /* SettingsBundleHelper.swift */,
+				65F7251420B85A9F00C31969 /* Reachability.swift */,
+				651A02E120BDDBB600E09864 /* NetworkStatus.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -286,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65DE11A620B602A80072C582 /* SettingsBundleHelper.swift in Sources */,
 				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
 				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,
 				65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */,
@@ -295,9 +305,11 @@
 				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
 				65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */,
 				656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */,
+				651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
+				65F7251520B85A9F00C31969 /* Reachability.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
 				65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */,
 				65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */,

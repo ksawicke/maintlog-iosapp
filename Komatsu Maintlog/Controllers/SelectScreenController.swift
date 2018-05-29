@@ -19,6 +19,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
     var API_UPLOAD_INSPECTION_RATINGS = "/api/upload_inspection_ratings"
     var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
@@ -152,7 +153,13 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     func uploadImages() {
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
-        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        }
+        
         UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
         uploadProgressBar.isHidden = true
@@ -279,7 +286,13 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //    }
     
     func uploadRatings(parameters: Any) {
-        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            var UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        }
+        
         UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
 
         print("*****")
@@ -347,7 +360,13 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //    }
     
     func uploadImages(parameters: Any) {
-        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        }
+        
         UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
         print("#####")

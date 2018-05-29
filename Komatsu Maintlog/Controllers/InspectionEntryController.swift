@@ -37,6 +37,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
     var API_EQUIPMENTTYPE = "/api/equipmenttype"
@@ -146,6 +147,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         loadItems()
         
         nextInspectionItem()
+        
+        registerSettingsBundle()
+        NotificationCenter.default.addObserver(self, selector: #selector(InspectionEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        defaultsChanged()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -209,6 +214,21 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             takePicture2Button.isEnabled = false
             takePicture1Button.setImage(UIImage(named: "icons8-camera"), for: [])
         }
+    }
+    
+    func registerSettingsBundle(){
+        let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+    }
+    
+    @objc func defaultsChanged(){
+//        if UserDefaults.standard.bool(forKey: "RedThemeKey") {
+//            self.view.backgroundColor = UIColor.red
+            
+//        }
+//        else {
+//            self.view.backgroundColor = UIColor.green
+//        }
     }
     
     func loadItems() {
