@@ -48,7 +48,16 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var uploadProgressBar: UIView!
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
-        uploadImages()
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            // USE DEV URL
+            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        }
+        
+        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
+        
+        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
 //        let params = getUploadInspectionParams() as [String: Any]
 //        print(params["images"]!)
 //        print(type(of: params["images"]!))
@@ -151,16 +160,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
     }
     
-    func uploadImages() {
+    func uploadImages(url: String) {
         var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
-        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
-        
-        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
-            // USE DEV URL
-            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
-        }
-        
-        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
         
         uploadProgressBar.isHidden = true
         uploadProgressBar.frame.size.width = 0
@@ -184,7 +185,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                     multipartFormData.append(imageData, withName: "d", fileName: "picture.png", mimeType: "image/png")
                 }
     
-            }, usingThreshold: UInt64.init(), to: UPLOAD_INSPECTION_IMAGES_URL, method: .post, headers: headersMultipart) { (result) in
+            }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headersMultipart) { (result) in
                 switch result {
                     case .success(let upload, _, _):
                         self.uploadProgressBar.isHidden = false
