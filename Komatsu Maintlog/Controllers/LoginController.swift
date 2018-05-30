@@ -20,6 +20,7 @@ class LoginController: UIViewController {
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
     var API_EQUIPMENTTYPE = "/api/equipmenttype"
+    var API_EQUIPMENTUNIT = "/api/equipmentunit"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
@@ -151,6 +152,7 @@ class LoginController: UIViewController {
         
         deleteItems()
         addEquipmentTypes()
+        addEquipmentUnits()
         addChecklists()
         addChecklistItems()
         
@@ -254,6 +256,51 @@ class LoginController: UIViewController {
                         let equipmentType = equipmenttype["equipment_type"].string!
                         
                         _ = EquipmentTypeCoreDataHandler.saveObject(id: id, equipmentType: equipmentType)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
+    func addEquipmentUnits() {
+        var URL = "\(API_PROD_BASE_URL)\(API_EQUIPMENTUNIT)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_EQUIPMENTUNIT)"
+        }
+        
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let equipmentunits = responseJSON["equipmentunits"]
+                    
+                    /**
+                     "equipmentunits": [
+                     {
+                     "equipmentunit_id": 1,
+                     "unit_number": "N/A",
+                     "manufacturer_name": "Komatsu",
+                     "model_number": "WB-140",
+                     "equipmenttype_id": 13
+                     }, **/
+                    
+                    print(equipmentunits)
+                    
+                    for (_, equipmentunit) in equipmentunits {
+                        let id = equipmentunit["equipmentunit_id"].int16!
+                        let equipmentTypeId = equipmentunit["equipmenttype_id"].int16
+                        let manufacturerName = equipmentunit["manufacturer_name"].stringValue
+                        let modelNumber = equipmentunit["model_number"].stringValue
+                        let unitNumber = equipmentunit["unit_number"].stringValue
+                        
+                        // saveObject(id: Int16, equipmentTypeId: Int16, manufacturerName: String, modelNumber: String, unitNumber: String)
+                        
+                        _ = EquipmentUnitCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId!, manufacturerName: manufacturerName, modelNumber: modelNumber, unitNumber: unitNumber)
                     }
                 } else {
                     let errorMessage = responseJSON["message"].string!

@@ -154,12 +154,12 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         uploadInspectionButton.isEnabled = false
     }
     
-    func userScannedANewBarcode(equipmentUnit: String) {
-        if equipmentUnit != "" {
+    func userScannedANewBarcode(unitNumber: String) {
+        if unitNumber != "" {
             barCodeScanned = true
-            barCodeValue = equipmentUnit
+            barCodeValue = unitNumber
             
-            barcodeSelectedLabel.text = "Equipment Unit: \(barCodeValue)"
+            barcodeSelectedLabel.text = "Unit Number: \(barCodeValue)"
             barcodeSelectedLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
             scanBarcodeButton.setTitle("Scan Another Barcode", for: .normal)
             inspectionEntryButton.isHidden = false
@@ -255,7 +255,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         print("Attempt connect to: \(url)")
         
-        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON {
+        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
             response in
             switch response.result {
                 case .success:

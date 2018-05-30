@@ -12,7 +12,7 @@ import AVFoundation
 // STEP 1: create a protocol with a name and a required method
 protocol ChangeEquipmentUnitDelegate {
     
-    func userScannedANewBarcode (equipmentUnit : String)
+    func userScannedANewBarcode (unitNumber : String)
     
 }
 
@@ -34,7 +34,7 @@ class BarCodeScannerController: UIViewController {
         //2 If we have a delegate set, call the method userEnteredANewCityName
         // delegate?  means if delegate is set then
         // called Optional Chaining
-        delegate?.userScannedANewBarcode(equipmentUnit: "")
+        delegate?.userScannedANewBarcode(unitNumber: "")
         
         //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
         // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
@@ -137,12 +137,12 @@ class BarCodeScannerController: UIViewController {
         let confirmAction = UIAlertAction(title: "Next", style: UIAlertActionStyle.default, handler: { (action) -> Void in
 
             // 1. Get the equipmentUnit the user scanned
-            let equipmentUnit = decodedURL
+            let unitNumber = decodedURL
             
             // 2. If we have a delegate set, call the method userScannedANewBarcode
             // delegate?  means if delegate is set then
             // called Optional Chaining
-            self.delegate?.userScannedANewBarcode(equipmentUnit: equipmentUnit)
+            self.delegate?.userScannedANewBarcode(unitNumber: unitNumber)
             
             // 3. Now go to the Inspection Entry Controller for now.
             // TODO: Later we need to determine which Controller

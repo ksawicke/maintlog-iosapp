@@ -139,12 +139,38 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
+        print("BAR CODE VALUE: \(barCodeValue)")
+        
         if barCodeValue != "" {
-            equipmentTypeSelected = 8
-            equipmentUnit = barCodeValue
-            barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
-            inspectionId = UUID().uuidString
+            // Try matching scanned barcode to equipment loaded into app
+            let equipmentUnitScanned = EquipmentUnitCoreDataHandler.filterData(fieldName: "unitNumber", filterType: "equals", queryString: barCodeValue)
+            
+//            print(equipmentUnitScanned!)
+            
+            for managedObject in equipmentUnitScanned! {
+                if let scannedManufacturerName = managedObject.value(forKey: "manufacturerName"),
+                   let scannedModelNumber = managedObject.value(forKey: "modelNumber"),
+                   let scannedEquipmentTypeId = managedObject.value(forKey: "equipmentTypeId") {
+                    
+                    equipmentTypeSelected = scannedEquipmentTypeId as! Int16
+                    let modelNumber = scannedModelNumber as! String
+                    let etid = scannedEquipmentTypeId as! Int16
+                    
+                    print("equipmentTypeSelected: \(equipmentTypeSelected)")
+                    print("modelNumber: \(modelNumber)")
+                    print("etid: \(etid)")
+                    print("barCodeValue: \(barCodeValue)")
+                    
+                    barcodeScannedLabel.text = "\(scannedManufacturerName) \(scannedModelNumber) - \(barCodeValue)"
+                    inspectionId = UUID().uuidString
+                }
+            }
+        } else {
+            print("HMM?")
         }
+        
+        equipmentUnit = barCodeValue
+        inspectionId = UUID().uuidString
         
         loadItems()
         
@@ -156,7 +182,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        delegate?.userScannedANewBarcode(equipmentUnit: "")
+        delegate?.userScannedANewBarcode(unitNumber: "")
     }
     
     deinit {
@@ -396,7 +422,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
                 self.startOver()
                 
-                self.userScannedANewBarcode(equipmentUnit: "")
+                self.userScannedANewBarcode(unitNumber: "")
                 
                 self.dismiss(animated: true, completion: nil)
             })
@@ -440,10 +466,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         }
     }
     
-    func userScannedANewBarcode(equipmentUnit: String) {
-        if equipmentUnit != "" {
+    func userScannedANewBarcode(unitNumber: String) {
+        if unitNumber != "" {
             barCodeScanned = true
-            barCodeValue = equipmentUnit
+            barCodeValue = unitNumber
         }
     }
     

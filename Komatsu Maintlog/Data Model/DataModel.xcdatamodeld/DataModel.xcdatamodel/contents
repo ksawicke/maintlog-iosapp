@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Checklist" representedClassName="Checklist" syncable="YES" codeGenerationType="class">
         <attribute name="checklistJson" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="equipmentTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -12,6 +12,13 @@
     <entity name="EquipmentType" representedClassName="EquipmentType" syncable="YES" codeGenerationType="class">
         <attribute name="equipmentType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="EquipmentUnit" representedClassName="EquipmentUnit" syncable="YES" codeGenerationType="class">
+        <attribute name="equipmentTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="manufacturerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="modelNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unitNumber" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="InspectionImage" representedClassName="InspectionImage" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -42,5 +49,6 @@
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="120"/>
         <element name="Login" positionX="-207" positionY="-18" width="128" height="150"/>
+        <element name="EquipmentUnit" positionX="-207" positionY="-18" width="128" height="120"/>
     </elements>
 </model>
