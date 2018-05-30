@@ -30,6 +30,8 @@ class SettingsBundleHelper {
             _ = EquipmentTypeCoreDataHandler.cleanDelete()
             _ = ChecklistCoreDataHandler.cleanDelete()
             _ = ChecklistItemCoreDataHandler.cleanDelete()
+            _ = InspectionImageCoreDataHandler.cleanDelete()
+            _ = InspectionRatingCoreDataHandler.cleanDelete()
         }
         
         // Use development environment

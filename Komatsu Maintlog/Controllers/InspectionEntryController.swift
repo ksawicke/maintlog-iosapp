@@ -27,6 +27,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var checklistitemPoststartArray = [[String: String]]()
     var imagesTaken = [[String: Any]]()
     var userFormData = [[String: String]]()
+    var inspectionId : String = ""
     var equipmentTypeSelected : Int16 = 0
     var questionNumber : Int = 0
     var equipmentUnit : String = ""
@@ -142,6 +143,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             equipmentTypeSelected = 8
             equipmentUnit = barCodeValue
             barcodeScannedLabel.text = "Equipment Unit: \(equipmentUnit)"
+            inspectionId = UUID().uuidString
         }
         
         loadItems()
@@ -302,7 +304,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveRating : String = "";
         var saveNote : String = "";
         let equipmentUnitId : String = equipmentUnit
-        let inspectionId : Int16 = 100
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -331,7 +332,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
         
-        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: Int16(inspectionId), checklistId: Int16(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int16(saveRating)!, note:saveNote)
+        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: inspectionId, checklistId: Int16(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int16(saveRating)!, note: saveNote)
         
         // Saving the image as Binary Data to the Entity.
         // Using UIImagePNGRepresentation as primary method.
@@ -339,12 +340,12 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         if picture1.image != nil {
             let image1Data = UIImagePNGRepresentation(picture1.image!)
-            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData, type: "png")
         }
         
         if picture2.image != nil {
             let image2Data = UIImagePNGRepresentation(picture2.image!)
-            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 2, image: image2Data! as NSData)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 2, image: image2Data! as NSData, type: "png")
         }
     }
     
@@ -412,6 +413,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         questionNumber = 0
         barCodeScanned = false
         barCodeValue = ""
+        inspectionId = ""
         
         nextInspectionItem()
     }

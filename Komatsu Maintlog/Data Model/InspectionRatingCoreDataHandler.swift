@@ -17,7 +17,7 @@ class InspectionRatingCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: Int16, checklistId: Int16, equipmentUnitId: String, rating: Int16, note: String) -> Bool {
+    class func saveObject(inspectionId: String, checklistId: Int16, equipmentUnitId: String, rating: Int16, note: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionRating", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)

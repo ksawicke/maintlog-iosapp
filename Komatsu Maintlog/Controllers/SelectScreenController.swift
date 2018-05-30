@@ -226,79 +226,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
     }
     
-//    func getUploadInspectionParams() -> [String: Any] {
-//
-//        // TODO: Continue implementation
-//        // https://stackoverflow.com/questions/40702845/alamofire-4-swift-3-and-building-a-json-body
-//
-//        var params: [String: Any] = [
-//            "ratings": [],
-//            "images": []
-//        ]
-//
-//        var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
-//        var inspectionImages = InspectionImageCoreDataHandler.fetchObject()
-//
-//        for inspectionRating in inspectionRatings! {
-//            let checklistId = inspectionRating.checklistId
-//            let equipmentUnitId = inspectionRating.equipmentUnitId!
-//            let inspectionId = inspectionRating.inspectionId
-//            let note = inspectionRating.note!
-//            let rating = inspectionRating.rating
-//            let uuid = inspectionRating.uuid
-//
-//            let inspectionRatingItem: [String: Any] = [
-//                "checklistId": checklistId,
-//                "equipmentUnitId": equipmentUnitId,
-//                "inspectionId": inspectionId,
-//                "note": note,
-//                "rating": rating,
-//                "uuid": uuid
-//            ]
-//
-//            // Append Inspection Item
-//            params["ratings"] = (params["ratings"] as? [[String: Any]] ?? []) + [inspectionRatingItem]
-//        }
-//
-//        // Close...but this looks like it uses the actual UIImage...
-//        // https://www.prisma.io/forum/t/upload-image-from-ios-with-alamofire/874
-//
-//        for inspectionImage in inspectionImages! {
-//            let image = inspectionImage.image
-//            let inspectionId = inspectionImage.inspectionId
-//            let photoId = inspectionImage.photoId
-//
-//            let inspectionImageItem: [String: Any] = [
-//                "image": UIImage(data: image!)! as Any,
-//                "inspectionId": inspectionId,
-//                "photoId": photoId
-//            ]
-//
-//            for (key, value) in inspectionImageItem {
-//                print("\(key): \(value)")
-//            }
-//
-//            // Append Inspection Item
-//            params["images"] = (params["images"] as? [[String: Any]] ?? []) + [inspectionImageItem]
-//        }
-//
-//        return params
-    
-//        print(JSON(params))
-        
-//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//
-//            if let responseJSON : JSON = JSON(response.result.value!) {
-//                if responseJSON["status"] == true {
-//                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
-//                } else {
-//                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
-//                }
-//            }
-//        }
-        
-//    }
-    
     func uploadRatings(url: String) {
         var inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
         var params: Any = []
@@ -309,20 +236,22 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let inspectionId = inspectionRating.inspectionId
             let note = inspectionRating.note!
             let rating = inspectionRating.rating
-            let uuid = inspectionRating.uuid
+            let userId = 1
 
             let inspectionRatingItem: [String: Any] = [
                 "checklistId": checklistId,
                 "equipmentUnitId": equipmentUnitId,
-                "inspectionId": inspectionId,
+                "inspectionId": inspectionId!,
                 "note": note,
                 "rating": rating,
-                "uuid": uuid
+                "userId": userId
             ]
 
             // Append Inspection Item
             params = (params as? [Any] ?? []) + [inspectionRatingItem]
         }
+        
+        print(params)
         
         print("Attempt connect to: \(url)")
         
@@ -330,7 +259,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             if((responseData.result.value) != nil) {
                 let responseJSON : JSON = JSON(responseData.result.value!)
                 
-                print(responseJSON)
+//                print(responseJSON["ratings_data"]["ratings"])
                 
                 if responseJSON["status"] == true {
                     print("TRUE")
@@ -342,25 +271,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 print("Response nil. No connection")
             }
         }
-        
-//        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
-//            if((responseData.result.value) != nil) {
-//                let responseJSON : JSON = JSON(responseData.result.value!)
-//
-//                print(responseJSON)
-//
-//                if responseJSON["status"] == true {
-//                    print("TRUE")
-////                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
-//                } else {
-////                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
-//                }
-//            } else {
-//                print("Response nil. No connection")
-//            }
-//        }
-    
-        print(params)
     }
     
     func uploadRatingsOld(parameters: Any) {
