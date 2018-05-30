@@ -255,22 +255,35 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         print("Attempt connect to: \(url)")
         
-        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
-            if((responseData.result.value) != nil) {
-                let responseJSON : JSON = JSON(responseData.result.value!)
-                
-//                print(responseJSON["ratings_data"]["ratings"])
-                
-                if responseJSON["status"] == true {
-                    print("TRUE")
-                    //                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
-                } else {
-                    //                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
-                }
-            } else {
-                print("Response nil. No connection")
+        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON {
+            response in
+            switch response.result {
+                case .success:
+                    print(response)
+                    
+                    break
+                case .failure(let error):
+                    
+                    print(error)
             }
         }
+        
+//        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
+//            if((responseData.result.value) != nil) {
+//                let responseJSON : JSON = JSON(responseData.result.value!)
+//                
+////                print(responseJSON["ratings_data"]["ratings"])
+//                
+//                if responseJSON["status"] == true {
+//                    print("TRUE")
+//                    //                    self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+//                } else {
+//                    //                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+//                }
+//            } else {
+//                print("Response nil. No connection")
+//            }
+//        }
     }
     
     func uploadRatingsOld(parameters: Any) {
