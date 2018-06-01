@@ -21,7 +21,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
     var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
     var API_UPLOAD_INSPECTION_RATINGS = "/api/upload_inspection_ratings"
-    var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images2"
+    var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headersWWWForm: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
@@ -69,7 +69,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
         
-//        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
+        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
         
         
 //        let params = getUploadInspectionParams() as [String: Any]
@@ -188,9 +188,10 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let inspectionId = inspectionImage.inspectionId!
             let photoId = inspectionImage.photoId
             
-            let inspectionImageItem: [String:Any] = [
+            let inspectionImageItem: Parameters = [
                 "inspectionId": inspectionId,
-                "photoId": photoId
+                "photoId": photoId,
+                "type": "png"
                 ]
             
             print(inspectionImageItem)
@@ -261,6 +262,62 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //
 //            }
             
+            // 1
+            // imageData = UIImageJPEGRepresentation(image, 0.5) else
+//            guard let imageData = UIImagePNGRepresentation(UIImage(data: image!, scale: 1)!) else {
+//                print("Could not get PNG representation of UIImage")
+//                return
+//            }
+//
+//            // 2
+//            Alamofire.upload(multipartFormData: { multipartFormData in
+//                for (key, value) in inspectionImageItem {
+//                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
+//                }
+//
+////                multipartFormData.append(imageData!, withName: "d", fileName: fileName, mimeType: mimeType)
+//
+//                multipartFormData.append(imageData,
+//                                         withName: "imagefile",
+//                                         fileName: fileName,
+//                                         mimeType: mimeType)
+//            },
+//             to: url,
+//             headers: headersMultipart, // ["Authorization": "Basic xxx"]
+//             encodingCompletion: { encodingResult in
+//                switch encodingResult {
+//                case .success(let upload, _, _):
+//                    upload.uploadProgress { progress in
+//                        let percentComplete = Float(progress.fractionCompleted)
+//                        let newProgressBarWidth = (self.view.frame.size.width - 30) * CGFloat(percentComplete)
+//                        self.uploadProgressBar.frame.size.width = newProgressBarWidth
+//                    }
+//                    upload.validate()
+//                    upload.responseJSON { response in
+//                        // 1
+//                        guard response.result.isSuccess,
+//                            let value = response.result.value else {
+//                                print("Error while uploading file: \(String(describing: response.result.error))")
+//            //                                                completion(nil, nil)
+//                                return
+//                        }
+//
+//                        // 2
+//                        let firstFileID = JSON(value)["uploaded"][0]["id"].stringValue
+//                        print("Content uploaded with ID: \(firstFileID)")
+//
+//                        //3
+//                        print("completion.....")
+//            //                                        completion(nil, nil)
+//                    }
+//                case .failure(let encodingError):
+//                    print(encodingError)
+//                }
+//            })
+//        }
+            
+            
+            
             let imageData = UIImagePNGRepresentation(UIImage(data: image!, scale: 0.1)!)
             
 //            Alamofire.upload(multipartFormData: { (multipartFormData) in
@@ -299,49 +356,30 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //                }
 //
 //            }
-            
-            print("Attempt upload to: \(url)")
+//        }
  
             Alamofire.upload(multipartFormData: { (multipartFormData) in
                 for (key, value) in inspectionImageItem {
                     multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
                 }
 
-//                if let imageData = UIImagePNGRepresentation(UIImage(data: image!)!) {
-                multipartFormData.append(imageData!, withName: "image", fileName: fileName, mimeType: mimeType)
-//                }
+                multipartFormData.append(imageData!, withName: "upload", fileName: fileName, mimeType: mimeType)
 
             }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headersMultipart) { (result) in
                 switch result {
                 case .success(let upload, _, _):
                     self.uploadProgressBar.isHidden = false
 
-//                    upload.responseJSON { request, response, JSON, error in
-//
-//
-//                    }
-
                     upload.uploadProgress { progress in
                         let percentComplete = Float(progress.fractionCompleted)
                         let newProgressBarWidth = (self.view.frame.size.width - 30) * CGFloat(percentComplete)
                         self.uploadProgressBar.frame.size.width = newProgressBarWidth
                     }
-//                    upload.validate()
-                    upload.validate(statusCode: 200..<600)
-                        .validate(contentType: ["application/json"])
-                        .response { response in
-//                            print("QQQ: \(statusCode)")
-//                            print(response)
-                    }  
+//                    upload.validate(statusCode: 200..<600)
+//                        .validate(contentType: ["text/html"])
+//                        .response { response in
+//                    }
                     upload.responseString { response in
-//                        print("ORIG REQUEST")
-//                        print(response.request)  // original URL request
-//                        print("RESPONSE")
-//                        print(response.response) // URL response
-//                        print("SERVER DATA")
-//                        print(response.data)     // server data
-//                        print("RESULT")
-//                        print(response.result)   // result of response serialization
                         debugPrint(response)
                         self.uploadProgressBar.isHidden = true
                         self.uploadProgressBar.frame.size.width = 0
