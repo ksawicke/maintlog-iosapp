@@ -17,14 +17,14 @@ class InspectionRatingCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: String, checklistId: Int16, equipmentUnitId: String, rating: Int16, note: String) -> Bool {
+    class func saveObject(inspectionId: String, equipmentUnitId: Int16, checklistItemId: Int16, rating: Int16, note: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionRating", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(inspectionId, forKey: "inspectionId")
-        managedObject.setValue(checklistId, forKey: "checklistId")
         managedObject.setValue(equipmentUnitId, forKey: "equipmentUnitId")
+        managedObject.setValue(checklistItemId, forKey: "checklistItemId")
         managedObject.setValue(rating, forKey: "rating")
         managedObject.setValue(note, forKey: "note")
         

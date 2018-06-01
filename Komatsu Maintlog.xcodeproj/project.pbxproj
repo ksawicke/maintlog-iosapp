@@ -145,10 +145,10 @@
 				65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */,
 				65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */,
 				65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */,
+				658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */,
 				656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */,
 				656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */,
 				65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */,
-				658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";

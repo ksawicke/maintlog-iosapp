@@ -311,6 +311,7 @@ class LoginController: UIViewController {
     
     func deleteItems() {
         _ = EquipmentTypeCoreDataHandler.cleanDelete()
+        _ = EquipmentUnitCoreDataHandler.cleanDelete()
         _ = ChecklistCoreDataHandler.cleanDelete()
         _ = ChecklistItemCoreDataHandler.cleanDelete()
     }

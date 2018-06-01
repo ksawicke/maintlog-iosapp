@@ -29,6 +29,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var userFormData = [[String: String]]()
     var inspectionId : String = ""
     var equipmentTypeSelected : Int16 = 0
+    var equipmentUnitIdSelected : Int16 = 0
     var questionNumber : Int = 0
     var equipmentUnit : String = ""
     var currentSection : String = ""
@@ -103,19 +104,21 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     @IBAction func onChooseInspectionValue(_ sender: UIButton) {
+        print(equipmentUnitIdSelected)
+        
         if (sender as AnyObject).tag == 1 && currentInspectionItemBadNote.isHidden == true {
             inspectionGoodButton.setImage(UIImage(named: "icons8-ok"), for: [])
             sender.shake()
-            
+
             appendFormData(rating: "1")
-            
+
             questionNumber += 1
-            
+
             nextInspectionItem()
         } else if (sender as AnyObject).tag == 0 && currentInspectionItemBadNote.isHidden == true {
             inspectionBadButton.setImage(UIImage(named: "icons8-cancel"), for: [])
             sender.shake()
-            
+
             // Unhide UI elements for Bad Notes
             currentInspectionItemBadNoteLabel.isHidden = false
             currentInspectionItemBadNote.isHidden = false
@@ -150,9 +153,11 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             for managedObject in equipmentUnitScanned! {
                 if let scannedManufacturerName = managedObject.value(forKey: "manufacturerName"),
                    let scannedModelNumber = managedObject.value(forKey: "modelNumber"),
-                   let scannedEquipmentTypeId = managedObject.value(forKey: "equipmentTypeId") {
+                   let scannedEquipmentTypeId = managedObject.value(forKey: "equipmentTypeId"),
+                    let scannedEquipmentUnitId = managedObject.value(forKey: "id") {
                     
                     equipmentTypeSelected = scannedEquipmentTypeId as! Int16
+                    equipmentUnitIdSelected = scannedEquipmentUnitId as! Int16
                     let modelNumber = scannedModelNumber as! String
                     let etid = scannedEquipmentTypeId as! Int16
                     
@@ -326,10 +331,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         let numChecklistItems = Int(checklistitemPrestartArray.count) + Int(checklistitemPoststartArray.count)
         var counter = questionNumber
         
-        var saveId : String = "";
-        var saveRating : String = "";
-        var saveNote : String = "";
-        let equipmentUnitId : String = equipmentUnit
+        var saveId : String = ""
+        var saveRating : String = ""
+        var saveNote : String = ""
+//        let equipmentUnitId : Int16 = equipmentUnitIdSelected
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -358,7 +363,13 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
         
-        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: inspectionId, checklistId: Int16(saveId)!, equipmentUnitId: equipmentUnitId, rating: Int16(saveRating)!, note: saveNote)
+//        print("inspectionId: \(inspectionId)")
+////        print(Int16(saveId)!)
+//        print("equipmentUnitIdSelected: \(equipmentUnitIdSelected)")
+//        print("saveRating: \(saveRating)")
+//        print("note: \(saveNote)")
+        
+        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, checklistItemId: Int16(saveId)!, rating: Int16(saveRating)!, note: saveNote)
         
         // Saving the image as Binary Data to the Entity.
         // Using UIImagePNGRepresentation as primary method.
@@ -440,6 +451,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         barCodeScanned = false
         barCodeValue = ""
         inspectionId = ""
+        equipmentUnitIdSelected = 0
         
         nextInspectionItem()
     }
@@ -470,6 +482,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         if unitNumber != "" {
             barCodeScanned = true
             barCodeValue = unitNumber
+            // equipmentUnitIdSelected
         }
     }
     
