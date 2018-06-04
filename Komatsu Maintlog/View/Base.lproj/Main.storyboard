@@ -584,12 +584,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxr-dZ-gNE">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxr-dZ-gNE" userLabel="Top Container">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-Ji-Acn">
-                                        <rect key="frame" x="170.66666666666666" y="45" width="74" height="22"/>
-                                        <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="16"/>
+                                        <rect key="frame" x="166.66666666666666" y="45" width="82.666666666666657" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -611,12 +611,30 @@
                                     <constraint firstItem="wPF-Mb-beX" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="35" id="xyK-t7-YAb"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Q0-s3-vQv" userLabel="Scroll View Container">
+                                <rect key="frame" x="0.0" y="75" width="414" height="616"/>
+                                <color key="backgroundColor" red="0.73991647309999997" green="1" blue="0.96687872429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJS-Wq-xGY" userLabel="Bottom Button Container">
+                                <rect key="frame" x="0.0" y="691" width="414" height="45"/>
+                                <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="90M-W8-zY4"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="u7T-hz-Rq7" firstAttribute="trailing" secondItem="kxr-dZ-gNE" secondAttribute="trailing" id="4gc-xf-3fO"/>
+                            <constraint firstItem="7Q0-s3-vQv" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="bottom" id="Evc-7p-eot"/>
                             <constraint firstItem="kxr-dZ-gNE" firstAttribute="top" secondItem="Xry-5U-pKB" secondAttribute="top" id="I8V-MT-7hW"/>
+                            <constraint firstItem="XJS-Wq-xGY" firstAttribute="top" secondItem="7Q0-s3-vQv" secondAttribute="bottom" id="LeV-WS-S2N"/>
+                            <constraint firstItem="u7T-hz-Rq7" firstAttribute="trailing" secondItem="7Q0-s3-vQv" secondAttribute="trailing" id="el4-1K-wpn"/>
+                            <constraint firstItem="u7T-hz-Rq7" firstAttribute="trailing" secondItem="XJS-Wq-xGY" secondAttribute="trailing" id="fa7-No-oZJ"/>
                             <constraint firstItem="kxr-dZ-gNE" firstAttribute="leading" secondItem="u7T-hz-Rq7" secondAttribute="leading" id="lyM-aX-DO9"/>
+                            <constraint firstItem="XJS-Wq-xGY" firstAttribute="leading" secondItem="u7T-hz-Rq7" secondAttribute="leading" id="qlR-mG-6Jd"/>
+                            <constraint firstItem="u7T-hz-Rq7" firstAttribute="bottom" secondItem="XJS-Wq-xGY" secondAttribute="bottom" id="qpD-KA-hco"/>
+                            <constraint firstItem="7Q0-s3-vQv" firstAttribute="leading" secondItem="u7T-hz-Rq7" secondAttribute="leading" id="uaQ-eX-iUm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="u7T-hz-Rq7"/>
                     </view>
