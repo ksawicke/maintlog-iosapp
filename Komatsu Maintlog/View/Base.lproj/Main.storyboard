@@ -68,7 +68,7 @@
                                     <constraint firstAttribute="height" constant="75" id="fC0-5w-e07"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1WZ-96-WOe" userLabel="Upload Button">
@@ -90,9 +90,21 @@
                                     <constraint firstAttribute="width" id="D2c-b9-Z8T"/>
                                 </constraints>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AjD-KY-L6m">
+                                <rect key="frame" x="15" y="302" width="384" height="34"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Log Entry">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="kLd-ml-HGc" kind="show" identifier="goToLogEntry" id="6PW-wK-4AQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.81960784313725488" green="0.83529411764705885" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AjD-KY-L6m" secondAttribute="trailing" constant="15" id="0nz-aP-OTj"/>
                             <constraint firstItem="oOA-OU-t43" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="15L-Wx-nNF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PUU-IH-D1v" secondAttribute="trailing" constant="15" id="1nL-eP-rRQ"/>
                             <constraint firstItem="dFr-C1-qlq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3IL-k6-hmK"/>
@@ -110,16 +122,19 @@
                             <constraint firstItem="5T9-Ut-Dd9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XaH-V7-w8m"/>
                             <constraint firstItem="1WZ-96-WOe" firstAttribute="top" secondItem="JJ1-jg-fdW" secondAttribute="bottom" id="bwt-bb-lC6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oOA-OU-t43" secondAttribute="trailing" constant="15" id="dyI-KL-IuJ"/>
+                            <constraint firstItem="AjD-KY-L6m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="gvQ-4E-RDQ"/>
                             <constraint firstItem="ISi-Vf-XBT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="keE-Id-Yna"/>
                             <constraint firstItem="PUU-IH-D1v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="kyo-yC-9tG"/>
                             <constraint firstItem="oOA-OU-t43" firstAttribute="top" secondItem="5T9-Ut-Dd9" secondAttribute="bottom" constant="15" id="oGK-uy-91e"/>
                             <constraint firstItem="1WZ-96-WOe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="qwe-bD-gjz"/>
+                            <constraint firstItem="AjD-KY-L6m" firstAttribute="top" secondItem="ISi-Vf-XBT" secondAttribute="bottom" constant="15" id="zxW-89-cw5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="barcodeSelectedLabel" destination="oOA-OU-t43" id="rgH-RT-xj9"/>
                         <outlet property="inspectionEntryButton" destination="ISi-Vf-XBT" id="LLs-lO-E2X"/>
+                        <outlet property="logEntryButton" destination="AjD-KY-L6m" id="S35-Ik-Zhu"/>
                         <outlet property="scanBarcodeButton" destination="PUU-IH-D1v" id="Y5k-Y3-ukZ"/>
                         <outlet property="uploadInspectionButton" destination="1WZ-96-WOe" id="OZI-hX-eiA"/>
                         <outlet property="uploadProgressBar" destination="JJ1-jg-fdW" id="VOo-yP-aWn"/>
@@ -159,7 +174,6 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ebz-EK-t2A" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="45" id="CeP-Uf-6Gt"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="G9w-lc-eFQ"/>
                                     <constraint firstItem="ebz-EK-t2A" firstAttribute="centerX" secondItem="DHK-8W-B4e" secondAttribute="centerX" id="RsR-pz-Wpz"/>
                                     <constraint firstAttribute="height" constant="75" id="UA4-38-GpK"/>
                                     <constraint firstAttribute="trailing" secondItem="5Tt-42-uVF" secondAttribute="trailing" constant="15" id="cVX-MG-FXh"/>
@@ -402,7 +416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6f-bu-Uep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="386.95652173913044" y="275.54347826086956"/>
+            <point key="canvasLocation" x="-488" y="734"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="FBr-1c-9dE">
@@ -489,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5uG-vd-n7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-488" y="-830"/>
+            <point key="canvasLocation" x="268" y="-839"/>
         </scene>
         <!--Bar Code Scanner Controller-->
         <scene sceneID="SJe-T0-G10">
@@ -560,27 +574,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vs2-Ap-Ccd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="387" y="-387"/>
+            <point key="canvasLocation" x="267" y="-47"/>
         </scene>
         <!--Log Entry Controller-->
         <scene sceneID="8C0-SZ-i0A">
             <objects>
-                <viewController id="kLd-ml-HGc" customClass="LogEntryController" customModule="Komatsu_Maintlog" sceneMemberID="viewController">
+                <viewController id="kLd-ml-HGc" customClass="LogEntryController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xry-5U-pKB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxr-dZ-gNE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-Ji-Acn">
-                                        <rect key="frame" x="170.66666666666666" y="30" width="74" height="22"/>
+                                        <rect key="frame" x="170.66666666666666" y="45" width="74" height="22"/>
                                         <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPF-Mb-beX" userLabel="Close Button">
-                                        <rect key="frame" x="361" y="25" width="33" height="33"/>
+                                        <rect key="frame" x="366" y="35" width="33" height="33"/>
                                         <state key="normal" image="icons8-menu-filled"/>
                                         <connections>
                                             <action selector="onCloseLogEntryViewButton:" destination="kLd-ml-HGc" eventType="touchUpInside" id="8Xs-QE-igJ"/>
@@ -590,11 +604,11 @@
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.83529411760000005" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="CM4-j1-9J4"/>
+                                    <constraint firstAttribute="height" constant="75" id="CM4-j1-9J4"/>
                                     <constraint firstItem="dM9-Ji-Acn" firstAttribute="centerX" secondItem="kxr-dZ-gNE" secondAttribute="centerX" id="nxe-ca-Ng0"/>
-                                    <constraint firstAttribute="trailing" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="20" id="ser-Tb-vo9"/>
-                                    <constraint firstItem="dM9-Ji-Acn" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="30" id="vHY-lr-rSL"/>
-                                    <constraint firstItem="wPF-Mb-beX" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="25" id="xyK-t7-YAb"/>
+                                    <constraint firstAttribute="trailing" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="15" id="ser-Tb-vo9"/>
+                                    <constraint firstItem="dM9-Ji-Acn" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="45" id="vHY-lr-rSL"/>
+                                    <constraint firstItem="wPF-Mb-beX" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="35" id="xyK-t7-YAb"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -609,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybX-V9-T7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061" y="-387"/>
+            <point key="canvasLocation" x="267" y="734"/>
         </scene>
     </scenes>
     <resources>
