@@ -588,7 +588,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-Ji-Acn">
-                                        <rect key="frame" x="166.66666666666666" y="45" width="82.666666666666657" height="21.666666666666671"/>
+                                        <rect key="frame" x="165.66666666666666" y="45" width="82.666666666666657" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -613,13 +613,65 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Q0-s3-vQv" userLabel="Scroll View Container">
                                 <rect key="frame" x="0.0" y="75" width="414" height="616"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2d-LS-Kyg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="616"/>
+                                    </scrollView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.73991647309999997" green="1" blue="0.96687872429999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="C2d-LS-Kyg" firstAttribute="leading" secondItem="7Q0-s3-vQv" secondAttribute="leading" id="2eJ-Iy-4df"/>
+                                    <constraint firstAttribute="bottom" secondItem="C2d-LS-Kyg" secondAttribute="bottom" id="cSw-5P-V3D"/>
+                                    <constraint firstAttribute="trailing" secondItem="C2d-LS-Kyg" secondAttribute="trailing" id="p0e-RQ-S0T"/>
+                                    <constraint firstItem="C2d-LS-Kyg" firstAttribute="top" secondItem="7Q0-s3-vQv" secondAttribute="top" id="yeW-te-Laa"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJS-Wq-xGY" userLabel="Bottom Button Container">
                                 <rect key="frame" x="0.0" y="691" width="414" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9k-Lf-mmC">
+                                        <rect key="frame" x="314" y="5" width="85" height="34"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="2wx-Th-EWZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Review">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RvI-hc-0Nt">
+                                        <rect key="frame" x="165" y="5.6666666666666288" width="85" height="34"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="JGY-2g-Zl6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFJ-dx-D99">
+                                        <rect key="frame" x="15" y="5.6666666666666288" width="85" height="34"/>
+                                        <color key="backgroundColor" red="0.1764705882" green="0.18039215689999999" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="ptf-ES-BCD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Prev">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="90M-W8-zY4"/>
+                                    <constraint firstAttribute="trailing" secondItem="n9k-Lf-mmC" secondAttribute="trailing" constant="15" id="Igg-3Z-SyU"/>
+                                    <constraint firstItem="eFJ-dx-D99" firstAttribute="centerY" secondItem="XJS-Wq-xGY" secondAttribute="centerY" id="Lj6-3d-PLw"/>
+                                    <constraint firstItem="eFJ-dx-D99" firstAttribute="leading" secondItem="XJS-Wq-xGY" secondAttribute="leading" constant="15" id="d2Y-5d-0nu"/>
+                                    <constraint firstItem="RvI-hc-0Nt" firstAttribute="centerX" secondItem="XJS-Wq-xGY" secondAttribute="centerX" id="icl-Iu-GC2"/>
+                                    <constraint firstItem="RvI-hc-0Nt" firstAttribute="centerY" secondItem="XJS-Wq-xGY" secondAttribute="centerY" id="igR-9w-ZWv"/>
+                                    <constraint firstItem="n9k-Lf-mmC" firstAttribute="centerY" secondItem="XJS-Wq-xGY" secondAttribute="centerY" id="vhw-Ub-C6m"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -641,7 +693,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ybX-V9-T7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267" y="734"/>
+            <point key="canvasLocation" x="266.66666666666669" y="733.69565217391312"/>
         </scene>
     </scenes>
     <resources>
