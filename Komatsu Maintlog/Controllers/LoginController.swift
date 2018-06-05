@@ -297,10 +297,12 @@ class LoginController: UIViewController {
                         let manufacturerName = equipmentunit["manufacturer_name"].stringValue
                         let modelNumber = equipmentunit["model_number"].stringValue
                         let unitNumber = equipmentunit["unit_number"].stringValue
+                        let trackType = equipmentunit["track_type"].stringValue
+                        let fluidsTracked = equipmentunit["fluids_tracked"].stringValue
                         
                         // saveObject(id: Int16, equipmentTypeId: Int16, manufacturerName: String, modelNumber: String, unitNumber: String)
                         
-                        _ = EquipmentUnitCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId!, manufacturerName: manufacturerName, modelNumber: modelNumber, unitNumber: unitNumber)
+                        _ = EquipmentUnitCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId!, manufacturerName: manufacturerName, modelNumber: modelNumber, unitNumber: unitNumber, trackType: trackType, fluidsTracked: fluidsTracked)
                     }
                 } else {
                     let errorMessage = responseJSON["message"].string!

@@ -132,6 +132,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("BAR CODE VALUE: \(barCodeValue)")
+        
         currentInspectionItemBadNote.delegate = self
         
         currentInspectionItemBadNote.setLeftPaddingPoints(10)
@@ -191,10 +193,12 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     deinit {
+        let notificationCenter = NotificationCenter.default
+        
         // Stop listening for keyboard hide/show events
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     override func didReceiveMemoryWarning() {

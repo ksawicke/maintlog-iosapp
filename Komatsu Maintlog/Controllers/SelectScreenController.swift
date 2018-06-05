@@ -285,7 +285,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             
                 destinationVC.delegate = self
             
-            case "goToInsepctionEntry":
+            case "goToInspectionEntry":
                 let destinationVC = segue.destination as! InspectionEntryController
             
                 destinationVC.delegate = self

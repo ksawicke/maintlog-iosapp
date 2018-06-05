@@ -17,7 +17,7 @@ class EquipmentUnitCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int16, equipmentTypeId: Int16, manufacturerName: String, modelNumber: String, unitNumber: String) -> Bool {
+    class func saveObject(id: Int16, equipmentTypeId: Int16, manufacturerName: String, modelNumber: String, unitNumber: String, trackType: String, fluidsTracked: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "EquipmentUnit", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -27,6 +27,8 @@ class EquipmentUnitCoreDataHandler: NSObject {
         managedObject.setValue(manufacturerName, forKey: "manufacturerName")
         managedObject.setValue(modelNumber, forKey: "modelNumber")
         managedObject.setValue(unitNumber, forKey: "unitNumber")
+        managedObject.setValue(trackType, forKey: "trackType")
+        managedObject.setValue(fluidsTracked, forKey: "fluidsTracked")
         
         do {
             try context.save()
@@ -79,18 +81,18 @@ class EquipmentUnitCoreDataHandler: NSObject {
     class func filterDataByEquipmentTypeId(equipmentTypeId: Int16) -> [EquipmentUnit]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<EquipmentUnit> = EquipmentUnit.fetchRequest()
-        var checklist:[EquipmentUnit]? = nil
+        var equipmentunit:[EquipmentUnit]? = nil
         
         let predicate = NSPredicate(format: "equipmentTypeId == %@", "\(equipmentTypeId)")
         fetchRequest.predicate = predicate
         fetchRequest.returnsObjectsAsFaults = false // Critical this stays here to get data out of the call!
         
         do {
-            checklist = try context.fetch(fetchRequest)
+            equipmentunit = try context.fetch(fetchRequest)
             
-            return checklist
+            return equipmentunit
         } catch {
-            return checklist
+            return equipmentunit
         }
     }
     

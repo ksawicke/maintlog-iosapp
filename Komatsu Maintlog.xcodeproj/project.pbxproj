@@ -15,6 +15,7 @@
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
 		658D8ED420BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */; };
+		6591F04F20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */; };
 		6594508220AF399000990ADF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6594508120AF399000990ADF /* Settings.bundle */; };
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
@@ -42,6 +43,7 @@
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentUnitCoreDataHandler.swift; sourceTree = "<group>"; };
+		6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidTypeCoreDataHandler.swift; sourceTree = "<group>"; };
 		6594508120AF399000990ADF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */,
 				656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */,
 				65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */,
+				6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
 				65F7251520B85A9F00C31969 /* Reachability.swift in Sources */,
+				6591F04F20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,
 				65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */,
 				65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */,

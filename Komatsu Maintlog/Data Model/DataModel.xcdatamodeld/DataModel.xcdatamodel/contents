@@ -15,10 +15,16 @@
     </entity>
     <entity name="EquipmentUnit" representedClassName="EquipmentUnit" syncable="YES" codeGenerationType="class">
         <attribute name="equipmentTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="fluidsTracked" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="manufacturerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modelNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trackType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unitNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="FluidType" representedClassName="FluidType" syncable="YES" codeGenerationType="class">
+        <attribute name="fluidType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="InspectionImage" representedClassName="InspectionImage" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -46,9 +52,10 @@
         <element name="Checklist" positionX="-380" positionY="-138" width="128" height="90"/>
         <element name="ChecklistItem" positionX="-36" positionY="63" width="128" height="75"/>
         <element name="EquipmentType" positionX="-189" positionY="-135" width="128" height="75"/>
-        <element name="EquipmentUnit" positionX="-207" positionY="-18" width="128" height="120"/>
+        <element name="EquipmentUnit" positionX="-207" positionY="-18" width="128" height="150"/>
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="120"/>
         <element name="Login" positionX="-207" positionY="-18" width="128" height="150"/>
+        <element name="FluidType" positionX="-207" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

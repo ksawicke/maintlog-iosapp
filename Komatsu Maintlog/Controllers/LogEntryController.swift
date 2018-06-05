@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogEntryController: UIViewController, UINavigationControllerDelegate, ChangeEquipmentUnitDelegate {
+class LogEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, ChangeEquipmentUnitDelegate {
     
     //Declare the delegate variable here:
     // STEP 3: create a delegate property (this is standard accepted practice)
@@ -24,6 +24,10 @@ class LogEntryController: UIViewController, UINavigationControllerDelegate, Chan
     var equipmentTypeSelected : Int16 = 0
     var equipmentUnitIdSelected : Int16 = 0
     var equipmentUnit : String = ""
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var unitNumber: UITextField!
+    @IBOutlet weak var currentSMR: UITextField!
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -57,6 +61,7 @@ class LogEntryController: UIViewController, UINavigationControllerDelegate, Chan
                     print("barCodeValue: \(barCodeValue)")
                     
 //                    barcodeScannedLabel.text = "\(scannedManufacturerName) \(scannedModelNumber) - \(barCodeValue)"
+                    unitNumber.text = "\(barCodeValue)"
                     logEntryId = UUID().uuidString
                 }
             }
@@ -72,13 +77,36 @@ class LogEntryController: UIViewController, UINavigationControllerDelegate, Chan
 //        nextInspectionItem()
         
         registerSettingsBundle()
-        NotificationCenter.default.addObserver(self, selector: #selector(LogEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
         defaultsChanged()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.userScannedANewBarcode(unitNumber: "")
+    }
+    
+    deinit {
+        let notificationCenter = NotificationCenter.default
+        
+        // Stop listening for keyboard hide/show events
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     func registerSettingsBundle(){
@@ -123,6 +151,38 @@ class LogEntryController: UIViewController, UINavigationControllerDelegate, Chan
             destinationVC.delegate = self
         }
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        
+        print("hide keyboard?")
+        
+//        nextButton.isHidden = false
+        
+        return true
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func hideKeyboard() {
+        print("run hide keyboard")
+        currentSMR.resignFirstResponder()
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = UIEdgeInsets.zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
     }
     
 }
