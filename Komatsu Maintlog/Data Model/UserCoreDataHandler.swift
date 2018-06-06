@@ -2,14 +2,14 @@
 //  EquipmentTypeCoreDataHandler.swift
 //  Komatsu Maintlog
 //
-//  Created by Kevin Sawicke <kevin@rinconmountaintech.com> on 4/18/18.
+//  Created by Kevin Sawicke <kevin@rinconmountaintech.com> on 6/6/18.
 //  Copyright © 2018 Komatsu NA. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class FluidTypeCoreDataHandler: NSObject {
+class UserCoreDataHandler: NSObject {
     
     private class func getContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -17,13 +17,16 @@ class FluidTypeCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(id: Int16, fluidType: String) -> Bool {
+    class func saveObject(id: Int16, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "FluidType", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(id, forKey: "id")
-        managedObject.setValue(fluidType, forKey: "fluidType")
+        managedObject.setValue(firstName, forKey: "firstName")
+        managedObject.setValue(lastName, forKey: "lastName")
+        managedObject.setValue(emailAddress, forKey: "emailAddress")
+        managedObject.setValue(role, forKey: "role")
         
         do {
             try context.save()
@@ -34,22 +37,22 @@ class FluidTypeCoreDataHandler: NSObject {
         }
     }
     
-    class func fetchObject() -> [FluidType]? {
+    class func fetchObject() -> [User]? {
         let context = getContext()
-        let fluidtype:[FluidType]? = nil
+        let user:[User]? = nil
         
         do {
-            let fluidtype = try context.fetch(FluidType.fetchRequest())
+            let user = try context.fetch(User.fetchRequest())
             
-            return fluidtype as? [FluidType]
+            return user as? [User]
         } catch {
-            return fluidtype
+            return user
         }
     }
     
-    class func deleteObject(fluidtype: FluidType) -> Bool {
+    class func deleteObject(user: User) -> Bool {
         let context = getContext()
-        context.delete(fluidtype)
+        context.delete(user)
         
         do {
             try context.save()
@@ -62,7 +65,7 @@ class FluidTypeCoreDataHandler: NSObject {
     
     class func cleanDelete() -> Bool {
         let context = getContext()
-        let delete = NSBatchDeleteRequest(fetchRequest: FluidType.fetchRequest())
+        let delete = NSBatchDeleteRequest(fetchRequest: User.fetchRequest())
         
         do {
             try context.execute(delete)
@@ -73,10 +76,10 @@ class FluidTypeCoreDataHandler: NSObject {
         }
     }
     
-    class func filterData(fieldName: String, filterType: String, queryString: String) -> [FluidType]? {
+    class func filterData(fieldName: String, filterType: String, queryString: String) -> [User]? {
         let context = getContext()
-        let fetchRequest:NSFetchRequest<FluidType> = FluidType.fetchRequest()
-        var fluidtype:[FluidType]? = nil
+        let fetchRequest:NSFetchRequest<User> = User.fetchRequest()
+        var user:[User]? = nil
         
         switch(filterType) {
         case "equals":
@@ -93,11 +96,11 @@ class FluidTypeCoreDataHandler: NSObject {
         }
         
         do {
-            fluidtype = try context.fetch(fetchRequest)
+            user = try context.fetch(fetchRequest)
             
-            return fluidtype
+            return user
         } catch {
-            return fluidtype
+            return user
         }
     }
     

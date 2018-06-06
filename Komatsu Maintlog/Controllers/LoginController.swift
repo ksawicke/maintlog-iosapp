@@ -12,15 +12,17 @@ import Alamofire
 import SwiftyJSON
 
 class LoginController: UIViewController {
-
+    
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
-    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
     var API_AUTHENTICATE = "/api/authenticate"
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
     var API_EQUIPMENTTYPE = "/api/equipmenttype"
     var API_EQUIPMENTUNIT = "/api/equipmentunit"
+    var API_FLUIDTYPE = "/api/fluidtype"
+    var API_USER = "/api/user"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
         "Content-Type": "x-www-form-urlencoded"
@@ -123,10 +125,34 @@ class LoginController: UIViewController {
         // http://ashishkakkad.com/2015/10/how-to-use-alamofire-and-swiftyjson-with-swift/
         // https://stackoverflow.com/questions/35427698/how-to-use-networkreachabilitymanager-in-alamofire
         
+//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    let userData = responseJSON["userData"]
+////
+//                    print(userData)
+////
+////                    for (_, checklist) in checklists {
+////                        let id = checklist["id"].int16!
+////                        let equipmentTypeId = checklist["equipmenttype_id"].int16!
+////                        let checklistJson = checklist["checklist_json"].string!
+////
+////                        //                        print(checklistJson)
+////                        //
+////                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
+////                    }
+//                } else {
+//                    let errorMessage = responseJSON["message"].string!
+//                }
+//            }
+//        }
+        
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+//            print(responseData)
             if((responseData.result.value) != nil) {
                 let responseJSON : JSON = JSON(responseData.result.value!)
-                
+
                 if responseJSON["status"] == true {
                     self.doSuccessfulAuthTasks(responseJSON: responseJSON)
                 } else {
@@ -136,25 +162,51 @@ class LoginController: UIViewController {
                 print("Response nil. No connection")
             }
         }
+        
+//        let sessionManager = SessionManager()
+//        sessionManager.delegate.taskDidReceiveChallengeWithCompletion = { (_, _, challenge, completionHandler) -> Void in
+//            // Pass test server with self signed certificate
+//            if challenge.protectionSpace.host == "10.132.146.48" {
+//                completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
+//            } else {
+//                completionHandler(.performDefaultHandling, nil)
+//            }
+//        }
+//
+//        sessionManager.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseString { (responseData) -> Void in
+//                        print(responseData)
+////                        if((responseData.result.value) != nil) {
+////                            let responseJSON : JSON = JSON(responseData.result.value!)
+////
+////                            if responseJSON["status"] == true {
+////                                self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+////                            } else {
+////                                self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+////                            }
+////                        } else {
+////                            print("Response nil. No connection")
+////                        }
+//                    }
     }
     
     func doSuccessfulAuthTasks(responseJSON: JSON) {
         let userData = responseJSON["userData"]
         let userId = userData["user_id"].int16!
-        let userName = userData["username"].string!
         let firstName = userData["first_name"].string!
         let lastName = userData["last_name"].string!
         let emailAddress = userData["email_address"].string!
         let role = userData["role"].string!
         // let twelveHoursFromNow = Date().addingTimeInterval(+43200) // TODO: Use to expire
         
-        _ = LoginCoreDataHandler.saveObject(userId: userId, userName: userName, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+        _ = LoginCoreDataHandler.saveObject(userId: userId, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
         
         deleteItems()
-        addEquipmentTypes()
-        addEquipmentUnits()
         addChecklists()
         addChecklistItems()
+        addEquipmentTypes()
+        addEquipmentUnits()
+        addFluidTypes()
+        addUsers()
         
         performSegue(withIdentifier: "goToSelectScreen", sender: self)
     }
@@ -311,11 +363,76 @@ class LoginController: UIViewController {
         }
     }
     
+    func addFluidTypes() {
+        var URL = "\(API_PROD_BASE_URL)\(API_FLUIDTYPE)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_FLUIDTYPE)"
+        }
+        
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let fluidtypes = responseJSON["fluidtypes"]
+                    
+                    //                    print(equipmenttypes)
+                    
+                    for (_, fluidtype) in fluidtypes {
+                        let id = fluidtype["id"].int16!
+                        let fluidType = fluidtype["fluid_type"].string!
+
+                        _ = FluidTypeCoreDataHandler.saveObject(id: id, fluidType: fluidType)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
+    func addUsers() {
+        var URL = "\(API_PROD_BASE_URL)\(API_USER)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_USER)"
+        }
+        
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
+            if let responseJSON : JSON = JSON(response.result.value!) {
+                if responseJSON["status"] == true {
+                    let users = responseJSON["users"]
+                    
+                    //                    print(equipmenttypes)
+                    
+                    for (_, user) in users {
+                        let id = user["id"].int16!
+                        let firstName = user["first_name"].string!
+                        let lastName = user["last_name"].string!
+                        let emailAddress = user["email_address"].string!
+                        let role = user["role"].string!
+
+                        _ = UserCoreDataHandler.saveObject(id: id, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            }
+        }
+    }
+    
     func deleteItems() {
-        _ = EquipmentTypeCoreDataHandler.cleanDelete()
-        _ = EquipmentUnitCoreDataHandler.cleanDelete()
         _ = ChecklistCoreDataHandler.cleanDelete()
         _ = ChecklistItemCoreDataHandler.cleanDelete()
+        _ = EquipmentTypeCoreDataHandler.cleanDelete()
+        _ = EquipmentUnitCoreDataHandler.cleanDelete()
+        _ = FluidTypeCoreDataHandler.cleanDelete()
+        _ = UserCoreDataHandler.cleanDelete()
     }
 
 }

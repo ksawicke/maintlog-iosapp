@@ -47,5 +47,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>10.132.146.48</key>
+            <dict>
+                <!--Include to allow subdomains too-->
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <!--Include to allow ssl requests with self signed certificates and other insecure stuff-->
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
 </dict>
 </plist>

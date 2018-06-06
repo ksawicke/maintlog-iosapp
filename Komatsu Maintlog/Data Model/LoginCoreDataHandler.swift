@@ -17,13 +17,12 @@ class LoginCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(userId: Int16, userName: String, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
+    class func saveObject(userId: Int16, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Login", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(userId, forKey: "userId")
-        managedObject.setValue(userName, forKey: "userName")
         managedObject.setValue(firstName, forKey: "firstName")
         managedObject.setValue(lastName, forKey: "lastName")
         managedObject.setValue(emailAddress, forKey: "emailAddress")
