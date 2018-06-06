@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, ChangeEquipmentUnitDelegate {
+class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, ChangeEquipmentUnitDelegate {
     
     //Declare the delegate variable here:
     // STEP 3: create a delegate property (this is standard accepted practice)
@@ -25,7 +25,18 @@ class LogEntryController: UIViewController, UITextFieldDelegate, UINavigationCon
     var equipmentUnitIdSelected : Int16 = 0
     var equipmentUnit : String = ""
     
+    var enteredByPickerData = ["Sawicke, Kevin", "Johnson, Bret", "Johnson, Neil"]
+    var enteredByOutputData = ["1", "2", "3"]
+    
+    var pickerView = UIPickerView()
+    
+    private var datePicker: UIDatePicker?
+    
+    // https://stackoverflow.com/questions/33896261/can-my-uipickerview-output-be-different-that-the-input
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var dateEntered: UITextField!
+    @IBOutlet weak var enteredBy: UITextField!
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var currentSMR: UITextField!
     
@@ -35,6 +46,30 @@ class LogEntryController: UIViewController, UITextFieldDelegate, UINavigationCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        dateEntered.inputView = datePicker
+        dateEntered?.addTarget(self, action: #selector(LogEntryController.dateChanged(datePicker:)), for: .valueChanged)
+        
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        enteredBy.inputView = pickerView
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.viewTapped(gestureRecognizer:)))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.dismissKeyboard))
+//        tap.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tap)
         
         print("BAR CODE VALUE: \(barCodeValue)")
         
@@ -78,17 +113,40 @@ class LogEntryController: UIViewController, UITextFieldDelegate, UINavigationCon
         
         registerSettingsBundle()
         
-        let notificationCenter = NotificationCenter.default
-        
-        notificationCenter.addObserver(self, selector: #selector(LogEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-        
         defaultsChanged()
+    }
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return enteredByPickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return enteredByPickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        enteredBy.text = enteredByPickerData[row]
+        enteredBy.resignFirstResponder()
+    }
+    
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        print("viewTapped.....")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateEntered.text = dateFormatter.string(from: (datePicker?.date)!)
+        view.endEditing(true)
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        print("dateChanged.....")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateEntered.text = dateFormatter.string(from: (datePicker.date))
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {

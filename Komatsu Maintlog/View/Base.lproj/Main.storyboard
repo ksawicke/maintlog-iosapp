@@ -618,13 +618,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="7380"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-tS-zQj" userLabel="Content View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="7578.333333333333"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="3126.3333333333335"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Qol-F4-6gp">
-                                                        <rect key="frame" x="20" y="20" width="374" height="7538.333333333333"/>
+                                                        <rect key="frame" x="20" y="20" width="374" height="3086.3333333333335"/>
                                                         <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="awG-4L-xmO" userLabel="Field Group">
+                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTE: Under construction ****************************" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOe-d5-BvG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NZA-33-iF4" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="252.66666666666666"/>
+                                                                <rect key="frame" x="0.0" y="58.000000000000007" width="374" height="76.666666666666686"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Entered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcm-Hn-eyb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -632,16 +643,16 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sce-9G-l4S">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666657" width="374" height="216"/>
-                                                                        <date key="date" timeIntervalSinceReferenceDate="549922833.033283">
-                                                                            <!--2018-06-05 20:20:33 +0000-->
-                                                                        </date>
-                                                                    </datePicker>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRF-QZ-xe6">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666657" width="374" height="40"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="G6P-E3-J1t" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="267.66666666666669" width="374" height="252.66666666666669"/>
+                                                                <rect key="frame" x="0.0" y="149.66666666666666" width="374" height="76.666666666666657"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entered By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sau-uI-ao9">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -649,13 +660,16 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FL1-Cu-BIJ">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="216"/>
-                                                                    </pickerView>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select one" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZ9-A4-dyR">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666657" width="374" height="40"/>
+                                                                        <nil key="textColor"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ta0-EK-rq3" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="535.33333333333337" width="374" height="76.666666666666629"/>
+                                                                <rect key="frame" x="0.0" y="241.33333333333329" width="374" height="76.666666666666657"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serviced By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2b-SA-CWA">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -663,8 +677,8 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UvU-bw-hHx">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="40"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UvU-bw-hHx">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666686" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -675,7 +689,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bJd-4S-jIt" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="627" width="374" height="76.666666666666629"/>
+                                                                <rect key="frame" x="0.0" y="333" width="374" height="76.666666666666686"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-9b-Zmv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -683,8 +697,8 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-YF-i2I">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="40"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-YF-i2I">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666686" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -695,7 +709,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="YcO-LE-aSL" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="718.66666666666663" width="374" height="252.66666666666663"/>
+                                                                <rect key="frame" x="0.0" y="424.66666666666663" width="374" height="21.666666666666686"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entry Selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2AR-Nt-RxB">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -703,13 +717,10 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZO-Eb-xAS">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="h3E-ze-5Tv" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="986.33333333333314" width="374" height="76.666666666666629"/>
+                                                                <rect key="frame" x="0.0" y="461.33333333333337" width="374" height="76.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uX1-7T-y5u">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -717,8 +728,8 @@
                                                                         <color key="textColor" red="1" green="0.073299989240000002" blue="0.90580215330000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yjd-Jk-NpZ">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yjd-Jk-NpZ">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -729,7 +740,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="uQ8-x6-J9M" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="1078" width="374" height="252.66666666666674"/>
+                                                                <rect key="frame" x="0.0" y="553" width="374" height="21.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSX-y2-7mr">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -737,13 +748,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmK-ss-q16">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xc1-vk-hbd" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="1345.6666666666667" width="374" height="76.666666666666742"/>
+                                                                <rect key="frame" x="0.0" y="589.66666666666663" width="374" height="76.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clH-0O-O5n">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -752,7 +760,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6aA-yw-tYH">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -763,7 +771,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9ij-Z3-Vvw" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="1437.3333333333333" width="374" height="252.66666666666674"/>
+                                                                <rect key="frame" x="0.0" y="681.33333333333337" width="374" height="21.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Na8-R4-9Gw">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -771,13 +779,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgN-3n-jME">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="nXs-EU-Znl" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="1705" width="374" height="76.666666666666742"/>
+                                                                <rect key="frame" x="0.0" y="718" width="374" height="76.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xiS-hU-igO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -785,8 +790,8 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NTt-ph-zKK">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NTt-ph-zKK">
+                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -797,7 +802,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="W0J-sD-9Ye" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="1796.6666666666667" width="374" height="252.66666666666674"/>
+                                                                <rect key="frame" x="0.0" y="809.66666666666663" width="374" height="21.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmC-eM-Ied">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -805,13 +810,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Za-ZH-hMN">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Nee-dA-HID" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2064.3333333333335" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="846.33333333333337" width="374" height="76.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdB-6R-uyc">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -820,7 +822,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2m-Fg-2kg">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666629" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -831,7 +833,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3jA-2c-rpf" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2156" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="938" width="374" height="21.666666666666629"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="00G-kv-hzT">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -839,13 +841,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8S-Zx-rjJ">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kRX-dY-69U" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2423.6666666666665" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="974.66666666666674" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mM-74-6BH">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -854,7 +853,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mSO-e9-AbW">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -865,7 +864,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cWN-6L-ww4" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2515.3333333333335" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="1066.3333333333333" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dd5-ph-vcU">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -873,13 +872,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y6R-oa-t0d">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="D8z-sD-58k" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2783" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="1103" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKw-PR-mP4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -888,7 +884,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IVT-Mh-tXE">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -899,7 +895,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CH8-GU-iu0" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="2874.6666666666665" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="1194.6666666666667" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCT-kH-IZb">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -907,13 +903,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joW-Eb-OWF">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qjK-dR-eHc" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3142.3333333333335" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="1231.3333333333333" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcR-df-vbN">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -922,7 +915,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N4h-Uq-ME2">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -933,7 +926,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="6fh-yb-pOe" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3234" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="1323" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jp-fR-bjH">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -941,13 +934,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tif-fc-52i">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pnO-Fk-aiX" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3501.6666666666665" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="1359.6666666666667" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cV7-va-9o8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -956,7 +946,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FIK-ne-TcD">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -967,7 +957,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="89C-EK-brH" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3593.3333333333335" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="1451.3333333333333" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fH0-RN-4xV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -975,13 +965,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg7-rz-NiD">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5gz-gN-8Ge" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3861" width="374" height="76.666666666666515"/>
+                                                                <rect key="frame" x="0.0" y="1488" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWO-V7-N41">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -990,7 +977,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fHu-VX-BfR">
-                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1001,7 +988,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="cUA-tj-A46" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="3952.6666666666665" width="374" height="252.66666666666652"/>
+                                                                <rect key="frame" x="0.0" y="1579.6666666666667" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZu-iU-F6Z">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1009,13 +996,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fc-hv-FRB">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qGU-k1-RJp" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4220.333333333333" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="1616.3333333333333" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fv-rn-b9w">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1024,7 +1008,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FdC-iD-5Fz">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1035,7 +1019,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qB2-U9-xAm" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4312" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="1708" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Type 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60y-Hm-IXy">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1043,13 +1027,10 @@
                                                                         <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZu-IZ-i74">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7ZR-fL-yuD" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4579.666666666667" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="1744.6666666666667" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity (gal)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8P-pL-kUf">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1058,7 +1039,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LPB-gG-qcD">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1069,7 +1050,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fxa-Qs-6yc" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4671.333333333333" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="1836.3333333333333" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wtq-r5-7J8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1078,7 +1059,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ev-Gd-aek">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666742" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1089,7 +1070,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="BcH-Wd-UPS" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4763" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="1928" width="374" height="76.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijR-Xs-6AP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1098,7 +1079,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-sN-TAk">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1109,7 +1090,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HkS-HQ-484" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="4854.666666666667" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2019.6666666666665" width="374" height="21.666666666666742"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RU-MR-NTE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1117,13 +1098,10 @@
                                                                         <color key="textColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4r-pA-0JB">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fev-OY-5zl" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5122.333333333333" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2056.3333333333335" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsu-Xk-JzS">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1131,13 +1109,10 @@
                                                                         <color key="textColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mj9-h5-pff">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="42X-dn-GrA" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5390" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2093" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BV-iC-ZCI">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1146,7 +1121,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H0h-7m-GzM">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1157,7 +1132,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ks7-xp-b0G" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5481.666666666667" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2184.6666666666665" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q59-iF-r81">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1166,7 +1141,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebt-z2-IeY">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1177,7 +1152,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MBD-Dh-qYH" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5573.333333333333" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2276.3333333333335" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URv-n4-dMd">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1186,7 +1161,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hV-HO-mc1">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1197,7 +1172,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-yv-U4U" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5665" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2368" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRu-Xw-gU8">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1206,7 +1181,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-wo-VS7">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1217,7 +1192,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0nH-yk-jvf" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="5756.666666666667" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2459.6666666666665" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Reminder - PM Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5l-7g-Ie0">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1225,13 +1200,10 @@
                                                                         <color key="textColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJ8-fZ-Edg">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="flb-BZ-oyg" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6024.333333333333" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2496.3333333333335" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Reminder - PM Level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FlN-tM-pZ0">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1239,13 +1211,10 @@
                                                                         <color key="textColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScW-Mt-ikp">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="59H-uo-XGL" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6292" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2533" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Service Reminder - Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpb-v1-5wl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1254,7 +1223,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Zk-Ke-4OO">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1265,7 +1234,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="KWx-wa-D9l" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6383.666666666667" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2624.6666666666665" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n0-g6-7cx">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1274,7 +1243,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Bx-nU-x63">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1285,7 +1254,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kKZ-i5-TSO" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6475.333333333333" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2716.3333333333335" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Window Before Due" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTd-nf-DU3">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1294,7 +1263,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vsw-Kb-F1O">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1305,7 +1274,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="7x1-0l-rO2" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6567" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2808" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Window Before Due Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6y-fT-25C">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1313,13 +1282,10 @@
                                                                         <color key="textColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwf-SL-gPN">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="kbf-P0-nSV" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="6834.666666666667" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2844.6666666666665" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Component Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSF-Pp-bYO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1327,13 +1293,10 @@
                                                                         <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3M-O3-F7l">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="D8T-a9-WH2" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="7102.333333333333" width="374" height="252.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2881.3333333333335" width="374" height="21.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Component" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDI-lA-3mw">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1341,13 +1304,10 @@
                                                                         <color key="textColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pCa-dY-M4e">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="216"/>
-                                                                    </pickerView>
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ck1-ye-trv" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="7370" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="2918" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Component Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgw-EO-IHO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1356,7 +1316,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cjI-Vj-NZz">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.666666666666515" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1367,7 +1327,7 @@
                                                                 </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="PCe-3w-wjX" userLabel="Field Group">
-                                                                <rect key="frame" x="0.0" y="7461.666666666667" width="374" height="76.66666666666697"/>
+                                                                <rect key="frame" x="0.0" y="3009.6666666666665" width="374" height="76.666666666666515"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zh4-eG-TFt">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="21.666666666666668"/>
@@ -1376,7 +1336,7 @@
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jId-Z9-RfH">
-                                                                        <rect key="frame" x="0.0" y="36.66666666666606" width="374" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="36.66666666666697" width="374" height="40"/>
                                                                         <nil key="textColor"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                         <textInputTraits key="textInputTraits"/>
@@ -1482,6 +1442,8 @@
                     <size key="freeformSize" width="414" height="7500"/>
                     <connections>
                         <outlet property="currentSMR" destination="Yjd-Jk-NpZ" id="9zk-Wu-nIE"/>
+                        <outlet property="dateEntered" destination="kRF-QZ-xe6" id="RLo-p9-VVR"/>
+                        <outlet property="enteredBy" destination="QZ9-A4-dyR" id="Vgp-jG-06J"/>
                         <outlet property="scrollView" destination="C2d-LS-Kyg" id="frt-CE-HR1"/>
                         <outlet property="unitNumber" destination="mfe-YF-i2I" id="kQl-fa-esP"/>
                         <outlet property="view" destination="Xry-5U-pKB" id="cev-hp-6KW"/>
