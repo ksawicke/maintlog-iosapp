@@ -51,6 +51,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 
     @IBOutlet weak var barcodeScannedLabel: UILabel!
+    @IBOutlet weak var equipmentUnitLabel: UILabel!
     @IBOutlet weak var currentSectionLabel: UILabel!
     @IBOutlet weak var currentInspectionItemLabel: UILabel!
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
@@ -168,7 +169,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                     print("etid: \(etid)")
                     print("barCodeValue: \(barCodeValue)")
                     
-                    barcodeScannedLabel.text = "\(scannedManufacturerName) \(scannedModelNumber) - \(barCodeValue)"
+                    barcodeScannedLabel.text = "\(barCodeValue)"
+                    equipmentUnitLabel.text = "\(scannedManufacturerName) \(scannedModelNumber)"
                     inspectionId = UUID().uuidString
                 }
             }
