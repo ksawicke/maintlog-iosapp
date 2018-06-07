@@ -19,7 +19,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
-    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
     var API_UPLOAD_INSPECTION_RATINGS = "/api/upload_inspection_ratings"
     var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"

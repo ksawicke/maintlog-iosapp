@@ -39,7 +39,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
-    var API_PROD_BASE_URL = "https://10.132.146.48/maintlog/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
     var API_CHECKLIST = "/api/checklist"
     var API_CHECKLISTITEM = "/api/checklistitem"
     var API_EQUIPMENTTYPE = "/api/equipmenttype"
