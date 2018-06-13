@@ -429,6 +429,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                     if responseJSON["status"] == true {
                         _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
                         
+//                        debugPrint(responseJSON)
+                        
 //                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
                     } else {
 //                        ProgressHUD.showError("Unable to upload Inspection Rating")
