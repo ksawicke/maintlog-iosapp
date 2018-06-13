@@ -48,6 +48,8 @@ class LoginController: UIViewController {
         let userPinEntered: String = userPin.text!
         var URL = "\(API_PROD_BASE_URL)\(API_AUTHENTICATE)"
         
+        ProgressHUD.show()
+        
 //        if !UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && ConnectivityHelper.isConnectedToKomatsuAmerica() {
 //            print("Mode: PROD. Connect: OK")
 //        } else if !UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey) && !ConnectivityHelper.isConnectedToKomatsuAmerica() {
@@ -64,8 +66,6 @@ class LoginController: UIViewController {
         }
         
         URL.append("?user_pin=\(userPinEntered)&api_key=\(API_KEY)")
-        
-        print(URL)
 
         loginButton.isEnabled = false
         
@@ -79,16 +79,45 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userPin.text = ""
+        
+        let countActiveUsers = LoginCoreDataHandler.countActiveUsers()
+        if countActiveUsers == 1 {
+            let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
+            
+            for activeUser in activeUsers! {
+//                print("expiresOn vs Date:")
+//                print(activeUser.value(forKey: "expiresOn")!)
+//                print(Date())
+                if Date() > activeUser.value(forKey: "expiresOn")! as! Date {
+                    // Proceed with login
+                } else {
+                    if isLoggedIn() {
+                        allowSessionToContinue()
+                    }
+                }
+            }
+        }
 
         // Do any additional setup after loading the view.
-        if isLoggedIn() {
-            loginErrorLabel.text = "Session active. Click Continue to proceed."
-            loginErrorLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
-            loginErrorLabel.isHidden = false
-            pinLabel.isHidden = true
-            userPin.isHidden = true
-            loginButton.setTitle("Continue", for: .normal)
-        }
+//        if isLoggedIn() {
+//            loginErrorLabel.text = "Session active. Click Continue to proceed."
+//            loginErrorLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
+//            loginErrorLabel.isHidden = false
+//            pinLabel.isHidden = true
+//            userPin.isHidden = true
+//            loginButton.setTitle("Continue", for: .normal)
+//        }
+    }
+    
+    func allowSessionToContinue() {
+        loginErrorLabel.text = "Session active. Click Continue to proceed."
+        loginErrorLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
+        loginErrorLabel.isHidden = false
+        pinLabel.isHidden = true
+        userPin.isHidden = true
+        loginButton.setTitle("Continue", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +130,7 @@ class LoginController: UIViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        print(networkStatus.startNetworkReachabilityObserver())
+//        print(networkStatus.startNetworkReachabilityObserver())
     }
     
     func isLoggedIn() -> Bool {
@@ -119,8 +148,8 @@ class LoginController: UIViewController {
     
     func doAuthCheck(url: String) {
 
-        print("Attempt connecting to: \(url)")
-        print(headers)
+//        print("Attempt connecting to: \(url)")
+//        print(headers)
         
         // http://ashishkakkad.com/2015/10/how-to-use-alamofire-and-swiftyjson-with-swift/
         // https://stackoverflow.com/questions/35427698/how-to-use-networkreachabilitymanager-in-alamofire
@@ -159,7 +188,7 @@ class LoginController: UIViewController {
                     self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
                 }
             } else {
-                print("Response nil. No connection")
+                ProgressHUD.showError("Unable to connect")
             }
         }
         
@@ -196,11 +225,14 @@ class LoginController: UIViewController {
         let lastName = userData["last_name"].string!
         let emailAddress = userData["email_address"].string!
         let role = userData["role"].string!
-        // let twelveHoursFromNow = Date().addingTimeInterval(+43200) // TODO: Use to expire
+        let expiresOn = Date().addingTimeInterval(+43200) // TODO: Use to expire
         
-        _ = LoginCoreDataHandler.saveObject(userId: userId, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
+        ProgressHUD.dismiss()
+        
+        _ = LoginCoreDataHandler.saveObject(userId: userId, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role, expiresOn: expiresOn)
         
         deleteItems()
+//        deleteInspections()
         addChecklists()
         addChecklistItems()
         addEquipmentTypes()
@@ -214,12 +246,14 @@ class LoginController: UIViewController {
     func doUnsuccessfulAuthTasks(responseJSON: JSON) {
         let loginErrorMessage = responseJSON["message"].string!
         
-        print(loginErrorMessage)
+        ProgressHUD.dismiss()
         
-        //                    self.userPin.layer.borderColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0) as! CGColor
+        ProgressHUD.showError(loginErrorMessage)
+        
+//        userPin.layer.borderColor = (UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0) as! CGColor)
         userPin.layer.borderWidth = 2
-        loginErrorLabel.text = loginErrorMessage
-        loginErrorLabel.isHidden = false
+//        loginErrorLabel.text = loginErrorMessage
+//        loginErrorLabel.isHidden = false
     }
     
     func addChecklists() {
@@ -232,27 +266,62 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//            .responseJSON { (responseData) -> Void in
+//                //            print(responseData)
+//                if((responseData.result.value) != nil) {
+//                    let responseJSON : JSON = JSON(responseData.result.value!)
+//
+//                    if responseJSON["status"] == true {
+//                        self.doSuccessfulAuthTasks(responseJSON: responseJSON)
+//                    } else {
+//                        self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
+//                    }
+//                } else {
+//                    print("Response nil. No connection")
+//                }
+//        }
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+
                 if responseJSON["status"] == true {
                     let checklists = responseJSON["checklists"]
-                    
-                    //                    print(checklists)
-                    
+
                     for (_, checklist) in checklists {
                         let id = checklist["id"].int16!
                         let equipmentTypeId = checklist["equipmenttype_id"].int16!
                         let checklistJson = checklist["checklist_json"].string!
-                        
-                        //                        print(checklistJson)
-                        //
+
                         _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
                     }
                 } else {
-                    let errorMessage = responseJSON["message"].string!
+                    self.doUnsuccessfulAuthTasks(responseJSON: responseJSON)
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Checklists")
             }
+            
+//            if let responseJSON : JSON = JSON(response.result.value!) {
+//                if responseJSON["status"] == true {
+//                    let checklists = responseJSON["checklists"]
+//                    
+//                    //                    print(checklists)
+//                    
+//                    for (_, checklist) in checklists {
+//                        let id = checklist["id"].int16!
+//                        let equipmentTypeId = checklist["equipmenttype_id"].int16!
+//                        let checklistJson = checklist["checklist_json"].string!
+//                        
+//                        //                        print(checklistJson)
+//                        //
+//                        _ = ChecklistCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId, checklistJson: checklistJson)
+//                    }
+//                } else {
+//                    let errorMessage = responseJSON["message"].string!
+//                }
+//            }
         }
     }
     
@@ -265,13 +334,13 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
                 if responseJSON["status"] == true {
                     let checklistitems = responseJSON["checklistitems"]
-                    
-                    //                    print(checklistitems)
                     
                     for (_, checklistitem) in checklistitems {
                         let id = checklistitem["id"].int16!
@@ -282,6 +351,8 @@ class LoginController: UIViewController {
                 } else {
                     let errorMessage = responseJSON["message"].string!
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Checklist Items")
             }
         }
     }
@@ -295,9 +366,11 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
                 if responseJSON["status"] == true {
                     let equipmenttypes = responseJSON["equipmenttypes"]
                     
@@ -312,6 +385,8 @@ class LoginController: UIViewController {
                 } else {
                     let errorMessage = responseJSON["message"].string!
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Equipment Types")
             }
         }
     }
@@ -325,23 +400,13 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
                 if responseJSON["status"] == true {
                     let equipmentunits = responseJSON["equipmentunits"]
-                    
-                    /**
-                     "equipmentunits": [
-                     {
-                     "equipmentunit_id": 1,
-                     "unit_number": "N/A",
-                     "manufacturer_name": "Komatsu",
-                     "model_number": "WB-140",
-                     "equipmenttype_id": 13
-                     }, **/
-                    
-                    print(equipmentunits)
                     
                     for (_, equipmentunit) in equipmentunits {
                         let id = equipmentunit["equipmentunit_id"].int16!
@@ -352,13 +417,13 @@ class LoginController: UIViewController {
                         let trackType = equipmentunit["track_type"].stringValue
                         let fluidsTracked = equipmentunit["fluids_tracked"].stringValue
                         
-                        // saveObject(id: Int16, equipmentTypeId: Int16, manufacturerName: String, modelNumber: String, unitNumber: String)
-                        
                         _ = EquipmentUnitCoreDataHandler.saveObject(id: id, equipmentTypeId: equipmentTypeId!, manufacturerName: manufacturerName, modelNumber: modelNumber, unitNumber: unitNumber, trackType: trackType, fluidsTracked: fluidsTracked)
                     }
                 } else {
                     let errorMessage = responseJSON["message"].string!
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Equipment Units")
             }
         }
     }
@@ -372,23 +437,25 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
                 if responseJSON["status"] == true {
                     let fluidtypes = responseJSON["fluidtypes"]
-                    
-                    //                    print(equipmenttypes)
                     
                     for (_, fluidtype) in fluidtypes {
                         let id = fluidtype["id"].int16!
                         let fluidType = fluidtype["fluid_type"].string!
-
+                        
                         _ = FluidTypeCoreDataHandler.saveObject(id: id, fluidType: fluidType)
                     }
                 } else {
                     let errorMessage = responseJSON["message"].string!
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Fluid Types")
             }
         }
     }
@@ -402,13 +469,13 @@ class LoginController: UIViewController {
         
         URL.append("?api_key=\(API_KEY)")
         
-        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
             
-            if let responseJSON : JSON = JSON(response.result.value!) {
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
                 if responseJSON["status"] == true {
                     let users = responseJSON["users"]
-                    
-                    //                    print(equipmenttypes)
                     
                     for (_, user) in users {
                         let id = user["id"].int16!
@@ -416,12 +483,14 @@ class LoginController: UIViewController {
                         let lastName = user["last_name"].string!
                         let emailAddress = user["email_address"].string!
                         let role = user["role"].string!
-
+                        
                         _ = UserCoreDataHandler.saveObject(id: id, firstName: firstName, lastName: lastName, emailAddress: emailAddress, role: role)
                     }
                 } else {
                     let errorMessage = responseJSON["message"].string!
                 }
+            } else {
+                ProgressHUD.showError("Unable to import Users")
             }
         }
     }
@@ -433,6 +502,11 @@ class LoginController: UIViewController {
         _ = EquipmentUnitCoreDataHandler.cleanDelete()
         _ = FluidTypeCoreDataHandler.cleanDelete()
         _ = UserCoreDataHandler.cleanDelete()
+    }
+    
+    func deleteInspections() {
+        _ = InspectionRatingCoreDataHandler.cleanDelete()
+        _ = InspectionImageCoreDataHandler.cleanDelete()
     }
 
 }

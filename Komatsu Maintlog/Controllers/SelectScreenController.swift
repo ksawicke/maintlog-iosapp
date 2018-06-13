@@ -50,27 +50,27 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @IBOutlet weak var uploadProgressBar: UIView!
     
     @IBAction func onClickUploadInspections(_ sender: UIButton) {
-        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
-        
-        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
-            // USE DEV URL
-            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
-        }
-        
-        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
-        
-        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
-        
-        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
-            // USE DEV URL
-            UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
-        }
-        
-        UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
-        
-        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
-        
-        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
+//        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+//        
+//        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+//            // USE DEV URL
+//            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+//        }
+//        
+//        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
+//        
+//        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+//        
+//        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+//            // USE DEV URL
+//            UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+//        }
+//        
+//        UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
+//        
+//        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
+//        
+//        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
         
         
 //        let params = getUploadInspectionParams() as [String: Any]
@@ -112,20 +112,23 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         resetDefaultValues()
 
-        let countInspectionRating = InspectionRatingCoreDataHandler.countData()
-        let countInspectionImage = InspectionImageCoreDataHandler.countData()
+//        let countInspectionRating = InspectionRatingCoreDataHandler.countData()
+//        let countInspectionImage = InspectionImageCoreDataHandler.countData()
+//
+//        print(countInspectionRating)
+//        print(countInspectionImage)
+//
+//        let totalUploads = countInspectionRating + countInspectionImage
+//
+//        if totalUploads > 0 {
+////        if countInspectionRating > 0 || countInspectionImage > 0 {
+//            enableUploadButton(totalUploads: totalUploads)
+//        } else {
+//            disableUploadButton()
+//        }
         
-        print(countInspectionRating)
-        print(countInspectionImage)
-        
-        let totalUploads = countInspectionRating + countInspectionImage
-        
-        if totalUploads > 0 {
-//        if countInspectionRating > 0 || countInspectionImage > 0 {
-            enableUploadButton(totalUploads: totalUploads)
-        } else {
-            disableUploadButton()
-        }
+        checkForDataToUpload()
+        checkIfSessionExpired()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,7 +156,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         barcodeSelectedLabel.text = "Equipment Unit QR Code not scanned"
         barcodeSelectedLabel.isHidden = false
         scanBarcodeButton.isHidden = false
-        uploadInspectionButton.isEnabled = false
+//        uploadInspectionButton.isEnabled = false
     }
     
     func userScannedANewBarcode(unitNumber: String) {
@@ -174,104 +177,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             barcodeSelectedLabel.backgroundColor = UIColor(red: 205/255, green: 68/255, blue: 74/255, alpha: 1.0)
             inspectionEntryButton.isHidden = true
             logEntryButton.isHidden = true
-        }
-    }
-    
-    func uploadImages(url: String) {
-        let inspectionImages = InspectionImageCoreDataHandler.fetchObject()
-        
-        uploadProgressBar.isHidden = true
-        uploadProgressBar.frame.size.width = 0
-        
-        for inspectionImage in inspectionImages! {
-            let image = inspectionImage.image
-            let inspectionId = inspectionImage.inspectionId!
-            let photoId = inspectionImage.photoId
-            
-            let inspectionImageItem: Parameters = [
-                "inspectionId": inspectionId,
-                "photoId": photoId,
-                "type": "png"
-                ]
-            
-            let fileName = "\(inspectionId)_\(photoId).png"
-            let mimeType = "image/png"
-            let imageData = UIImagePNGRepresentation(UIImage(data: image!, scale: 0.1)!)
- 
-            Alamofire.upload(multipartFormData: { (multipartFormData) in
-                for (key, value) in inspectionImageItem {
-                    multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
-                }
-
-                multipartFormData.append(imageData!, withName: "upload", fileName: fileName, mimeType: mimeType)
-
-            }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headersMultipart) { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    self.uploadProgressBar.isHidden = false
-
-                    upload.uploadProgress { progress in
-                        let percentComplete = Float(progress.fractionCompleted)
-                        let newProgressBarWidth = (self.view.frame.size.width - 30) * CGFloat(percentComplete)
-                        self.uploadProgressBar.frame.size.width = newProgressBarWidth
-                    }
-//                    upload.validate(statusCode: 200..<600)
-//                        .validate(contentType: ["text/html"])
-//                        .response { response in
-//                    }
-                    upload.responseString { response in
-                        debugPrint(response)
-                        self.uploadProgressBar.isHidden = true
-                        self.uploadProgressBar.frame.size.width = 0
-                    }
-
-                case .failure(let encodingError):
-                    print(encodingError)
-                    print("Image upload FAIL")
-                    print("##")
-                    self.uploadProgressBar.isHidden = true
-                    self.uploadProgressBar.frame.size.width = 0
-                }
-            }
-        }
-    }
-    
-    func uploadRatings(url: String) {
-        let inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
-        var params: Any = []
-        
-        for inspectionRating in inspectionRatings! {
-            let equipmentUnitId = inspectionRating.equipmentUnitId
-            let checklistItemId = inspectionRating.checklistItemId
-            let inspectionId = inspectionRating.inspectionId
-            let note = inspectionRating.note!
-            let rating = inspectionRating.rating
-            let userId = 1
-
-            let inspectionRatingItem: [String: Any] = [
-                "equipmentUnitId": equipmentUnitId,
-                "checklistItemId": checklistItemId,
-                "inspectionId": inspectionId!,
-                "note": note,
-                "rating": rating,
-                "userId": userId
-            ]
-
-            // Append Inspection Item
-            params = (params as? [Any] ?? []) + [inspectionRatingItem]
-        }
- 
-        Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-            response in
-            switch response.result {
-                case .success:
-                    print(response)
-                    
-                    break
-                case .failure(let error):
-                    
-                    print(error)
-            }
         }
     }
     
@@ -335,5 +240,218 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //        }
         
     }
+    
+    func checkForDataToUpload() {
+        Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(SelectScreenController.countInspectionsToUpload), userInfo: nil, repeats: true)
+    }
+    
+    func checkIfSessionExpired() {
+        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(SelectScreenController.checkSession), userInfo: nil, repeats: true)
+    }
+    
+    @objc func countInspectionsToUpload() {
+        let countInspectionRating = InspectionRatingCoreDataHandler.countData()
+        let countInspectionImage = InspectionImageCoreDataHandler.countData()
 
+        let totalUploads = countInspectionRating + countInspectionImage
+        
+        if totalUploads > 0 {
+            uploadInspectionButton.setTitle("\(totalUploads) items pending upload", for: .normal)
+
+            uploadInspectionRatings()
+            uploadInspectionImages()
+        } else {
+            uploadInspectionButton.setTitle("", for: .normal)
+        }
+    }
+    
+    @objc func checkSession() {
+        let countActiveUsers = LoginCoreDataHandler.countActiveUsers()
+        if countActiveUsers == 1 {
+            let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
+            
+            for activeUser in activeUsers! {
+                if Date() > activeUser.value(forKey: "expiresOn")! as! Date {
+                    goBackToLogin()
+                } else {
+                    if isLoggedIn() {
+                        // Ok, allow user to continue
+                    } else {
+                        goBackToLogin()
+                    }
+                }
+            }
+        }
+    }
+    
+    func isLoggedIn() -> Bool {
+        let adminCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "admin")
+        let userCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "user")
+        
+        let loggedInCount = (adminCount?.count)! + (userCount?.count)!
+        
+        if loggedInCount > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func goBackToLogin() {
+        let alert = UIAlertController(title: "Session Expired", message: "Return to Main Menu", preferredStyle: .alert)
+        
+        let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        alert.addAction(restartAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func uploadInspectionRatings() {
+        var UPLOAD_INSPECTION_RATINGS_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            UPLOAD_INSPECTION_RATINGS_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_RATINGS)"
+        }
+        UPLOAD_INSPECTION_RATINGS_URL.append("?&api_key=\(API_KEY)")
+
+        uploadRatings(url: UPLOAD_INSPECTION_RATINGS_URL)
+    }
+    
+    func uploadInspectionImages() {
+        var UPLOAD_INSPECTION_IMAGES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            UPLOAD_INSPECTION_IMAGES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_INSPECTION_IMAGES)"
+        }
+        UPLOAD_INSPECTION_IMAGES_URL.append("?&api_key=\(API_KEY)")
+        
+        uploadImages(url: UPLOAD_INSPECTION_IMAGES_URL)
+    }
+
+    func uploadImages(url: String) {
+        let inspectionImages = InspectionImageCoreDataHandler.fetchObject()
+        
+        uploadProgressBar.isHidden = true
+        uploadProgressBar.frame.size.width = 0
+        
+        for inspectionImage in inspectionImages! {
+            let image = inspectionImage.image
+            let inspectionId = inspectionImage.inspectionId!
+            let photoId = inspectionImage.photoId
+            
+            let inspectionImageItem: Parameters = [
+                "inspectionId": inspectionId,
+                "photoId": photoId,
+                "type": "png"
+            ]
+            
+            let fileName = "\(inspectionId)_\(photoId).png"
+            let mimeType = "image/png"
+            let imageData = UIImagePNGRepresentation(UIImage(data: image!, scale: 1)!)
+            
+            if(imageData != nil) {
+                Alamofire.upload(multipartFormData: { (multipartFormData) in
+                    for (key, value) in inspectionImageItem {
+                        multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                    }
+
+                    multipartFormData.append(imageData!, withName: "upload", fileName: fileName, mimeType: mimeType)
+
+                }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headersMultipart) { (result) in
+                    switch result {
+                    case .success(let upload, _, _):
+                        self.uploadProgressBar.isHidden = false
+
+                        upload.uploadProgress { progress in
+                            let percentComplete = Float(progress.fractionCompleted)
+                            let newProgressBarWidth = (self.view.frame.size.width - 30) * CGFloat(percentComplete)
+                            self.uploadProgressBar.frame.size.width = newProgressBarWidth
+                        }
+                        //                    upload.validate(statusCode: 200..<600)
+                        //                        .validate(contentType: ["text/html"])
+                        //                        .response { response in
+                        //                    }
+                        upload.responseString { response in
+                            debugPrint(response)
+                            self.uploadProgressBar.isHidden = true
+                            self.uploadProgressBar.frame.size.width = 0
+                        }
+
+                        _ = InspectionImageCoreDataHandler.deleteObject(inspectionImage: inspectionImage)
+                        
+                        ProgressHUD.showSuccess("Inspection Image uploaded!")
+
+                    case .failure(let encodingError):
+                        ProgressHUD.showError("Unable to upload Inspection Image")
+//                        print(encodingError)
+//                        print("Image upload FAIL")
+//                        print("##")
+                        self.uploadProgressBar.isHidden = true
+                        self.uploadProgressBar.frame.size.width = 0
+//                        self.uploadInspectionButton.setTitle("Error trying to upload inspection(s)", for: .normal)
+                    }
+                }
+            }
+        }
+    }
+    
+    func uploadRatings(url: String) {
+        let inspectionRatings = InspectionRatingCoreDataHandler.fetchObject()
+        var params: Any = []
+        
+        for inspectionRating in inspectionRatings! {
+            let equipmentUnitId = inspectionRating.equipmentUnitId
+            let checklistItemId = inspectionRating.checklistItemId
+            let inspectionId = inspectionRating.inspectionId
+            let note = inspectionRating.note!
+            let rating = inspectionRating.rating
+            let userId = 1
+            
+            let inspectionRatingItem: [String: Any] = [
+                "equipmentUnitId": equipmentUnitId,
+                "checklistItemId": checklistItemId,
+                "inspectionId": inspectionId!,
+                "note": note,
+                "rating": rating,
+                "userId": userId
+            ]
+            
+            // Append Inspection Item
+            params = (params as? [Any] ?? []) + [inspectionRatingItem]
+            
+            Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
+                if((responseData.result.value) != nil) {
+                    let responseJSON : JSON = JSON(responseData.result.value!)
+                    
+                    if responseJSON["status"] == true {
+                        _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
+                        
+                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
+                    } else {
+                        ProgressHUD.showError("Unable to upload Inspection Rating")
+//                        self.uploadInspectionButton.setTitle("Error trying to upload inspection(s)", for: .normal)
+                    }
+                } else {
+                    ProgressHUD.showError("Unable to upload Inspection Rating")
+//                    print("Response nil. No connection")
+//                    self.uploadInspectionButton.setTitle("Unable to connect", for: .normal)
+                }
+            }
+                        
+//            Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+//                response in
+//                switch response.result {
+//                case .success:
+//                    print(response)
+//                    _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
+//                    break
+//                case .failure(let error):
+//                    
+//                    print(error)
+//                }
+//            }
+        }
+    }
+    
 }

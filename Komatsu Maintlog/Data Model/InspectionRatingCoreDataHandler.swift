@@ -81,8 +81,7 @@ class InspectionRatingCoreDataHandler: NSObject {
     class func countData() -> Int {
         let context = getContext()
         let fetchRequest:NSFetchRequest<InspectionRating> = InspectionRating.fetchRequest()
-        var inspectionRatingCount:Int? = nil
-        var _ = 0
+        var inspectionRatingCount:Int? = 0
         
         let predicate = NSPredicate(format: "rating == 0 OR rating == 1")
         fetchRequest.predicate = predicate

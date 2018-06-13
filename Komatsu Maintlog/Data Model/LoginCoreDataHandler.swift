@@ -17,10 +17,24 @@ class LoginCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(userId: Int16, firstName: String, lastName: String, emailAddress: String, role: String) -> Bool {
+    class func saveObject(userId: Int16, firstName: String, lastName: String, emailAddress: String, role: String, expiresOn: Date) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Login", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
+        
+//        let date = NSDate()
+//        let date2 = Date()
+//        // +43200 = 12 hours
+//        // +300 = 5 minutes
+//        let expiresOn2 = date.addingTimeInterval(+300)
+//        dateFormatter.dateFormat = "dd/MM/yyyy"
+//        var dateString = dateFormatter.string(from: date as Date)
+        // Date().addingTimeInterval(+43200)
+        
+//        print("date: \(date)")
+//        print("Date(): \(date2)")
+//        print("expiresOn: \(expiresOn)")
+//        print("expiresOn2: \(expiresOn2)")
         
         managedObject.setValue(userId, forKey: "userId")
         managedObject.setValue(firstName, forKey: "firstName")
@@ -28,6 +42,8 @@ class LoginCoreDataHandler: NSObject {
         managedObject.setValue(emailAddress, forKey: "emailAddress")
         managedObject.setValue(role, forKey: "role")
         managedObject.setValue(Date(), forKey: "created")
+        managedObject.setValue(expiresOn, forKey: "expiresOn")
+        managedObject.setValue(1, forKey: "active")
         
         do {
             try context.save()
@@ -77,6 +93,23 @@ class LoginCoreDataHandler: NSObject {
         }
     }
     
+    class func countActiveUsers() -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<Login> = Login.fetchRequest()
+        var loginRatingCount:Int? = 0
+        
+        let predicate = NSPredicate(format: "active == 1")
+        fetchRequest.predicate = predicate
+        
+        do {
+            loginRatingCount = try context.count(for: fetchRequest)
+            
+            return loginRatingCount!
+        } catch {
+            return loginRatingCount!
+        }
+    }
+    
     class func filterData(fieldName: String, filterType: String, queryString: String) -> [Login]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<Login> = Login.fetchRequest()
@@ -97,9 +130,12 @@ class LoginCoreDataHandler: NSObject {
         }
         
         do {
-            login = try context.fetch(fetchRequest)
+            let login = try context.fetch(Login.fetchRequest())
             
-            return login
+            return login as? [Login]
+//            login = try context.fetch(fetchRequest)
+//
+//            return login
         } catch {
             return login
         }

@@ -459,7 +459,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         inspectionId = ""
         equipmentUnitIdSelected = 0
         
-        nextInspectionItem()
+        checkSession()
     }
     
     func updateUI(sectionLabel: String, itemLabel: String) {
@@ -490,6 +490,55 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             barCodeValue = unitNumber
             // equipmentUnitIdSelected
         }
+    }
+    
+    func checkSession() {
+        let countActiveUsers = LoginCoreDataHandler.countActiveUsers()
+        if countActiveUsers == 1 {
+            let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
+            
+            for activeUser in activeUsers! {
+                print("expiresOn vs Date:")
+                print(activeUser.value(forKey: "expiresOn")!)
+                print(Date())
+                if Date() > activeUser.value(forKey: "expiresOn")! as! Date {
+                    goBackToLogin()
+                } else {
+                    if isLoggedIn() {
+                        nextInspectionItem()
+                    } else {
+                        goBackToLogin()
+                    }
+                }
+            }
+        }
+    }
+    
+    func isLoggedIn() -> Bool {
+        let adminCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "admin")
+        let userCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "user")
+        
+        let loggedInCount = (adminCount?.count)! + (userCount?.count)!
+        
+        if loggedInCount > 0 {
+            return true
+        }
+        
+        return false
+    }
+    
+    func goBackToLogin() {
+        print("Gotta log back in")
+        return
+//        let alert = UIAlertController(title: "Session Expired", message: "Return to Main Menu", preferredStyle: .alert)
+//
+//        let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
+//            self.dismiss(animated: true, completion: nil)
+//        })
+//
+//        alert.addAction(restartAction)
+//
+//        present(alert, animated: true, completion: nil)
     }
     
     //Write the PrepareForSegue Method here
