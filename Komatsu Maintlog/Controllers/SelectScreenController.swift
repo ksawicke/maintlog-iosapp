@@ -111,6 +111,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         // Do any additional setup after loading the view, typically from a nib.
         resetDefaultValues()
+        
+        ProgressHUD.dismiss()
 
 //        let countInspectionRating = InspectionRatingCoreDataHandler.countData()
 //        let countInspectionImage = InspectionImageCoreDataHandler.countData()
@@ -373,17 +375,17 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                         //                        .response { response in
                         //                    }
                         upload.responseString { response in
-                            debugPrint(response)
+//                            debugPrint(response)
                             self.uploadProgressBar.isHidden = true
                             self.uploadProgressBar.frame.size.width = 0
                         }
 
                         _ = InspectionImageCoreDataHandler.deleteObject(inspectionImage: inspectionImage)
                         
-                        ProgressHUD.showSuccess("Inspection Image uploaded!")
+//                        ProgressHUD.showSuccess("Inspection Image uploaded!")
 
                     case .failure(let encodingError):
-                        ProgressHUD.showError("Unable to upload Inspection Image")
+//                        ProgressHUD.showError("Unable to upload Inspection Image")
 //                        print(encodingError)
 //                        print("Image upload FAIL")
 //                        print("##")
@@ -427,13 +429,13 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                     if responseJSON["status"] == true {
                         _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
                         
-                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
+//                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
                     } else {
-                        ProgressHUD.showError("Unable to upload Inspection Rating")
+//                        ProgressHUD.showError("Unable to upload Inspection Rating")
 //                        self.uploadInspectionButton.setTitle("Error trying to upload inspection(s)", for: .normal)
                     }
                 } else {
-                    ProgressHUD.showError("Unable to upload Inspection Rating")
+//                    ProgressHUD.showError("Unable to upload Inspection Rating")
 //                    print("Response nil. No connection")
 //                    self.uploadInspectionButton.setTitle("Unable to connect", for: .normal)
                 }

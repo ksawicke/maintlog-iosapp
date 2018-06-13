@@ -246,7 +246,7 @@ class LoginController: UIViewController {
     func doUnsuccessfulAuthTasks(responseJSON: JSON) {
         let loginErrorMessage = responseJSON["message"].string!
         
-        ProgressHUD.dismiss()
+//        ProgressHUD.dismiss()
         
         ProgressHUD.showError(loginErrorMessage)
         

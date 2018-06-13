@@ -500,9 +500,9 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
             
             for activeUser in activeUsers! {
-                print("expiresOn vs Date:")
-                print(activeUser.value(forKey: "expiresOn")!)
-                print(Date())
+//                print("expiresOn vs Date:")
+//                print(activeUser.value(forKey: "expiresOn")!)
+//                print(Date())
                 if Date() > activeUser.value(forKey: "expiresOn")! as! Date {
                     goBackToLogin()
                 } else {
