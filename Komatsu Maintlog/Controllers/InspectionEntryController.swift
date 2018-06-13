@@ -105,7 +105,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     @IBAction func onChooseInspectionValue(_ sender: UIButton) {
-        print(equipmentUnitIdSelected)
+//        print(equipmentUnitIdSelected)
         
         if (sender as AnyObject).tag == 1 && currentInspectionItemBadNote.isHidden == true {
             inspectionGoodButton.setImage(UIImage(named: "icons8-ok"), for: [])
@@ -133,7 +133,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("BAR CODE VALUE: \(barCodeValue)")
+//        print("BAR CODE VALUE: \(barCodeValue)")
         
         currentInspectionItemBadNote.delegate = self
         
@@ -145,7 +145,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-        print("BAR CODE VALUE: \(barCodeValue)")
+//        print("BAR CODE VALUE: \(barCodeValue)")
         
         if barCodeValue != "" {
             // Try matching scanned barcode to equipment loaded into app
@@ -164,10 +164,10 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                     let modelNumber = scannedModelNumber as! String
                     let etid = scannedEquipmentTypeId as! Int16
                     
-                    print("equipmentTypeSelected: \(equipmentTypeSelected)")
-                    print("modelNumber: \(modelNumber)")
-                    print("etid: \(etid)")
-                    print("barCodeValue: \(barCodeValue)")
+//                    print("equipmentTypeSelected: \(equipmentTypeSelected)")
+//                    print("modelNumber: \(modelNumber)")
+//                    print("etid: \(etid)")
+//                    print("barCodeValue: \(barCodeValue)")
                     
                     barcodeScannedLabel.text = "\(barCodeValue)"
                     equipmentUnitLabel.text = "\(scannedManufacturerName) \(scannedModelNumber)"
@@ -175,7 +175,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                 }
             }
         } else {
-            print("HMM?")
+//            ProgressHUD.showError("Error")
+//            print("HMM?")
         }
         
         equipmentUnit = barCodeValue
@@ -308,7 +309,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
                         appendToChecklistItemArray(id: checklistItemId, checklistitem: checklistitem!, appendTo: "postStart")
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    ProgressHUD.showError("Error loading Checklist Items")
+//                    print(error.localizedDescription)
                 }
             }
         }
@@ -528,7 +530,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     }
     
     func goBackToLogin() {
-        print("Gotta log back in")
+//        print("Gotta log back in")
         return
 //        let alert = UIAlertController(title: "Session Expired", message: "Return to Main Menu", preferredStyle: .alert)
 //

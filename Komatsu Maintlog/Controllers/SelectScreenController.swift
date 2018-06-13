@@ -205,7 +205,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 destinationVC.barCodeValue = self.barCodeValue
             
             default:
-                print("ERROR")
+                print(".")
         }
         
 //        if segue.identifier == "goToScanBarcode" {
