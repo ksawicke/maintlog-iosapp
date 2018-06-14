@@ -24,7 +24,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headersWWWForm: HTTPHeaders = [
-        "Content-Type": "x-www-form-urlencoded"
+        "Content-Type": "application/json"
     ]
     let headersMultipart: HTTPHeaders = [
         "Content-type": "multipart/form-data"
@@ -129,8 +129,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //            disableUploadButton()
 //        }
         
-        checkForDataToUpload()
-        checkIfSessionExpired()
+        countInspectionsToUpload()
+        updateItemsPendingMessage()
+        attemptInspectionUploads()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -243,12 +244,16 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
     }
     
-    func checkForDataToUpload() {
-        Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(SelectScreenController.countInspectionsToUpload), userInfo: nil, repeats: true)
+    func updateItemsPendingMessage() {
+        Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(SelectScreenController.countInspectionsToUpload), userInfo: nil, repeats: true)
+    }
+    
+    func attemptInspectionUploads() {
+        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(SelectScreenController.uploadInspectionData), userInfo: nil, repeats: true)
     }
     
     func checkIfSessionExpired() {
-        Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(SelectScreenController.checkSession), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(SelectScreenController.checkSession), userInfo: nil, repeats: true)
     }
     
     @objc func countInspectionsToUpload() {
@@ -259,12 +264,14 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         
         if totalUploads > 0 {
             uploadInspectionButton.setTitle("\(totalUploads) items pending upload", for: .normal)
-
-            uploadInspectionRatings()
-            uploadInspectionImages()
         } else {
             uploadInspectionButton.setTitle("", for: .normal)
         }
+    }
+    
+    @objc func uploadInspectionData() {
+        uploadInspectionRatings()
+        uploadInspectionImages()
     }
     
     @objc func checkSession() {
@@ -410,7 +417,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let rating = inspectionRating.rating
             let userId = 1
             
-            let inspectionRatingItem: [String: Any] = [
+            let inspectionRatingItem: Parameters = [
                 "equipmentUnitId": equipmentUnitId,
                 "checklistItemId": checklistItemId,
                 "inspectionId": inspectionId!,
@@ -420,29 +427,73 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             ]
             
             // Append Inspection Item
-            params = (params as? [Any] ?? []) + [inspectionRatingItem]
+//            params = (params as? [Any] ?? []) + [inspectionRatingItem]
             
-            Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
-                if((responseData.result.value) != nil) {
-                    let responseJSON : JSON = JSON(responseData.result.value!)
-                    
-                    if responseJSON["status"] == true {
-                        _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
-                        
-//                        debugPrint(responseJSON)
-                        
-//                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
-                    } else {
-//                        ProgressHUD.showError("Unable to upload Inspection Rating")
-//                        self.uploadInspectionButton.setTitle("Error trying to upload inspection(s)", for: .normal)
-                    }
-                } else {
-//                    ProgressHUD.showError("Unable to upload Inspection Rating")
-//                    print("Response nil. No connection")
-//                    self.uploadInspectionButton.setTitle("Unable to connect", for: .normal)
+//            print("Attempt upload rating data")
+
+//            let jsonData = try! JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted)
+//            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
+            
+//            print(JSONSerialization.isValidJSONObject(inspectionRatingItem))
+            
+//            Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseJSON { (responseData) -> Void in
+//
+//                if((responseData.result.value) != nil) {
+//                    let responseJSON : JSON = JSON(responseData.result.value!)
+//
+//                    if responseJSON["status"] == true {
+//                        print("Upload sucess....")
+//                    } else {
+//                        let errorMessage = responseJSON["message"].string!
+//                    }
+//                } else {
+//                    ProgressHUD.showError("Unable to upload Ratings data")
+//                }
+//            }
+            
+//            print(inspectionRatingItem)
+//
+//            let headers: HTTPHeaders = [
+//                "Accept": "application/json"
+//            ]
+            
+            Alamofire.request(url, method: .post, parameters: inspectionRatingItem, headers: headersWWWForm).responseString {
+                response in
+                switch response.result {
+                case .success:
+//                    print(response)
+                    _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
+                    break
+                case .failure(let error):
+
+                    print(error)
                 }
             }
-                        
+            
+                
+                
+//                if((responseData.result.value) != nil) {
+//                    let responseJSON : JSON = JSON(responseData.result.value!)
+//
+//                    if responseJSON["status"] == true {
+//                        _ = InspectionRatingCoreDataHandler.deleteObject(inspectionRating: inspectionRating)
+//
+//                        print("upload rating test....")
+//                        debugPrint(responseJSON)
+//
+////                        ProgressHUD.showSuccess("Inspection Rating uploaded!")
+//                    } else {
+////                        ProgressHUD.showError("Unable to upload Inspection Rating")
+////                        self.uploadInspectionButton.setTitle("Error trying to upload inspection(s)", for: .normal)
+//                    }
+//                } else {
+////                    ProgressHUD.showError("Unable to upload Inspection Rating")
+//                    print("upload rating nil...")
+//                    print("Response nil. No connection")
+////                    self.uploadInspectionButton.setTitle("Unable to connect", for: .normal)
+//                }
+//            }
+            
 //            Alamofire.request(url, method: .post, parameters: ["ratings": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
 //                response in
 //                switch response.result {
