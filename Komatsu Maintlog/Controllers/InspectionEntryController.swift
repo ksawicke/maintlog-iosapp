@@ -37,6 +37,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var imagePickerController : UIImagePickerController!
     var progressLabelText : String = ""
     var userId : Int16 = 1
+    var currentInspectionItemSMR : String = ""
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
@@ -58,6 +59,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     @IBOutlet weak var inspectionChoiceImage: UIImageView!
     @IBOutlet weak var inspectionGoodButton: UIButton!
     @IBOutlet weak var inspectionBadButton: UIButton!
+    @IBOutlet weak var inspectionButtonArea: UIStackView!
     @IBOutlet weak var currentInspectionItemBadNoteLabel: UILabel!
     @IBOutlet weak var currentInspectionItemBadNote: UITextField!
     @IBOutlet weak var progressLabel: UILabel!
@@ -66,8 +68,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     @IBOutlet weak var picture1: UIImageView!
     @IBOutlet weak var picture2: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var currentInspectionItemSMRLabel: UILabel!
-    @IBOutlet weak var currentInspectionItemSMR: UITextField!
     @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickTakePicture(_ sender: Any) {
@@ -373,7 +373,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
-        saveSmr = currentInspectionItemSMR.text!
+//        saveSmr = "" // TODO get text from pop up... was currentInspectionItemSMR.text!
         
 //        print("inspectionId: \(inspectionId)")
 ////        print(Int16(saveId)!)
@@ -396,8 +396,6 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             let image2Data = UIImageJPEGRepresentation(picture2.image!, 0.5)
             _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, checklistItemId: Int16(saveId)!, photoId: 2, image: image2Data! as NSData, type: "jpg", userId: userId)
         }
-        
-        _ = SmrUpdateCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, smr: saveSmr, userId: userId)
     }
     
     func appendPicture(inspectionID: String, photoId: String, image: UIImage) {
@@ -441,38 +439,64 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
             
             updateUI(sectionLabel: sectionLabel, itemLabel: itemLabel)
         } else {
-            
-            let alert = UIAlertController(title: "Inspection Complete", message: "Return to Main Menu", preferredStyle: .alert)
-            
-            let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
+
+            let alert = UIAlertController(title: "Enter SMR / Time / Miles", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+                let textField = alert.textFields![0] // Force unwrapping because we know it exists.
+                
+                self.currentInspectionItemSMR = textField.text!
+                
                 self.startOver()
                 
                 self.userScannedANewBarcode(unitNumber: "")
-                
+
                 self.dismiss(animated: true, completion: nil)
+            }))
+            alert.addTextField(configurationHandler: {(textField: UITextField!) in
+//                textField.placeholder = "SMR / Time / Miles"
+                textField.isSecureTextEntry = false // true for password input
+                textField.keyboardType = .numberPad
+                
+                let inputTextField = textField
             })
+            self.present(alert, animated: true, completion: nil)
             
-            alert.addAction(restartAction)
+//            inspectionButtonArea.isHidden = true
             
-            present(alert, animated: true, completion: nil)
+//            let alert = UIAlertController(title: "Inspection Complete", message: "Return to Main Menu", preferredStyle: .alert)
+//
+//            let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
+//                self.startOver()
+//
+//                self.userScannedANewBarcode(unitNumber: "")
+//
+//                self.dismiss(animated: true, completion: nil)
+//            })
+//
+//            alert.addAction(restartAction)
+//
+//            present(alert, animated: true, completion: nil)
         }
     }
     
     func startOver() {
 //        loadItems()
         
+        _ = SmrUpdateCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, smr: currentInspectionItemSMR, userId: userId)
+        
         questionNumber = 0
         barCodeScanned = false
         barCodeValue = ""
         inspectionId = ""
         equipmentUnitIdSelected = 0
+        currentInspectionItemSMR = ""
         
         checkSession()
     }
     
     func updateUI(sectionLabel: String, itemLabel: String) {
         let numTotalItems = Int16(checklistitemPrestartArray.count) + Int16(checklistitemPoststartArray.count)
-        let newProgressBarWidth = (view.frame.size.width / 17) * CGFloat(questionNumber)
+        let newProgressBarWidth = (Float(view.frame.size.width) / Float(numTotalItems)) * Float(questionNumber)
         
         takePicture1Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
         takePicture2Button.setImage(UIImage(named: "icons8-camera-unselected"), for: [])
@@ -486,7 +510,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         progressLabel.text = "Completed: \(Int(questionNumber)) / \(Int(numTotalItems))"
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.progressBar.frame.size.width = newProgressBarWidth // Keep this call within closure; must be here due to threading
+            self.progressBar.frame.size.width = CGFloat(newProgressBarWidth) // Keep this call within closure; must be here due to threading
             self.inspectionGoodButton.setImage(UIImage(named: "icons8-ok-unselected"), for: [])
             self.inspectionBadButton.setImage(UIImage(named: "icons8-cancel-unselected"), for: [])
         }

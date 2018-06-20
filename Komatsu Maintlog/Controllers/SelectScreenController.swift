@@ -456,16 +456,14 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             params = (params as? [Any] ?? []) + [smrUpdateItem]
         }
         
-//        print(params)
-        
         Alamofire.request(url, method: .post, parameters: ["smrupdates": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
             response in
 
             switch response.result {
             case .success:
-                for smrUpdate in smrUpdates! {
-                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
-                }
+//                for smrUpdate in smrUpdates! {
+//                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
+//                }
 
                 break
             case .failure(let error):

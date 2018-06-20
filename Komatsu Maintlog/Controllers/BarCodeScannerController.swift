@@ -137,7 +137,32 @@ class BarCodeScannerController: UIViewController {
         let confirmAction = UIAlertAction(title: "Next", style: UIAlertActionStyle.default, handler: { (action) -> Void in
 
             // 1. Get the equipmentUnit the user scanned
-            let unitNumber = decodedURL
+            var unitNumber = decodedURL
+            
+            // 1b. Check the equipment scanned in db
+            let equipmentUnitScanned = EquipmentUnitCoreDataHandler.filterData(fieldName: "unitNumber", filterType: "equals", queryString: unitNumber)
+            
+            //            print(equipmentUnitScanned!)
+            
+            for managedObject in equipmentUnitScanned! {
+                if let _ = managedObject.value(forKey: "manufacturerName"),
+                    let _ = managedObject.value(forKey: "modelNumber"),
+                    let scannedEquipmentTypeId = managedObject.value(forKey: "equipmentTypeId"),
+                    let _ = managedObject.value(forKey: "id") {
+                    
+                    let equipmentTypeSelected = scannedEquipmentTypeId as! Int16
+                    
+                    let checklistCount = LoginCoreDataHandler.filterData(fieldName: "role", filterType: "", queryString: "\(scannedEquipmentTypeId)")
+                    
+                    print((checklistCount?.count)!)
+                    
+                    if (checklistCount?.count)! != 1 {
+                        unitNumber = ""
+                        
+                        ProgressHUD.showError("Checklist not found")
+                    }
+                }
+            }
             
             // 2. If we have a delegate set, call the method userScannedANewBarcode
             // delegate?  means if delegate is set then

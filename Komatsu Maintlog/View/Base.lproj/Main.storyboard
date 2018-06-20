@@ -357,18 +357,6 @@
                                             <action selector="onSaveBadNote:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="uoy-Yj-arV"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zol-i7-JXz" userLabel="SMR Label">
-                                        <rect key="frame" x="10" y="104.66666666666663" width="40" height="21.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1uA-lK-fn0" userLabel="SMR">
-                                        <rect key="frame" x="10" y="136.33333333333337" width="394" height="28"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="J5V-y2-O4W" firstAttribute="leading" secondItem="aHV-VS-jDY" secondAttribute="leading" constant="10" id="4N5-BS-gKe"/>
@@ -376,13 +364,8 @@
                                     <constraint firstItem="2ig-4B-nUA" firstAttribute="top" secondItem="J5V-y2-O4W" secondAttribute="bottom" constant="10" id="GCR-7j-T7o"/>
                                     <constraint firstItem="2ig-4B-nUA" firstAttribute="leading" secondItem="aHV-VS-jDY" secondAttribute="leading" constant="10" id="MsW-Iw-hEm"/>
                                     <constraint firstAttribute="trailing" secondItem="Lbd-kj-MKI" secondAttribute="trailing" constant="20" id="Nb7-fQ-WDB"/>
-                                    <constraint firstItem="1uA-lK-fn0" firstAttribute="leading" secondItem="aHV-VS-jDY" secondAttribute="leading" constant="10" id="WSJ-0w-dGF"/>
-                                    <constraint firstItem="Zol-i7-JXz" firstAttribute="top" secondItem="2ig-4B-nUA" secondAttribute="bottom" constant="35" id="a4a-kr-Jjw"/>
                                     <constraint firstItem="J5V-y2-O4W" firstAttribute="top" secondItem="aHV-VS-jDY" secondAttribute="top" constant="10" id="hPL-ez-mNP"/>
-                                    <constraint firstItem="1uA-lK-fn0" firstAttribute="top" secondItem="Zol-i7-JXz" secondAttribute="bottom" constant="10" id="iAu-II-iVG"/>
-                                    <constraint firstItem="Zol-i7-JXz" firstAttribute="leading" secondItem="aHV-VS-jDY" secondAttribute="leading" constant="10" id="l7n-7U-lPH"/>
                                     <constraint firstAttribute="height" constant="200" id="ryZ-kM-JFf"/>
-                                    <constraint firstAttribute="trailing" secondItem="1uA-lK-fn0" secondAttribute="trailing" constant="10" id="usr-Kc-YOI"/>
                                     <constraint firstItem="Lbd-kj-MKI" firstAttribute="top" secondItem="2ig-4B-nUA" secondAttribute="bottom" constant="10" id="xRB-w6-Tie"/>
                                 </constraints>
                             </view>
@@ -437,11 +420,10 @@
                         <outlet property="currentInspectionItemBadNote" destination="2ig-4B-nUA" id="0I2-pV-VOf"/>
                         <outlet property="currentInspectionItemBadNoteLabel" destination="J5V-y2-O4W" id="0uf-P6-yTr"/>
                         <outlet property="currentInspectionItemLabel" destination="w2j-Pe-FZU" id="bsl-8N-qur"/>
-                        <outlet property="currentInspectionItemSMR" destination="1uA-lK-fn0" id="W8Q-57-nGu"/>
-                        <outlet property="currentInspectionItemSMRLabel" destination="Zol-i7-JXz" id="lqo-x1-5e7"/>
                         <outlet property="currentSectionLabel" destination="DFT-q1-F0v" id="Kdl-j1-XXe"/>
                         <outlet property="equipmentUnitLabel" destination="lSF-nT-Z1a" id="ZRc-Pr-fMH"/>
                         <outlet property="inspectionBadButton" destination="y6q-En-x2K" id="wwb-Fr-OH6"/>
+                        <outlet property="inspectionButtonArea" destination="MQ2-z0-FKq" id="diU-OH-TSX"/>
                         <outlet property="inspectionChoiceImage" destination="3CT-gE-Vr6" id="HIp-D3-u3P"/>
                         <outlet property="inspectionGoodButton" destination="3CT-gE-Vr6" id="gPw-CO-B7t"/>
                         <outlet property="nextButton" destination="Lbd-kj-MKI" id="a2Q-KV-nHQ"/>
@@ -496,7 +478,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="onUserPinChanged:" destination="mxM-Zh-ZnC" eventType="editingChanged" id="ITU-Oh-SQc"/>
                                 </connections>

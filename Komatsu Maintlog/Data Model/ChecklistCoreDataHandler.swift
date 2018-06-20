@@ -74,6 +74,23 @@ class ChecklistCoreDataHandler: NSObject {
         }
     }
     
+    class func countChecklists(equipmentTypeId: Int16) -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<Checklist> = Checklist.fetchRequest()
+        var checklistCount:Int? = 0
+        
+        let predicate = NSPredicate(format: "equipmentTypeId == \"\(equipmentTypeId)\"")
+        fetchRequest.predicate = predicate
+        
+        do {
+            checklistCount = try context.count(for: fetchRequest)
+            
+            return checklistCount!
+        } catch {
+            return checklistCount!
+        }
+    }
+    
     class func filterDataByEquipmentTypeId(equipmentTypeId: Int16) -> [Checklist]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<Checklist> = Checklist.fetchRequest()
