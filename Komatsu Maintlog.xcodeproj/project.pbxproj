@@ -20,6 +20,7 @@
 		6594508220AF399000990ADF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6594508120AF399000990ADF /* Settings.bundle */; };
 		65A0A01A20D1900300A2FCEF /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A0A01820D1900300A2FCEF /* ProgressHUD.m */; };
 		65A0A01B20D1900300A2FCEF /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65A0A01920D1900300A2FCEF /* ProgressHUD.bundle */; };
+		65A3D00420D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A3D00320D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift */; };
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
 		65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */; };
@@ -56,6 +57,7 @@
 		65A0A01720D1900300A2FCEF /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		65A0A01820D1900300A2FCEF /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		65A0A01920D1900300A2FCEF /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
+		65A3D00320D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmrUpdateCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentTypeCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */,
 				6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */,
 				6593DE0620C8582B00045CE7 /* UserCoreDataHandler.swift */,
+				65A3D00320D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
 				8AEA56ED207818BF00B827F2 /* SelectScreenController.swift in Sources */,
 				65E9D69C20C88B3700DC0578 /* CustomSessionDelegate.swift in Sources */,
+				65A3D00420D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift in Sources */,
 				65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */,
 				658D8ED420BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift in Sources */,
 				656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */,

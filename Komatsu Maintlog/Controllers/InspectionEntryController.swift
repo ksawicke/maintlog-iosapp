@@ -36,6 +36,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var checklistitem:[ChecklistItem]? = nil
     var imagePickerController : UIImagePickerController!
     var progressLabelText : String = ""
+    var userId : Int16 = 1
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
@@ -65,6 +66,8 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     @IBOutlet weak var picture1: UIImageView!
     @IBOutlet weak var picture2: UIImageView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var currentInspectionItemSMRLabel: UILabel!
+    @IBOutlet weak var currentInspectionItemSMR: UITextField!
     @IBOutlet var progressBar: UIView!
     
     @IBAction func onClickTakePicture(_ sender: Any) {
@@ -342,7 +345,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         var saveId : String = ""
         var saveRating : String = ""
         var saveNote : String = ""
-//        let equipmentUnitId : Int16 = equipmentUnitIdSelected
+        var saveSmr : String = ""
         
         if questionNumber <= checklistitemPrestartArray.count-1 {
             counter = questionNumber
@@ -370,6 +373,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
         
         saveNote = currentInspectionItemBadNote.text!
         saveRating = rating
+        saveSmr = currentInspectionItemSMR.text!
         
 //        print("inspectionId: \(inspectionId)")
 ////        print(Int16(saveId)!)
@@ -377,21 +381,23 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
 //        print("saveRating: \(saveRating)")
 //        print("note: \(saveNote)")
         
-        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, checklistItemId: Int16(saveId)!, rating: Int16(saveRating)!, note: saveNote)
+        _ = InspectionRatingCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, checklistItemId: Int16(saveId)!, rating: Int16(saveRating)!, note: saveNote, userId: userId)
         
         // Saving the image as Binary Data to the Entity.
         // Using UIImagePNGRepresentation as primary method.
         // TODO: Condider using UIImageJPEGRepresentation as an alternate or fallback method.
         
         if picture1.image != nil {
-            let image1Data = UIImagePNGRepresentation(picture1.image!)
-            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 1, image: image1Data! as NSData, type: "png")
+            let image1Data = UIImageJPEGRepresentation(picture1.image!, 0.5)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, checklistItemId: Int16(saveId)!, photoId: 1, image: image1Data! as NSData, type: "jpg", userId: userId)
         }
         
         if picture2.image != nil {
-            let image2Data = UIImagePNGRepresentation(picture2.image!)
-            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, photoId: 2, image: image2Data! as NSData, type: "png")
+            let image2Data = UIImageJPEGRepresentation(picture2.image!, 0.5)
+            _ = InspectionImageCoreDataHandler.saveObject(inspectionId: inspectionId, checklistItemId: Int16(saveId)!, photoId: 2, image: image2Data! as NSData, type: "jpg", userId: userId)
         }
+        
+        _ = SmrUpdateCoreDataHandler.saveObject(inspectionId: inspectionId, equipmentUnitId: equipmentUnitIdSelected, smr: saveSmr, userId: userId)
     }
     
     func appendPicture(inspectionID: String, photoId: String, image: UIImage) {

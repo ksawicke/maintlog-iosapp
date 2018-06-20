@@ -17,15 +17,17 @@ class InspectionImageCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(inspectionId: String, photoId: Int16, image: NSData, type: String) -> Bool {
+    class func saveObject(inspectionId: String, checklistItemId: Int16, photoId: Int16, image: NSData, type: String, userId: Int16) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "InspectionImage", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(inspectionId, forKey: "inspectionId")
+        managedObject.setValue(checklistItemId, forKey: "checklistItemId")
         managedObject.setValue(photoId, forKey: "photoId")
         managedObject.setValue(image, forKey: "image")
         managedObject.setValue(type, forKey: "type")
+        managedObject.setValue(userId, forKey: "userId")
         
         do {
             try context.save()
