@@ -94,7 +94,29 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var fluidTypeNotesLabel: UILabel!
     @IBOutlet weak var fluidTypeNotes: UITextField!
     
+    //    - PM Service
+    @IBOutlet weak var pmsServicePMTypeLabel: UILabel!
+    @IBOutlet weak var pmsServicePMLevelLabel: UILabel!
+
+    @IBOutlet weak var pmsServiceCurrentSMRLabel: UILabel!
     
+    @IBOutlet weak var pmsServiceNotesLabel: UILabel!
+    
+    @IBOutlet weak var pmsServiceNotes2Label: UILabel!
+    
+    @IBOutlet weak var pmsServiceNotes3Label: UILabel!
+    
+    @IBOutlet weak var pmsServiceSRPMTypeLabel: UILabel!
+    @IBOutlet weak var pmsServiceSRPMLevelLabel: UILabel!
+    @IBOutlet weak var pmsServiceSRDueLabel: UILabel!
+    
+    @IBOutlet weak var pmsServiceSRNotesLabel: UILabel!
+    
+    @IBOutlet weak var pmsServiceSRBeforeDueLabel: UILabel!
+    
+    @IBOutlet weak var pmsServiceSRBeforeDueUnitsLabel: UILabel!
+    
+    //    - Component Change
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
