@@ -35,8 +35,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var servicedByPickerData = [String]()
     var servicedByOutputData = [String]()
     
-    var subflowPickerData = ["SMR Update", "Fluid Entry", "PM Service", "Component Change"]
-    var subflowOutputData = ["sus", "flu", "pss", "ccs"]
+    var subflowPickerData = ["Select one:", "SMR Update", "Fluid Entry", "PM Service", "Component Change"]
+    var subflowOutputData = ["", "sus", "flu", "pss", "ccs"]
     
     var pickerView = UIPickerView()
     
@@ -60,29 +60,39 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     //    - Fluid Entry
     @IBOutlet weak var fluidType1Label: UILabel!
+    @IBOutlet weak var fluidType1QuantityLabel: UILabel!
     @IBOutlet weak var fluidType1Quantity: UITextField!
     @IBOutlet weak var fluidType2Label: UILabel!
+    @IBOutlet weak var fluidType2QuantityLabel: UILabel!
     @IBOutlet weak var fluidType2Quantity: UITextField!
     @IBOutlet weak var fluidType3Label: UILabel!
+    @IBOutlet weak var fluidType3QuantityLabel: UILabel!
     @IBOutlet weak var fluidType3Quantity: UITextField!
     @IBOutlet weak var fluidType4Label: UILabel!
+    @IBOutlet weak var fluidType4QuantityLabel: UILabel!
     @IBOutlet weak var fluidType4Quantity: UITextField!
     @IBOutlet weak var fluidType5Label: UILabel!
+    @IBOutlet weak var fluidType5QuantityLabel: UILabel!
     @IBOutlet weak var fluidType5Quantity: UITextField!
     @IBOutlet weak var fluidType6Label: UILabel!
+    @IBOutlet weak var fluidType6QuantityLabel: UILabel!
     @IBOutlet weak var fluidType6Quantity: UITextField!
     @IBOutlet weak var fluidType7Label: UILabel!
+    @IBOutlet weak var fluidType7QuantityLabel: UILabel!
     @IBOutlet weak var fluidType7Quantity: UITextField!
     @IBOutlet weak var fluidType8Label: UILabel!
+    @IBOutlet weak var fluidType8QuantityLabel: UILabel!
     @IBOutlet weak var fluidType8Quantity: UITextField!
     @IBOutlet weak var fluidType9Label: UILabel!
+    @IBOutlet weak var fluidType9QuantityLabel: UILabel!
     @IBOutlet weak var fluidType9Quantity: UITextField!
     @IBOutlet weak var fluidType10Label: UILabel!
+    @IBOutlet weak var fluidType10QuantityLabel: UILabel!
     @IBOutlet weak var fluidType10Quantity: UITextField!
     @IBOutlet weak var fluidTypeCurrentSMRLabel: UILabel!
     @IBOutlet weak var fluidTypeCurrentSMR: UITextField!
     @IBOutlet weak var fluidTypeNotesLabel: UILabel!
-    @IBOutlet weak var fluidTyupeNotes: UITextField!
+    @IBOutlet weak var fluidTypeNotes: UITextField!
     
     
     
@@ -93,7 +103,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setInitialFieldsHidden()
+        toggleSMRUpdateFields(setTo: true)
+        toggleFluidEntryFields(setTo: true)
         
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
@@ -181,35 +192,119 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 //        defaultsChanged()
     }
     
-    func setInitialFieldsHidden() {
-        // SMR Fields
-        currentSMRLabel.isHidden = true
-        currentSMR.isHidden = true
+//    func setInitialFieldsHidden() {
+//        // SMR Fields
+//        currentSMRLabel.isHidden = true
+//        currentSMR.isHidden = true
+//
+//        // Fluid Entry Fields
+//        fluidType1Label.isHidden = true
+//        fluidType1QuantityLabel.isHidden = true
+//        fluidType1Quantity.isHidden = true
+//
+//        fluidType2Label.isHidden = true
+//        fluidType2QuantityLabel.isHidden = true
+//        fluidType2Quantity.isHidden = true
+//
+//        fluidType3Label.isHidden = true
+//        fluidType3QuantityLabel.isHidden = true
+//        fluidType3Quantity.isHidden = true
+//
+//        fluidType4Label.isHidden = true
+//        fluidType4QuantityLabel.isHidden = true
+//        fluidType4Quantity.isHidden = true
+//
+//        fluidType5Label.isHidden = true
+//        fluidType5QuantityLabel.isHidden = true
+//        fluidType5Quantity.isHidden = true
+//
+//        fluidType6Label.isHidden = true
+//        fluidType6QuantityLabel.isHidden = true
+//        fluidType6Quantity.isHidden = true
+//
+//        fluidType7Label.isHidden = true
+//        fluidType7QuantityLabel.isHidden = true
+//        fluidType7Quantity.isHidden = true
+//
+//        fluidType8Label.isHidden = true
+//        fluidType8QuantityLabel.isHidden = true
+//        fluidType8Quantity.isHidden = true
+//
+//        fluidType9Label.isHidden = true
+//        fluidType9QuantityLabel.isHidden = true
+//        fluidType9Quantity.isHidden = true
+//
+//        fluidType10Label.isHidden = true
+//        fluidType10QuantityLabel.isHidden = true
+//        fluidType10Quantity.isHidden = true
+//
+//        fluidTypeCurrentSMRLabel.isHidden = true
+//        fluidTypeCurrentSMR.isHidden = true
+//
+//        fluidTypeNotesLabel.isHidden = true
+//        fluidTypeNotes.isHidden = true
+//    }
+    
+    func toggleSMRUpdateFields(setTo: Bool) {
+        currentSMRLabel.isHidden = setTo
+        currentSMR.isHidden = setTo
+    }
+    
+    func toggleFluidEntryFields(setTo: Bool) {
+        fluidType1Label.isHidden = setTo
+        fluidType1QuantityLabel.isHidden = setTo
+        fluidType1Quantity.isHidden = setTo
         
-        // Fluid Entry Fields
-        fluidType1Label.isHidden = true
-        fluidType1Quantity.isHidden = true
-        fluidType2Label.isHidden = true
-        fluidType2Quantity.isHidden = true
-        fluidType3Label.isHidden = true
-        fluidType3Quantity.isHidden = true
-        fluidType4Label.isHidden = true
-        fluidType4Quantity.isHidden = true
-        fluidType5Label.isHidden = true
-        fluidType6Label.isHidden = true
-        fluidType6Quantity.isHidden = true
-        fluidType7Label.isHidden = true
-        fluidType7Quantity.isHidden = true
-        fluidType8Label.isHidden = true
-        fluidType8Quantity.isHidden = true
-        fluidType9Label.isHidden = true
-        fluidType9Quantity.isHidden = true
-        fluidType10Label.isHidden = true
-        fluidType10Quantity.isHidden = true
+        fluidType2Label.isHidden = setTo
+        fluidType2QuantityLabel.isHidden = setTo
+        fluidType2Quantity.isHidden = setTo
+        
+        fluidType3Label.isHidden = setTo
+        fluidType3QuantityLabel.isHidden = setTo
+        fluidType3Quantity.isHidden = setTo
+        
+        fluidType4Label.isHidden = setTo
+        fluidType4QuantityLabel.isHidden = setTo
+        fluidType4Quantity.isHidden = setTo
+        
+        fluidType5Label.isHidden = setTo
+        fluidType5QuantityLabel.isHidden = setTo
+        fluidType5Quantity.isHidden = setTo
+        
+        fluidType6Label.isHidden = setTo
+        fluidType6QuantityLabel.isHidden = setTo
+        fluidType6Quantity.isHidden = setTo
+        
+        fluidType7Label.isHidden = setTo
+        fluidType7QuantityLabel.isHidden = setTo
+        fluidType7Quantity.isHidden = setTo
+        
+        fluidType8Label.isHidden = setTo
+        fluidType8QuantityLabel.isHidden = setTo
+        fluidType8Quantity.isHidden = setTo
+        
+        fluidType9Label.isHidden = setTo
+        fluidType9QuantityLabel.isHidden = setTo
+        fluidType9Quantity.isHidden = setTo
+        
+        fluidType10Label.isHidden = setTo
+        fluidType10QuantityLabel.isHidden = setTo
+        fluidType10Quantity.isHidden = setTo
+        
+        fluidTypeCurrentSMRLabel.isHidden = setTo
+        fluidTypeCurrentSMR.isHidden = setTo
+        
+        fluidTypeNotesLabel.isHidden = setTo
+        fluidTypeNotes.isHidden = setTo
     }
     
     func appendUsers() {
         let users = UserCoreDataHandler.fetchObject()
+        
+        enteredByPickerData.append("Select one:")
+        enteredByOutputData.append("0")
+        servicedByPickerData.append("Select one:")
+        servicedByOutputData.append("0")
         
         for user in users! {
             let firstName = user.value(forKey: "firstName") as! String
@@ -256,8 +351,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             case 2:
                 if subflowPickerData[row]=="SMR Update" {
-                    currentSMRLabel.isHidden = false
-                    currentSMR.isHidden = false
+                    toggleSMRUpdateFields(setTo: false)
+                    toggleFluidEntryFields(setTo: true)
+                }
+                if subflowPickerData[row]=="Fluid Entry" {
+                    toggleSMRUpdateFields(setTo: true)
+                    toggleFluidEntryFields(setTo: false)
                 }
                 return subflowPickerData[row]
             
