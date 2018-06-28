@@ -25,8 +25,18 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var equipmentUnitIdSelected : Int16 = 0
     var equipmentUnit : String = ""
     
-    var enteredByPickerData = ["Sawicke, Kevin", "Johnson, Bret", "Johnson, Neil"]
-    var enteredByOutputData = ["1", "2", "3"]
+    var pickerViewEnteredBy = UIPickerView()
+    var pickerViewServicedBy = UIPickerView()
+    var pickerViewSubflow = UIPickerView()
+    
+    var enteredByPickerData = [String]()
+    var enteredByOutputData = [String]()
+    
+    var servicedByPickerData = [String]()
+    var servicedByOutputData = [String]()
+    
+    var subflowPickerData = ["SMR Update", "Fluid Entry", "PM Service", "Component Change"]
+    var subflowOutputData = ["sus", "flu", "pss", "ccs"]
     
     var pickerView = UIPickerView()
     
@@ -37,7 +47,9 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateEntered: UITextField!
     @IBOutlet weak var enteredBy: UITextField!
+    @IBOutlet weak var servicedBy: UITextField!
     @IBOutlet weak var unitNumber: UITextField!
+    @IBOutlet weak var subflow: UITextField!
     @IBOutlet weak var currentSMR: UITextField!
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
@@ -47,15 +59,28 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let currentDate = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
+        dateFormatter.dateFormat = "M/dd/yyyy"
+        let today = dateFormatter.string(from: currentDate as Date)
+        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         dateEntered.inputView = datePicker
         dateEntered?.addTarget(self, action: #selector(LogEntryController.dateChanged(datePicker:)), for: .valueChanged)
+        dateEntered.text = today
         
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        pickerViewEnteredBy.delegate = self
+        pickerViewServicedBy.delegate = self
+        pickerViewSubflow.delegate = self
+        self.pickerViewEnteredBy.tag = 0
+        self.pickerViewServicedBy.tag = 1
+        self.pickerViewSubflow.tag = 2
         
-        enteredBy.inputView = pickerView
+        enteredBy.inputView = pickerViewEnteredBy
+        servicedBy.inputView = pickerViewServicedBy
+        subflow.inputView = pickerViewSubflow
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.viewTapped(gestureRecognizer:)))
         tapGesture.cancelsTouchesInView = false
@@ -66,6 +91,10 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         notificationCenter.addObserver(self, selector: #selector(LogEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
         notificationCenter.addObserver(self, selector: #selector(LogEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        
+        
+        appendUsers()
         
 //        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LogEntryController.dismissKeyboard))
 //        tap.cancelsTouchesInView = false
@@ -111,32 +140,90 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 //
 //        nextInspectionItem()
         
-        registerSettingsBundle()
+//        registerSettingsBundle()
         
-        defaultsChanged()
+//        defaultsChanged()
     }
     
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func appendUsers() {
+        let users = UserCoreDataHandler.fetchObject()
+        
+        for user in users! {
+            let firstName = user.value(forKey: "firstName") as! String
+            let lastName = user.value(forKey: "lastName") as! String
+            let id = user.value(forKey: "id") as! Int16
+            
+            print("\(id), \(firstName), \(lastName)")
+            
+            enteredByPickerData.append("\(lastName), \(firstName)")
+            enteredByOutputData.append("\(id)")
+            
+            servicedByPickerData.append("\(lastName), \(firstName)")
+            servicedByOutputData.append("\(id)")
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return enteredByPickerData.count
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch(pickerView.tag) {
+            case 0:
+                return enteredByPickerData.count
+            
+            case 1:
+                return servicedByPickerData.count
+            
+            case 2:
+                return subflowPickerData.count
+            
+            default:
+                return enteredByPickerData.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return enteredByPickerData[row]
+        switch(pickerView.tag) {
+            case 0:
+                return enteredByPickerData[row]
+            
+            case 1:
+                return servicedByPickerData[row]
+            
+            case 2:
+                return subflowPickerData[row]
+            
+            default:
+                return enteredByPickerData[row]
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        enteredBy.text = enteredByPickerData[row]
-        enteredBy.resignFirstResponder()
+        print("pickerView tag \(pickerView.tag)")
+        switch(pickerView.tag) {
+            case 0:
+                enteredBy.text = enteredByPickerData[row]
+                enteredBy.resignFirstResponder()
+            
+            case 1:
+                servicedBy.text = servicedByPickerData[row]
+                servicedBy.resignFirstResponder()
+            
+            case 2:
+                subflow.text = subflowPickerData[row]
+                subflow.resignFirstResponder()
+            
+            default:
+                enteredBy.text = enteredByPickerData[row]
+                enteredBy.resignFirstResponder()
+        }
     }
     
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
         print("viewTapped.....")
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "M/dd/yyyy"
         dateEntered.text = dateFormatter.string(from: (datePicker?.date)!)
         view.endEditing(true)
     }
@@ -158,14 +245,14 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         delegate?.userScannedANewBarcode(unitNumber: "")
     }
     
-    deinit {
-        let notificationCenter = NotificationCenter.default
-        
-        // Stop listening for keyboard hide/show events
-        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
-    }
+//    deinit {
+//        let notificationCenter = NotificationCenter.default
+//
+//        // Stop listening for keyboard hide/show events
+//        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+//    }
     
     func registerSettingsBundle(){
         let appDefaults = [String:AnyObject]()
