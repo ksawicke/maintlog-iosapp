@@ -50,7 +50,41 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var servicedBy: UITextField!
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var subflow: UITextField!
+    
+    // Fields to toggle hidden property
+    
+    //    - SMR Update
+    @IBOutlet weak var currentSMRLabel: UILabel!
     @IBOutlet weak var currentSMR: UITextField!
+
+    
+    //    - Fluid Entry
+    @IBOutlet weak var fluidType1Label: UILabel!
+    @IBOutlet weak var fluidType1Quantity: UITextField!
+    @IBOutlet weak var fluidType2Label: UILabel!
+    @IBOutlet weak var fluidType2Quantity: UITextField!
+    @IBOutlet weak var fluidType3Label: UILabel!
+    @IBOutlet weak var fluidType3Quantity: UITextField!
+    @IBOutlet weak var fluidType4Label: UILabel!
+    @IBOutlet weak var fluidType4Quantity: UITextField!
+    @IBOutlet weak var fluidType5Label: UILabel!
+    @IBOutlet weak var fluidType5Quantity: UITextField!
+    @IBOutlet weak var fluidType6Label: UILabel!
+    @IBOutlet weak var fluidType6Quantity: UITextField!
+    @IBOutlet weak var fluidType7Label: UILabel!
+    @IBOutlet weak var fluidType7Quantity: UITextField!
+    @IBOutlet weak var fluidType8Label: UILabel!
+    @IBOutlet weak var fluidType8Quantity: UITextField!
+    @IBOutlet weak var fluidType9Label: UILabel!
+    @IBOutlet weak var fluidType9Quantity: UITextField!
+    @IBOutlet weak var fluidType10Label: UILabel!
+    @IBOutlet weak var fluidType10Quantity: UITextField!
+    @IBOutlet weak var fluidTypeCurrentSMRLabel: UILabel!
+    @IBOutlet weak var fluidTypeCurrentSMR: UITextField!
+    @IBOutlet weak var fluidTypeNotesLabel: UILabel!
+    @IBOutlet weak var fluidTyupeNotes: UITextField!
+    
+    
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
@@ -58,6 +92,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setInitialFieldsHidden()
         
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
@@ -145,6 +181,33 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 //        defaultsChanged()
     }
     
+    func setInitialFieldsHidden() {
+        // SMR Fields
+        currentSMRLabel.isHidden = true
+        currentSMR.isHidden = true
+        
+        // Fluid Entry Fields
+        fluidType1Label.isHidden = true
+        fluidType1Quantity.isHidden = true
+        fluidType2Label.isHidden = true
+        fluidType2Quantity.isHidden = true
+        fluidType3Label.isHidden = true
+        fluidType3Quantity.isHidden = true
+        fluidType4Label.isHidden = true
+        fluidType4Quantity.isHidden = true
+        fluidType5Label.isHidden = true
+        fluidType6Label.isHidden = true
+        fluidType6Quantity.isHidden = true
+        fluidType7Label.isHidden = true
+        fluidType7Quantity.isHidden = true
+        fluidType8Label.isHidden = true
+        fluidType8Quantity.isHidden = true
+        fluidType9Label.isHidden = true
+        fluidType9Quantity.isHidden = true
+        fluidType10Label.isHidden = true
+        fluidType10Quantity.isHidden = true
+    }
+    
     func appendUsers() {
         let users = UserCoreDataHandler.fetchObject()
         
@@ -192,6 +255,10 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 return servicedByPickerData[row]
             
             case 2:
+                if subflowPickerData[row]=="SMR Update" {
+                    currentSMRLabel.isHidden = false
+                    currentSMR.isHidden = false
+                }
                 return subflowPickerData[row]
             
             default:
