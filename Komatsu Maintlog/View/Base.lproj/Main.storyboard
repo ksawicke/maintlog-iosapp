@@ -526,6 +526,21 @@
             </objects>
             <point key="canvasLocation" x="268" y="-839"/>
         </scene>
+        <!--Update Controller-->
+        <scene sceneID="Php-Tp-QMR">
+            <objects>
+                <viewController storyboardIdentifier="smrUpdateVC" id="tpY-3C-5t7" customClass="SMRUpdateController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QFV-Vd-XcL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="olM-DQ-LK9"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oX2-Sz-Sdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1901" y="-2257"/>
+        </scene>
         <!--Bar Code Scanner Controller-->
         <scene sceneID="SJe-T0-G10">
             <objects>
@@ -745,6 +760,10 @@
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <connections>
+                                                                    <action selector="onSelectSubflow:" destination="kLd-ml-HGc" eventType="editingDidEnd" id="KAe-YM-rLE"/>
+                                                                    <segue destination="tpY-3C-5t7" kind="show" identifier="goToSMRUpdate" id="ucR-Ik-icj"/>
+                                                                </connections>
                                                             </textField>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="h3E-ze-5Tv" userLabel="Field Group">
                                                                 <rect key="frame" x="0.0" y="516.33333333333337" width="374" height="76.666666666666629"/>
@@ -1427,6 +1446,9 @@
                                         <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onClickNext:" destination="kLd-ml-HGc" eventType="touchUpInside" id="zHR-XR-eUl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFJ-dx-D99">
                                         <rect key="frame" x="15" y="5.6666666666669698" width="85" height="34"/>

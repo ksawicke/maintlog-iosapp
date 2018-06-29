@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol InitialSelectionDelegate {
+    
+    func userSelectedSubflow (unitNumber: String)
+    
+}
+
 class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, ChangeEquipmentUnitDelegate {
     
     //Declare the delegate variable here:
@@ -17,6 +23,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     // below in getWeatherPressed starting with delegate? will not be triggered.
     // This means the data won't be sent to the other Controller
     var delegate : ChangeEquipmentUnitDelegate?
+    var initialSelectionDelegate : InitialSelectionDelegate?
     
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
@@ -50,6 +57,10 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     @IBOutlet weak var servicedBy: UITextField!
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var subflow: UITextField!
+    
+    @IBAction func onSelectSubflow(_ sender: Any) {
+        
+    }
     
     // Fields to toggle hidden property
     
@@ -120,6 +131,10 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onClickNext(_ sender: Any) {
+        print("clicked Next")
     }
     
     override func viewDidLoad() {
@@ -373,8 +388,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             case 2:
                 if subflowPickerData[row]=="SMR Update" {
-                    toggleSMRUpdateFields(setTo: false)
-                    toggleFluidEntryFields(setTo: true)
+//                    toggleSMRUpdateFields(setTo: false)
+//                    toggleFluidEntryFields(setTo: true)
                 }
                 if subflowPickerData[row]=="Fluid Entry" {
                     toggleSMRUpdateFields(setTo: true)
@@ -384,6 +399,14 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             default:
                 return enteredByPickerData[row]
+        }
+    }
+    
+    func jumpToSMRUpdateSubflow() {
+        if let smrUpdateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "smrUpdateVC") as? SMRUpdateController {
+            initialSelectionDelegate?.userSelectedSubflow(unitNumber: "\(unitNumber)")
+//            smrUpdateVC.initialSelectionDelegate = self
+            self.present(smrUpdateVC, animated: true, completion: nil)
         }
     }
     
@@ -401,6 +424,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             case 2:
                 subflow.text = subflowPickerData[row]
                 subflow.resignFirstResponder()
+//                print("select subflow 2")
+                jumpToSMRUpdateSubflow()
             
             default:
                 enteredBy.text = enteredByPickerData[row]
@@ -484,6 +509,22 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             destinationVC.delegate = self
         }
         
+        if segue.identifier == "goToSMRUpdate" {
+            //2 If we have a delegate set, call the method userEnteredANewCityName
+            // delegate?  means if delegate is set then
+            // called Optional Chaining
+            
+            //                        delegate?.userScannedANewBarcode(equipmentUnit: "")
+            print("QQQQ")
+            //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
+            // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
+            //            self.dismiss(animated: true, completion: nil)
+            
+            let destinationVC = segue.destination as! SMRUpdateController
+//
+//            destinationVC.initialSelectionDelegate = self as! InitialSelectionDelegate
+        }
+    
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

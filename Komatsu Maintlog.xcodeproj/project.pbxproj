@@ -24,6 +24,9 @@
 		65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */; };
 		65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */; };
 		65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */; };
+		65CC066920E6B5B9003C5FE3 /* SMRUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC066820E6B5B9003C5FE3 /* SMRUpdateController.swift */; };
+		65CC066B20E6B5C9003C5FE3 /* FluidEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC066A20E6B5C9003C5FE3 /* FluidEntryController.swift */; };
+		65CC066D20E6B5DB003C5FE3 /* PMServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65CC066C20E6B5DB003C5FE3 /* PMServiceController.swift */; };
 		65DE11A620B602A80072C582 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE11A520B602A80072C582 /* SettingsBundleHelper.swift */; };
 		65E9D69C20C88B3700DC0578 /* CustomSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E9D69B20C88B3700DC0578 /* CustomSessionDelegate.swift */; };
 		65E9D69E20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E9D69D20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift */; };
@@ -61,6 +64,9 @@
 		65A593052087A862000F673D /* ChecklistItemCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItemCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593072087D7C9000F673D /* ChecklistCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistCoreDataHandler.swift; sourceTree = "<group>"; };
 		65A593092087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentTypeCoreDataHandler.swift; sourceTree = "<group>"; };
+		65CC066820E6B5B9003C5FE3 /* SMRUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMRUpdateController.swift; sourceTree = "<group>"; };
+		65CC066A20E6B5C9003C5FE3 /* FluidEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidEntryController.swift; sourceTree = "<group>"; };
+		65CC066C20E6B5DB003C5FE3 /* PMServiceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PMServiceController.swift; sourceTree = "<group>"; };
 		65DE11A520B602A80072C582 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		65E9D69B20C88B3700DC0578 /* CustomSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSessionDelegate.swift; sourceTree = "<group>"; };
 		65E9D69D20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomServerTrustPolicyManager.swift; sourceTree = "<group>"; };
@@ -189,6 +195,9 @@
 				8AEA56EA2078179500B827F2 /* LogEntryController.swift */,
 				65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */,
 				65424E1720A0A7E20004FF6D /* LoginController.swift */,
+				65CC066820E6B5B9003C5FE3 /* SMRUpdateController.swift */,
+				65CC066A20E6B5C9003C5FE3 /* FluidEntryController.swift */,
+				65CC066C20E6B5DB003C5FE3 /* PMServiceController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -330,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65DE11A620B602A80072C582 /* SettingsBundleHelper.swift in Sources */,
+				65CC066B20E6B5C9003C5FE3 /* FluidEntryController.swift in Sources */,
 				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
 				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,
 				65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */,
@@ -346,6 +356,8 @@
 				651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */,
 				6593DE0720C8582B00045CE7 /* UserCoreDataHandler.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,
+				65CC066D20E6B5DB003C5FE3 /* PMServiceController.swift in Sources */,
+				65CC066920E6B5B9003C5FE3 /* SMRUpdateController.swift in Sources */,
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				65E9D69E20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
