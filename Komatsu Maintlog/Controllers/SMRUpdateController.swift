@@ -10,11 +10,23 @@ import UIKit
 
 class SMRUpdateController: UIViewController, InitialSelectionDelegate {
 
-    var delegate : InitialSelectionDelegate?
+    var initialSelectionDelegate : InitialSelectionDelegate?
+    
+    var barCodeScanned : Bool = false
+    var barCodeValue : String = ""
+    var dateEntered : String = ""
+    var enteredBy : String = ""
+    var servicedBy : String = ""
+    var subflow : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("barCodeValue: \(barCodeValue)")
+        print("dateEntered: \(dateEntered)")
+        print("enteredBy: \(enteredBy)")
+        print("servicedBy: \(servicedBy)")
+        print("subflow: \(subflow)")
         // Do any additional setup after loading the view.
     }
 
@@ -24,9 +36,9 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     }
     
     func userSelectedSubflow(unitNumber: String) {
-        print("selected subflow")
-        print("loaded SMRUpdateController")
-        print("unit number passed: \(unitNumber)")
+//        barCodeValue = unitNumber
+//        print("Test")
+//        print("\(barCodeValue)")
     }
 
     /*

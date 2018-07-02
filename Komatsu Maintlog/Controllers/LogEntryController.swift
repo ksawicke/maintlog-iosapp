@@ -404,8 +404,14 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func jumpToSMRUpdateSubflow() {
         if let smrUpdateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "smrUpdateVC") as? SMRUpdateController {
-            initialSelectionDelegate?.userSelectedSubflow(unitNumber: "\(unitNumber)")
-//            smrUpdateVC.initialSelectionDelegate = self
+            
+            smrUpdateVC.barCodeScanned = self.barCodeScanned
+            smrUpdateVC.barCodeValue = self.barCodeValue
+            smrUpdateVC.dateEntered = dateEntered.text!
+            smrUpdateVC.enteredBy = enteredBy.text!
+            smrUpdateVC.servicedBy = servicedBy.text!
+            smrUpdateVC.subflow = subflow.text!
+            
             self.present(smrUpdateVC, animated: true, completion: nil)
         }
     }
@@ -510,19 +516,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
         
         if segue.identifier == "goToSMRUpdate" {
-            //2 If we have a delegate set, call the method userEnteredANewCityName
-            // delegate?  means if delegate is set then
-            // called Optional Chaining
-            
-            //                        delegate?.userScannedANewBarcode(equipmentUnit: "")
-            print("QQQQ")
-            //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
-            // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
-            //            self.dismiss(animated: true, completion: nil)
-            
+            print("prepare for segue -- goToSMRUpdate")
             let destinationVC = segue.destination as! SMRUpdateController
-//
-//            destinationVC.initialSelectionDelegate = self as! InitialSelectionDelegate
+            
+//            destinationVC.initialSelectionDelegate = self
+            destinationVC.barCodeScanned = self.barCodeScanned
+            destinationVC.barCodeValue = self.barCodeValue
         }
     
     }
