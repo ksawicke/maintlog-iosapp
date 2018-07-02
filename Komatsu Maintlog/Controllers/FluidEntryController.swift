@@ -19,6 +19,8 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
+    @IBOutlet weak var unitNumber: UITextField!
+    
     @IBAction func onCloseFluidEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -31,6 +33,8 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
         print("enteredBy: \(enteredBy)")
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
+        
+        unitNumber.text = barCodeValue
     }
 
     override func didReceiveMemoryWarning() {
