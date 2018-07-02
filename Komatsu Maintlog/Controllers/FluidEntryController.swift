@@ -8,12 +8,25 @@
 
 import UIKit
 
-class FluidEntryController: UIViewController {
+class FluidEntryController: UIViewController, InitialSelectionDelegate {
 
+    var initialSelectionDelegate : InitialSelectionDelegate?
+    
+    var barCodeScanned : Bool = false
+    var barCodeValue : String = ""
+    var dateEntered : String = ""
+    var enteredBy : String = ""
+    var servicedBy : String = ""
+    var subflow : String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        print("barCodeValue: \(barCodeValue)")
+        print("dateEntered: \(dateEntered)")
+        print("enteredBy: \(enteredBy)")
+        print("servicedBy: \(servicedBy)")
+        print("subflow: \(subflow)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +34,9 @@ class FluidEntryController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func userSelectedSubflow(unitNumber: String) {
+        //
+    }
 
     /*
     // MARK: - Navigation

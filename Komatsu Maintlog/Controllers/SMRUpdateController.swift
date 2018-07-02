@@ -27,7 +27,6 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         print("enteredBy: \(enteredBy)")
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

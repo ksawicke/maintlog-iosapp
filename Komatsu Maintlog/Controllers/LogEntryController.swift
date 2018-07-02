@@ -392,8 +392,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 //                    toggleFluidEntryFields(setTo: true)
                 }
                 if subflowPickerData[row]=="Fluid Entry" {
-                    toggleSMRUpdateFields(setTo: true)
-                    toggleFluidEntryFields(setTo: false)
+//                    toggleSMRUpdateFields(setTo: true)
+//                    toggleFluidEntryFields(setTo: false)
                 }
                 return subflowPickerData[row]
             
@@ -416,6 +416,20 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    func jumpToFluidEntrySubflow() {
+        if let fluidEntryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "fluidEntryVC") as? FluidEntryController {
+            
+            fluidEntryVC.barCodeScanned = self.barCodeScanned
+            fluidEntryVC.barCodeValue = self.barCodeValue
+            fluidEntryVC.dateEntered = dateEntered.text!
+            fluidEntryVC.enteredBy = enteredBy.text!
+            fluidEntryVC.servicedBy = servicedBy.text!
+            fluidEntryVC.subflow = subflow.text!
+            
+            self.present(fluidEntryVC, animated: true, completion: nil)
+        }
+    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("pickerView tag \(pickerView.tag)")
         switch(pickerView.tag) {
@@ -431,7 +445,13 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 subflow.text = subflowPickerData[row]
                 subflow.resignFirstResponder()
 //                print("select subflow 2")
-                jumpToSMRUpdateSubflow()
+//                print("QQQQ: \(subflow.text!)")
+                if(subflow.text! == "SMR Update") {
+                    jumpToSMRUpdateSubflow()
+                }
+                if(subflow.text! == "Fluid Entry") {
+                    jumpToFluidEntrySubflow()
+                }
             
             default:
                 enteredBy.text = enteredByPickerData[row]
