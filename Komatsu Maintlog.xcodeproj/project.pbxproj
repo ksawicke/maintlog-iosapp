@@ -11,6 +11,7 @@
 		651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A02E120BDDBB600E09864 /* NetworkStatus.swift */; };
 		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
 		65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65424E1720A0A7E20004FF6D /* LoginController.swift */; };
+		655FABFF20EA954100718D60 /* ComponentChangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655FABFE20EA954100718D60 /* ComponentChangeController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
@@ -49,6 +50,7 @@
 		651A02E120BDDBB600E09864 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
 		65424E1720A0A7E20004FF6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		655FABFE20EA954100718D60 /* ComponentChangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentChangeController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				65CC066820E6B5B9003C5FE3 /* SMRUpdateController.swift */,
 				65CC066A20E6B5C9003C5FE3 /* FluidEntryController.swift */,
 				65CC066C20E6B5DB003C5FE3 /* PMServiceController.swift */,
+				655FABFE20EA954100718D60 /* ComponentChangeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				65A5930A2087D8F8000F673D /* EquipmentTypeCoreDataHandler.swift in Sources */,
 				658D8ED420BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift in Sources */,
 				656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */,
+				655FABFF20EA954100718D60 /* ComponentChangeController.swift in Sources */,
 				651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */,
 				6593DE0720C8582B00045CE7 /* UserCoreDataHandler.swift in Sources */,
 				8AEA56EB2078179500B827F2 /* LogEntryController.swift in Sources */,

@@ -19,6 +19,10 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
+    @IBAction func onCloseSMRUpdateViewButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,9 +39,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     }
     
     func userSelectedSubflow(unitNumber: String) {
-//        barCodeValue = unitNumber
-//        print("Test")
-//        print("\(barCodeValue)")
+        //
     }
 
     /*

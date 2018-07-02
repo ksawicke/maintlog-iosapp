@@ -430,6 +430,34 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    func jumpToPMServiceSubflow() {
+        if let pmServiceVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pmServiceVC") as? PMServiceController {
+            
+            pmServiceVC.barCodeScanned = self.barCodeScanned
+            pmServiceVC.barCodeValue = self.barCodeValue
+            pmServiceVC.dateEntered = dateEntered.text!
+            pmServiceVC.enteredBy = enteredBy.text!
+            pmServiceVC.servicedBy = servicedBy.text!
+            pmServiceVC.subflow = subflow.text!
+            
+            self.present(pmServiceVC, animated: true, completion: nil)
+        }
+    }
+    
+    func jumpToComponentChangeSubflow() {
+        if let componentChangeVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "componentChangeVC") as? ComponentChangeController {
+            
+            componentChangeVC.barCodeScanned = self.barCodeScanned
+            componentChangeVC.barCodeValue = self.barCodeValue
+            componentChangeVC.dateEntered = dateEntered.text!
+            componentChangeVC.enteredBy = enteredBy.text!
+            componentChangeVC.servicedBy = servicedBy.text!
+            componentChangeVC.subflow = subflow.text!
+            
+            self.present(componentChangeVC, animated: true, completion: nil)
+        }
+    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("pickerView tag \(pickerView.tag)")
         switch(pickerView.tag) {
@@ -451,6 +479,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 }
                 if(subflow.text! == "Fluid Entry") {
                     jumpToFluidEntrySubflow()
+                }
+                if(subflow.text! == "PM Service") {
+                    jumpToPMServiceSubflow()
+                }
+                if(subflow.text! == "Component Change") {
+                    jumpToComponentChangeSubflow()
                 }
             
             default:

@@ -526,20 +526,105 @@
             </objects>
             <point key="canvasLocation" x="268" y="-839"/>
         </scene>
-        <!--Update Controller-->
+        <!--SMR Update Controller-->
         <scene sceneID="Php-Tp-QMR">
             <objects>
-                <viewController storyboardIdentifier="smrUpdateVC" id="tpY-3C-5t7" customClass="SMRUpdateController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="smrUpdateVC" id="tpY-3C-5t7" userLabel="SMR Update Controller" customClass="SMRUpdateController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QFV-Vd-XcL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.073299989240000002" blue="0.90580215330000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ii-be-VKA" userLabel="Header Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMR Update" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B01-k3-Ckh">
+                                        <rect key="frame" x="153.66666666666666" y="45" width="107.66666666666666" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeE-Wj-sea" userLabel="Close Button">
+                                        <rect key="frame" x="366" y="35" width="33" height="33"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
+                                        <connections>
+                                            <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="V3O-bk-fN5"/>
+                                            <action selector="onCloseSMRUpdateViewButton:" destination="tpY-3C-5t7" eventType="touchUpInside" id="UTM-ty-rWr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="B01-k3-Ckh" firstAttribute="centerX" secondItem="6Ii-be-VKA" secondAttribute="centerX" id="Imy-Bn-oJ9"/>
+                                    <constraint firstItem="JeE-Wj-sea" firstAttribute="top" secondItem="6Ii-be-VKA" secondAttribute="top" constant="35" id="J3I-cx-Q1K"/>
+                                    <constraint firstAttribute="trailing" secondItem="JeE-Wj-sea" secondAttribute="trailing" constant="15" id="OFp-7K-XmJ"/>
+                                    <constraint firstItem="B01-k3-Ckh" firstAttribute="top" secondItem="6Ii-be-VKA" secondAttribute="top" constant="45" id="pnw-sr-8tH"/>
+                                    <constraint firstAttribute="height" constant="75" id="xbg-YS-tW7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Ii-be-VKA" firstAttribute="top" secondItem="QFV-Vd-XcL" secondAttribute="top" id="gue-37-Wmj"/>
+                            <constraint firstItem="6Ii-be-VKA" firstAttribute="trailing" secondItem="olM-DQ-LK9" secondAttribute="trailing" id="z7B-aZ-Kmn"/>
+                            <constraint firstItem="6Ii-be-VKA" firstAttribute="leading" secondItem="olM-DQ-LK9" secondAttribute="leading" id="zv3-Gg-5PG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="olM-DQ-LK9"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oX2-Sz-Sdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1901" y="-2257"/>
+            <point key="canvasLocation" x="1900.0000000000002" y="-2257.3369565217395"/>
+        </scene>
+        <!--Service Controller-->
+        <scene sceneID="4dL-Ng-2KQ">
+            <objects>
+                <viewController storyboardIdentifier="pmServiceVC" id="GSy-44-iwI" customClass="PMServiceController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kU6-KX-sPD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJg-85-02I" userLabel="Header Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-39-fWI">
+                                        <rect key="frame" x="159" y="45" width="97" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyu-DK-hLI" userLabel="Close Button">
+                                        <rect key="frame" x="366" y="35" width="33" height="33"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
+                                        <connections>
+                                            <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="Ocj-ga-sCQ"/>
+                                            <action selector="onClosePMServiceViewButton:" destination="GSy-44-iwI" eventType="touchUpInside" id="bCN-06-Ngc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="vyu-DK-hLI" secondAttribute="trailing" constant="15" id="FsI-Vc-kFc"/>
+                                    <constraint firstItem="QTs-39-fWI" firstAttribute="centerX" secondItem="pJg-85-02I" secondAttribute="centerX" id="Gai-EC-qIz"/>
+                                    <constraint firstAttribute="height" constant="75" id="PSF-fE-Izc"/>
+                                    <constraint firstItem="vyu-DK-hLI" firstAttribute="top" secondItem="pJg-85-02I" secondAttribute="top" constant="35" id="dPf-wM-hWb"/>
+                                    <constraint firstItem="QTs-39-fWI" firstAttribute="top" secondItem="pJg-85-02I" secondAttribute="top" constant="45" id="y3r-tg-37c"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pJg-85-02I" firstAttribute="trailing" secondItem="yKt-QW-YXe" secondAttribute="trailing" id="KFk-bO-g8S"/>
+                            <constraint firstItem="pJg-85-02I" firstAttribute="top" secondItem="kU6-KX-sPD" secondAttribute="top" id="VH6-MW-76F"/>
+                            <constraint firstItem="pJg-85-02I" firstAttribute="leading" secondItem="yKt-QW-YXe" secondAttribute="leading" id="yYc-UF-akY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yKt-QW-YXe"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8yV-iA-XUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2564" y="-2257"/>
         </scene>
         <!--Fluid Entry Controller-->
         <scene sceneID="XUn-Qu-QTj">
@@ -548,13 +633,98 @@
                     <view key="view" contentMode="scaleToFill" id="LbH-eV-Pbj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjp-LU-JZj" userLabel="Header Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xi-uz-dVJ">
+                                        <rect key="frame" x="161" y="45" width="93" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-xV-XH8" userLabel="Close Button">
+                                        <rect key="frame" x="366" y="35" width="33" height="33"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
+                                        <connections>
+                                            <action selector="onCloseFluidEntryViewButton:" destination="OB1-kl-I8V" eventType="touchUpInside" id="DmQ-8o-3o4"/>
+                                            <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="CJl-nb-W21"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="2Xi-uz-dVJ" firstAttribute="centerX" secondItem="Gjp-LU-JZj" secondAttribute="centerX" id="LZK-pX-NHf"/>
+                                    <constraint firstItem="mXc-xV-XH8" firstAttribute="top" secondItem="Gjp-LU-JZj" secondAttribute="top" constant="35" id="Uug-21-8Vh"/>
+                                    <constraint firstAttribute="trailing" secondItem="mXc-xV-XH8" secondAttribute="trailing" constant="15" id="Xpq-wP-rkv"/>
+                                    <constraint firstItem="2Xi-uz-dVJ" firstAttribute="top" secondItem="Gjp-LU-JZj" secondAttribute="top" constant="45" id="bQC-bI-o58"/>
+                                    <constraint firstAttribute="height" constant="75" id="yEP-Yt-yt7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gjp-LU-JZj" firstAttribute="leading" secondItem="hxl-sn-QEm" secondAttribute="leading" id="Aq3-lu-lWP"/>
+                            <constraint firstItem="Gjp-LU-JZj" firstAttribute="trailing" secondItem="hxl-sn-QEm" secondAttribute="trailing" id="GcA-1h-z9Y"/>
+                            <constraint firstItem="Gjp-LU-JZj" firstAttribute="top" secondItem="LbH-eV-Pbj" secondAttribute="top" id="rw1-ya-CG3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hxl-sn-QEm"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Esa-Sd-Q4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1907" y="-1589"/>
+        </scene>
+        <!--Component Change Controller-->
+        <scene sceneID="Uvd-Pj-UID">
+            <objects>
+                <viewController storyboardIdentifier="componentChangeVC" id="THK-eC-FQf" customClass="ComponentChangeController" customModule="Komatsu_Maintlog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9en-20-Cgp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQa-NU-AJS" userLabel="Header Background">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Component Change" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-cr-ICV">
+                                        <rect key="frame" x="121.66666666666669" y="45" width="172" height="21.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEV-tE-Kdx" userLabel="Close Button">
+                                        <rect key="frame" x="366" y="35" width="33" height="33"/>
+                                        <state key="normal" image="icons8-menu-filled"/>
+                                        <connections>
+                                            <action selector="onCloseComponentChangeEntryViewButton:" destination="THK-eC-FQf" eventType="touchUpInside" id="YD1-9h-8yc"/>
+                                            <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="LNS-2I-CyI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AEV-tE-Kdx" secondAttribute="trailing" constant="15" id="3PV-r4-0aV"/>
+                                    <constraint firstAttribute="height" constant="75" id="3nu-vp-Blm"/>
+                                    <constraint firstItem="AEV-tE-Kdx" firstAttribute="top" secondItem="CQa-NU-AJS" secondAttribute="top" constant="35" id="OZh-qu-6Sa"/>
+                                    <constraint firstItem="cJM-cr-ICV" firstAttribute="top" secondItem="CQa-NU-AJS" secondAttribute="top" constant="45" id="jI9-h4-ZaQ"/>
+                                    <constraint firstItem="cJM-cr-ICV" firstAttribute="centerX" secondItem="CQa-NU-AJS" secondAttribute="centerX" id="mDD-1A-jXE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CQa-NU-AJS" firstAttribute="top" secondItem="9en-20-Cgp" secondAttribute="top" id="9R5-74-UK5"/>
+                            <constraint firstItem="CQa-NU-AJS" firstAttribute="trailing" secondItem="SDe-zE-ERa" secondAttribute="trailing" id="usp-YX-Pue"/>
+                            <constraint firstItem="CQa-NU-AJS" firstAttribute="leading" secondItem="SDe-zE-ERa" secondAttribute="leading" id="vfS-wK-F5V"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SDe-zE-ERa"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EAl-eY-SKP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2564" y="-1590"/>
         </scene>
         <!--Bar Code Scanner Controller-->
         <scene sceneID="SJe-T0-G10">

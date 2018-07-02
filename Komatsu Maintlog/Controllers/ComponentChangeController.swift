@@ -1,14 +1,14 @@
 //
-//  FluidEntryController.swift
+//  ComponentChangeController.swift
 //  Komatsu Maintlog
 //
-//  Created by Kevin Sawicke on 6/29/18.
-//  Copyright © 2018 user138461. All rights reserved.
+//  Created by Kevin Sawicke on 7/2/18.
+//  Copyright © 2018 Kevin Sawicke. All rights reserved.
 //
 
 import UIKit
 
-class FluidEntryController: UIViewController, InitialSelectionDelegate {
+class ComponentChangeController: UIViewController, InitialSelectionDelegate {
 
     var initialSelectionDelegate : InitialSelectionDelegate?
     
@@ -19,7 +19,7 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
-    @IBAction func onCloseFluidEntryViewButton(_ sender: UIButton) {
+    @IBAction func onCloseComponentChangeEntryViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
@@ -41,15 +41,5 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     func userSelectedSubflow(unitNumber: String) {
         //
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
