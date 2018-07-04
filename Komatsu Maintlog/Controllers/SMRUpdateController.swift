@@ -19,9 +19,18 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
+    @IBOutlet weak var unitNumber: UITextField!
+    @IBOutlet weak var smrUpdatePreviousSMR: UIStackView!
+    @IBOutlet weak var smrUpdateCurrentSMR: UITextField!
+    
     @IBAction func onCloseSMRUpdateViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +40,8 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         print("enteredBy: \(enteredBy)")
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
+        
+        unitNumber.text = barCodeValue
     }
 
     override func didReceiveMemoryWarning() {

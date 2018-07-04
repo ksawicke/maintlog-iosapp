@@ -19,8 +19,28 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
+    @IBOutlet weak var unitNumber: UITextField!
+    @IBOutlet weak var pmServicePmType: UITextField!
+    @IBOutlet weak var pmServicePMLevel: UITextField!
+    @IBOutlet weak var pmServicePreviousSMR: UITextField!
+    @IBOutlet weak var pmServiceCurrentSMR: UITextField!
+    @IBOutlet weak var pmServiceNotes: UITextField!
+    @IBOutlet weak var pmServiceNotes2: UITextField!
+    @IBOutlet weak var pmServiceNotes3: UITextField!
+    @IBOutlet weak var pmServiceReminderPMType: UITextField!
+    @IBOutlet weak var pmServiceReminderPMLevel: UITextField!
+    @IBOutlet weak var pmServiceReminderDue: UITextField!
+    @IBOutlet weak var pmServiceReminderNotes: UITextField!
+    @IBOutlet weak var pmServiceReminderDueQuantity: UITextField!
+    @IBOutlet weak var pmServiceReminderDueUnits: UITextField!
+    
     @IBAction func onClosePMServiceViewButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func onClickSubmitPMService(_ sender: Any) {
+        
     }
     
     override func viewDidLoad() {
@@ -31,6 +51,8 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
         print("enteredBy: \(enteredBy)")
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
+        
+        unitNumber.text = barCodeValue
     }
 
     override func didReceiveMemoryWarning() {
