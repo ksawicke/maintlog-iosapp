@@ -26,7 +26,7 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     @IBOutlet weak var componentChangeNotes: UITextField!
     
     @IBAction func onCloseComponentChangeEntryViewButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {

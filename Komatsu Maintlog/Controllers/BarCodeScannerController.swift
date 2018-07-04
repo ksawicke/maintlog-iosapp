@@ -38,7 +38,7 @@ class BarCodeScannerController: UIViewController {
         
         //3 dismiss the BarCodeScannerController to go back to the SelectScreenController
         // STEP 5: Dismiss the second VC so we can go back to the SelectScreenController
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
         
 //        dismiss(animated: true, completion: nil)
     }

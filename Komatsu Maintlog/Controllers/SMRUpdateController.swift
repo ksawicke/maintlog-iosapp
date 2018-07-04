@@ -24,7 +24,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     @IBOutlet weak var smrUpdateCurrentSMR: UITextField!
     
     @IBAction func onCloseSMRUpdateViewButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {

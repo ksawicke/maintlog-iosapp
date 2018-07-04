@@ -328,12 +328,12 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         let alert = UIAlertController(title: "Session Expired", message: "Return to Main Menu", preferredStyle: .alert)
         
         let restartAction = UIAlertAction(title: "Done", style: .default, handler: { (action: UIAlertAction!) in
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         })
         
         alert.addAction(restartAction)
         
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: false, completion: nil)
     }
     
     func uploadInspectionRatings() {

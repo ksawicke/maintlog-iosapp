@@ -22,18 +22,17 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var fluidEntryFluidType1: UITextField!
     @IBOutlet weak var fluidEntryFluidQuantity1: UITextField!
-     @IBOutlet weak var fluidEntryPreviousSMR: UITextField!
+    @IBOutlet weak var fluidEntryPreviousSMR: UITextField!
     @IBOutlet weak var fluidEntryCurrentSMR: UITextField!
     @IBOutlet weak var fluidEntryNotes: UITextField!
     
     @IBAction func onCloseFluidEntryViewButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

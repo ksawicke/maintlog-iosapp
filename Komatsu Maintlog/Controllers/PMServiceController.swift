@@ -35,7 +35,7 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
     @IBOutlet weak var pmServiceReminderDueUnits: UITextField!
     
     @IBAction func onClosePMServiceViewButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     
