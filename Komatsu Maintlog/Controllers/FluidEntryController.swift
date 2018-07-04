@@ -31,7 +31,8 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
-        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: "test2", equipmentUnitId: 55, subflow: "Fluid Entry", jsonData: "[{\"sample\":\"342434242424\"}]")
+        print("Save Fluid Entry test...")
     }
     
     override func viewDidLoad() {

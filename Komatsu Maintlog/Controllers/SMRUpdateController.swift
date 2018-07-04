@@ -28,7 +28,8 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
-        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 21, subflow: "SMR Update", jsonData: "[{\"sample\":\"123\"}]")
+        print("Save SMR Update test...")
     }
     
     

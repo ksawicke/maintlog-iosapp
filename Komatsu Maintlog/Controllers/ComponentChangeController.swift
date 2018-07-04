@@ -30,7 +30,8 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {
-        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 665, subflow: "Component Change", jsonData: "[{\"sample\":\"555555\"}]")
+        print("Save Component Change test...")
     }
     
     override func viewDidLoad() {

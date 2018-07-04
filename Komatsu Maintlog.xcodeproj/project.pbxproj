@@ -14,6 +14,7 @@
 		655FABFF20EA954100718D60 /* ComponentChangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655FABFE20EA954100718D60 /* ComponentChangeController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
 		656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */; };
+		65722F7220ED80DB0018CD2D /* LogEntryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65722F7120ED80DB0018CD2D /* LogEntryCoreDataHandler.swift */; };
 		65875F732083FE4800303D20 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65875F722083FE4800303D20 /* UITextField.swift */; };
 		658D8ED420BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */; };
 		6591F04F20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */; };
@@ -53,6 +54,7 @@
 		655FABFE20EA954100718D60 /* ComponentChangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentChangeController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
 		656FD9BA208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionRatingCoreDataHandler.swift; sourceTree = "<group>"; };
+		65722F7120ED80DB0018CD2D /* LogEntryCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntryCoreDataHandler.swift; sourceTree = "<group>"; };
 		65875F722083FE4800303D20 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		658D8ED320BF3FBC00A65F03 /* EquipmentUnitCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentUnitCoreDataHandler.swift; sourceTree = "<group>"; };
 		6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FluidTypeCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				6591F04E20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift */,
 				6593DE0620C8582B00045CE7 /* UserCoreDataHandler.swift */,
 				65A3D00320D9BC7E001FAC2A /* SmrUpdateCoreDataHandler.swift */,
+				65722F7120ED80DB0018CD2D /* LogEntryCoreDataHandler.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65DE11A620B602A80072C582 /* SettingsBundleHelper.swift in Sources */,
+				65722F7220ED80DB0018CD2D /* LogEntryCoreDataHandler.swift in Sources */,
 				65CC066B20E6B5C9003C5FE3 /* FluidEntryController.swift in Sources */,
 				8AD02AE9207804CD00AD05BC /* AppDelegate.swift in Sources */,
 				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,

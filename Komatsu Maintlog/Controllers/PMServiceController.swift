@@ -40,7 +40,8 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
     
     
     @IBAction func onClickSubmitPMService(_ sender: Any) {
-        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: "test5", equipmentUnitId: 66, subflow: "PM Service", jsonData: "[{\"sample\":\"324324234\"}]")
+        print("Save PM Service test...")
     }
     
     override func viewDidLoad() {

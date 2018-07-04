@@ -43,6 +43,12 @@
         <attribute name="smr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="LogEntry" representedClassName="LogEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="equipmentUnitId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="jsonData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subflow" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
         <attribute name="active" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -77,5 +83,6 @@
         <element name="Login" positionX="-207" positionY="-18" width="128" height="165"/>
         <element name="SmrUpdate" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="User" positionX="-207" positionY="-18" width="128" height="120"/>
+        <element name="LogEntry" positionX="-207" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
