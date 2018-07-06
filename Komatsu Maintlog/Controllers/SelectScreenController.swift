@@ -43,6 +43,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     var barCodeValue : String = ""
     var equipmentUnitId : Int16 = 0
     
+    var loggedInUserId = 0
+    
     @IBOutlet weak var barcodeSelectedLabel: UILabel!
     @IBOutlet weak var scanBarcodeButton: UIButton!
     @IBOutlet weak var inspectionEntryButton: UIButton!
@@ -130,6 +132,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
 //            disableUploadButton()
 //        }
         
+        currentUserCheck()
+        
         countInspectionsToUpload()
         updateItemsPendingMessage()
         attemptInspectionDataUploads()
@@ -144,6 +148,18 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func currentUserCheck() {
+        let countActiveUsers = LoginCoreDataHandler.countActiveUsers()
+        if countActiveUsers == 1 {
+            let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
+            
+            for activeUser in activeUsers! {
+
+                loggedInUserId = activeUser.value(forKey: "userId")! as! Int
+            }
+        }
     }
     
     func enableUploadButton(totalUploads: Int) {
@@ -260,7 +276,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     }
     
     func attemptInspectionImageUploads() {
-        Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(SelectScreenController.uploadInspectionImageData), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(SelectScreenController.uploadInspectionImageData), userInfo: nil, repeats: true)
     }
     
     func checkIfSessionExpired() {
@@ -449,7 +465,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 "equipmentUnitId": equipmentUnitId,
                 "inspectionId": inspectionId,
                 "smr": smr,
-                "userId": userId
+                "userId": loggedInUserId
             ]
             
             // Append Item
@@ -483,7 +499,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let inspectionId = "\(inspectionRating.inspectionId!)"
             let note = "\(inspectionRating.note!)"
             let rating = "\(inspectionRating.rating)"
-            let userId = "1"
+            let userId = loggedInUserId
             
             let inspectionRatingItem: [String: Any] = [
                 "equipmentUnitId": equipmentUnitId,

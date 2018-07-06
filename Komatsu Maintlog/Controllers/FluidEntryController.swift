@@ -37,41 +37,41 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
         _ = LogEntryCoreDataHandler.saveObject(uuid: "test2", equipmentUnitId: 55, subflow: "Fluid Entry", jsonData: "[{\"sample\":\"342434242424\"}]")
         print("Save Fluid Entry test...")
         
-        let logEntries = LogEntryCoreDataHandler.fetchObject()
-        var params: Any = []
-        
-        for logEntry in logEntries! {
-            let uuid = "\(logEntry.uuid)"
-            let equipmentUnitId = "\(logEntry.equipmentUnitId)"
-            let subflow = "\(logEntry.subflow!)"
-            let jsonData = "\(logEntry.jsonData!)"
-            
-            let logEntryItem: [String: Any] = [
-                "uuid": uuid,
-                "equipmentUnitId": equipmentUnitId,
-                "subflow": subflow,
-                "jsonData": jsonData
-            ]
-            
-            // Append Item
-            params = (params as? [Any] ?? []) + [logEntryItem]
-        }
-        
-        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-            response in
-            
-            switch response.result {
-            case .success:
-                //                for smrUpdate in smrUpdates! {
-                //                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
-                //                }
-                
-                break
-            case .failure(let error):
-                
-                print(error)
-            }
-        }
+//        let logEntries = LogEntryCoreDataHandler.fetchObject()
+//        var params: Any = []
+//        
+//        for logEntry in logEntries! {
+//            let uuid = "\(logEntry.uuid)"
+//            let equipmentUnitId = "\(logEntry.equipmentUnitId)"
+//            let subflow = "\(logEntry.subflow!)"
+//            let jsonData = "\(logEntry.jsonData!)"
+//            
+//            let logEntryItem: [String: Any] = [
+//                "uuid": uuid,
+//                "equipmentUnitId": equipmentUnitId,
+//                "subflow": subflow,
+//                "jsonData": jsonData
+//            ]
+//            
+//            // Append Item
+//            params = (params as? [Any] ?? []) + [logEntryItem]
+//        }
+//        
+//        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+//            response in
+//            
+//            switch response.result {
+//            case .success:
+//                //                for smrUpdate in smrUpdates! {
+//                //                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
+//                //                }
+//                
+//                break
+//            case .failure(let error):
+//                
+//                print(error)
+//            }
+//        }
     }
     
     override func viewDidLoad() {
