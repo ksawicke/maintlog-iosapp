@@ -286,8 +286,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     @objc func countInspectionsToUpload() {
         let countInspectionRating = InspectionRatingCoreDataHandler.countData()
         let countInspectionImage = InspectionImageCoreDataHandler.countData()
+        let countSmrUpdate = SmrUpdateCoreDataHandler.countData()
 
-        let totalUploads = countInspectionRating + countInspectionImage
+        let totalUploads = countInspectionRating + countInspectionImage + countSmrUpdate
         
         if totalUploads > 0 {
             uploadInspectionButton.setTitle("\(totalUploads) items pending upload", for: .normal)
@@ -459,27 +460,29 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             let equipmentUnitId = "\(smrUpdate.equipmentUnitId)"
             let inspectionId = "\(smrUpdate.inspectionId!)"
             let smr = "\(smrUpdate.smr!)"
-            let userId = "1"
+            let userId = loggedInUserId
             
             let smrUpdateItem: [String: Any] = [
                 "equipmentUnitId": equipmentUnitId,
                 "inspectionId": inspectionId,
                 "smr": smr,
-                "userId": loggedInUserId
+                "userId": userId
             ]
             
             // Append Item
             params = (params as? [Any] ?? []) + [smrUpdateItem]
         }
         
+        print(params)
+        
         Alamofire.request(url, method: .post, parameters: ["smrupdates": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
             response in
 
             switch response.result {
             case .success:
-//                for smrUpdate in smrUpdates! {
+                for smrUpdate in smrUpdates! {
 //                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
-//                }
+                }
 
                 break
             case .failure(let error):

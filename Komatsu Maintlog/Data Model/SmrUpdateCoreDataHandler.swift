@@ -75,6 +75,23 @@ class SmrUpdateCoreDataHandler: NSObject {
         }
     }
     
+    class func countData() -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<SmrUpdate> = SmrUpdate.fetchRequest()
+        var smrUpdateCount:Int? = 0
+        
+        let predicate = NSPredicate(format: "userId != 99999")
+        fetchRequest.predicate = predicate
+        
+        do {
+            smrUpdateCount = try context.count(for: fetchRequest)
+            
+            return smrUpdateCount!
+        } catch {
+            return smrUpdateCount!
+        }
+    }
+    
     class func filterData(fieldName: String, filterType: String, queryString: String) -> [SmrUpdate]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<SmrUpdate> = SmrUpdate.fetchRequest()
