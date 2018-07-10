@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ComponentChangeController: UIViewController, InitialSelectionDelegate {
 
@@ -30,7 +31,44 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {
-        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 665, subflow: "Component Change", jsonData: "[{\"sample\":\"555555\"}]")
+        let uuid: String = UUID().uuidString
+        let jsonData: JSON = [
+            "date_entered": "2018-01-01 12:00:01",
+            "entered_by": "21",
+            "unit_number": "5",
+            "serviced_by": "1",
+            
+            "subflow": "ccs",
+            "ccs_component_type": "",
+            "ccs_component": "",
+            "ccs_component_data": "",
+            "ccs_notes": "",
+            "ccs_previous_smr": "",
+            "ccs_current_smr": ""
+        ]
+        /*
+         $componentchange = R::dispense('componentchange');
+         $componentchange->servicelog_id = $servicelog_id;
+         $componentchange->component_type = $post['ccs_component_type'];
+         $componentchange->component = $post['ccs_component'];
+         $componentchange->component_data = $post['ccs_component_data'];
+         $componentchange->notes = $post['ccs_notes'];
+         R::store($componentchange);
+         
+         $componentchangesmrupdate = R::dispense('componentchangesmrupdate');
+         $componentchangesmrupdate->servicelog_id = $servicelog_id;
+         $componentchangesmrupdate->previous_smr = $post['ccs_previous_smr'];
+         $componentchangesmrupdate->smr = $post['ccs_current_smr'];
+         R::store($componentchangesmrupdate);*/
+        
+        debugPrint(jsonData)
+        print("**")
+        print(jsonData)
+        
+//        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 665, subflow: "Component Change", jsonData: "[{\"sample\":\"555555\"}]")
+        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        
         print("Save Component Change test...")
     }
     

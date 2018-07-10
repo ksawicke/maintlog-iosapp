@@ -44,9 +44,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="LogEntry" representedClassName="LogEntry" syncable="YES" codeGenerationType="class">
-        <attribute name="equipmentUnitId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="jsonData" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="subflow" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
@@ -80,9 +78,9 @@
         <element name="FluidType" positionX="-207" positionY="-18" width="128" height="75"/>
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="135"/>
         <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="150"/>
+        <element name="LogEntry" positionX="-207" positionY="-18" width="128" height="75"/>
         <element name="Login" positionX="-207" positionY="-18" width="128" height="165"/>
         <element name="SmrUpdate" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="User" positionX="-207" positionY="-18" width="128" height="120"/>
-        <element name="LogEntry" positionX="-207" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

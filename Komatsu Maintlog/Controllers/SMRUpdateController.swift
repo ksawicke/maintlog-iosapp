@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class SMRUpdateController: UIViewController, InitialSelectionDelegate {
 
@@ -28,7 +29,50 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
-        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 21, subflow: "SMR Update", jsonData: "[{\"sample\":\"123\"}]")
+        let uuid: String = UUID().uuidString
+        let jsonData: JSON = [
+            "date_entered": "2018-01-01 12:00:01",
+            "entered_by": "21",
+            "unit_number": "5",
+            "serviced_by": "1",
+            
+            "subflow": "sus",
+            "sus_previous_smr": "12345",
+            "sus_current_smr": "12346"
+        ]
+        
+        debugPrint(jsonData)
+        print("**")
+        print(jsonData)
+        
+        /**
+         $servicelog = R::dispense('servicelog');
+         //        $servicelog->date_entered = date('Y-m-d', strtotime($post['date_entered']));
+         //        $servicelog->entered_by = $post['entered_by'];
+         //        $servicelog->unit_number = $post['unit_number'];
+         //        $servicelog->created = $now;
+         //        $servicelog_id = R::store($servicelog);
+         //
+         //        $servicedBys = explode("|", $post['serviced_by']);
+         //        foreach($servicedBys as $ctr => $serviceByUserId) {
+         //            $servicelog_servicedby = R::dispense('servicelogservicedby');
+         //            $servicelog_servicedby->servicelog_id = $servicelog_id;
+         //            $servicelog_servicedby->user_id = $serviceByUserId;
+         //            $servicelog_servicedby_id = R::store($servicelog_servicedby);
+         //        }
+         //
+         //        switch($post['subflow']) {
+         //            case 'sus':
+         //                $smrupdate = R::dispense('smrupdate');
+         //                $smrupdate->servicelog_id = $servicelog_id;
+         //                $smrupdate->previous_smr = $post['sus_previous_smr'];
+         //                $smrupdate->smr = $post['sus_current_smr'];
+         **/
+        
+//        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 21, subflow: "SMR Update", jsonData: "[{\"sample\":\"123\"}]")
+        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        
         print("Save SMR Update test...")
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class PMServiceController: UIViewController, InitialSelectionDelegate {
 
@@ -40,7 +41,36 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
     
     
     @IBAction func onClickSubmitPMService(_ sender: Any) {
-        _ = LogEntryCoreDataHandler.saveObject(uuid: "test5", equipmentUnitId: 66, subflow: "PM Service", jsonData: "[{\"sample\":\"324324234\"}]")
+        let uuid: String = UUID().uuidString
+        let jsonData: JSON = [
+            "date_entered": "2018-01-01 12:00:01",
+            "entered_by": "21",
+            "unit_number": "5",
+            "serviced_by": "1",
+            
+            "subflow": "pss",
+            "pss_pm_type": "",
+            "pss_smr_based_pm_level": "",
+            "pss_smr_based_previous_smr": "",
+            "pss_smr_based_current_smr": "",
+            "pss_due_units": "",
+            "pss_notes": "",
+            "pss_smr_based_notes": [
+                [ "note": "" ],
+                [ "note": "" ],
+                [ "note": "" ]
+            ],
+            "pss_reminder_recipients": [
+                [ "email_addresses": "" ]
+            ]
+        ]
+        
+        debugPrint(jsonData)
+        print("**")
+        print(jsonData)
+        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        
         print("Save PM Service test...")
     }
     

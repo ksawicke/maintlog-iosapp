@@ -17,14 +17,12 @@ class LogEntryCoreDataHandler: NSObject {
         return appDelegate.persistentContainer.viewContext
     }
     
-    class func saveObject(uuid: String, equipmentUnitId: Int16, subflow: String, jsonData: String) -> Bool {
+    class func saveObject(uuid: String, jsonData: String) -> Bool {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "LogEntry", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(uuid, forKey: "uuid")
-        managedObject.setValue(equipmentUnitId, forKey: "equipmentUnitId")
-        managedObject.setValue(subflow, forKey: "subflow")
         managedObject.setValue(jsonData, forKey: "jsonData")
         
         do {
@@ -80,7 +78,7 @@ class LogEntryCoreDataHandler: NSObject {
         let fetchRequest:NSFetchRequest<LogEntry> = LogEntry.fetchRequest()
         var logEntryCount:Int? = 0
         
-        let predicate = NSPredicate(format: "equipmentUnitId > 0")
+        let predicate = NSPredicate(format: "uuid != 9")
         fetchRequest.predicate = predicate
         
         do {

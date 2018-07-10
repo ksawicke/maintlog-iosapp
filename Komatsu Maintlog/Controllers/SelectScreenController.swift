@@ -517,34 +517,34 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         let logEntries = LogEntryCoreDataHandler.fetchObject()
         var params: Any = []
         
-        for logEntry in logEntries! {
-            let uuid = "\(logEntry.uuid!)"
-            let equipmentUnitId = "\(logEntry.equipmentUnitId)"
-            let subflow = "\(logEntry.subflow!)"
-            let jsonData = "\(logEntry.jsonData)"
-            let userId = loggedInUserId
-            
-            let logEntryItem: [String: Any] = [
-                "uuid": uuid,
-                "equipmentUnitId": equipmentUnitId,
-                "subflow": subflow,
-                "jsonData": jsonData,
-                "userId": userId
-            ]
-            
-            // Append Item
-            params = (params as? [Any] ?? []) + [logEntryItem]
-        }
-        
-                print(params)
+//        for logEntry in logEntries! {
+//            let uuid = "\(logEntry.uuid!)"
+//            let jsonData = "\(logEntry.jsonData!)"
+//            let userId = loggedInUserId
+//            
+//            let logEntryItem: [String: Any] = [
+//                "uuid": uuid,
+//                "equipmentUnitId": equipmentUnitId,
+//                "subflow": subflow,
+//                "jsonData": jsonData,
+//                "userId": userId
+//            ]
+//            
+//            // Append Item
+//            params = (params as? [Any] ?? []) + [logEntryItem]
+//        }
+//        
+//        print(params)
         
 //        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
 //            response in
+//            
+//            debugPrint(response)
 //
 //            switch response.result {
 //            case .success:
 //                for logEntry in logEntries! {
-//                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+////                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
 //                }
 //
 //                break

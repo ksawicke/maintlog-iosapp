@@ -34,44 +34,34 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     }
     
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
-        _ = LogEntryCoreDataHandler.saveObject(uuid: "test2", equipmentUnitId: 55, subflow: "Fluid Entry", jsonData: "[{\"sample\":\"342434242424\"}]")
-        print("Save Fluid Entry test...")
+        let uuid: String = UUID().uuidString
+        let jsonData: JSON = [
+            "date_entered": "2018-01-01 12:00:01",
+            "entered_by": "21",
+            "unit_number": "5",
+            "serviced_by": "1",
+            
+            "subflow": "flu",
+            "fluid_added": [
+                [ "type": "",
+                  "quantity": 4.1,
+                  "units": "gal" ],
+                [ "type": "",
+                  "quantity": 3.2,
+                  "units": "gal" ],
+            ],
+            "flu_previous_smr": "12345",
+            "flu_current_smr": "12346",
+            "flu_notes": ""
+        ]
         
-//        let logEntries = LogEntryCoreDataHandler.fetchObject()
-//        var params: Any = []
-//        
-//        for logEntry in logEntries! {
-//            let uuid = "\(logEntry.uuid)"
-//            let equipmentUnitId = "\(logEntry.equipmentUnitId)"
-//            let subflow = "\(logEntry.subflow!)"
-//            let jsonData = "\(logEntry.jsonData!)"
-//            
-//            let logEntryItem: [String: Any] = [
-//                "uuid": uuid,
-//                "equipmentUnitId": equipmentUnitId,
-//                "subflow": subflow,
-//                "jsonData": jsonData
-//            ]
-//            
-//            // Append Item
-//            params = (params as? [Any] ?? []) + [logEntryItem]
-//        }
-//        
-//        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-//            response in
-//            
-//            switch response.result {
-//            case .success:
-//                //                for smrUpdate in smrUpdates! {
-//                //                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
-//                //                }
-//                
-//                break
-//            case .failure(let error):
-//                
-//                print(error)
-//            }
-//        }
+        debugPrint(jsonData)
+        print("**")
+        print(jsonData)
+        
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        
+        print("Save Fluid Entry test...")
     }
     
     override func viewDidLoad() {
