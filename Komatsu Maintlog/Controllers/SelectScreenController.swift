@@ -23,6 +23,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     var API_UPLOAD_INSPECTION_RATINGS = "/api/upload_inspection_ratings"
     var API_UPLOAD_INSPECTION_SMR_UPDATES = "/api/upload_inspection_smrupdates"
     var API_UPLOAD_INSPECTION_IMAGES = "/api/upload_inspection_images"
+    var API_UPLOAD_LOG_ENTRIES = "/api/upload_log_entries"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headersWWWForm: HTTPHeaders = [
         "Content-Type": "application/json"
@@ -138,6 +139,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         updateItemsPendingMessage()
         attemptInspectionDataUploads()
         attemptInspectionSmrUploads()
+        attemptInspectionLogEntryUploads()
         attemptInspectionImageUploads()
     }
     
@@ -275,6 +277,10 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(SelectScreenController.uploadSmrUpdateData), userInfo: nil, repeats: true)
     }
     
+    func attemptInspectionLogEntryUploads() {
+        Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(SelectScreenController.uploadLogEntryData), userInfo: nil, repeats: true)
+    }
+    
     func attemptInspectionImageUploads() {
         Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(SelectScreenController.uploadInspectionImageData), userInfo: nil, repeats: true)
     }
@@ -287,8 +293,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         let countInspectionRating = InspectionRatingCoreDataHandler.countData()
         let countInspectionImage = InspectionImageCoreDataHandler.countData()
         let countSmrUpdate = SmrUpdateCoreDataHandler.countData()
+        let countLogEntry = LogEntryCoreDataHandler.countData()
 
-        let totalUploads = countInspectionRating + countInspectionImage + countSmrUpdate
+        let totalUploads = countInspectionRating + countInspectionImage + countSmrUpdate + countLogEntry
         
         if totalUploads > 0 {
             uploadInspectionButton.setTitle("\(totalUploads) items pending upload", for: .normal)
@@ -307,6 +314,10 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     
     @objc func uploadSmrUpdateData() {
         uploadInspectionSmrUpdates()
+    }
+    
+    @objc func uploadLogEntryData() {
+        uploadLogEntryRecords()
     }
     
     @objc func checkSession() {
@@ -371,6 +382,16 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         UPLOAD_INSPECTION_SMR_UPDATES_URL.append("?&api_key=\(API_KEY)")
         
         uploadSmrUpdates(url: UPLOAD_INSPECTION_SMR_UPDATES_URL)
+    }
+    
+    func uploadLogEntryRecords() {
+        var UPLOAD_LOG_ENTRIES_URL = "\(API_PROD_BASE_URL)\(API_UPLOAD_LOG_ENTRIES)"
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            UPLOAD_LOG_ENTRIES_URL = "\(API_DEV_BASE_URL)\(API_UPLOAD_LOG_ENTRIES)"
+        }
+        UPLOAD_LOG_ENTRIES_URL.append("?&api_key=\(API_KEY)")
+        
+        uploadLogEntries(url: UPLOAD_LOG_ENTRIES_URL)
     }
     
     func uploadInspectionImages() {
@@ -473,7 +494,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             params = (params as? [Any] ?? []) + [smrUpdateItem]
         }
         
-        print(params)
+//        print(params)
         
         Alamofire.request(url, method: .post, parameters: ["smrupdates": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
             response in
@@ -481,7 +502,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             switch response.result {
             case .success:
                 for smrUpdate in smrUpdates! {
-//                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
+                    _ = SmrUpdateCoreDataHandler.deleteObject(smrupdate: smrUpdate)
                 }
 
                 break
@@ -490,6 +511,48 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 print(error)
             }
         }
+    }
+    
+    func uploadLogEntries(url: String) {
+        let logEntries = LogEntryCoreDataHandler.fetchObject()
+        var params: Any = []
+        
+        for logEntry in logEntries! {
+            let uuid = "\(logEntry.uuid!)"
+            let equipmentUnitId = "\(logEntry.equipmentUnitId)"
+            let subflow = "\(logEntry.subflow!)"
+            let jsonData = "\(logEntry.jsonData)"
+            let userId = loggedInUserId
+            
+            let logEntryItem: [String: Any] = [
+                "uuid": uuid,
+                "equipmentUnitId": equipmentUnitId,
+                "subflow": subflow,
+                "jsonData": jsonData,
+                "userId": userId
+            ]
+            
+            // Append Item
+            params = (params as? [Any] ?? []) + [logEntryItem]
+        }
+        
+                print(params)
+        
+//        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+//            response in
+//
+//            switch response.result {
+//            case .success:
+//                for logEntry in logEntries! {
+//                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+//                }
+//
+//                break
+//            case .failure(let error):
+//
+//                print(error)
+//            }
+//        }
     }
     
     func uploadRatings(url: String) {

@@ -75,6 +75,23 @@ class LogEntryCoreDataHandler: NSObject {
         }
     }
     
+    class func countData() -> Int {
+        let context = getContext()
+        let fetchRequest:NSFetchRequest<LogEntry> = LogEntry.fetchRequest()
+        var logEntryCount:Int? = 0
+        
+        let predicate = NSPredicate(format: "equipmentUnitId > 0")
+        fetchRequest.predicate = predicate
+        
+        do {
+            logEntryCount = try context.count(for: fetchRequest)
+            
+            return logEntryCount!
+        } catch {
+            return logEntryCount!
+        }
+    }
+    
     class func filterData(fieldName: String, filterType: String, queryString: String) -> [LogEntry]? {
         let context = getContext()
         let fetchRequest:NSFetchRequest<LogEntry> = LogEntry.fetchRequest()
