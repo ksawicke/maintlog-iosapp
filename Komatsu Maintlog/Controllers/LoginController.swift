@@ -22,6 +22,7 @@ class LoginController: UIViewController {
     var API_EQUIPMENTTYPE = "/api/equipmenttype"
     var API_EQUIPMENTUNIT = "/api/equipmentunit"
     var API_FLUIDTYPE = "/api/fluidtype"
+    var API_COMPONENTTYPE = "/api/componenttype"
     var API_USER = "/api/user"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
@@ -456,6 +457,38 @@ class LoginController: UIViewController {
                 }
             } else {
                 ProgressHUD.showError("Unable to import Fluid Types")
+            }
+        }
+    }
+    
+    func addComponentTypes() {
+        var URL = "\(API_PROD_BASE_URL)\(API_COMPONENTTYPE)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_COMPONENTTYPE)"
+        }
+        
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                if responseJSON["status"] == true {
+                    let componenttypes = responseJSON["componenttypes"]
+                    
+                    for (_, componenttype) in componenttypes {
+                        let id = componenttype["id"].int16!
+                        let componentType = componenttype["component_type"].string!
+                        
+                        _ = ComponentTypeCoreDataHandler.saveObject(id: id, componentType: componentType)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            } else {
+                ProgressHUD.showError("Unable to import Component Types")
             }
         }
     }

@@ -20,11 +20,18 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     var servicedBy : String = ""
     var subflow : String = ""
     
+    var pickerViewComponentType = UIPickerView()
+    
+    var componentTypePickerData = ["Select one:", "Engine", "Final Drive", "Suspension", "Software", "Tires", "Windshield", "Brakes", "Cab", "Hydraulics", "Steering", "Electrical", "Motor Grader Cutting Edges"]
+    var componentTypeOutputData = ["", "sus", "flu", "pss", "ccs"]
+    
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var componentChangeComponentType: UITextField!
     @IBOutlet weak var componentChangeComponent: UITextField!
     @IBOutlet weak var componentChangeComponentData: UITextField!
     @IBOutlet weak var componentChangeNotes: UITextField!
+    @IBOutlet weak var componentChangePreviousSMR: UITextField!
+    @IBOutlet weak var componentChangeCurrentSMR: UITextField!
     
     @IBAction func onCloseComponentChangeEntryViewButton(_ sender: UIButton) {
         dismiss(animated: false, completion: nil)
@@ -33,39 +40,23 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
-            "date_entered": "2018-01-01 12:00:01",
-            "entered_by": "21",
-            "unit_number": "5",
-            "serviced_by": "1",
+            "date_entered": dateEntered,
+            "entered_by": enteredBy,
+            "unit_number": barCodeValue,
+            "serviced_by": servicedBy,
             
             "subflow": "ccs",
-            "ccs_component_type": "",
-            "ccs_component": "",
-            "ccs_component_data": "",
-            "ccs_notes": "",
-            "ccs_previous_smr": "",
-            "ccs_current_smr": ""
+            "ccs_component_type": componentChangeComponentType,
+            "ccs_component": componentChangeComponent,
+            "ccs_component_data": componentChangeComponentData,
+            "ccs_notes": componentChangeNotes,
+            "ccs_previous_smr": componentChangePreviousSMR,
+            "ccs_current_smr": componentChangeCurrentSMR
         ]
-        /*
-         $componentchange = R::dispense('componentchange');
-         $componentchange->servicelog_id = $servicelog_id;
-         $componentchange->component_type = $post['ccs_component_type'];
-         $componentchange->component = $post['ccs_component'];
-         $componentchange->component_data = $post['ccs_component_data'];
-         $componentchange->notes = $post['ccs_notes'];
-         R::store($componentchange);
-         
-         $componentchangesmrupdate = R::dispense('componentchangesmrupdate');
-         $componentchangesmrupdate->servicelog_id = $servicelog_id;
-         $componentchangesmrupdate->previous_smr = $post['ccs_previous_smr'];
-         $componentchangesmrupdate->smr = $post['ccs_current_smr'];
-         R::store($componentchangesmrupdate);*/
         
         debugPrint(jsonData)
         print("**")
         print(jsonData)
-        
-//        _ = LogEntryCoreDataHandler.saveObject(uuid: "test", equipmentUnitId: 665, subflow: "Component Change", jsonData: "[{\"sample\":\"555555\"}]")
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
@@ -91,6 +82,75 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     
     func userSelectedSubflow(unitNumber: String) {
         //
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch(pickerView.tag) {
+        case 0:
+            return componentTypePickerData.count
+            
+        default:
+            return componentTypePickerData.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch(pickerView.tag) {
+        case 0:
+            return componentTypePickerData[row]
+
+        default:
+            return componentTypePickerData[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("pickerView tag \(pickerView.tag)")
+        switch(pickerView.tag) {
+        case 0:
+            componentChangeComponentType.text = componentTypePickerData[row]
+            componentChangeComponentType.resignFirstResponder()
+ 
+        default:
+            componentChangeComponentType.text = componentTypePickerData[row]
+            componentChangeComponentType.resignFirstResponder()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        
+        print("hide keyboard?")
+        
+        //        nextButton.isHidden = false
+        
+        return true
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func hideKeyboard() {
+        print("run hide keyboard")
+        //        currentSMR.resignFirstResponder()
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset = UIEdgeInsets.zero
+        } else {
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height, right: 0)
+        }
     }
 
 }

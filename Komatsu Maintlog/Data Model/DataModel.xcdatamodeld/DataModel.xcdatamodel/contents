@@ -9,6 +9,10 @@
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="ComponentType" representedClassName="ComponentType" syncable="YES" codeGenerationType="class">
+        <attribute name="componentType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="EquipmentType" representedClassName="EquipmentType" syncable="YES" codeGenerationType="class">
         <attribute name="equipmentType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -82,5 +86,6 @@
         <element name="Login" positionX="-207" positionY="-18" width="128" height="165"/>
         <element name="SmrUpdate" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="User" positionX="-207" positionY="-18" width="128" height="120"/>
+        <element name="ComponentType" positionX="-207" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

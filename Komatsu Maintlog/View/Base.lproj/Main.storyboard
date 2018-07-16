@@ -681,7 +681,7 @@
                     </view>
                     <connections>
                         <outlet property="smrUpdateCurrentSMR" destination="2Z4-6c-96J" id="0Ue-rC-HBQ"/>
-                        <outlet property="smrUpdatePreviousSMR" destination="Co4-mW-kOc" id="IFh-We-7Aw"/>
+                        <outlet property="smrUpdatePreviousSMR" destination="4ph-YW-7Ji" id="tdo-i9-VtZ"/>
                         <outlet property="unitNumber" destination="g3N-nV-G9m" id="feF-uL-iwh"/>
                     </connections>
                 </viewController>
@@ -1248,7 +1248,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="661"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9Rk-oM-dp5">
-                                                        <rect key="frame" x="20" y="19.999999999999972" width="374" height="492.33333333333326"/>
+                                                        <rect key="frame" x="20" y="20" width="374" height="675.66666666666663"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-hl-7Ur">
                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="76.666666666666671"/>
@@ -1335,8 +1335,32 @@
                                                                     </textField>
                                                                 </subviews>
                                                             </stackView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Previous SMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iyq-9c-tmY">
+                                                                <rect key="frame" x="0.0" y="458.33333333333337" width="374" height="21.666666666666686"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5cV-G0-DdJ">
+                                                                <rect key="frame" x="0.0" y="495" width="374" height="40"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current SMR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AH-Hl-qdU">
+                                                                <rect key="frame" x="0.0" y="550" width="374" height="21.666666666666629"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Unb-cC-oZ2">
+                                                                <rect key="frame" x="0.0" y="586.66666666666663" width="374" height="40"/>
+                                                                <nil key="textColor"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wg8-fc-QZd">
-                                                                <rect key="frame" x="0.0" y="458.33333333333337" width="374" height="34"/>
+                                                                <rect key="frame" x="0.0" y="641.66666666666663" width="374" height="34"/>
                                                                 <color key="backgroundColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <state key="normal" title="Submit">
@@ -1392,7 +1416,9 @@
                         <outlet property="componentChangeComponent" destination="H6z-EF-t02" id="hZC-rL-a4g"/>
                         <outlet property="componentChangeComponentData" destination="oXo-sy-R6f" id="tPR-LO-Q2J"/>
                         <outlet property="componentChangeComponentType" destination="6vp-lO-KGE" id="xmv-kF-RFu"/>
+                        <outlet property="componentChangeCurrentSMR" destination="Unb-cC-oZ2" id="b14-h2-fYa"/>
                         <outlet property="componentChangeNotes" destination="8V3-6c-Dsx" id="ty4-NB-BW6"/>
+                        <outlet property="componentChangePreviousSMR" destination="5cV-G0-DdJ" id="0k6-hS-3mB"/>
                         <outlet property="unitNumber" destination="aaI-Vi-PhB" id="ui1-ba-vUS"/>
                     </connections>
                 </viewController>
