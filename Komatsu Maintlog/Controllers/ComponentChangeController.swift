@@ -25,6 +25,7 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     var componentTypePickerData = ["Select one:", "Engine", "Final Drive", "Suspension", "Software", "Tires", "Windshield", "Brakes", "Cab", "Hydraulics", "Steering", "Electrical", "Motor Grader Cutting Edges"]
     var componentTypeOutputData = ["", "sus", "flu", "pss", "ccs"]
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var componentChangeComponentType: UITextField!
     @IBOutlet weak var componentChangeComponent: UITextField!

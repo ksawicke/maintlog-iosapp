@@ -1419,6 +1419,7 @@
                         <outlet property="componentChangeCurrentSMR" destination="Unb-cC-oZ2" id="b14-h2-fYa"/>
                         <outlet property="componentChangeNotes" destination="8V3-6c-Dsx" id="ty4-NB-BW6"/>
                         <outlet property="componentChangePreviousSMR" destination="5cV-G0-DdJ" id="0k6-hS-3mB"/>
+                        <outlet property="scrollView" destination="oft-OM-fzt" id="Ljs-oB-xLc"/>
                         <outlet property="unitNumber" destination="aaI-Vi-PhB" id="ui1-ba-vUS"/>
                     </connections>
                 </viewController>
