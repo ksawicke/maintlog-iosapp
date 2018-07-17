@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ComponentChangeController: UIViewController, InitialSelectionDelegate {
+class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, InitialSelectionDelegate {
 
     var initialSelectionDelegate : InitialSelectionDelegate?
     
@@ -21,9 +21,15 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
     var subflow : String = ""
     
     var pickerViewComponentType = UIPickerView()
+    var pickerViewComponent = UIPickerView()
     
-    var componentTypePickerData = ["Select one:", "Engine", "Final Drive", "Suspension", "Software", "Tires", "Windshield", "Brakes", "Cab", "Hydraulics", "Steering", "Electrical", "Motor Grader Cutting Edges"]
-    var componentTypeOutputData = ["", "sus", "flu", "pss", "ccs"]
+    var componentTypePickerData = [String]()
+    var componentTypeOutputData = [String]()
+    
+    var componentPickerData = [String]()
+    var componentOutputData = [String]()
+    
+    var pickerView = UIPickerView()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var unitNumber: UITextField!
@@ -45,19 +51,18 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
             "entered_by": enteredBy,
             "unit_number": barCodeValue,
             "serviced_by": servicedBy,
-            
+
             "subflow": "ccs",
-            "ccs_component_type": componentChangeComponentType,
-            "ccs_component": componentChangeComponent,
-            "ccs_component_data": componentChangeComponentData,
-            "ccs_notes": componentChangeNotes,
-            "ccs_previous_smr": componentChangePreviousSMR,
-            "ccs_current_smr": componentChangeCurrentSMR
+            "ccs_component_type": componentChangeComponentType.text!, // TODO: Convert to id of selected item
+            "ccs_component": componentChangeComponent.text!, // TODO: Convert to id of selected item
+            "ccs_component_data": componentChangeComponentData.text!,
+            "ccs_notes": componentChangeNotes.text!,
+            "ccs_previous_smr": componentChangePreviousSMR.text!,
+            "ccs_current_smr": componentChangeCurrentSMR.text!
         ]
         
+        print("JSON DATA - Component Change")
         debugPrint(jsonData)
-        print("**")
-        print(jsonData)
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
@@ -73,7 +78,33 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
         
+        pickerViewComponentType.delegate = self
+        self.pickerViewComponentType.tag = 0
+        
+        pickerViewComponent.delegate = self
+        self.pickerViewComponent.tag = 1
+        
+        appendComponentTypes()
+        appendComponents()
+        
+        componentChangeComponentType.inputView = pickerViewComponentType
+        componentChangeComponent.inputView = pickerViewComponent
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ComponentChangeController.viewTapped(gestureRecognizer:)))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(ComponentChangeController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(ComponentChangeController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(ComponentChangeController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
         unitNumber.text = barCodeValue
+    }
+    
+    @objc func defaultsChanged(){
+        //
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,14 +116,56 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
         //
     }
     
+    func appendComponentTypes() {
+        let componenttypes = ComponentTypeCoreDataHandler.fetchObject()
+        
+        componentTypePickerData.append("Select one:")
+        componentTypeOutputData.append("0")
+        
+        for componenttype in componenttypes! {
+            let componentType = componenttype.value(forKey: "componentType") as! String
+            let id = componenttype.value(forKey: "id") as! Int16
+
+            print("\(id), \(componentType)")
+
+            componentTypePickerData.append("\(componentType)")
+            componentTypeOutputData.append("\(id)")
+        }
+    }
+    
+    func appendComponents() {
+        let components = ComponentCoreDataHandler.fetchObject()
+        
+        componentPickerData.append("Select one:")
+        componentOutputData.append("0")
+        
+        for component in components! {
+            let componentitem = component.value(forKey: "component") as! String
+            let id = component.value(forKey: "id") as! Int16
+            
+            print("\(id), \(componentitem)")
+            
+            componentPickerData.append("\(componentitem)")
+            componentOutputData.append("\(id)")
+        }
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        print("viewTapped.....")
+        view.endEditing(true)
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch(pickerView.tag) {
         case 0:
             return componentTypePickerData.count
+            
+        case 1:
+            return componentPickerData.count
             
         default:
             return componentTypePickerData.count
@@ -103,6 +176,9 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
         switch(pickerView.tag) {
         case 0:
             return componentTypePickerData[row]
+            
+        case 1:
+            return componentPickerData[row]
 
         default:
             return componentTypePickerData[row]
@@ -116,6 +192,10 @@ class ComponentChangeController: UIViewController, InitialSelectionDelegate {
             componentChangeComponentType.text = componentTypePickerData[row]
             componentChangeComponentType.resignFirstResponder()
  
+        case 1:
+            componentChangeComponent.text = componentPickerData[row]
+            componentChangeComponent.resignFirstResponder()
+            
         default:
             componentChangeComponentType.text = componentTypePickerData[row]
             componentChangeComponentType.resignFirstResponder()

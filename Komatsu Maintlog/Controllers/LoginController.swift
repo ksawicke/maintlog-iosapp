@@ -23,6 +23,7 @@ class LoginController: UIViewController {
     var API_EQUIPMENTUNIT = "/api/equipmentunit"
     var API_FLUIDTYPE = "/api/fluidtype"
     var API_COMPONENTTYPE = "/api/componenttype"
+    var API_COMPONENT = "/api/component"
     var API_USER = "/api/user"
     let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
     let headers: HTTPHeaders = [
@@ -240,6 +241,8 @@ class LoginController: UIViewController {
         addEquipmentUnits()
         addFluidTypes()
         addUsers()
+        addComponents()
+        addComponentTypes()
         
         performSegue(withIdentifier: "goToSelectScreen", sender: self)
     }
@@ -478,6 +481,8 @@ class LoginController: UIViewController {
                 if responseJSON["status"] == true {
                     let componenttypes = responseJSON["componenttypes"]
                     
+                    debugPrint(componenttypes)
+                    
                     for (_, componenttype) in componenttypes {
                         let id = componenttype["id"].int16!
                         let componentType = componenttype["component_type"].string!
@@ -489,6 +494,40 @@ class LoginController: UIViewController {
                 }
             } else {
                 ProgressHUD.showError("Unable to import Component Types")
+            }
+        }
+    }
+    
+    func addComponents() {
+        var URL = "\(API_PROD_BASE_URL)\(API_COMPONENT)"
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_COMPONENT)"
+        }
+        
+        URL.append("?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                if responseJSON["status"] == true {
+                    let components = responseJSON["components"]
+                    
+                    debugPrint(components)
+                    
+                    for (_, component) in components {
+                        let id = component["id"].int16!
+                        let component = component["component"].string!
+                        
+                        _ = ComponentCoreDataHandler.saveObject(id: id, component: component)
+                    }
+                } else {
+                    let errorMessage = responseJSON["message"].string!
+                }
+            } else {
+                ProgressHUD.showError("Unable to import Components")
             }
         }
     }
