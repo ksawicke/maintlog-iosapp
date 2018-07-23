@@ -174,7 +174,7 @@ class BarCodeScannerController: UIViewController {
             // the user actually wanted to go to since the scanner
             // can be used also for the Log Entry section
             
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: false, completion: nil)
             
 //            let vc = InspectionEntryController(
 //                nibName: "InspectionEntryController",
@@ -194,7 +194,7 @@ class BarCodeScannerController: UIViewController {
         alertPrompt.addAction(confirmAction)
         alertPrompt.addAction(cancelAction)
         
-        present(alertPrompt, animated: true, completion: nil)
+        present(alertPrompt, animated: false, completion: nil)
     }
     
 }

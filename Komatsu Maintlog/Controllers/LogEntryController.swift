@@ -32,16 +32,18 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var equipmentUnitIdSelected : Int16 = 0
     var equipmentUnit : String = ""
     var subflowSelected : String = ""
+    var enteredByInt : Int16 = 0
+    var servicedByInt : Int16 = 0
     
     var pickerViewEnteredBy = UIPickerView()
     var pickerViewServicedBy = UIPickerView()
     var pickerViewSubflow = UIPickerView()
     
     var enteredByPickerData = [String]()
-    var enteredByOutputData = [String]()
+    var enteredByOutputData = [Int16]()
     
     var servicedByPickerData = [String]()
-    var servicedByOutputData = [String]()
+    var servicedByOutputData = [Int16]()
     
     var subflowPickerData = ["Select one:", "SMR Update", "Fluid Entry", "PM Service", "Component Change"]
     var subflowOutputData = ["", "sus", "flu", "pss", "ccs"]
@@ -68,7 +70,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     @IBAction func onCloseLogEntryViewButton(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     @IBAction func onClickNext(_ sender: Any) {
@@ -321,9 +323,9 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         let users = UserCoreDataHandler.fetchObject()
         
         enteredByPickerData.append("Select one:")
-        enteredByOutputData.append("0")
+        enteredByOutputData.append(0)
         servicedByPickerData.append("Select one:")
-        servicedByOutputData.append("0")
+        servicedByOutputData.append(0)
         
         for user in users! {
             let firstName = user.value(forKey: "firstName") as! String
@@ -333,10 +335,10 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             print("\(id), \(firstName), \(lastName)")
             
             enteredByPickerData.append("\(lastName), \(firstName)")
-            enteredByOutputData.append("\(id)")
+            enteredByOutputData.append(id)
             
             servicedByPickerData.append("\(lastName), \(firstName)")
-            servicedByOutputData.append("\(id)")
+            servicedByOutputData.append(id)
         }
     }
     
@@ -389,10 +391,13 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             smrUpdateVC.barCodeScanned = self.barCodeScanned
             smrUpdateVC.barCodeValue = self.barCodeValue
-            smrUpdateVC.dateEntered = dateEntered.text!
-            smrUpdateVC.enteredBy = enteredBy.text!
-            smrUpdateVC.servicedBy = servicedBy.text!
-            smrUpdateVC.subflow = subflowSelected
+            smrUpdateVC.equipmentUnitIdSelected = self.equipmentUnitIdSelected
+            smrUpdateVC.dateEntered = self.dateEntered.text!
+            smrUpdateVC.enteredBy = self.enteredBy.text!
+            smrUpdateVC.servicedBy = self.servicedBy.text!
+            smrUpdateVC.enteredByInt = self.enteredByInt
+            smrUpdateVC.servicedByInt = self.servicedByInt
+            smrUpdateVC.subflow = self.subflowSelected
             
             self.present(smrUpdateVC, animated: false, completion: nil)
         }
@@ -431,9 +436,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             componentChangeVC.barCodeScanned = self.barCodeScanned
             componentChangeVC.barCodeValue = self.barCodeValue
+            componentChangeVC.equipmentUnitIdSelected = self.equipmentUnitIdSelected
             componentChangeVC.dateEntered = dateEntered.text!
             componentChangeVC.enteredBy = enteredBy.text!
             componentChangeVC.servicedBy = servicedBy.text!
+            componentChangeVC.enteredByInt = enteredByInt
+            componentChangeVC.servicedByInt = servicedByInt
             componentChangeVC.subflow = subflowSelected
             
             self.present(componentChangeVC, animated: false, completion: nil)
@@ -444,10 +452,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         print("pickerView tag \(pickerView.tag)")
         switch(pickerView.tag) {
         case 0:
+            enteredByInt = enteredByOutputData[row]
             enteredBy.text = enteredByPickerData[row]
             enteredBy.resignFirstResponder()
             
         case 1:
+            servicedByInt = servicedByOutputData[row]
             servicedBy.text = servicedByPickerData[row]
             servicedBy.resignFirstResponder()
             
@@ -457,6 +467,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             subflow.resignFirstResponder()
             
         default:
+            enteredByInt = enteredByOutputData[row]
             enteredBy.text = enteredByPickerData[row]
             enteredBy.resignFirstResponder()
         }

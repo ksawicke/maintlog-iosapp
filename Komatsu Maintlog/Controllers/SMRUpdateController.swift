@@ -15,9 +15,12 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
+    var equipmentUnitIdSelected : Int16 = 0
     var dateEntered : String = ""
     var enteredBy : String = ""
     var servicedBy : String = ""
+    var enteredByInt : Int16 = 0
+    var servicedByInt : Int16 = 0
     var subflow : String = ""
     
     @IBOutlet weak var unitNumber: UITextField!
@@ -32,20 +35,19 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
             "date_entered": dateEntered,
-            "entered_by": enteredBy,
-            "unit_number": barCodeValue,
-            "serviced_by": servicedBy,
+            "entered_by": enteredByInt,
+            "unit_number": equipmentUnitIdSelected,
+            "serviced_by": servicedByInt,
             
             "subflow": "sus",
-            "sus_previous_smr": smrUpdatePreviousSMR,
-            "sus_current_smr": smrUpdateCurrentSMR
+            "sus_previous_smr": smrUpdatePreviousSMR.text!,
+            "sus_current_smr": smrUpdateCurrentSMR.text!
         ]
         
+        print("JSON DATA - SMR Update")
         debugPrint(jsonData)
-        print("**")
-        print(jsonData)
         
-        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+//        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
         print("Save SMR Update test...")
     }

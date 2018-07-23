@@ -36,7 +36,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y0a-uA-qWq" kind="show" identifier="goToScanBarcode" id="u6z-3u-goX"/>
+                                    <segue destination="Y0a-uA-qWq" kind="showDetail" identifier="goToScanBarcode" id="u6z-3u-goX"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISi-Vf-XBT" userLabel="Inspection Entry Button">

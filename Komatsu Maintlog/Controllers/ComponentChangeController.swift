@@ -15,19 +15,24 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
+    var equipmentUnitIdSelected : Int16 = 0
     var dateEntered : String = ""
     var enteredBy : String = ""
     var servicedBy : String = ""
+    var enteredByInt : Int16 = 0
+    var servicedByInt : Int16 = 0
     var subflow : String = ""
+    var componentChangeComponentTypeSelected : Int16 = 0
+    var componentChangeComponentSelected : Int16 = 0
     
     var pickerViewComponentType = UIPickerView()
     var pickerViewComponent = UIPickerView()
     
     var componentTypePickerData = [String]()
-    var componentTypeOutputData = [String]()
+    var componentTypeOutputData = [Int16]()
     
     var componentPickerData = [String]()
-    var componentOutputData = [String]()
+    var componentOutputData = [Int16]()
     
     var pickerView = UIPickerView()
     
@@ -48,13 +53,13 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
             "date_entered": dateEntered,
-            "entered_by": enteredBy,
-            "unit_number": barCodeValue,
-            "serviced_by": servicedBy,
+            "entered_by": enteredByInt,
+            "unit_number": equipmentUnitIdSelected,
+            "serviced_by": servicedByInt,
 
             "subflow": "ccs",
-            "ccs_component_type": componentChangeComponentType.text!, // TODO: Convert to id of selected item
-            "ccs_component": componentChangeComponent.text!, // TODO: Convert to id of selected item
+            "ccs_component_type": componentChangeComponentTypeSelected,
+            "ccs_component": componentChangeComponentSelected,
             "ccs_component_data": componentChangeComponentData.text!,
             "ccs_notes": componentChangeNotes.text!,
             "ccs_previous_smr": componentChangePreviousSMR.text!,
@@ -120,7 +125,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         let componenttypes = ComponentTypeCoreDataHandler.fetchObject()
         
         componentTypePickerData.append("Select one:")
-        componentTypeOutputData.append("0")
+        componentTypeOutputData.append(0)
         
         for componenttype in componenttypes! {
             let componentType = componenttype.value(forKey: "componentType") as! String
@@ -129,7 +134,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
             print("\(id), \(componentType)")
 
             componentTypePickerData.append("\(componentType)")
-            componentTypeOutputData.append("\(id)")
+            componentTypeOutputData.append(id)
         }
     }
     
@@ -137,7 +142,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         let components = ComponentCoreDataHandler.fetchObject()
         
         componentPickerData.append("Select one:")
-        componentOutputData.append("0")
+        componentOutputData.append(0)
         
         for component in components! {
             let componentitem = component.value(forKey: "component") as! String
@@ -146,7 +151,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
             print("\(id), \(componentitem)")
             
             componentPickerData.append("\(componentitem)")
-            componentOutputData.append("\(id)")
+            componentOutputData.append(id)
         }
     }
     
@@ -189,14 +194,17 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         print("pickerView tag \(pickerView.tag)")
         switch(pickerView.tag) {
         case 0:
+            componentChangeComponentTypeSelected = componentTypeOutputData[row]
             componentChangeComponentType.text = componentTypePickerData[row]
             componentChangeComponentType.resignFirstResponder()
  
         case 1:
+            componentChangeComponentSelected = componentOutputData[row]
             componentChangeComponent.text = componentPickerData[row]
             componentChangeComponent.resignFirstResponder()
             
         default:
+            componentChangeComponentTypeSelected = componentTypeOutputData[row]
             componentChangeComponentType.text = componentTypePickerData[row]
             componentChangeComponentType.resignFirstResponder()
         }
