@@ -47,7 +47,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         print("JSON DATA - SMR Update")
         debugPrint(jsonData)
         
-//        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
         print("Save SMR Update test...")
     }

@@ -138,9 +138,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         countInspectionsToUpload()
         updateItemsPendingMessage()
         attemptInspectionDataUploads()
-        attemptInspectionSmrUploads()
-        attemptInspectionLogEntryUploads()
+//        attemptInspectionSmrUploads()
         attemptInspectionImageUploads()
+        attemptInspectionLogEntryUploads()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -494,7 +494,10 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             params = (params as? [Any] ?? []) + [smrUpdateItem]
         }
         
-//        print(params)
+        print("**")
+        print(url)
+        print(params)
+        print("**")
         
         Alamofire.request(url, method: .post, parameters: ["smrupdates": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
             response in
@@ -517,42 +520,84 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         let logEntries = LogEntryCoreDataHandler.fetchObject()
         var params: Any = []
         
-//        for logEntry in logEntries! {
-//            let uuid = "\(logEntry.uuid!)"
-//            let jsonData = "\(logEntry.jsonData!)"
-//            let userId = loggedInUserId
-//            
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
+        
+        for logEntry in logEntries! {
+            let uuid = "\(logEntry.uuid!)"
+            let rawJsonData = "\(logEntry.jsonData!)"
+            let userId = loggedInUserId
+            
+            if let data = rawJsonData.data(using: .utf8) {
+                if let jsonData = try? JSON(data: data) {
+                    let date_entered = formattedDateFromString(dateString: jsonData["date_entered"].string!, withFormat: "yyyy-MM-dd")
+                    
+                    // TODO 07/24/18
+                    // Switch on jsonData["subflow"]
+                    // This works for "sus" currently
+                    
+                    switch(jsonData["subflow"]) {
+                        case "sus":
+                            let logEntryItem: [String: Any] = [
+                                "id": "0",
+                                "subflow": "\(jsonData["subflow"])",
+                                "date_entered": "\(date_entered!)",
+                                "entered_by": "\(jsonData["entered_by"])",
+                                "unit_number": "\(jsonData["unit_number"])",
+                                "serviced_by": "\(jsonData["serviced_by"])",
+                                "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
+                                "sus_current_smr": "\(jsonData["sus_current_smr"])"
+                            ]
+                            params = (params as? [Any] ?? []) + [logEntryItem]
+                        break
+                        
+                        default:
+                            let logEntryItem: [String: Any] = [
+                                "id": "0",
+                                "subflow": "\(jsonData["subflow"])",
+                                "date_entered": "\(date_entered!)",
+                                "entered_by": "\(jsonData["entered_by"])",
+                                "unit_number": "\(jsonData["unit_number"])",
+                                "serviced_by": "\(jsonData["serviced_by"])",
+                                "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
+                                "sus_current_smr": "\(jsonData["sus_current_smr"])"
+                            ]
+                            params = (params as? [Any] ?? []) + [logEntryItem]
+                            break
+                    }
+                }
+            }
+            
 //            let logEntryItem: [String: Any] = [
 //                "uuid": uuid,
-//                "equipmentUnitId": equipmentUnitId,
-//                "subflow": subflow,
-//                "jsonData": jsonData,
-//                "userId": userId
+//                "jsonData": jsonData
 //            ]
-//            
+//
 //            // Append Item
 //            params = (params as? [Any] ?? []) + [logEntryItem]
-//        }
-//        
-//        print(params)
-        
-//        Alamofire.request(url, method: .post, parameters: ["logentries": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-//            response in
-//            
-//            debugPrint(response)
+        }
 //
-//            switch response.result {
-//            case .success:
+        print("***")
+        print(url)
+        print(params)
+        print("****")
+        
+        Alamofire.request(url, method: .post, parameters: ["data": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+            response in
+
+            switch response.result {
+            case .success:
+                debugPrint(response)
 //                for logEntry in logEntries! {
 ////                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
 //                }
-//
-//                break
-//            case .failure(let error):
-//
-//                print(error)
-//            }
-//        }
+
+                break
+            case .failure(let error):
+
+                print(error)
+            }
+        }
     }
     
     func uploadRatings(url: String) {
@@ -606,6 +651,17 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 print(error)
             }
         }
+    }
+    
+    func formattedDateFromString(dateString: String, withFormat format: String) -> String? {
+        
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "MM/dd/yyyy"
+        let showDate = inputFormatter.date(from: dateString)
+        inputFormatter.dateFormat = format
+        let date_to_return = inputFormatter.string(from: showDate!)
+        
+        return date_to_return
     }
     
 }
