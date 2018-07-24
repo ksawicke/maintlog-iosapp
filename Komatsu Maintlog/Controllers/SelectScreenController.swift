@@ -551,6 +551,24 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                             params = (params as? [Any] ?? []) + [logEntryItem]
                         break
                         
+                        case "ccs":
+                            let logEntryItem: [String: Any] = [
+                                "id": "0",
+                                "subflow": "\(jsonData["subflow"])",
+                                "date_entered": "\(date_entered!)",
+                                "entered_by": "\(jsonData["entered_by"])",
+                                "unit_number": "\(jsonData["unit_number"])",
+                                "serviced_by": "\(jsonData["serviced_by"])",
+                                "ccs_component_type": "\(jsonData["ccs_component_type"])",
+                                "ccs_component": "\(jsonData["ccs_component"])",
+                                "ccs_component_data": "\(jsonData["ccs_component_data"])",
+                                "ccs_notes": "\(jsonData["ccs_notes"])",
+                                "ccs_previous_smr": "\(jsonData["ccs_previous_smr"])",
+                                "ccs_current_smr": "\(jsonData["ccs_current_smr"])"
+                            ]
+                            params = (params as? [Any] ?? []) + [logEntryItem]
+                        break
+                        
                         default:
                             let logEntryItem: [String: Any] = [
                                 "id": "0",
