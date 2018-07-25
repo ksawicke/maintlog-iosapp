@@ -39,14 +39,13 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
             "date_entered": "07/25/2018",
             "entered_by": "21",
             "unit_number": "5",
-            "serviced_by": "1",
-            
+            "serviced_by": "1",         
             "subflow": "flu",
             "fluid_added": [
-                [ "type": "",
+                [ "type": 3,
                   "quantity": 4.1,
                   "units": "gal" ],
-                [ "type": "",
+                [ "type": 3,
                   "quantity": 3.2,
                   "units": "gal" ],
             ],

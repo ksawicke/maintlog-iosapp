@@ -552,21 +552,22 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                         break
                         
                         case "flu":
-                            let logEntryItem: [String: Any] = [
+                            var logEntryItem: [String: Any] = [
                                 "id": "0",
                                 "subflow": "\(jsonData["subflow"])",
                                 "date_entered": "\(date_entered!)",
                                 "entered_by": "\(jsonData["entered_by"])",
                                 "unit_number": "\(jsonData["unit_number"])",
                                 "serviced_by": "\(jsonData["serviced_by"])",
-                                "fluid_added": [
-                                    [ "type": 3,
-                                      "quantity": 5432,
-                                      "units": "gal" ],
-                                    [ "type": 3,
-                                      "quantity": 6543,
-                                      "units": "gal" ]
-                                ], //"\(jsonData["fluid_added"])",
+                                "fluid_added": jsonData["fluid_added"].arrayObject!,
+//                                "fluid_added": [
+//                                    [ "type": 3,
+//                                      "quantity": 5432,
+//                                      "units": "gal" ],
+//                                    [ "type": 3,
+//                                      "quantity": 6543,
+//                                      "units": "gal" ]
+//                                ], //"\(jsonData["fluid_added"])",
                                 "flu_notes": "\(jsonData["flu_notes"])",
                                 "flu_previous_smr": "\(jsonData["flu_previous_smr"])",
                                 "flu_current_smr": "\(jsonData["flu_current_smr"])"
@@ -576,6 +577,26 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                 //   [0]["quantity"]
                                 //   [0]["units"]
                             ]
+                            
+                            debugPrint(jsonData["fluid_added"].arrayObject! as Any)
+                            
+//                            for (_, fluid) in jsonData["fluid_added"] {
+//
+//                                let item: [String: Any] = [
+//                                    "type": fluid["type"],
+//                                    "quantity": fluid["quantity"],
+//                                    "units": fluid["units"]
+//                                ]
+//
+//                                // get existing items, or create new array if doesn't exist
+//                                var existingItems = logEntryItem["fluid_added"] as? [[String: Any]] ?? [[String: Any]]()
+//
+//                                // append the item
+//                                existingItems.append(item)
+//
+//                                // replace back into `data`
+//                                logEntryItem["fluid_added"] = existingItems
+//                            }
                             
 //                            var counter = 0
 //                            for fluidEntry in jsonData["fluid_added"] {
