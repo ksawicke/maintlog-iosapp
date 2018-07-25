@@ -551,6 +551,42 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                             params = (params as? [Any] ?? []) + [logEntryItem]
                         break
                         
+                        case "flu":
+                            let logEntryItem: [String: Any] = [
+                                "id": "0",
+                                "subflow": "\(jsonData["subflow"])",
+                                "date_entered": "\(date_entered!)",
+                                "entered_by": "\(jsonData["entered_by"])",
+                                "unit_number": "\(jsonData["unit_number"])",
+                                "serviced_by": "\(jsonData["serviced_by"])",
+                                "fluid_added": [
+                                    [ "type": 3,
+                                      "quantity": 5432,
+                                      "units": "gal" ],
+                                    [ "type": 3,
+                                      "quantity": 6543,
+                                      "units": "gal" ]
+                                ], //"\(jsonData["fluid_added"])",
+                                "flu_notes": "\(jsonData["flu_notes"])",
+                                "flu_previous_smr": "\(jsonData["flu_previous_smr"])",
+                                "flu_current_smr": "\(jsonData["flu_current_smr"])"
+                                // type, quantity, units
+                                // jsonData["fluid_added"]
+                                //   [0]["type"]
+                                //   [0]["quantity"]
+                                //   [0]["units"]
+                            ]
+                            
+//                            var counter = 0
+//                            for fluidEntry in jsonData["fluid_added"] {
+////                                let type = jsonData[counter]["type"] as? NSDictionary
+////                                let quantity = jsonData[counter]["quantity"] as? NSDictionary
+////                                let units = jsonData[counter]["units"] as? NSDictionary
+////                                logEntryItem["fluid_added"]![counter]["type"] = 0 //"\(jsonData[counter]!["type"])"
+//                            }
+                            params = (params as? [Any] ?? []) + [logEntryItem]
+                        break
+                        
                         case "ccs":
                             let logEntryItem: [String: Any] = [
                                 "id": "0",

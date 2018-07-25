@@ -36,7 +36,7 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
-            "date_entered": "2018-01-01 12:00:01",
+            "date_entered": "07/25/2018",
             "entered_by": "21",
             "unit_number": "5",
             "serviced_by": "1",
@@ -52,7 +52,7 @@ class FluidEntryController: UIViewController, InitialSelectionDelegate {
             ],
             "flu_previous_smr": "12345",
             "flu_current_smr": "12346",
-            "flu_notes": ""
+            "flu_notes": "sdfadfs"
         ]
         
         debugPrint(jsonData)
