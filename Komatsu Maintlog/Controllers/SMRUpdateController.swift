@@ -38,8 +38,8 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,
             "serviced_by": servicedByInt,
-            
             "subflow": "sus",
+            
             "sus_previous_smr": smrUpdatePreviousSMR.text!,
             "sus_current_smr": smrUpdateCurrentSMR.text!
         ]

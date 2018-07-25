@@ -408,9 +408,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             
             fluidEntryVC.barCodeScanned = self.barCodeScanned
             fluidEntryVC.barCodeValue = self.barCodeValue
-            fluidEntryVC.dateEntered = dateEntered.text!
-            fluidEntryVC.enteredBy = enteredBy.text!
-            fluidEntryVC.servicedBy = servicedBy.text!
+            fluidEntryVC.equipmentUnitIdSelected = self.equipmentUnitIdSelected
+            fluidEntryVC.dateEntered = self.dateEntered.text!
+            fluidEntryVC.enteredBy = self.enteredBy.text!
+            fluidEntryVC.servicedBy = self.servicedBy.text!
+            fluidEntryVC.enteredByInt = self.enteredByInt
+            fluidEntryVC.servicedByInt = self.servicedByInt
             fluidEntryVC.subflow = subflowSelected
             
             self.present(fluidEntryVC, animated: false, completion: nil)
@@ -473,22 +476,6 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
-    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
-        print("viewTapped.....")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/dd/yyyy"
-        dateEntered.text = dateFormatter.string(from: (datePicker?.date)!)
-        view.endEditing(true)
-    }
-    
-    @objc func dateChanged(datePicker: UIDatePicker) {
-        print("dateChanged.....")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        dateEntered.text = dateFormatter.string(from: (datePicker.date))
-        view.endEditing(true)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -510,16 +497,6 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func registerSettingsBundle(){
         let appDefaults = [String:AnyObject]()
         UserDefaults.standard.register(defaults: appDefaults)
-    }
-    
-    @objc func defaultsChanged(){
-        //        if UserDefaults.standard.bool(forKey: "RedThemeKey") {
-        //            self.view.backgroundColor = UIColor.red
-        
-        //        }
-        //        else {
-        //            self.view.backgroundColor = UIColor.green
-        //        }
     }
     
     func userScannedANewBarcode(unitNumber: String) {
@@ -558,6 +535,32 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             destinationVC.barCodeValue = self.barCodeValue
         }
     
+    }
+    
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        print("viewTapped.....")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/dd/yyyy"
+        dateEntered.text = dateFormatter.string(from: (datePicker?.date)!)
+        view.endEditing(true)
+    }
+    
+    @objc func defaultsChanged(){
+        //        if UserDefaults.standard.bool(forKey: "RedThemeKey") {
+        //            self.view.backgroundColor = UIColor.red
+        
+        //        }
+        //        else {
+        //            self.view.backgroundColor = UIColor.green
+        //        }
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker) {
+        print("dateChanged.....")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateEntered.text = dateFormatter.string(from: (datePicker.date))
+        view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
