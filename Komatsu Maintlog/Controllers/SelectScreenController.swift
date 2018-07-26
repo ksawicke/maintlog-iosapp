@@ -518,6 +518,18 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
     }
     
+    func removeUploadedLogEntries() {
+        let logEntries = LogEntryCoreDataHandler.fetchObject()
+
+        for logEntry in logEntries! {
+            let uploaded = logEntry.uploaded
+            
+            if uploaded == true {
+                _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+            }
+        }
+    }
+    
     func uploadLogEntries(url: String) {
         let logEntries = LogEntryCoreDataHandler.fetchObject()
         var params: Any = []
@@ -528,130 +540,88 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         for logEntry in logEntries! {
             let uuid = "\(logEntry.uuid!)"
             let rawJsonData = "\(logEntry.jsonData!)"
+            let uploaded = logEntry.uploaded
             let userId = loggedInUserId
             
-            if let data = rawJsonData.data(using: .utf8) {
-                if let jsonData = try? JSON(data: data) {
-                    let date_entered = formattedDateFromString(dateString: jsonData["date_entered"].string!, withFormat: "yyyy-MM-dd")
-                    
-                    // TODO 07/24/18
-                    // Switch on jsonData["subflow"]
-                    // This works for "sus" currently
-                    
-                    switch(jsonData["subflow"]) {
-                        case "sus":
-                            let logEntryItem: [String: Any] = [
-                                "id": "0",
-                                "subflow": "\(jsonData["subflow"])",
-                                "date_entered": "\(date_entered!)",
-                                "entered_by": "\(jsonData["entered_by"])",
-                                "unit_number": "\(jsonData["unit_number"])",
-                                "serviced_by": "\(jsonData["serviced_by"])",
-                                "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
-                                "sus_current_smr": "\(jsonData["sus_current_smr"])"
-                            ]
-                            params = (params as? [Any] ?? []) + [logEntryItem]
-                        break
+            if uploaded == false {
+                if let data = rawJsonData.data(using: .utf8) {
+                    if let jsonData = try? JSON(data: data) {
+                        let date_entered = formattedDateFromString(dateString: jsonData["date_entered"].string!, withFormat: "yyyy-MM-dd")
                         
-                        case "flu":
-                            var logEntryItem: [String: Any] = [
-                                "id": "0",
-                                "subflow": "\(jsonData["subflow"])",
-                                "date_entered": "\(date_entered!)",
-                                "entered_by": "\(jsonData["entered_by"])",
-                                "unit_number": "\(jsonData["unit_number"])",
-                                "serviced_by": "\(jsonData["serviced_by"])",
-                                "fluid_added": jsonData["fluid_added"].arrayObject!,
-//                                "fluid_added": [
-//                                    [ "type": 3,
-//                                      "quantity": 5432,
-//                                      "units": "gal" ],
-//                                    [ "type": 3,
-//                                      "quantity": 6543,
-//                                      "units": "gal" ]
-//                                ], //"\(jsonData["fluid_added"])",
-                                "flu_notes": "\(jsonData["flu_notes"])",
-                                "flu_previous_smr": "\(jsonData["flu_previous_smr"])",
-                                "flu_current_smr": "\(jsonData["flu_current_smr"])"
-                                // type, quantity, units
-                                // jsonData["fluid_added"]
-                                //   [0]["type"]
-                                //   [0]["quantity"]
-                                //   [0]["units"]
-                            ]
-                            
-                            debugPrint(jsonData["fluid_added"].arrayObject! as Any)
-                            
-//                            for (_, fluid) in jsonData["fluid_added"] {
-//
-//                                let item: [String: Any] = [
-//                                    "type": fluid["type"],
-//                                    "quantity": fluid["quantity"],
-//                                    "units": fluid["units"]
-//                                ]
-//
-//                                // get existing items, or create new array if doesn't exist
-//                                var existingItems = logEntryItem["fluid_added"] as? [[String: Any]] ?? [[String: Any]]()
-//
-//                                // append the item
-//                                existingItems.append(item)
-//
-//                                // replace back into `data`
-//                                logEntryItem["fluid_added"] = existingItems
-//                            }
-                            
-//                            var counter = 0
-//                            for fluidEntry in jsonData["fluid_added"] {
-////                                let type = jsonData[counter]["type"] as? NSDictionary
-////                                let quantity = jsonData[counter]["quantity"] as? NSDictionary
-////                                let units = jsonData[counter]["units"] as? NSDictionary
-////                                logEntryItem["fluid_added"]![counter]["type"] = 0 //"\(jsonData[counter]!["type"])"
-//                            }
-                            params = (params as? [Any] ?? []) + [logEntryItem]
-                        break
+                        // TODO 07/24/18
+                        // Switch on jsonData["subflow"]
+                        // This works for "sus" currently
                         
-                        case "ccs":
-                            let logEntryItem: [String: Any] = [
-                                "id": "0",
-                                "subflow": "\(jsonData["subflow"])",
-                                "date_entered": "\(date_entered!)",
-                                "entered_by": "\(jsonData["entered_by"])",
-                                "unit_number": "\(jsonData["unit_number"])",
-                                "serviced_by": "\(jsonData["serviced_by"])",
-                                "ccs_component_type": "\(jsonData["ccs_component_type"])",
-                                "ccs_component": "\(jsonData["ccs_component"])",
-                                "ccs_component_data": "\(jsonData["ccs_component_data"])",
-                                "ccs_notes": "\(jsonData["ccs_notes"])",
-                                "ccs_previous_smr": "\(jsonData["ccs_previous_smr"])",
-                                "ccs_current_smr": "\(jsonData["ccs_current_smr"])"
-                            ]
-                            params = (params as? [Any] ?? []) + [logEntryItem]
-                        break
-                        
-                        default:
-                            let logEntryItem: [String: Any] = [
-                                "id": "0",
-                                "subflow": "\(jsonData["subflow"])",
-                                "date_entered": "\(date_entered!)",
-                                "entered_by": "\(jsonData["entered_by"])",
-                                "unit_number": "\(jsonData["unit_number"])",
-                                "serviced_by": "\(jsonData["serviced_by"])",
-                                "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
-                                "sus_current_smr": "\(jsonData["sus_current_smr"])"
-                            ]
-                            params = (params as? [Any] ?? []) + [logEntryItem]
+                        switch(jsonData["subflow"]) {
+                            case "sus":
+                                let logEntryItem: [String: Any] = [
+                                    "id": "0",
+                                    "uuid": "\(uuid)",
+                                    "subflow": "\(jsonData["subflow"])",
+                                    "date_entered": "\(date_entered!)",
+                                    "entered_by": "\(jsonData["entered_by"])",
+                                    "unit_number": "\(jsonData["unit_number"])",
+                                    "serviced_by": "\(jsonData["serviced_by"])",
+                                    "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
+                                    "sus_current_smr": "\(jsonData["sus_current_smr"])"
+                                ]
+                                params = (params as? [Any] ?? []) + [logEntryItem]
                             break
+                            
+                            case "flu":
+                                let logEntryItem: [String: Any] = [
+                                    "id": "0",
+                                    "uuid": "\(uuid)",
+                                    "subflow": "\(jsonData["subflow"])",
+                                    "date_entered": "\(date_entered!)",
+                                    "entered_by": "\(jsonData["entered_by"])",
+                                    "unit_number": "\(jsonData["unit_number"])",
+                                    "serviced_by": "\(jsonData["serviced_by"])",
+                                    "fluid_added": jsonData["fluid_added"].arrayObject!,
+                                    "flu_notes": "\(jsonData["flu_notes"])",
+                                    "flu_previous_smr": "\(jsonData["flu_previous_smr"])",
+                                    "flu_current_smr": "\(jsonData["flu_current_smr"])"
+                                ]
+                                params = (params as? [Any] ?? []) + [logEntryItem]
+                            break
+                            
+                            case "ccs":
+                                let logEntryItem: [String: Any] = [
+                                    "id": "0",
+                                    "uuid": "\(uuid)",
+                                    "subflow": "\(jsonData["subflow"])",
+                                    "date_entered": "\(date_entered!)",
+                                    "entered_by": "\(jsonData["entered_by"])",
+                                    "unit_number": "\(jsonData["unit_number"])",
+                                    "serviced_by": "\(jsonData["serviced_by"])",
+                                    "ccs_component_type": "\(jsonData["ccs_component_type"])",
+                                    "ccs_component": "\(jsonData["ccs_component"])",
+                                    "ccs_component_data": "\(jsonData["ccs_component_data"])",
+                                    "ccs_notes": "\(jsonData["ccs_notes"])",
+                                    "ccs_previous_smr": "\(jsonData["ccs_previous_smr"])",
+                                    "ccs_current_smr": "\(jsonData["ccs_current_smr"])"
+                                ]
+                                params = (params as? [Any] ?? []) + [logEntryItem]
+                            break
+                            
+                            default:
+                                let logEntryItem: [String: Any] = [
+                                    "id": "0",
+                                    "uuid": "\(uuid)",
+                                    "subflow": "\(jsonData["subflow"])",
+                                    "date_entered": "\(date_entered!)",
+                                    "entered_by": "\(jsonData["entered_by"])",
+                                    "unit_number": "\(jsonData["unit_number"])",
+                                    "serviced_by": "\(jsonData["serviced_by"])",
+                                    "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
+                                    "sus_current_smr": "\(jsonData["sus_current_smr"])"
+                                ]
+                                params = (params as? [Any] ?? []) + [logEntryItem]
+                                break
+                        }
                     }
                 }
             }
-            
-//            let logEntryItem: [String: Any] = [
-//                "uuid": uuid,
-//                "jsonData": jsonData
-//            ]
-//
-//            // Append Item
-//            params = (params as? [Any] ?? []) + [logEntryItem]
         }
 //
         print("***")
@@ -666,6 +636,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             case .success:
                 debugPrint(response)
                 for logEntry in logEntries! {
+                    let uuid = "\(logEntry.uuid!)"
+//                    LogEntryCoreDataHandler.markAsUploaded(uuid: uuid)
                     _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
                 }
 

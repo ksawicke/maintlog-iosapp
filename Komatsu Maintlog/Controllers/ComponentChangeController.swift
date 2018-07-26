@@ -52,6 +52,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
+            "uuid": uuid,
             "date_entered": dateEntered,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,

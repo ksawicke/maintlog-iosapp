@@ -34,6 +34,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
+            "uuid": uuid,
             "date_entered": dateEntered,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,

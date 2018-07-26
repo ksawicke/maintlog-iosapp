@@ -43,6 +43,7 @@ class PMServiceController: UIViewController, InitialSelectionDelegate {
     @IBAction func onClickSubmitPMService(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
+            "uuid": uuid,
             "date_entered": "2018-01-01 12:00:01",
             "entered_by": "21",
             "unit_number": "5",

@@ -53,6 +53,7 @@
     </entity>
     <entity name="LogEntry" representedClassName="LogEntry" syncable="YES" codeGenerationType="class">
         <attribute name="jsonData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Login" representedClassName="Login" syncable="YES" codeGenerationType="class">
@@ -81,16 +82,16 @@
     <elements>
         <element name="Checklist" positionX="-380" positionY="-138" width="128" height="90"/>
         <element name="ChecklistItem" positionX="-36" positionY="63" width="128" height="75"/>
+        <element name="Component" positionX="-207" positionY="-18" width="128" height="75"/>
         <element name="ComponentType" positionX="-207" positionY="-18" width="128" height="75"/>
         <element name="EquipmentType" positionX="-189" positionY="-135" width="128" height="75"/>
         <element name="EquipmentUnit" positionX="-207" positionY="-18" width="128" height="150"/>
         <element name="FluidType" positionX="-207" positionY="-18" width="128" height="75"/>
         <element name="InspectionImage" positionX="-207" positionY="-18" width="128" height="135"/>
         <element name="InspectionRating" positionX="-198" positionY="-9" width="128" height="150"/>
-        <element name="LogEntry" positionX="-207" positionY="-18" width="128" height="75"/>
+        <element name="LogEntry" positionX="-207" positionY="-18" width="128" height="90"/>
         <element name="Login" positionX="-207" positionY="-18" width="128" height="165"/>
         <element name="SmrUpdate" positionX="-207" positionY="-18" width="128" height="105"/>
         <element name="User" positionX="-207" positionY="-18" width="128" height="120"/>
-        <element name="Component" positionX="-207" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

@@ -48,6 +48,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
+            "uuid": uuid,
             "date_entered": dateEntered,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,

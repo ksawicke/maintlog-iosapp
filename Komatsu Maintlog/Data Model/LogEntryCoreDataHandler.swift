@@ -24,6 +24,7 @@ class LogEntryCoreDataHandler: NSObject {
         
         managedObject.setValue(uuid, forKey: "uuid")
         managedObject.setValue(jsonData, forKey: "jsonData")
+        managedObject.setValue(false, forKey: "uploaded")
         
         do {
             try context.save()
@@ -31,6 +32,26 @@ class LogEntryCoreDataHandler: NSObject {
             return true
         } catch {
             return false
+        }
+    }
+    
+    class func markAsUploaded(uuid: String) {
+        let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LogEntry")
+        fetchRequest.predicate = NSPredicate(format: "uuid = '\(uuid)'")
+        let result = try? managedObjectContext.fetch(fetchRequest)
+        let resultData = result as! [LogEntry]
+        for object in resultData {
+            print(object.uploaded)
+            if object.uploaded == false {
+                object.setValue(true, forKey: "uploaded")
+            }
+        }
+        do {
+            try managedObjectContext.save()
+            print("saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
         }
     }
     
@@ -78,7 +99,7 @@ class LogEntryCoreDataHandler: NSObject {
         let fetchRequest:NSFetchRequest<LogEntry> = LogEntry.fetchRequest()
         var logEntryCount:Int? = 0
         
-        let predicate = NSPredicate(format: "uuid != 9")
+        let predicate = NSPredicate(format: "uploaded = false")
         fetchRequest.predicate = predicate
         
         do {
