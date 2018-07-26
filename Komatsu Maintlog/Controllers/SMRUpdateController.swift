@@ -49,7 +49,10 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
-        print("Save SMR Update test...")
+        if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
+            
+            self.present(selectScreenController, animated: false, completion: nil)
+        }
     }
     
     

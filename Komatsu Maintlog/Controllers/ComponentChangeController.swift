@@ -71,7 +71,10 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
-        print("Save Component Change test...")
+        if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
+            
+            self.present(selectScreenController, animated: false, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
