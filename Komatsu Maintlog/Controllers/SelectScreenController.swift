@@ -317,7 +317,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     }
     
     @objc func uploadLogEntryData() {
-        uploadLogEntryRecords()
+        if LogEntryCoreDataHandler.countData() > 0 {
+            uploadLogEntryRecords()
+        }
     }
     
     @objc func checkSession() {
@@ -663,9 +665,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             switch response.result {
             case .success:
                 debugPrint(response)
-//                for logEntry in logEntries! {
-////                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
-//                }
+                for logEntry in logEntries! {
+                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+                }
 
                 break
             case .failure(let error):

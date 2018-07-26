@@ -386,6 +386,31 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("pickerView tag \(pickerView.tag)")
+        switch(pickerView.tag) {
+        case 0:
+            enteredByInt = enteredByOutputData[row]
+            enteredBy.text = enteredByPickerData[row]
+            enteredBy.resignFirstResponder()
+            
+        case 1:
+            servicedByInt = servicedByOutputData[row]
+            servicedBy.text = servicedByPickerData[row]
+            servicedBy.resignFirstResponder()
+            
+        case 2:
+            subflow.text = subflowPickerData[row]
+            subflowSelected = subflow.text!
+            subflow.resignFirstResponder()
+            
+        default:
+            enteredByInt = enteredByOutputData[row]
+            enteredBy.text = enteredByPickerData[row]
+            enteredBy.resignFirstResponder()
+        }
+    }
+    
     func jumpToSMRUpdateSubflow() {
         if let smrUpdateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "smrUpdateVC") as? SMRUpdateController {
             
@@ -448,31 +473,6 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             componentChangeVC.subflow = subflowSelected
             
             self.present(componentChangeVC, animated: false, completion: nil)
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("pickerView tag \(pickerView.tag)")
-        switch(pickerView.tag) {
-        case 0:
-            enteredByInt = enteredByOutputData[row]
-            enteredBy.text = enteredByPickerData[row]
-            enteredBy.resignFirstResponder()
-            
-        case 1:
-            servicedByInt = servicedByOutputData[row]
-            servicedBy.text = servicedByPickerData[row]
-            servicedBy.resignFirstResponder()
-            
-        case 2:
-            subflow.text = subflowPickerData[row]
-            subflowSelected = subflow.text!
-            subflow.resignFirstResponder()
-            
-        default:
-            enteredByInt = enteredByOutputData[row]
-            enteredBy.text = enteredByPickerData[row]
-            enteredBy.resignFirstResponder()
         }
     }
     

@@ -11,7 +11,7 @@ import CoreData
 import Alamofire
 import SwiftyJSON
 
-class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, InitialSelectionDelegate {
+class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UINavigationControllerDelegate, InitialSelectionDelegate {
 
     var initialSelectionDelegate : InitialSelectionDelegate?
     
@@ -24,6 +24,14 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
     var enteredByInt : Int16 = 0
     var servicedByInt : Int16 = 0
     var subflow : String = ""
+    var fluidType1SelectedInt : Int16 = 0
+    
+    var pickerViewFluidType1 = UIPickerView()
+    
+    var fluidType1PickerData = [String]()
+    var fluidType1OutputData = [Int16]()
+    
+    var pickerView = UIPickerView()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var unitNumber: UITextField!
@@ -48,12 +56,12 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
             
             // 07/25/18 Need to change to actual values entered
             "fluid_added": [
-                [ "type": 3,
-                  "quantity": 4.1,
+                [ "type": fluidType1SelectedInt,
+                  "quantity": fluidEntryFluidQuantity1.text!,
                   "units": "gal" ],
-                [ "type": 3,
-                  "quantity": 3.2,
-                  "units": "gal" ],
+//                [ "type": 3,
+//                  "quantity": 3.2,
+//                  "units": "gal" ],
             ],
             "flu_previous_smr": fluidEntryPreviousSMR.text!,
             "flu_current_smr": fluidEntryCurrentSMR.text!,
@@ -65,9 +73,9 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
         print(jsonData)
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
-        
+
         if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
-            
+
             self.present(selectScreenController, animated: false, completion: nil)
         }
     }
@@ -81,6 +89,11 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
         print("servicedBy: \(servicedBy)")
         print("subflow: \(subflow)")
         
+        pickerViewFluidType1.delegate = self
+        self.pickerViewFluidType1.tag = 0
+        
+        fluidEntryFluidType1.inputView = pickerViewFluidType1
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FluidEntryController.viewTapped(gestureRecognizer:)))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
@@ -92,6 +105,8 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         unitNumber.text = barCodeValue
+        
+        appendFluidTypes()
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,6 +116,62 @@ class FluidEntryController: UIViewController, UITextFieldDelegate, UINavigationC
     
     func userSelectedSubflow(unitNumber: String) {
         //
+    }
+    
+    func appendFluidTypes() {
+        let fluids = FluidTypeCoreDataHandler.fetchObject()
+        
+        fluidType1PickerData.append("Select one:")
+        fluidType1OutputData.append(0)
+        
+        for fluid in fluids! {
+            let fluidType = fluid.value(forKey: "fluidType") as! String
+            let id = fluid.value(forKey: "id") as! Int16
+            
+            print("\(id), \(fluidType)")
+            
+            fluidType1PickerData.append("\(fluidType)")
+            fluidType1OutputData.append(id)
+        }
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch(pickerView.tag) {
+        case 0:
+            return fluidType1PickerData.count
+            
+        default:
+            return fluidType1PickerData.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch(pickerView.tag) {
+        case 0:
+            return fluidType1PickerData[row]
+            
+        default:
+            return fluidType1PickerData[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("pickerView tag \(pickerView.tag)")
+        switch(pickerView.tag) {
+        case 0:
+            fluidType1SelectedInt = fluidType1OutputData[row]
+            fluidEntryFluidType1.text = fluidType1PickerData[row]
+            fluidEntryFluidType1.resignFirstResponder()
+            
+        default:
+            fluidType1SelectedInt = fluidType1OutputData[row]
+            fluidEntryFluidType1.text = fluidType1PickerData[row]
+            fluidEntryFluidType1.resignFirstResponder()
+        }
     }
     
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
