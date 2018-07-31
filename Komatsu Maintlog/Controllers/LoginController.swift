@@ -89,9 +89,6 @@ class LoginController: UIViewController {
             let activeUsers = LoginCoreDataHandler.filterData(fieldName: "active", filterType: "equals", queryString: "1")
             
             for activeUser in activeUsers! {
-//                print("expiresOn vs Date:")
-//                print(activeUser.value(forKey: "expiresOn")!)
-//                print(Date())
                 if Date() > activeUser.value(forKey: "expiresOn")! as! Date {
                     // Proceed with login
                 } else {
@@ -101,16 +98,6 @@ class LoginController: UIViewController {
                 }
             }
         }
-
-        // Do any additional setup after loading the view.
-//        if isLoggedIn() {
-//            loginErrorLabel.text = "Session active. Click Continue to proceed."
-//            loginErrorLabel.backgroundColor = UIColor(red: 80/255, green: 164/255, blue: 81/255, alpha: 1.0)
-//            loginErrorLabel.isHidden = false
-//            pinLabel.isHidden = true
-//            userPin.isHidden = true
-//            loginButton.setTitle("Continue", for: .normal)
-//        }
     }
     
     func allowSessionToContinue() {

@@ -38,6 +38,7 @@ class InspectionEntryController: UIViewController, UITextFieldDelegate, UINaviga
     var progressLabelText : String = ""
     var userId : Int16 = 1
     var currentInspectionItemSMR : String = ""
+    var loggedInUserId : Int16 = 0
     
     // Constants
     var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"

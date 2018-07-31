@@ -45,6 +45,8 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         dismiss(animated: false, completion: nil)
     }
     
+    
+    
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let jsonData: JSON = [
@@ -104,6 +106,10 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.defaultsChanged), name: UserDefaults.didChangeNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        let customBackButton = UIBarButtonItem(image: UIImage(named: "backArrow") , style: .plain, target: self, action: #selector(backAction(sender:)))
+        customBackButton.imageInsets = UIEdgeInsets(top: 2, left: -8, bottom: 0, right: 0)
+        navigationItem.leftBarButtonItem = customBackButton
         
         unitNumber.text = barCodeValue
         
@@ -199,6 +205,11 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
 //        dateFormatter.dateFormat = "MM/dd/yyyy"
 //        dateEntered.text = dateFormatter.string(from: (datePicker.date))
         view.endEditing(true)
+    }
+    
+    @objc func backAction(sender: UIBarButtonItem) {
+        // custom actions here
+        navigationController?.popViewController(animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

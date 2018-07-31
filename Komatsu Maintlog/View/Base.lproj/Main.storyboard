@@ -159,18 +159,28 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inspection Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebz-EK-t2A">
                                         <rect key="frame" x="136" y="45" width="142" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tt-42-uVF" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="1iN-8C-0nb"/>
-                                            <constraint firstAttribute="height" constant="18" id="cPP-5Y-fES"/>
+                                            <constraint firstAttribute="width" constant="24" id="lej-6O-zwU"/>
+                                            <constraint firstAttribute="height" constant="24" id="mV3-sh-6YG"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="CfK-ry-1xH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGC-Bl-dzu">
+                                        <rect key="frame" x="31" y="36" width="41" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Menu">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="KGk-jY-eNF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -178,10 +188,12 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ebz-EK-t2A" firstAttribute="top" secondItem="DHK-8W-B4e" secondAttribute="top" constant="45" id="CeP-Uf-6Gt"/>
+                                    <constraint firstItem="aGC-Bl-dzu" firstAttribute="leading" secondItem="5Tt-42-uVF" secondAttribute="trailing" id="D1y-m6-vAu"/>
+                                    <constraint firstAttribute="bottom" secondItem="aGC-Bl-dzu" secondAttribute="bottom" constant="7" id="NNG-JK-uuK"/>
                                     <constraint firstItem="ebz-EK-t2A" firstAttribute="centerX" secondItem="DHK-8W-B4e" secondAttribute="centerX" id="RsR-pz-Wpz"/>
                                     <constraint firstAttribute="height" constant="75" id="UA4-38-GpK"/>
-                                    <constraint firstAttribute="bottom" secondItem="5Tt-42-uVF" secondAttribute="bottom" constant="15" id="VVW-qj-qsI"/>
-                                    <constraint firstAttribute="trailing" secondItem="5Tt-42-uVF" secondAttribute="trailing" constant="15" id="cVX-MG-FXh"/>
+                                    <constraint firstItem="5Tt-42-uVF" firstAttribute="leading" secondItem="DHK-8W-B4e" secondAttribute="leading" constant="7" id="pXS-9b-dol"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Tt-42-uVF" secondAttribute="bottom" constant="10" id="vRb-wE-Z8p"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3w5-KK-bYu" userLabel="Inspection Item Label Area">
@@ -545,31 +557,42 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SMR Update" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B01-k3-Ckh">
                                         <rect key="frame" x="153.33333333333334" y="45" width="107.66666666666666" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeE-Wj-sea" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="Wd2-sf-9zx"/>
-                                            <constraint firstAttribute="height" constant="18" id="zAp-Me-cca"/>
+                                            <constraint firstAttribute="width" constant="24" id="cdo-Uc-iNJ"/>
+                                            <constraint firstAttribute="height" constant="24" id="sqT-k8-qNb"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="V3O-bk-fN5"/>
                                             <action selector="onCloseSMRUpdateViewButton:" destination="tpY-3C-5t7" eventType="touchUpInside" id="UTM-ty-rWr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzb-sd-XS2">
+                                        <rect key="frame" x="31" y="36" width="70" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Log Entry">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseSMRUpdateViewButton:" destination="tpY-3C-5t7" eventType="touchUpInside" id="MUO-bL-61O"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Bzb-sd-XS2" secondAttribute="bottom" constant="7" id="1UI-ae-8Sm"/>
+                                    <constraint firstItem="Bzb-sd-XS2" firstAttribute="leading" secondItem="JeE-Wj-sea" secondAttribute="trailing" id="FOG-nN-UCw"/>
                                     <constraint firstItem="B01-k3-Ckh" firstAttribute="centerX" secondItem="6Ii-be-VKA" secondAttribute="centerX" id="Imy-Bn-oJ9"/>
-                                    <constraint firstAttribute="trailing" secondItem="JeE-Wj-sea" secondAttribute="trailing" constant="15" id="OFp-7K-XmJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="JeE-Wj-sea" secondAttribute="bottom" constant="10" id="kVc-fR-mnN"/>
+                                    <constraint firstItem="JeE-Wj-sea" firstAttribute="leading" secondItem="6Ii-be-VKA" secondAttribute="leading" constant="7" id="nZt-fb-Mfd"/>
                                     <constraint firstItem="B01-k3-Ckh" firstAttribute="top" secondItem="6Ii-be-VKA" secondAttribute="top" constant="45" id="pnw-sr-8tH"/>
-                                    <constraint firstAttribute="bottom" secondItem="JeE-Wj-sea" secondAttribute="bottom" constant="15" id="pt1-vP-9On"/>
                                     <constraint firstAttribute="height" constant="75" id="xbg-YS-tW7"/>
-                                    <constraint firstAttribute="trailing" secondItem="JeE-Wj-sea" secondAttribute="trailing" constant="15" id="yoL-Pz-9n0"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6z-PD-lSK" userLabel="Scroll View Container">
@@ -712,30 +735,41 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PM Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTs-39-fWI">
                                         <rect key="frame" x="159" y="45" width="97" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyu-DK-hLI" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="DwB-T7-P5T"/>
-                                            <constraint firstAttribute="width" constant="18" id="S6B-6B-tNZ"/>
+                                            <constraint firstAttribute="height" constant="24" id="Plu-fk-ue4"/>
+                                            <constraint firstAttribute="width" constant="24" id="vG0-z0-rBn"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="Ocj-ga-sCQ"/>
                                             <action selector="onClosePMServiceViewButton:" destination="GSy-44-iwI" eventType="touchUpInside" id="bCN-06-Ngc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhq-w6-qx6">
+                                        <rect key="frame" x="31" y="36" width="70" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Log Entry">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onClosePMServiceViewButton:" destination="GSy-44-iwI" eventType="touchUpInside" id="xri-6P-dFw"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vyu-DK-hLI" secondAttribute="trailing" constant="15" id="FsI-Vc-kFc"/>
                                     <constraint firstItem="QTs-39-fWI" firstAttribute="centerX" secondItem="pJg-85-02I" secondAttribute="centerX" id="Gai-EC-qIz"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bhq-w6-qx6" secondAttribute="bottom" constant="7" id="JyI-Rf-YWN"/>
                                     <constraint firstAttribute="height" constant="75" id="PSF-fE-Izc"/>
-                                    <constraint firstAttribute="bottom" secondItem="vyu-DK-hLI" secondAttribute="bottom" constant="15" id="nEm-jZ-vrk"/>
-                                    <constraint firstAttribute="trailing" secondItem="vyu-DK-hLI" secondAttribute="trailing" constant="15" id="t9g-Ft-Z7j"/>
+                                    <constraint firstItem="vyu-DK-hLI" firstAttribute="leading" secondItem="pJg-85-02I" secondAttribute="leading" constant="7" id="f1Z-4W-IBd"/>
+                                    <constraint firstAttribute="bottom" secondItem="vyu-DK-hLI" secondAttribute="bottom" constant="10" id="kGe-c0-YL5"/>
+                                    <constraint firstItem="Bhq-w6-qx6" firstAttribute="leading" secondItem="vyu-DK-hLI" secondAttribute="trailing" id="xJg-ss-tQV"/>
                                     <constraint firstItem="QTs-39-fWI" firstAttribute="top" secondItem="pJg-85-02I" secondAttribute="top" constant="45" id="y3r-tg-37c"/>
                                 </constraints>
                             </view>
@@ -1005,33 +1039,47 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gjp-LU-JZj" userLabel="Header Background">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xi-uz-dVJ">
-                                        <rect key="frame" x="161" y="45" width="93" height="21.666666666666671"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluid Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xi-uz-dVJ" userLabel="Fluid Entry">
+                                        <rect key="frame" x="161.33333333333334" y="45" width="93" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-xV-XH8" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="8Nr-8z-muN"/>
-                                            <constraint firstAttribute="height" constant="18" id="D7Z-9s-hZY"/>
+                                            <constraint firstAttribute="width" constant="24" id="9yO-uF-k4v"/>
+                                            <constraint firstAttribute="height" constant="24" id="fCr-jJ-2Ia"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back">
+                                            <color key="titleColor" red="0.0039215686274509803" green="0.098039215686274508" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="onCloseFluidEntryViewButton:" destination="OB1-kl-I8V" eventType="touchUpInside" id="DmQ-8o-3o4"/>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="CJl-nb-W21"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qq7-pn-kXd">
+                                        <rect key="frame" x="31" y="36" width="70" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Log Entry">
+                                            <color key="titleColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseFluidEntryViewButton:" destination="OB1-kl-I8V" eventType="touchUpInside" id="Kz9-Un-6yF"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="mXc-xV-XH8" secondAttribute="trailing" constant="15" id="Bqk-KU-eDt"/>
-                                    <constraint firstAttribute="bottom" secondItem="mXc-xV-XH8" secondAttribute="bottom" constant="15" id="GYj-RL-M7i"/>
+                                    <constraint firstAttribute="bottom" secondItem="mXc-xV-XH8" secondAttribute="bottom" constant="10" id="030-hh-foc"/>
+                                    <constraint firstItem="mXc-xV-XH8" firstAttribute="leading" secondItem="Gjp-LU-JZj" secondAttribute="leading" constant="7" id="3mQ-bc-tTI"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qq7-pn-kXd" secondAttribute="bottom" constant="7" id="9CX-bQ-ySg"/>
                                     <constraint firstItem="2Xi-uz-dVJ" firstAttribute="centerX" secondItem="Gjp-LU-JZj" secondAttribute="centerX" id="LZK-pX-NHf"/>
                                     <constraint firstItem="2Xi-uz-dVJ" firstAttribute="top" secondItem="Gjp-LU-JZj" secondAttribute="top" constant="45" id="bQC-bI-o58"/>
                                     <constraint firstAttribute="height" constant="75" id="yEP-Yt-yt7"/>
+                                    <constraint firstItem="Qq7-pn-kXd" firstAttribute="leading" secondItem="mXc-xV-XH8" secondAttribute="trailing" id="yrj-kj-t6C"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-xE-3cT" userLabel="Scroll View Container">
@@ -1268,28 +1316,40 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Component Change" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJM-cr-ICV">
                                         <rect key="frame" x="121" y="45" width="172" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEV-tE-Kdx" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="vH3-hH-7Fe"/>
-                                            <constraint firstAttribute="height" constant="18" id="vgQ-iO-Ras"/>
+                                            <constraint firstAttribute="height" constant="24" id="0T2-0i-q18"/>
+                                            <constraint firstAttribute="width" constant="24" id="Whn-jt-dZi"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseComponentChangeEntryViewButton:" destination="THK-eC-FQf" eventType="touchUpInside" id="YD1-9h-8yc"/>
                                             <action selector="onCloseInspectionEntryViewButton:" destination="Pcu-lO-5Us" eventType="touchUpInside" id="LNS-2I-CyI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Il6-Xy-2kD">
+                                        <rect key="frame" x="31" y="36" width="70" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Log Entry">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseComponentChangeEntryViewButton:" destination="THK-eC-FQf" eventType="touchUpInside" id="xaA-t2-TcZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="AEV-tE-Kdx" secondAttribute="trailing" constant="15" id="3PV-r4-0aV"/>
+                                    <constraint firstItem="Il6-Xy-2kD" firstAttribute="leading" secondItem="AEV-tE-Kdx" secondAttribute="trailing" id="2Js-Tj-5Fo"/>
                                     <constraint firstAttribute="height" constant="75" id="3nu-vp-Blm"/>
-                                    <constraint firstAttribute="bottom" secondItem="AEV-tE-Kdx" secondAttribute="bottom" constant="15" id="gAQ-6I-Feu"/>
+                                    <constraint firstAttribute="bottom" secondItem="AEV-tE-Kdx" secondAttribute="bottom" constant="10" id="DbZ-ym-bsd"/>
+                                    <constraint firstItem="AEV-tE-Kdx" firstAttribute="leading" secondItem="CQa-NU-AJS" secondAttribute="leading" constant="7" id="Mo7-4w-cc1"/>
+                                    <constraint firstAttribute="bottom" secondItem="Il6-Xy-2kD" secondAttribute="bottom" constant="7" id="dve-jv-mhV"/>
                                     <constraint firstItem="cJM-cr-ICV" firstAttribute="top" secondItem="CQa-NU-AJS" secondAttribute="top" constant="45" id="jI9-h4-ZaQ"/>
                                     <constraint firstItem="cJM-cr-ICV" firstAttribute="centerX" secondItem="CQa-NU-AJS" secondAttribute="centerX" id="mDD-1A-jXE"/>
                                 </constraints>
@@ -1512,36 +1572,48 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Equipment Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-7E-QAr">
-                                        <rect key="frame" x="98.666666666666686" y="45" width="217" height="21.666666666666671"/>
+                                        <rect key="frame" x="99.333333333333314" y="45" width="217" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DP0-ZZ-IWj" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="VYZ-je-SoM"/>
-                                            <constraint firstAttribute="width" constant="18" id="dd3-qV-ijF"/>
+                                            <constraint firstAttribute="width" constant="24" id="4ib-mc-cWh"/>
+                                            <constraint firstAttribute="height" constant="24" id="SS8-Ig-5r1"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseScanBarcode:" destination="Y0a-uA-qWq" eventType="touchUpInside" id="VJf-9M-pvg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXf-3J-Q6S">
+                                        <rect key="frame" x="31" y="36" width="41" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Menu">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseScanBarcode:" destination="Y0a-uA-qWq" eventType="touchUpInside" id="Bib-Ny-Num"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85490196078431369" green="0.8666666666666667" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="DP0-ZZ-IWj" firstAttribute="leading" secondItem="A5W-Rv-gnx" secondAttribute="leading" constant="7" id="1sF-Di-ETn"/>
                                     <constraint firstItem="Y32-7E-QAr" firstAttribute="top" secondItem="A5W-Rv-gnx" secondAttribute="top" constant="45" id="JT4-W3-iQf"/>
-                                    <constraint firstAttribute="bottom" secondItem="DP0-ZZ-IWj" secondAttribute="bottom" constant="15" id="bNi-Y2-S4u"/>
+                                    <constraint firstItem="fXf-3J-Q6S" firstAttribute="leading" secondItem="DP0-ZZ-IWj" secondAttribute="trailing" id="NYo-5E-jEz"/>
                                     <constraint firstItem="Y32-7E-QAr" firstAttribute="centerX" secondItem="A5W-Rv-gnx" secondAttribute="centerX" id="fn4-FG-20A"/>
-                                    <constraint firstAttribute="trailing" secondItem="DP0-ZZ-IWj" secondAttribute="trailing" constant="15" id="k0v-tJ-iPE"/>
                                     <constraint firstAttribute="height" constant="75" id="wQX-6M-2Mg"/>
+                                    <constraint firstAttribute="bottom" secondItem="DP0-ZZ-IWj" secondAttribute="bottom" constant="10" id="yAD-zJ-fTm"/>
+                                    <constraint firstAttribute="bottom" secondItem="fXf-3J-Q6S" secondAttribute="bottom" constant="7" id="z0T-Sy-Jej"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Equipment Unit QR Code not scanned" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQe-Nq-5MF">
                                 <rect key="frame" x="0.0" y="686" width="414" height="50"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.86666666670000003" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Uca-fP-CmC"/>
                                 </constraints>
@@ -1564,6 +1636,7 @@
                     </view>
                     <connections>
                         <outlet property="barcodeDetectedLabel" destination="kQe-Nq-5MF" id="DkA-nO-YTp"/>
+                        <outlet property="barcodeScanned" destination="kQe-Nq-5MF" id="AUy-gb-w6R"/>
                         <outlet property="barcodeScannerHeader" destination="A5W-Rv-gnx" id="0rs-bQ-Hyb"/>
                     </connections>
                 </viewController>
@@ -1585,29 +1658,40 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dM9-Ji-Acn">
                                         <rect key="frame" x="165.66666666666666" y="45" width="82.666666666666657" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPF-Mb-beX" userLabel="Close Button">
-                                        <rect key="frame" x="381" y="42" width="18" height="18"/>
+                                        <rect key="frame" x="7" y="41" width="24" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="N5Y-rQ-nbX"/>
-                                            <constraint firstAttribute="height" constant="18" id="kSH-h7-axW"/>
+                                            <constraint firstAttribute="width" constant="24" id="mh8-Xw-CaY"/>
+                                            <constraint firstAttribute="height" constant="24" id="nGC-4Q-cLB"/>
                                         </constraints>
-                                        <state key="normal" image="cross"/>
+                                        <state key="normal" image="icons8-back"/>
                                         <connections>
                                             <action selector="onCloseLogEntryViewButton:" destination="kLd-ml-HGc" eventType="touchUpInside" id="8Xs-QE-igJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhn-2d-Mcu">
+                                        <rect key="frame" x="31" y="36" width="41" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Menu">
+                                            <color key="titleColor" red="0.0039215686269999999" green="0.098039215690000001" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onCloseLogEntryViewButton:" destination="kLd-ml-HGc" eventType="touchUpInside" id="4It-UB-cdD"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.81960784310000001" green="0.83529411760000005" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="15" id="0NL-nz-RlX"/>
+                                    <constraint firstItem="wPF-Mb-beX" firstAttribute="leading" secondItem="kxr-dZ-gNE" secondAttribute="leading" constant="7" id="0pg-6S-zXe"/>
                                     <constraint firstAttribute="height" constant="75" id="CM4-j1-9J4"/>
-                                    <constraint firstAttribute="bottom" secondItem="wPF-Mb-beX" secondAttribute="bottom" constant="15" id="aXl-Lm-HR2"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zhn-2d-Mcu" secondAttribute="bottom" constant="7" id="UBz-L7-QnX"/>
+                                    <constraint firstAttribute="bottom" secondItem="wPF-Mb-beX" secondAttribute="bottom" constant="10" id="Uhz-Qp-bSD"/>
+                                    <constraint firstItem="Zhn-2d-Mcu" firstAttribute="leading" secondItem="wPF-Mb-beX" secondAttribute="trailing" id="Uoa-YN-KPx"/>
                                     <constraint firstItem="dM9-Ji-Acn" firstAttribute="centerX" secondItem="kxr-dZ-gNE" secondAttribute="centerX" id="nxe-ca-Ng0"/>
-                                    <constraint firstAttribute="trailing" secondItem="wPF-Mb-beX" secondAttribute="trailing" constant="15" id="ser-Tb-vo9"/>
                                     <constraint firstItem="dM9-Ji-Acn" firstAttribute="top" secondItem="kxr-dZ-gNE" secondAttribute="top" constant="45" id="vHY-lr-rSL"/>
                                 </constraints>
                             </view>
@@ -1798,7 +1882,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cross" width="40" height="40"/>
+        <image name="icons8-back" width="21" height="21"/>
         <image name="icons8-camera-unselected" width="320" height="320"/>
         <image name="icons8-cancel-unselected" width="320" height="320"/>
         <image name="icons8-ok-unselected" width="320" height="320"/>

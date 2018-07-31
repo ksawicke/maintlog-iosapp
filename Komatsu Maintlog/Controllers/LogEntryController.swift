@@ -34,6 +34,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var subflowSelected : String = ""
     var enteredByInt : Int16 = 0
     var servicedByInt : Int16 = 0
+    var loggedInUserId : Int16 = 0
     
     var pickerViewEnteredBy = UIPickerView()
     var pickerViewServicedBy = UIPickerView()
@@ -142,9 +143,9 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         pickerViewEnteredBy.delegate = self
         pickerViewServicedBy.delegate = self
         pickerViewSubflow.delegate = self
-        self.pickerViewEnteredBy.tag = 0
-        self.pickerViewServicedBy.tag = 1
-        self.pickerViewSubflow.tag = 2
+        pickerViewEnteredBy.tag = 0
+        pickerViewServicedBy.tag = 1
+        pickerViewSubflow.tag = 2
         
         enteredBy.inputView = pickerViewEnteredBy
         servicedBy.inputView = pickerViewServicedBy
@@ -321,6 +322,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func appendUsers() {
         let users = UserCoreDataHandler.fetchObject()
+        var counter = 0
+        var keepCounting = true
         
         enteredByPickerData.append("Select one:")
         enteredByOutputData.append(0)
@@ -332,6 +335,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             let lastName = user.value(forKey: "lastName") as! String
             let id = user.value(forKey: "id") as! Int16
             
+            if id != loggedInUserId && keepCounting == true {
+                counter += 1
+            } else {
+                keepCounting = false
+            }
+            
             print("\(id), \(firstName), \(lastName)")
             
             enteredByPickerData.append("\(lastName), \(firstName)")
@@ -340,6 +349,12 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             servicedByPickerData.append("\(lastName), \(firstName)")
             servicedByOutputData.append(id)
         }
+        
+        // Pre-select Entered By drop down
+        // Select the logged in user by default
+        // Allow user to change it if needed
+        pickerViewEnteredBy.selectRow(counter + 1, inComponent: 0, animated: false)
+        pickerView(pickerViewEnteredBy, didSelectRow: counter + 1, inComponent: 0)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

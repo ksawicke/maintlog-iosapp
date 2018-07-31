@@ -28,6 +28,7 @@ class BarCodeScannerController: UIViewController {
     
     @IBOutlet var barcodeDetectedLabel:UILabel!
     @IBOutlet var barcodeScannerHeader:UIView!
+    @IBOutlet weak var barcodeScanned: UILabel!
     
     @IBAction func onCloseScanBarcode(_ sender: UIButton) {
         
@@ -189,12 +190,17 @@ class BarCodeScannerController: UIViewController {
 //            }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: alertCancelHandler)
         
         alertPrompt.addAction(confirmAction)
         alertPrompt.addAction(cancelAction)
         
         present(alertPrompt, animated: false, completion: nil)
+    }
+    
+    func alertCancelHandler(alert: UIAlertAction!) {
+        barcodeDetectedLabel.text = "Equipment QR Code not scanned"
+        barcodeScanned.backgroundColor = UIColor.red
     }
     
 }
@@ -205,7 +211,7 @@ extension BarCodeScannerController: AVCaptureMetadataOutputObjectsDelegate {
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
-            barcodeDetectedLabel.text = "Barcode not detected"
+//            barcodeDetectedLabel.text = "Barcode not detected"
             return
         }
         
@@ -219,7 +225,9 @@ extension BarCodeScannerController: AVCaptureMetadataOutputObjectsDelegate {
             
             if metadataObj.stringValue != nil {
                 launchApp(decodedURL: metadataObj.stringValue!)
-                barcodeDetectedLabel.text = metadataObj.stringValue
+//                barcodeDetectedLabel.text = metadataObj.stringValue
+                barcodeDetectedLabel.text = "Equipment QR Code scanned!"
+                barcodeScanned.backgroundColor = UIColor.green
             }
         }
     }
