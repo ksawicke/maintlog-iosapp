@@ -143,7 +143,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
             print("\(id), \(fluidType)")
 
             // Append only if the fluids are tracked for the
-            // scanned Equipment Unit
+            // scanned Equipment Unit.
             if fluidsTrackedArray.contains("\(id)") {
                 fluidType1PickerData.append("\(fluidType)")
                 fluidType1OutputData.append(id)
