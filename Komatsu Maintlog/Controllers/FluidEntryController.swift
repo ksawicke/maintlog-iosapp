@@ -25,6 +25,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     var servicedByInt : Int16 = 0
     var subflow : String = ""
     var fluidType1SelectedInt : Int16 = 0
+    var fluidsTracked : String = ""
     
     var pickerViewFluidType1 = UIPickerView()
     
@@ -83,6 +84,10 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -107,10 +112,6 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
         notificationCenter.addObserver(self, selector: #selector(FluidEntryController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
-        let customBackButton = UIBarButtonItem(image: UIImage(named: "backArrow") , style: .plain, target: self, action: #selector(backAction(sender:)))
-        customBackButton.imageInsets = UIEdgeInsets(top: 2, left: -8, bottom: 0, right: 0)
-        navigationItem.leftBarButtonItem = customBackButton
-        
         unitNumber.text = barCodeValue
         
         appendFluidTypes()
@@ -128,17 +129,25 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     func appendFluidTypes() {
         let fluids = FluidTypeCoreDataHandler.fetchObject()
         
+        let fluidsTrackedArray = fluidsTracked.components(separatedBy: "|")
+        
+        debugPrint(fluidsTrackedArray)
+        
         fluidType1PickerData.append("Select one:")
         fluidType1OutputData.append(0)
         
         for fluid in fluids! {
             let fluidType = fluid.value(forKey: "fluidType") as! String
             let id = fluid.value(forKey: "id") as! Int16
-            
+
             print("\(id), \(fluidType)")
-            
-            fluidType1PickerData.append("\(fluidType)")
-            fluidType1OutputData.append(id)
+
+            // Append only if the fluids are tracked for the
+            // scanned Equipment Unit
+            if fluidsTrackedArray.contains("\(id)") {
+                fluidType1PickerData.append("\(fluidType)")
+                fluidType1OutputData.append(id)
+            }
         }
     }
     

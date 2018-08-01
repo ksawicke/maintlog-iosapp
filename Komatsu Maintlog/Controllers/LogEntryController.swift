@@ -31,6 +31,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var equipmentTypeSelected : Int16 = 0
     var equipmentUnitIdSelected : Int16 = 0
     var equipmentUnit : String = ""
+    var fluidsTracked : String = ""
     var subflowSelected : String = ""
     var enteredByInt : Int16 = 0
     var servicedByInt : Int16 = 0
@@ -181,10 +182,14 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
                 if let scannedManufacturerName = managedObject.value(forKey: "manufacturerName"),
                     let scannedModelNumber = managedObject.value(forKey: "modelNumber"),
                     let scannedEquipmentTypeId = managedObject.value(forKey: "equipmentTypeId"),
-                    let scannedEquipmentUnitId = managedObject.value(forKey: "id") {
+                    let scannedEquipmentUnitId = managedObject.value(forKey: "id"),
+                    let scannedEquipmentFluidsTracked = managedObject.value(forKey: "fluidsTracked")
+                    {
                     
                     equipmentTypeSelected = scannedEquipmentTypeId as! Int16
                     equipmentUnitIdSelected = scannedEquipmentUnitId as! Int16
+                    fluidsTracked = scannedEquipmentFluidsTracked as! String
+                        
                     let modelNumber = scannedModelNumber as! String
                     let etid = scannedEquipmentTypeId as! Int16
                     
@@ -454,6 +459,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             fluidEntryVC.servicedBy = self.servicedBy.text!
             fluidEntryVC.enteredByInt = self.enteredByInt
             fluidEntryVC.servicedByInt = self.servicedByInt
+            fluidEntryVC.fluidsTracked = self.fluidsTracked
             fluidEntryVC.subflow = subflowSelected
             
             self.present(fluidEntryVC, animated: false, completion: nil)
