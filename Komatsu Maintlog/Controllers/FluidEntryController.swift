@@ -25,12 +25,20 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     var servicedByInt : Int16 = 0
     var subflow : String = ""
     var fluidType1SelectedInt : Int16 = 0
+    var fluidType2SelectedInt : Int16 = 0
+    var fluidType3SelectedInt : Int16 = 0
     var fluidsTracked : String = ""
     
     var pickerViewFluidType1 = UIPickerView()
+    var pickerViewFluidType2 = UIPickerView()
+    var pickerViewFluidType3 = UIPickerView()
     
     var fluidType1PickerData = [String]()
     var fluidType1OutputData = [Int16]()
+    var fluidType2PickerData = [String]()
+    var fluidType2OutputData = [Int16]()
+    var fluidType3PickerData = [String]()
+    var fluidType3OutputData = [Int16]()
     
     var pickerView = UIPickerView()
     
@@ -38,6 +46,10 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var fluidEntryFluidType1: UITextField!
     @IBOutlet weak var fluidEntryFluidQuantity1: UITextField!
+    @IBOutlet weak var fluidEntryFluidType2: UITextField!
+    @IBOutlet weak var fluidEntryFluidQuantity2: UITextField!
+    @IBOutlet weak var fluidEntryFluidType3: UITextField!
+    @IBOutlet weak var fluidEntryFluidQuantity3: UITextField!
     @IBOutlet weak var fluidEntryPreviousSMR: UITextField!
     @IBOutlet weak var fluidEntryCurrentSMR: UITextField!
     @IBOutlet weak var fluidEntryNotes: UITextField!
@@ -45,8 +57,6 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBAction func onCloseFluidEntryViewButton(_ sender: UIButton) {
         dismiss(animated: false, completion: nil)
     }
-    
-    
     
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         let uuid: String = UUID().uuidString
@@ -91,16 +101,22 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("barCodeValue: \(barCodeValue)")
-        print("dateEntered: \(dateEntered)")
-        print("enteredBy: \(enteredBy)")
-        print("servicedBy: \(servicedBy)")
-        print("subflow: \(subflow)")
-        
+//        print("barCodeValue: \(barCodeValue)")
+//        print("dateEntered: \(dateEntered)")
+//        print("enteredBy: \(enteredBy)")
+//        print("servicedBy: \(servicedBy)")
+//        print("subflow: \(subflow)")
+//
         pickerViewFluidType1.delegate = self
-        self.pickerViewFluidType1.tag = 0
-        
+        pickerViewFluidType1.tag = 0
+        pickerViewFluidType2.delegate = self
+        pickerViewFluidType2.tag = 1
+        pickerViewFluidType3.delegate = self
+        pickerViewFluidType3.tag = 2
+
         fluidEntryFluidType1.inputView = pickerViewFluidType1
+        fluidEntryFluidType2.inputView = pickerViewFluidType2
+        fluidEntryFluidType3.inputView = pickerViewFluidType3
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FluidEntryController.viewTapped(gestureRecognizer:)))
         tapGesture.cancelsTouchesInView = false
@@ -131,22 +147,30 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         let fluidsTrackedArray = fluidsTracked.components(separatedBy: "|")
         
-        debugPrint(fluidsTrackedArray)
+//        debugPrint(fluidsTrackedArray)
         
         fluidType1PickerData.append("Select one:")
         fluidType1OutputData.append(0)
+        fluidType2PickerData.append("Select one:")
+        fluidType2OutputData.append(0)
+        fluidType3PickerData.append("Select one:")
+        fluidType3OutputData.append(0)
         
         for fluid in fluids! {
             let fluidType = fluid.value(forKey: "fluidType") as! String
             let id = fluid.value(forKey: "id") as! Int16
 
-            print("\(id), \(fluidType)")
+//            print("\(id), \(fluidType)")
 
             // Append only if the fluids are tracked for the
             // scanned Equipment Unit.
             if fluidsTrackedArray.contains("\(id)") {
                 fluidType1PickerData.append("\(fluidType)")
                 fluidType1OutputData.append(id)
+                fluidType2PickerData.append("\(fluidType)")
+                fluidType2OutputData.append(id)
+                fluidType3PickerData.append("\(fluidType)")
+                fluidType3OutputData.append(id)
             }
         }
     }
@@ -160,6 +184,12 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         case 0:
             return fluidType1PickerData.count
             
+        case 1:
+            return fluidType2PickerData.count
+            
+        case 2:
+            return fluidType3PickerData.count
+            
         default:
             return fluidType1PickerData.count
         }
@@ -169,6 +199,12 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         switch(pickerView.tag) {
         case 0:
             return fluidType1PickerData[row]
+            
+        case 1:
+            return fluidType2PickerData[row]
+            
+        case 2:
+            return fluidType3PickerData[row]
             
         default:
             return fluidType1PickerData[row]
@@ -182,6 +218,16 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
             fluidType1SelectedInt = fluidType1OutputData[row]
             fluidEntryFluidType1.text = fluidType1PickerData[row]
             fluidEntryFluidType1.resignFirstResponder()
+           
+        case 1:
+            fluidType2SelectedInt = fluidType2OutputData[row]
+            fluidEntryFluidType2.text = fluidType2PickerData[row]
+            fluidEntryFluidType2.resignFirstResponder()
+            
+        case 2:
+            fluidType3SelectedInt = fluidType3OutputData[row]
+            fluidEntryFluidType3.text = fluidType3PickerData[row]
+            fluidEntryFluidType3.resignFirstResponder()
             
         default:
             fluidType1SelectedInt = fluidType1OutputData[row]
@@ -224,7 +270,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyboard()
         
-        print("hide keyboard?")
+//        print("hide keyboard?")
         
         //        nextButton.isHidden = false
         
@@ -236,7 +282,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func hideKeyboard() {
-        print("run hide keyboard")
+//        print("run hide keyboard")
         //        currentSMR.resignFirstResponder()
     }
     
