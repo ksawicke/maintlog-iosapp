@@ -7,11 +7,22 @@
 //
 
 import UIKit
+import CoreData
+import Alamofire
 import SwiftyJSON
 
 class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, InitialSelectionDelegate {
 
     var initialSelectionDelegate : InitialSelectionDelegate?
+    
+    // Constants
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
+    var API_SMR = "/api/last_smr"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
     
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
@@ -51,9 +62,10 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBAction func onClickSubmitComponentChange(_ sender: Any) {
         let uuid: String = UUID().uuidString
+        let dateEnteredYMD = DateFormatHelper().getMySQLDateFormat(dateString: dateEntered)! as String
         let jsonData: JSON = [
             "uuid": uuid,
-            "date_entered": dateEntered,
+            "date_entered": dateEnteredYMD,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,
             "serviced_by": servicedByInt,
@@ -67,13 +79,10 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
             "ccs_current_smr": componentChangeCurrentSMR.text!
         ]
         
-        print("JSON DATA - Component Change")
-        debugPrint(jsonData)
-        
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
-        
+
         if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
-            
+
             self.present(selectScreenController, animated: false, completion: nil)
         }
     }
@@ -110,6 +119,8 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
         notificationCenter.addObserver(self, selector: #selector(ComponentChangeController.adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         unitNumber.text = barCodeValue
+        componentChangePreviousSMR.text = "Unable to load data"
+        getPreviousSMR()
     }
     
     @objc func defaultsChanged(){
@@ -119,6 +130,34 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPreviousSMR() {
+        var URL = "\(API_PROD_BASE_URL)\(API_SMR)"
+        var previous_smr = ""
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_SMR)"
+        }
+        
+        URL.append("/\(equipmentUnitIdSelected)?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                if responseJSON["status"] == true {
+                    self.updatePreviousSMR(responseJSON: responseJSON)
+                }
+            }
+        }
+    }
+    
+    func updatePreviousSMR(responseJSON: JSON) {
+        let previousSMR = responseJSON["previous_smr"].int16
+        
+        componentChangePreviousSMR.text = "\(String(describing: previousSMR!))"
     }
     
     func userSelectedSubflow(unitNumber: String) {

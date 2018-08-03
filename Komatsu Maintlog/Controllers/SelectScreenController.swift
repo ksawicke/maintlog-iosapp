@@ -539,7 +539,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             if uploaded == false {
                 if let data = rawJsonData.data(using: .utf8) {
                     if let jsonData = try? JSON(data: data) {
-                        let date_entered = formattedDateFromString(dateString: jsonData["date_entered"].string!, withFormat: "yyyy-MM-dd")
                         
                         // TODO 07/24/18
                         // Switch on jsonData["subflow"]
@@ -551,7 +550,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "id": "0",
                                     "uuid": "\(uuid)",
                                     "subflow": "\(jsonData["subflow"])",
-                                    "date_entered": "\(date_entered!)",
+                                    "date_entered": "\(jsonData["date_entered"])",
                                     "entered_by": "\(jsonData["entered_by"])",
                                     "unit_number": "\(jsonData["unit_number"])",
                                     "serviced_by": "\(jsonData["serviced_by"])",
@@ -566,7 +565,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "id": "0",
                                     "uuid": "\(uuid)",
                                     "subflow": "\(jsonData["subflow"])",
-                                    "date_entered": "\(date_entered!)",
+                                    "date_entered": "\(jsonData["date_entered"])",
                                     "entered_by": "\(jsonData["entered_by"])",
                                     "unit_number": "\(jsonData["unit_number"])",
                                     "serviced_by": "\(jsonData["serviced_by"])",
@@ -583,7 +582,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "id": "0",
                                     "uuid": "\(uuid)",
                                     "subflow": "\(jsonData["subflow"])",
-                                    "date_entered": "\(date_entered!)",
+                                    "date_entered": "\(jsonData["date_entered"])",
                                     "entered_by": "\(jsonData["entered_by"])",
                                     "unit_number": "\(jsonData["unit_number"])",
                                     "serviced_by": "\(jsonData["serviced_by"])",
@@ -602,7 +601,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "id": "0",
                                     "uuid": "\(uuid)",
                                     "subflow": "\(jsonData["subflow"])",
-                                    "date_entered": "\(date_entered!)",
+                                    "date_entered": "\(jsonData["date_entered"])",
                                     "entered_by": "\(jsonData["entered_by"])",
                                     "unit_number": "\(jsonData["unit_number"])",
                                     "serviced_by": "\(jsonData["serviced_by"])",
@@ -622,24 +621,24 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         print(params)
         print("****")
         
-        Alamofire.request(url, method: .post, parameters: ["data": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-            response in
-
-            switch response.result {
-            case .success:
-                debugPrint(response)
-                for logEntry in logEntries! {
-                    let uuid = "\(logEntry.uuid!)"
-//                    LogEntryCoreDataHandler.markAsUploaded(uuid: uuid)
-                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
-                }
-
-                break
-            case .failure(let error):
-
-                print(error)
-            }
-        }
+//        Alamofire.request(url, method: .post, parameters: ["data": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+//            response in
+//
+//            switch response.result {
+//            case .success:
+//                debugPrint(response)
+//                for logEntry in logEntries! {
+////                    let uuid = "\(logEntry.uuid!)"
+////                    LogEntryCoreDataHandler.markAsUploaded(uuid: uuid)
+//                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+//                }
+//
+//                break
+//            case .failure(let error):
+//
+//                print(error)
+//            }
+//        }
     }
     
     func uploadRatings(url: String) {
@@ -693,17 +692,6 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                 print(error)
             }
         }
-    }
-    
-    func formattedDateFromString(dateString: String, withFormat format: String) -> String? {
-        
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "MM/dd/yyyy"
-        let showDate = inputFormatter.date(from: dateString)
-        inputFormatter.dateFormat = format
-        let date_to_return = inputFormatter.string(from: showDate!)
-        
-        return date_to_return
     }
     
 }

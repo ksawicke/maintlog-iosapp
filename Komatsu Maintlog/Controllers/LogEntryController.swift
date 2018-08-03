@@ -434,10 +434,22 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     func jumpToSMRUpdateSubflow() {
         if let smrUpdateVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "smrUpdateVC") as? SMRUpdateController {
             
+//            print("\(self.dateEntered.text!)")
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
+//            dateFormatter.dateFormat = "yyyy-MMMM-dd"
+//            let dateEnteredYmd = dateFormatter.date(from: self.dateEntered.text!)
+            
+            let dateAsString = "8/02/2018"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yyyy, H:mm"
+            let blah = dateFormatter.date(from: dateAsString)
+            print("\(String(describing: blah))")
+            
             smrUpdateVC.barCodeScanned = self.barCodeScanned
             smrUpdateVC.barCodeValue = self.barCodeValue
             smrUpdateVC.equipmentUnitIdSelected = self.equipmentUnitIdSelected
-            smrUpdateVC.dateEntered = self.dateEntered.text!
+            smrUpdateVC.dateEntered = self.dateEntered.text! //"\(String(describing: dateEnteredYmd))"
             smrUpdateVC.enteredBy = self.enteredBy.text!
             smrUpdateVC.servicedBy = self.servicedBy.text!
             smrUpdateVC.enteredByInt = self.enteredByInt

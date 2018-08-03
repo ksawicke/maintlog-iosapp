@@ -7,11 +7,22 @@
 //
 
 import UIKit
+import CoreData
+import Alamofire
 import SwiftyJSON
 
 class SMRUpdateController: UIViewController, InitialSelectionDelegate {
 
     var initialSelectionDelegate : InitialSelectionDelegate?
+    
+    // Constants
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
+    var API_SMR = "/api/last_smr"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
     
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
@@ -33,9 +44,10 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
         let uuid: String = UUID().uuidString
+        let dateEnteredYMD = DateFormatHelper().getMySQLDateFormat(dateString: dateEntered)! as String
         let jsonData: JSON = [
             "uuid": uuid,
-            "date_entered": dateEntered,
+            "date_entered": dateEnteredYMD,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,
             "serviced_by": servicedByInt,
@@ -45,13 +57,10 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
             "sus_current_smr": smrUpdateCurrentSMR.text!
         ]
         
-        print("JSON DATA - SMR Update")
-        debugPrint(jsonData)
-        
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
-        
+
         if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
-            
+
             self.present(selectScreenController, animated: false, completion: nil)
         }
     }
@@ -67,11 +76,42 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
         print("subflow: \(subflow)")
         
         unitNumber.text = barCodeValue
+        
+        smrUpdatePreviousSMR.text = "Unable to load data"
+        getPreviousSMR()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPreviousSMR() {
+        var URL = "\(API_PROD_BASE_URL)\(API_SMR)"
+        var previous_smr = ""
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_SMR)"
+        }
+        
+        URL.append("/\(equipmentUnitIdSelected)?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                if responseJSON["status"] == true {
+                    self.updatePreviousSMR(responseJSON: responseJSON)
+                }
+            }
+        }
+    }
+    
+    func updatePreviousSMR(responseJSON: JSON) {
+        let previousSMR = responseJSON["previous_smr"].int16
+        
+        smrUpdatePreviousSMR.text = "\(String(describing: previousSMR!))"
     }
     
     func userSelectedSubflow(unitNumber: String) {

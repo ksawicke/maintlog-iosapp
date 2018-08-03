@@ -10,6 +10,8 @@
 		65178D0820A23726000BEF58 /* LoginCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */; };
 		651A02E220BDDBB600E09864 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651A02E120BDDBB600E09864 /* NetworkStatus.swift */; };
 		65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */; };
+		6531AE002113ACEE001A5474 /* DateFormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531ADFF2113ACEE001A5474 /* DateFormatHelper.swift */; };
+		6531AE022113C635001A5474 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6531AE012113C635001A5474 /* ApiHelper.swift */; };
 		65424E1820A0A7E20004FF6D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65424E1720A0A7E20004FF6D /* LoginController.swift */; };
 		655FABFF20EA954100718D60 /* ComponentChangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655FABFE20EA954100718D60 /* ComponentChangeController.swift */; };
 		656FD9B9208FED8D00769A2A /* InspectionImageCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */; };
@@ -52,6 +54,8 @@
 		65178D0720A23726000BEF58 /* LoginCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoreDataHandler.swift; sourceTree = "<group>"; };
 		651A02E120BDDBB600E09864 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		65261EBC20924FBD002A5FC0 /* BarCodeScannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeScannerController.swift; sourceTree = "<group>"; };
+		6531ADFF2113ACEE001A5474 /* DateFormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatHelper.swift; sourceTree = "<group>"; };
+		6531AE012113C635001A5474 /* ApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		65424E1720A0A7E20004FF6D /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		655FABFE20EA954100718D60 /* ComponentChangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentChangeController.swift; sourceTree = "<group>"; };
 		656FD9B8208FED8D00769A2A /* InspectionImageCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectionImageCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				65E9D69D20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift */,
 				65E9D69F20C88C4B00DC0578 /* komatsuna.crt */,
 				65A0A01620D1900100A2FCEF /* Komatsu Maintlog-Bridging-Header.h */,
+				6531ADFF2113ACEE001A5474 /* DateFormatHelper.swift */,
+				6531AE012113C635001A5474 /* ApiHelper.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				65A593062087A862000F673D /* ChecklistItemCoreDataHandler.swift in Sources */,
 				65261EBD20924FBD002A5FC0 /* BarCodeScannerController.swift in Sources */,
 				8AE7FA6D207D70F600945D73 /* DataModel.xcdatamodeld in Sources */,
+				6531AE002113ACEE001A5474 /* DateFormatHelper.swift in Sources */,
 				65875F732083FE4800303D20 /* UITextField.swift in Sources */,
 				65A0A01A20D1900300A2FCEF /* ProgressHUD.m in Sources */,
 				8AEA56E92078177F00B827F2 /* InspectionEntryController.swift in Sources */,
@@ -377,6 +384,7 @@
 				65A593082087D7C9000F673D /* ChecklistCoreDataHandler.swift in Sources */,
 				65E9D69E20C88B8F00DC0578 /* CustomServerTrustPolicyManager.swift in Sources */,
 				656FD9BB208FF6CA00769A2A /* InspectionRatingCoreDataHandler.swift in Sources */,
+				6531AE022113C635001A5474 /* ApiHelper.swift in Sources */,
 				65F7251520B85A9F00C31969 /* Reachability.swift in Sources */,
 				6591F04F20C70A0600E497B0 /* FluidTypeCoreDataHandler.swift in Sources */,
 				8AEAD20B2081249B009F12CC /* UIButtonExtension.swift in Sources */,

@@ -15,6 +15,15 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     var initialSelectionDelegate : InitialSelectionDelegate?
     
+    // Constants
+    var API_DEV_BASE_URL = "https://test.rinconmountaintech.com/sites/komatsuna/index.php"
+    var API_PROD_BASE_URL = "http://10.132.146.48/maintlog/index.php"
+    var API_SMR = "/api/last_smr"
+    let API_KEY = "2b3vCKJO901LmncHfUREw8bxzsi3293101kLMNDhf"
+    let headers: HTTPHeaders = [
+        "Content-Type": "x-www-form-urlencoded"
+    ]
+    
     var barCodeScanned : Bool = false
     var barCodeValue : String = ""
     var equipmentUnitIdSelected : Int16 = 0
@@ -60,9 +69,10 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func onClickSubmitFluidEntry(_ sender: Any) {
         let uuid: String = UUID().uuidString
+        let dateEnteredYMD = DateFormatHelper().getMySQLDateFormat(dateString: dateEntered)! as String
         let jsonData: JSON = [
             "uuid": uuid,
-            "date_entered": dateEntered,
+            "date_entered": dateEnteredYMD,
             "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,
             "serviced_by": servicedByInt,
@@ -81,10 +91,6 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
             "flu_current_smr": fluidEntryCurrentSMR.text!,
             "flu_notes": fluidEntryNotes.text!
         ]
-        
-        debugPrint(jsonData)
-        print("**")
-        print(jsonData)
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
 
@@ -131,11 +137,41 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         unitNumber.text = barCodeValue
         
         appendFluidTypes()
+        fluidEntryPreviousSMR.text = "Unable to load data"
+        getPreviousSMR()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getPreviousSMR() {
+        var URL = "\(API_PROD_BASE_URL)\(API_SMR)"
+        var previous_smr = ""
+        
+        if(UserDefaults.standard.bool(forKey: SettingsBundleHelper.SettingsBundleKeys.DevModeKey)) {
+            URL = "\(API_DEV_BASE_URL)\(API_SMR)"
+        }
+        
+        URL.append("/\(equipmentUnitIdSelected)?api_key=\(API_KEY)")
+        
+        Alamofire.request(URL, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (responseData) -> Void in
+            
+            if((responseData.result.value) != nil) {
+                let responseJSON : JSON = JSON(responseData.result.value!)
+                
+                if responseJSON["status"] == true {
+                    self.updatePreviousSMR(responseJSON: responseJSON)
+                }
+            }
+        }
+    }
+    
+    func updatePreviousSMR(responseJSON: JSON) {
+        let previousSMR = responseJSON["previous_smr"].int16
+        
+        fluidEntryPreviousSMR.text = "\(String(describing: previousSMR!))"
     }
     
     func userSelectedSubflow(unitNumber: String) {
