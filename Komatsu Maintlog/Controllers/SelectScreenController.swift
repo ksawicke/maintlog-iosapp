@@ -526,6 +526,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
     func uploadLogEntries(url: String) {
         let logEntries = LogEntryCoreDataHandler.fetchObject()
         var params: Any = []
+        var paramsToJson = [[String: Any]]()
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US") as Locale?
@@ -546,7 +547,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                         
                         switch(jsonData["subflow"]) {
                             case "sus":
-                                let logEntryItem: [String: Any] = [
+                                let logEntryItem: [String:Any] = [
                                     "id": "0",
                                     "uuid": "\(uuid)",
                                     "subflow": "\(jsonData["subflow"])",
@@ -558,6 +559,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "sus_current_smr": "\(jsonData["sus_current_smr"])"
                                 ]
                                 params = (params as? [Any] ?? []) + [logEntryItem]
+                                paramsToJson.append(logEntryItem)
                             break
                             
                             case "flu":
@@ -575,8 +577,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "flu_current_smr": "\(jsonData["flu_current_smr"])"
                                 ]
                                 params = (params as? [Any] ?? []) + [logEntryItem]
+                                paramsToJson.append(logEntryItem)
                             break
-                            
+
                             case "ccs":
                                 let logEntryItem: [String: Any] = [
                                     "id": "0",
@@ -594,6 +597,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "ccs_current_smr": "\(jsonData["ccs_current_smr"])"
                                 ]
                                 params = (params as? [Any] ?? []) + [logEntryItem]
+                                paramsToJson.append(logEntryItem)
                             break
                             
                             default:
@@ -609,6 +613,7 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "sus_current_smr": "\(jsonData["sus_current_smr"])"
                                 ]
                                 params = (params as? [Any] ?? []) + [logEntryItem]
+                                paramsToJson.append(logEntryItem)
                                 break
                         }
                     }
@@ -616,29 +621,39 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
             }
         }
 //
-        print("***")
-        print(url)
+//        print("***")
+//        print(url)
         print(params)
-        print("****")
-        
-//        Alamofire.request(url, method: .post, parameters: ["data": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
-//            response in
+//        print(JSON(paramsToJson))
+//        debugPrint(logEntries)
+//        print(JSON(params))
+//        let jsonParams = JSON(params)
 //
-//            switch response.result {
-//            case .success:
-//                debugPrint(response)
-//                for logEntry in logEntries! {
-////                    let uuid = "\(logEntry.uuid!)"
-////                    LogEntryCoreDataHandler.markAsUploaded(uuid: uuid)
-//                    _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
-//                }
-//
-//                break
-//            case .failure(let error):
-//
-//                print(error)
-//            }
+//        for logEntry in logEntries! {
+//            debugPrint(logEntry)
 //        }
+        
+//        print("****")
+        
+        Alamofire.request(url, method: .post, parameters: ["data": params], encoding: JSONEncoding.default, headers: headersWWWForm).responseString {
+            response in
+
+            switch response.result {
+                case .success:
+                    print("yeah!")
+                    debugPrint(response)
+                    for logEntry in logEntries! {
+    //                    let uuid = "\(logEntry.uuid!)"
+    //                    LogEntryCoreDataHandler.markAsUploaded(uuid: uuid)
+                        _ = LogEntryCoreDataHandler.deleteObject(logentry: logEntry)
+                    }
+
+                    break
+
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
     
     func uploadRatings(url: String) {

@@ -76,7 +76,8 @@ class LogEntryCoreDataHandler: NSObject {
             try context.save()
             
             return true
-        } catch {
+        } catch let error as NSError {
+            print("Error saving context after delete \(error.localizedDescription)")
             return false
         }
     }

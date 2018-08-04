@@ -45,7 +45,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     @IBAction func onClickSubmitSMRUpdate(_ sender: Any) {
         let uuid: String = UUID().uuidString
         let dateEnteredYMD = DateFormatHelper().getMySQLDateFormat(dateString: dateEntered)! as String
-        let jsonData: JSON = [
+        let jsonData: [String: Any] = [
             "uuid": uuid,
             "date_entered": dateEnteredYMD,
             "entered_by": enteredByInt,
@@ -53,11 +53,11 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
             "serviced_by": servicedByInt,
             "subflow": "sus",
             
-            "sus_previous_smr": smrUpdatePreviousSMR.text!,
+            "sus_previous_smr": "",
             "sus_current_smr": smrUpdateCurrentSMR.text!
         ]
         
-        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
+        _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(JSON(jsonData))")
 
         if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
 

@@ -75,7 +75,7 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
             "ccs_component": componentChangeComponentSelected,
             "ccs_component_data": componentChangeComponentData.text!,
             "ccs_notes": componentChangeNotes.text!,
-            "ccs_previous_smr": componentChangePreviousSMR.text!,
+            "ccs_previous_smr": "",
             "ccs_current_smr": componentChangeCurrentSMR.text!
         ]
         

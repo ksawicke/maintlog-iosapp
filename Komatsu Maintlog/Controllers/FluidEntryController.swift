@@ -78,16 +78,21 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
             "serviced_by": servicedByInt,
             "subflow": "flu",
             
-            // 07/25/18 Need to change to actual values entered
             "fluid_added": [
                 [ "type": fluidType1SelectedInt,
                   "quantity": fluidEntryFluidQuantity1.text!,
                   "units": "gal" ],
-//                [ "type": 3,
-//                  "quantity": 3.2,
-//                  "units": "gal" ],
+                [ "type": fluidType2SelectedInt,
+                  "quantity": fluidEntryFluidQuantity2.text!,
+                  "units": "gal"
+                ],
+                [ "type": fluidType3SelectedInt,
+                  "quantity": fluidEntryFluidQuantity3.text!,
+                  "units": "gal"
+                ]
             ],
-            "flu_previous_smr": fluidEntryPreviousSMR.text!,
+            
+            "flu_previous_smr": "",
             "flu_current_smr": fluidEntryCurrentSMR.text!,
             "flu_notes": fluidEntryNotes.text!
         ]
@@ -107,12 +112,6 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        print("barCodeValue: \(barCodeValue)")
-//        print("dateEntered: \(dateEntered)")
-//        print("enteredBy: \(enteredBy)")
-//        print("servicedBy: \(servicedBy)")
-//        print("subflow: \(subflow)")
-//
         pickerViewFluidType1.delegate = self
         pickerViewFluidType1.tag = 0
         pickerViewFluidType2.delegate = self
@@ -180,10 +179,7 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func appendFluidTypes() {
         let fluids = FluidTypeCoreDataHandler.fetchObject()
-        
         let fluidsTrackedArray = fluidsTracked.components(separatedBy: "|")
-        
-//        debugPrint(fluidsTrackedArray)
         
         fluidType1PickerData.append("Select one:")
         fluidType1OutputData.append(0)
@@ -195,8 +191,6 @@ class FluidEntryController: UIViewController, UIPickerViewDelegate, UIPickerView
         for fluid in fluids! {
             let fluidType = fluid.value(forKey: "fluidType") as! String
             let id = fluid.value(forKey: "id") as! Int16
-
-//            print("\(id), \(fluidType)")
 
             // Append only if the fluids are tracked for the
             // scanned Equipment Unit.
