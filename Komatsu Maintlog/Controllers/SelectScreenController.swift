@@ -556,7 +556,8 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                     "unit_number": "\(jsonData["unit_number"])",
                                     "serviced_by": "\(jsonData["serviced_by"])",
                                     "sus_previous_smr": "\(jsonData["sus_previous_smr"])",
-                                    "sus_current_smr": "\(jsonData["sus_current_smr"])"
+                                    "sus_current_smr": "\(jsonData["sus_current_smr"])",
+                                    "sus_notes": "\(jsonData["sus_notes"])"
                                 ]
                                 params = (params as? [Any] ?? []) + [logEntryItem]
                                 paramsToJson.append(logEntryItem)

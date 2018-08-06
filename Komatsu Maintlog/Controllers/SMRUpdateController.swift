@@ -37,6 +37,7 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
     @IBOutlet weak var unitNumber: UITextField!
     @IBOutlet weak var smrUpdatePreviousSMR: UITextField!
     @IBOutlet weak var smrUpdateCurrentSMR: UITextField!
+    @IBOutlet weak var smrUpdateNotes: UITextField!
     
     @IBAction func onCloseSMRUpdateViewButton(_ sender: UIButton) {
         dismiss(animated: false, completion: nil)
@@ -53,8 +54,9 @@ class SMRUpdateController: UIViewController, InitialSelectionDelegate {
             "serviced_by": servicedByInt,
             "subflow": "sus",
             
-            "sus_previous_smr": "",
-            "sus_current_smr": smrUpdateCurrentSMR.text!
+            "sus_previous_smr": "", // Don't store since API will verify correct value
+            "sus_current_smr": smrUpdateCurrentSMR.text!,
+            "sus_notes": smrUpdateNotes.text!
         ]
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(JSON(jsonData))")

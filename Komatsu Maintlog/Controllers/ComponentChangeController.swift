@@ -90,11 +90,11 @@ class ComponentChangeController: UIViewController, UIPickerViewDelegate, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("barCodeValue: \(barCodeValue)")
-        print("dateEntered: \(dateEntered)")
-        print("enteredBy: \(enteredBy)")
-        print("servicedBy: \(servicedBy)")
-        print("subflow: \(subflow)")
+//        print("barCodeValue: \(barCodeValue)")
+//        print("dateEntered: \(dateEntered)")
+//        print("enteredBy: \(enteredBy)")
+//        print("servicedBy: \(servicedBy)")
+//        print("subflow: \(subflow)")
         
         pickerViewComponentType.delegate = self
         self.pickerViewComponentType.tag = 0
