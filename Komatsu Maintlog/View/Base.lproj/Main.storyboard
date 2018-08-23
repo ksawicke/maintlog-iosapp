@@ -868,7 +868,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43Z-OF-y4e">
+                                                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43Z-OF-y4e">
                                                                 <rect key="frame" x="0.0" y="385" width="374" height="40"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -884,7 +884,7 @@
                                                                 <rect key="frame" x="0.0" y="476.66666666666663" width="374" height="40"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hx5-EG-gcd">
                                                                 <rect key="frame" x="0.0" y="531.66666666666663" width="374" height="21.666666666666629"/>
@@ -980,7 +980,7 @@
                                                                 <rect key="frame" x="0.0" y="1210" width="374" height="40"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                             </textField>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alert Window Before Due Units" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZb-FC-e1x">
                                                                 <rect key="frame" x="0.0" y="1265" width="374" height="21.666666666666742"/>
@@ -1062,6 +1062,7 @@
                         <outlet property="pmServiceReminderNotes" destination="x8o-tZ-66i" id="Y3I-PS-LwU"/>
                         <outlet property="pmServiceReminderPMLevel" destination="jQI-ia-zbu" id="gTd-I8-ZWO"/>
                         <outlet property="pmServiceReminderPMType" destination="6uA-FW-OXj" id="65p-X2-6o1"/>
+                        <outlet property="scrollView" destination="rNX-m9-C2k" id="CRR-Ry-MfG"/>
                         <outlet property="unitNumber" destination="7di-1b-pf8" id="Pxu-l5-le3"/>
                     </connections>
                 </viewController>
