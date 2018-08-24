@@ -29,6 +29,8 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var dateEntered : String = ""
     var enteredBy : String = ""
     var servicedBy : String = ""
+    var enteredByInt : Int16 = 0
+    var servicedByInt : Int16 = 0
     var subflow : String = ""
     var pmTypeSelected : String = ""
     var pmLevelSelected : String = ""
@@ -119,28 +121,31 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     @IBAction func onClickSubmitPMService(_ sender: Any) {
         let uuid: String = UUID().uuidString
+        let dateEnteredYMD = DateFormatHelper().getMySQLDateFormat(dateString: dateEntered)! as String
         let jsonData: JSON = [
             "uuid": uuid,
-            "date_entered": "2018-01-01 12:00:01",
-            "entered_by": "21",
+            "date_entered": dateEnteredYMD,
+            "entered_by": enteredByInt,
             "unit_number": equipmentUnitIdSelected,
-            "serviced_by": "1",
+            "serviced_by": servicedByInt,
             
             "subflow": "pss",
-            "pss_pm_type": "",
-            "pss_smr_based_pm_level": "",
+            "pss_pm_type": pmTypeSelected,
+            "pss_smr_based_pm_level": pmLevelSelected,
             "pss_smr_based_previous_smr": "",
-            "pss_smr_based_current_smr": "",
-            "pss_due_units": "",
-            "pss_notes": "",
+            "pss_smr_based_current_smr": pmServiceCurrentSMR,
+            "pss_due_units": pmServiceReminderDue,
+            "pss_notes": pmServiceReminderNotes,
             "pss_smr_based_notes": [
-                [ "note": "" ],
-                [ "note": "" ],
-                [ "note": "" ]
+                [ "note": pmServiceNotes ],
+                [ "note": pmServiceNotes2 ],
+                [ "note": pmServiceNotes3 ]
             ],
             "pss_reminder_recipients": [
                 [ "email_addresses": "" ]
-            ]
+            ],
+            "pss_reminder_quantity": pmServiceReminderDueQuantity,
+            "pss_reminder_units": pmServiceReminderDueUnits
         ]
         
         debugPrint(jsonData)
@@ -149,7 +154,10 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
-        print("Save PM Service test...")
+        if let selectScreenController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectScreenController") as? SelectScreenController {
+            
+            self.present(selectScreenController, animated: false, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
