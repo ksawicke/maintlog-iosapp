@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import Alamofire
 import SwiftyJSON
 
@@ -133,24 +134,24 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "pss_pm_type": pmTypeSelected,
             "pss_smr_based_pm_level": pmLevelSelected,
             "pss_smr_based_previous_smr": "",
-            "pss_smr_based_current_smr": pmServiceCurrentSMR,
-            "pss_due_units": pmServiceReminderDue,
-            "pss_notes": pmServiceReminderNotes,
+            "pss_smr_based_current_smr": pmServiceCurrentSMR.text!,
+            "pss_due_units": pmServiceReminderDue.text!,
+            "pss_notes": pmServiceReminderNotes.text!,
             "pss_smr_based_notes": [
-                [ "note": pmServiceNotes ],
-                [ "note": pmServiceNotes2 ],
-                [ "note": pmServiceNotes3 ]
+                [ "note": pmServiceNotes.text! ],
+                [ "note": pmServiceNotes2.text! ],
+                [ "note": pmServiceNotes3.text! ]
             ],
             "pss_reminder_recipients": [
                 [ "email_addresses": "" ]
             ],
-            "pss_reminder_quantity": pmServiceReminderDueQuantity,
-            "pss_reminder_units": pmServiceReminderDueUnits
+            "pss_reminder_quantity": pmServiceReminderDueQuantity.text!,
+            "pss_reminder_units": pmServiceReminderDueUnitsSelected
         ]
         
-        debugPrint(jsonData)
-        print("**")
-        print(jsonData)
+//        debugPrint(jsonData)
+//        print("**")
+//        print(jsonData)
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         

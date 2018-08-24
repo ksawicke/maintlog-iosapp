@@ -601,6 +601,59 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
                                 paramsToJson.append(logEntryItem)
                             break
                             
+                            case "pss":
+                                let logEntryItem: [String: Any] = [
+                                    "id": "0",
+                                    "uuid": "\(uuid)",
+                                    "subflow": "\(jsonData["subflow"])",
+                                    "date_entered": "\(jsonData["date_entered"])",
+                                    "entered_by": "\(jsonData["entered_by"])",
+                                    "unit_number": "\(jsonData["unit_number"])",
+                                    "serviced_by": "\(jsonData["serviced_by"])",
+                                    "pss_pm_type": "\(jsonData["pss_pm_type"])",
+                                    "pss_smr_based_pm_level": "\(jsonData["pss_smr_based_pm_level"])",
+                                    "pss_smr_based_previous_smr": "",
+                                    "pss_smr_based_current_smr": "\(jsonData["pss_smr_based_current_smr"])",
+                                    "pss_due_units": "\(jsonData["pss_due_units"])",
+                                    "pss_notes": "\(jsonData["pss_notes"])",
+                                    "pss_smr_based_notes": "\(jsonData["pss_smr_based_notes"])",
+//                                    "pss_reminder_recipients": [
+//                                        [ "email_addresses": "" ]
+//                                    ],
+                                    "pss_reminder_quantity": "\(jsonData["pss_reminder_quantity"])",
+                                    "pss_reminder_units": "\(jsonData["pss_reminder_units"])",
+                                ]
+                                /**
+                                 let jsonData: JSON = [
+                                 "uuid": uuid,
+                                 "date_entered": dateEnteredYMD,
+                                 "entered_by": enteredByInt,
+                                 "unit_number": equipmentUnitIdSelected,
+                                 "serviced_by": servicedByInt,
+                                 
+                                 "subflow": "pss",
+                                 "pss_pm_type": pmTypeSelected,
+                                 "pss_smr_based_pm_level": pmLevelSelected,
+                                 "pss_smr_based_previous_smr": "",
+                                 "pss_smr_based_current_smr": pmServiceCurrentSMR,
+                                 "pss_due_units": pmServiceReminderDue,
+                                 "pss_notes": pmServiceReminderNotes,
+                                 "pss_smr_based_notes": [
+                                 [ "note": pmServiceNotes ],
+                                 [ "note": pmServiceNotes2 ],
+                                 [ "note": pmServiceNotes3 ]
+                                 ],
+                                 "pss_reminder_recipients": [
+                                 [ "email_addresses": "" ]
+                                 ],
+                                 "pss_reminder_quantity": pmServiceReminderDueQuantity,
+                                 "pss_reminder_units": pmServiceReminderDueUnits
+                                 ]
+                                 **/
+                                params = (params as? [Any] ?? []) + [logEntryItem]
+                                paramsToJson.append(logEntryItem)
+                            break
+                            
                             default:
                                 let logEntryItem: [String: Any] = [
                                     "id": "0",
@@ -623,9 +676,9 @@ class SelectScreenController: UIViewController, ChangeEquipmentUnitDelegate {
         }
 //
 //        print("***")
-//        print(url)
+        print(url)
         print(params)
-//        print(JSON(paramsToJson))
+        print(JSON(paramsToJson))
 //        debugPrint(logEntries)
 //        print(JSON(params))
 //        let jsonParams = JSON(params)

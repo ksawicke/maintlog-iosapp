@@ -469,8 +469,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             fluidEntryVC.dateEntered = self.dateEntered.text!
             fluidEntryVC.enteredBy = self.enteredBy.text!
             fluidEntryVC.servicedBy = self.servicedBy.text!
-            fluidEntryVC.enteredByInt = self.enteredByInt
             fluidEntryVC.servicedByInt = self.servicedByInt
+            fluidEntryVC.enteredByInt = self.enteredByInt
             fluidEntryVC.fluidsTracked = self.fluidsTracked
             fluidEntryVC.subflow = subflowSelected
             
@@ -485,7 +485,8 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             pmServiceVC.barCodeValue = self.barCodeValue
             pmServiceVC.dateEntered = dateEntered.text!
             pmServiceVC.enteredBy = enteredBy.text!
-            pmServiceVC.servicedBy = servicedBy.text!
+            pmServiceVC.servicedBy = self.servicedBy.text!
+            pmServiceVC.servicedByInt = self.servicedByInt
             pmServiceVC.subflow = subflowSelected
             
             self.present(pmServiceVC, animated: false, completion: nil)
@@ -502,7 +503,7 @@ class LogEntryController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
             componentChangeVC.enteredBy = enteredBy.text!
             componentChangeVC.servicedBy = servicedBy.text!
             componentChangeVC.enteredByInt = enteredByInt
-            componentChangeVC.servicedByInt = servicedByInt
+            componentChangeVC.servicedByInt = self.servicedByInt
             componentChangeVC.subflow = subflowSelected
             
             self.present(componentChangeVC, animated: false, completion: nil)
