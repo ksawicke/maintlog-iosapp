@@ -133,7 +133,7 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "subflow": "pss",
             "pss_pm_type": pmTypeSelected,
             "pss_smr_based_pm_level": pmLevelSelected,
-            "pss_smr_based_previous_smr": "",
+            "pss_smr_based_previous_smr": "", // Don't store since API will verify correct value
             "pss_smr_based_current_smr": pmServiceCurrentSMR.text!,
             "pss_due_units": pmServiceReminderDue.text!,
             "pss_notes": pmServiceReminderNotes.text!,
@@ -149,9 +149,9 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             "pss_reminder_units": pmServiceReminderDueUnitsSelected
         ]
         
-//        debugPrint(jsonData)
-//        print("**")
-//        print(jsonData)
+        debugPrint(jsonData)
+        print("**")
+        print(jsonData)
         
         _ = LogEntryCoreDataHandler.saveObject(uuid: uuid, jsonData: "\(jsonData)")
         
@@ -246,7 +246,8 @@ class PMServiceController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func updatePreviousSMR(responseJSON: JSON) {
         let previousSMR = responseJSON["previous_smr"].int16
         
-        pmServicePreviousSMR.text = "\(String(describing: previousSMR!))"
+        // TODO: Check
+//        pmServicePreviousSMR.text = "\(String(describing: previousSMR!))"
     }
     
     func userSelectedSubflow(unitNumber: String) {
